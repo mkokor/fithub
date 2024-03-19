@@ -10,10 +10,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan(basePackages = { "com.fithub.services.training" })
 @EnableJpaRepositories("com.fithub.services.training.dao.repository")
 @EntityScan(basePackages = { "com.fithub.services.training.dao.model" })
-public class ApplicationLauncher {
+public class TrainingServiceLauncher {
 
     public static void main(String[] args) {
-        SpringApplication.run(ApplicationLauncher.class, args);
+        SpringApplication.run(TrainingServiceLauncher.class, args);
     }
 
 }
