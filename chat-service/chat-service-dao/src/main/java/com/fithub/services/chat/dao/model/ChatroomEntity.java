@@ -16,7 +16,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "messages")
+@Table(name = "chatrooms")
 public class ChatroomEntity {
 
     @Id
@@ -26,9 +26,6 @@ public class ChatroomEntity {
 
     @Column(name = "room_name")
     private String roomName;
-    
-    @Column(name = "content")
-    private String content;
 
     @OneToOne
     @JoinColumn(name = "admin", nullable = false)
