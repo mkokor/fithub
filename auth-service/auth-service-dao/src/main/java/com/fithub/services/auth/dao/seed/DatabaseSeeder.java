@@ -31,6 +31,9 @@ public class DatabaseSeeder implements ApplicationRunner {
             userEntity.setUuid(UUID.randomUUID().toString());
             userEntity.setFirstName("John");
             userEntity.setLastName("Doe");
+            userEntity.setUsername("johndoe");
+            userEntity.setEmail("johndoe@email.com");
+            userEntity.setPasswordHash("password123");
             userRepository.save(userEntity);
         }
 
@@ -41,4 +44,5 @@ public class DatabaseSeeder implements ApplicationRunner {
             coachRepository.save(coachEntity);
         }
     }
+
 }

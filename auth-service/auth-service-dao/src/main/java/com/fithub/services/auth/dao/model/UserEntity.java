@@ -1,5 +1,6 @@
 package com.fithub.services.auth.dao.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -9,28 +10,39 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Entity
 @Data
 @Table(name = "users")
-public class UserEntity {
+public class UserEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(updatable = false)
     private String uuid;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
+    @NotBlank(message = "The first name must not be blank.")
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
+    @NotBlank(message = "The last name must not be blank.")
     private String lastName;
 
+    @Column(unique = true, nullable = false)
+    @NotBlank(message = "The username must not be blank.")
     private String username;
 
-    @Column(name = "password_hash")
+    @Column(name = "password_hash", nullable = false)
+    @NotBlank(message = "The password must not be blank.")
     private String passwordHash;
 
+    @Column(unique = true, nullable = false)
+    @Email(message = "The email address is not valid.")
     private String email;
 
     @OneToOne(mappedBy = "user")

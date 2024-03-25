@@ -43,4 +43,7 @@ public class AppointmentEntity {
     @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL)
     private List<SongRequestEntity> songRequests;
 
+    @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL)
+    private List<ReservationEntity> reservations;
+
 }

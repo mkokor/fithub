@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="AuthServiceTestSuite">
+    <test thread-count="5" name="ClientService">
+        <classes>
+            <class name="com.fithub.services.auth.test.suites.ClientServiceTest"/>
+        </classes>
+    </test>
+</suite>

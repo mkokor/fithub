@@ -8,4 +8,8 @@ import com.fithub.services.auth.dao.model.UserEntity;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, String> {
 
+    boolean existsByEmail(String email);
+
+    boolean existsByUsername(String username);
+
 }
