@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
@@ -22,15 +23,18 @@ public class ProgressionStatsEntity {
     @Column(updatable = false)
     private Long id;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", nullable = false)
+    @NotNull(message = "The creation date of a progression stats must be specified.")
     private LocalDateTime createdAt;
 
     @ManyToOne
     @JoinColumn(name = "created_by")
+    @NotNull(message = "The creator must be specified.")
     private CoachEntity createdBy;
 
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
+    @NotNull(message = "The client must be specified.")
     private ClientEntity client;
 
     private Double weight;

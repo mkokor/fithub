@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
@@ -22,10 +23,12 @@ public class ReservationEntity {
 
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
+    @NotNull(message = "The client must not be null.")
     private ClientEntity client;
 
     @ManyToOne
     @JoinColumn(name = "appointment_id", nullable = false)
+    @NotNull(message = "The appoinment must not be null.")
     private AppointmentEntity appointment;
 
 }
