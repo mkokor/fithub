@@ -9,10 +9,14 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import com.fithub.services.training.dao.model.AppointmentEntity;
+import com.fithub.services.training.dao.model.ClientEntity;
 import com.fithub.services.training.dao.model.CoachEntity;
+import com.fithub.services.training.dao.model.ReservationEntity;
 import com.fithub.services.training.dao.model.UserEntity;
 import com.fithub.services.training.dao.repository.AppointmentRepository;
+import com.fithub.services.training.dao.repository.ClientRepository;
 import com.fithub.services.training.dao.repository.CoachRepository;
+import com.fithub.services.training.dao.repository.ReservationRepository;
 import com.fithub.services.training.dao.repository.UserRepository;
 
 import lombok.AllArgsConstructor;
@@ -23,7 +27,9 @@ public class DatabaseSeeder implements ApplicationRunner {
 
     private final AppointmentRepository appointmentRepository;
     private final CoachRepository coachRepository;
+    private final ClientRepository clientRepository;
     private final UserRepository userRepository;
+    private final ReservationRepository reservationRepository;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -53,6 +59,21 @@ public class DatabaseSeeder implements ApplicationRunner {
             appointmentEntity.setEndTime(LocalTime.parse("10:30:00"));
             appointmentEntity.setCoach(coachEntity);
             appointmentRepository.save(appointmentEntity);
+
+            UserEntity clientUser = new UserEntity();
+            clientUser.setUuid(UUID.randomUUID().toString());
+            clientUser.setFirstName("Mary");
+            clientUser.setLastName("Ann");
+
+            ClientEntity clientEntity = new ClientEntity();
+            clientEntity.setUser(userEntity);
+            clientEntity.setCoach(coachEntity);
+            clientRepository.save(clientEntity);
+
+            ReservationEntity reservationEntity = new ReservationEntity();
+            reservationEntity.setAppointment(appointmentEntity);
+            reservationEntity.setClient(clientEntity);
+            reservationRepository.save(reservationEntity);
         }
     }
 }

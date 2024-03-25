@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
@@ -27,17 +28,22 @@ public class AppointmentEntity {
 
     @OneToOne
     @JoinColumn(name = "coach_id", nullable = false)
+    @NotNull(message = "The coach must not be null.")
     private CoachEntity coach;
 
     @Column(name = "start_time", nullable = false)
+    @JoinColumn(name = "coach_id", nullable = false)
+    @NotNull(message = "The start time must be specified.")
     private LocalTime startTime;
 
     @Column(name = "end_time", nullable = false)
+    @NotNull(message = "The end time must be specified.")
     private LocalTime endTime;
 
     private Integer capacity;
 
     @Column(name = "day", nullable = false)
+    @NotNull(message = "The day must be specified.")
     private String day;
 
     @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL)
