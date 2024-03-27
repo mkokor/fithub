@@ -20,6 +20,11 @@
   	
   	<dependencies>
 		<dependency>
+    		<groupId>org.hibernate</groupId>
+    		<artifactId>hibernate-validator</artifactId>
+    		<version>7.0.2.Final</version>
+		</dependency>
+		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
@@ -28,6 +33,10 @@
 			<groupId>io.swagger.core.v3</groupId>
     		<artifactId>swagger-annotations</artifactId>
     		<version>2.1.10</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-web</artifactId>
 		</dependency>
 	</dependencies>
 	

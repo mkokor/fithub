@@ -1,5 +1,7 @@
 package com.fithub.services.chat.dao.model;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +16,9 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "clients")
-public class ClientEntity {
+public class ClientEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +26,11 @@ public class ClientEntity {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false, updatable = false)
     private UserEntity user;
 
     @ManyToOne
     @JoinColumn(name = "coach_id", nullable = false)
     private CoachEntity coach;
-
+    
 }
