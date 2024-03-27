@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
@@ -12,6 +13,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories("com.fithub.services.training.dao.repository")
 @EntityScan(basePackages = { "com.fithub.services.training.dao.model" })
 @EnableFeignClients("com.fithub.services.training.core.client")
+@PropertySource("classpath:spotify-api.properties")
 public class TrainingServiceLauncher {
 
     public static void main(String[] args) {
