@@ -55,8 +55,9 @@ public class ErrorHandler {
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ResponseEntity<ApiErrorResponse> handleMissingServletRequestParameterException(
             MissingServletRequestParameterException exception) {
-        return new ResponseEntity<>(new ApiErrorResponse(List.of(
-                new ApiError(ApiErrorType.BAD_REQUEST, String.format("Query parameter %s is required.", exception.getParameterName())))),
+        return new ResponseEntity<>(
+                new ApiErrorResponse(List.of(
+                        new ApiError(ApiErrorType.BAD_REQUEST, String.format("Parameter %s is required.", exception.getParameterName())))),
                 HttpStatus.BAD_REQUEST);
     }
 
