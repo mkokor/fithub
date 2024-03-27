@@ -5,6 +5,6 @@ import com.fithub.services.chat.api.model.message.MessageSendRequest;
 
 public interface MessageService {
 
-    MessageResponse sendMessage(MessageSendRequest messageSendRequest) throws Exception;
+    MessageResponse sendMessage(MessageSendRequest messageSendRequest, Long chatroomId) throws Exception;
 
 }

@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fithub.services.chat.api.ChatroomService;
 import com.fithub.services.chat.api.MessageService;
+import com.fithub.services.chat.api.UserService;
 import com.fithub.services.chat.api.model.message.MessageResponse;
 import com.fithub.services.chat.api.model.message.MessageSendRequest;
+import com.fithub.services.chat.api.model.user.UserResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,6 +31,7 @@ public class ChatroomController {
 
     private final ChatroomService chatroomService;
     private final MessageService messageService;
+    private final UserService userService;
 
     @Operation(summary = "Get chatroom messages")
     @GetMapping(value = "/{id}/messages")
@@ -39,6 +42,12 @@ public class ChatroomController {
     @Operation(summary = "Send a message to chatroom")
     @PostMapping(value = "/{id}/send-message")
     public ResponseEntity<MessageResponse> signUp(@PathVariable Long id, @Valid @RequestBody MessageSendRequest messageSendRequest) throws Exception {
-        return new ResponseEntity<>(messageService.sendMessage(messageSendRequest), HttpStatus.OK);
+        return new ResponseEntity<>(messageService.sendMessage(messageSendRequest, id), HttpStatus.OK);
+    }
+    
+    @Operation(summary = "Get chatroom participants")
+    @GetMapping(value = "/{id}/participants")
+    public ResponseEntity<List<UserResponse>> getChatroomParticipants(@PathVariable Long id) throws Exception {
+        return new ResponseEntity<>(userService.getChatroomParticipants(id), HttpStatus.OK);
     }
 }

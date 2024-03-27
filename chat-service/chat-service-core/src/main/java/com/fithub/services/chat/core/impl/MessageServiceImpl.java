@@ -33,8 +33,8 @@ public class MessageServiceImpl implements MessageService {
     private final Validator validator;
 
     @Override
-    public MessageResponse sendMessage(MessageSendRequest messageSendRequest) throws Exception {
-        final Optional<ChatroomEntity> chatroom = chatroomRepository.findById(messageSendRequest.getChatroomId());
+    public MessageResponse sendMessage(MessageSendRequest messageSendRequest, Long chatroomId) throws Exception {
+        final Optional<ChatroomEntity> chatroom = chatroomRepository.findById(chatroomId);
         final Optional<UserEntity> user = userRepository.findById(messageSendRequest.getUserId());
         Set<ConstraintViolation<MessageSendRequest>> violations = validator.validate(messageSendRequest);
         if (!violations.isEmpty()) {

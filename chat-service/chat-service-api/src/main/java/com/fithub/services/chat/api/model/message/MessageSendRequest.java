@@ -22,10 +22,6 @@ public class MessageSendRequest implements Serializable {
     @NotBlank(message = "The content of the message must not be blank.")
     private String content;
 
-    @Schema(description = "The id of the chatroom")
-    @NotNull(message = "The id of the chatroom must not be null.")
-    private Long chatroomId;
-
     @Schema(description = "The time of message creation")
     private LocalDateTime created;
 
