@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -33,13 +34,12 @@ public class SongRequestEntity {
     private ClientEntity createdBy;
 
     @ManyToOne
-    @JoinColumn(name = "song_id", nullable = false)
-    @NotNull(message = "The song must not be null.")
-    private SongEntity song;
-
-    @ManyToOne
     @JoinColumn(name = "appointment_id", nullable = false)
     @NotNull(message = "The appointment must not be null.")
     private AppointmentEntity appointment;
+
+    @Column(name = "spotify_id", nullable = false)
+    @NotBlank(message = "The spotify ID of a song must not be null.")
+    private String spotifyId;
 
 }
