@@ -43,6 +43,8 @@ public class UserServiceImpl implements UserService {
             UserEntity user = clientEntity.getUser();
             userEntities.add(user);
         }
+        
+        userEntities.add(coachEntity.getUser());
 
         return userMapper.entitiesToDtos(userEntities);
     }

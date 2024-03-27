@@ -1,11 +1,11 @@
 package com.fithub.services.chat.api.model.message;
 
 import java.io.Serializable;
+
 import java.time.LocalDateTime;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data

@@ -6,7 +6,9 @@ public enum ApiErrorType {
 
     BUSINESS_LOGIC("BUSINESS_LOGIC"),
 
-    INTERNAL_SERVER("INTERNAL_SERVER");
+    INTERNAL_SERVER("INTERNAL_SERVER"),
+	
+	BAD_REQUEST("BAD_REQUEST");
 
     private final String value;
 
