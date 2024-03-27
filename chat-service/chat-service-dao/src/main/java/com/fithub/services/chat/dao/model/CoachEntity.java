@@ -1,5 +1,6 @@
 package com.fithub.services.chat.dao.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -17,7 +18,9 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "coaches")
-public class CoachEntity {
+public class CoachEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +28,7 @@ public class CoachEntity {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false, updatable = false)
     private UserEntity user;
 
     @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL)
