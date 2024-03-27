@@ -10,9 +10,4 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ReservationServiceImpl implements ReservationService {
 
-    @Override
-    public String getAll() {
-        return "Succes";
-    }
-
 }
