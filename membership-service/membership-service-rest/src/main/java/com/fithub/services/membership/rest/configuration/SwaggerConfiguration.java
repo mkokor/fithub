@@ -15,5 +15,10 @@ public class SwaggerConfiguration {
     public GroupedOpenApi appointmentApi() {
         return GroupedOpenApi.builder().group("coach-api").packagesToScan("com.fithub.services.membership.rest.coach").build();
     }
+    
+    @Bean
+    public GroupedOpenApi membershipApi() {
+        return GroupedOpenApi.builder().group("membership-api").packagesToScan("com.fithub.services.membership.rest.membership").build();
+    }
 
 }

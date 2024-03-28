@@ -23,7 +23,7 @@ public class CoachEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
     private Long id;
-
+    
     private String biography;
 
     @OneToOne

@@ -26,7 +26,7 @@
 		<dependency>
 			<groupId>com.fithub.services</groupId>
 			<artifactId>membership-service-dao</artifactId>
-			<version>${project.version}</version>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fithub.services</groupId>
@@ -46,6 +46,23 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-test</artifactId>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+    		<groupId>org.testng</groupId>
+    		<artifactId>testng</artifactId>
+    		<version>7.9.0</version>
+    		<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	
@@ -71,6 +88,22 @@
         			</annotationProcessorPaths>
     			</configuration>
 			</plugin>
+			<plugin>
+            	<groupId>org.apache.maven.plugins</groupId>
+            	<artifactId>maven-surefire-plugin</artifactId>
+            	<dependencies>
+                	<dependency>
+        				<groupId>org.apache.maven.surefire</groupId>
+        				<artifactId>surefire-testng</artifactId>
+        				<version>3.2.5</version>
+                	</dependency>
+            	</dependencies>
+            	<configuration>
+                	<suiteXmlFiles>
+                    	<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                	</suiteXmlFiles>
+            	</configuration>
+        	</plugin>
     	</plugins>
 	</build>
 </project>
