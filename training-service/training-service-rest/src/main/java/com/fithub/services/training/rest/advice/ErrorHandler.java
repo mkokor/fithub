@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -49,6 +50,15 @@ public class ErrorHandler {
         errors.add(new ApiError(ApiErrorType.BUSINESS_LOGIC, exception.getMessage()));
 
         return new ResponseEntity<>(new ApiErrorResponse(errors), exception.getStatusCode());
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<ApiErrorResponse> handleMissingServletRequestParameterException(
+            MissingServletRequestParameterException exception) {
+        return new ResponseEntity<>(
+                new ApiErrorResponse(List.of(
+                        new ApiError(ApiErrorType.BAD_REQUEST, String.format("Parameter %s is required.", exception.getParameterName())))),
+                HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)
