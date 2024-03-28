@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="MembershipServiceTestSuite">
+    <test thread-count="5" name="MembershipService">
+        <classes>
+            <class name="com.fithub.services.membership.test.suites.MembershipServiceTest"/>
+        </classes>
+    </test>
+</suite>

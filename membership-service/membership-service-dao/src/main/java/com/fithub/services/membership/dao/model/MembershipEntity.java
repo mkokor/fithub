@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
@@ -24,6 +25,8 @@ public class MembershipEntity {
 	    @Column(updatable = false)
 	    private Long id;
 	 	
+	 	@Column(name = "amount", nullable = false)
+	 	@NotNull(message = "The amount must be specified")
 	 	private double amount;
 	 	
 	 	@OneToOne
