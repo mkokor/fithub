@@ -1,6 +1,7 @@
 package com.fithub.services.training.core.impl;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.fithub.services.training.api.SongService;
 import com.fithub.services.training.api.SpotifyApiService;
+import com.fithub.services.training.api.exception.BadRequestException;
 import com.fithub.services.training.api.exception.ThirdPartyApiException;
 import com.fithub.services.training.api.model.song.SongSearchResponse;
 import com.fithub.services.training.api.model.spotify.AlbumImageResponse;
@@ -44,10 +46,21 @@ public class SongServiceImpl implements SongService {
         spotifyAccessToken = String.format("%s %s", spotifyAccessTokenResponse.getTokenType(), spotifyAccessTokenResponse.getAccessToken());
     }
 
-    @Override
-    public List<SongSearchResponse> search(Integer pageNumber, Integer pageSize, String songTitleSearchTerm) throws ThirdPartyApiException {
-        TracksSearchResponse tracksWrapperResponse;
+    private String findAlbumCoverImage(String songSpotifyId, List<SpotifyTrackResponse> tracks) {
+        List<List<AlbumImageResponse>> albumImages = tracks.stream().filter(track -> track.getSpotifyId().equals(songSpotifyId))
+                .map(SpotifyTrackResponse::getAlbum).filter(Objects::nonNull).map(AlbumResponse::getImages).filter(Objects::nonNull)
+                .collect(Collectors.toList());
 
+        return !albumImages.isEmpty() ? albumImages.get(0).get(0).getUrl() : null;
+    }
+
+    @Override
+    public List<SongSearchResponse> search(Integer pageNumber, Integer pageSize, String songTitleSearchTerm) throws Exception {
+        if (songTitleSearchTerm == null || songTitleSearchTerm.length() < 2) {
+            throw new BadRequestException("Song search term must contain at least 2 characters.");
+        }
+
+        TracksSearchResponse tracksWrapperResponse = new TracksSearchResponse();
         try {
             tracksWrapperResponse = spotifyApiService.search(spotifyAccessToken, songTitleSearchTerm, List.of("track"), pageNumber,
                     pageSize);
@@ -58,15 +71,11 @@ public class SongServiceImpl implements SongService {
                     pageSize);
         }
 
-        List<SongSearchResponse> songSearchResults = songMapper
-                .spotifyTrackResponsesToSongSearchResponses(tracksWrapperResponse.getTracks().getItems());
+        List<SpotifyTrackResponse> spotifyTracks = tracksWrapperResponse.getTracks().getItems();
+        List<SongSearchResponse> songSearchResults = songMapper.spotifyTrackResponsesToSongSearchResponses(spotifyTracks);
 
         for (SongSearchResponse songSearchResult : songSearchResults) {
-            List<List<AlbumImageResponse>> albumImages = tracksWrapperResponse.getTracks().getItems().stream()
-                    .filter(track -> track.getSpotifyId().equals(songSearchResult.getSpotifyId())).map(SpotifyTrackResponse::getAlbum)
-                    .map(AlbumResponse::getImages).collect(Collectors.toList());
-
-            songSearchResult.setAlbumCoverImage(!albumImages.isEmpty() ? albumImages.get(0).get(0).getUrl() : null);
+            songSearchResult.setAlbumCoverImage(findAlbumCoverImage(songSearchResult.getSpotifyId(), spotifyTracks));
         }
 
         return songSearchResults;

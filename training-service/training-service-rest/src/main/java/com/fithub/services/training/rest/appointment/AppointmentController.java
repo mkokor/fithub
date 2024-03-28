@@ -14,6 +14,7 @@ import com.fithub.services.training.api.model.reservation.ReservationResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @Tag(name = "appointment", description = "Appointment API")
@@ -26,7 +27,7 @@ public class AppointmentController {
 
     @Operation(summary = "Get reservations for appointment")
     @GetMapping(value = "/{id}/reservation")
-    public ResponseEntity<List<ReservationResponse>> getReservations(@PathVariable Long id) throws Exception {
+    public ResponseEntity<List<ReservationResponse>> getReservations(@Valid @PathVariable Long id) throws Exception {
         return new ResponseEntity<>(appointmentService.getReservations(id), HttpStatus.OK);
     }
 

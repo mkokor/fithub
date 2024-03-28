@@ -13,6 +13,7 @@ import com.fithub.services.training.api.SongService;
 import com.fithub.services.training.api.model.song.SongSearchResponse;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @Tag(name = "song", description = "Song API")
@@ -23,11 +24,11 @@ public class SongController {
 
     private final SongService songService;
 
-    @GetMapping("/search")
+    @GetMapping(name = "/search", produces = "application/json")
     public ResponseEntity<List<SongSearchResponse>> search(
             @RequestParam(name = "page_number", required = false, defaultValue = "0") Integer pageNumber,
             @RequestParam(name = "page_size", required = false, defaultValue = "20") Integer pageSize,
-            @RequestParam("song_title_search_term") String songTitleSearchTerm) throws Exception {
+            @Valid @RequestParam("song_title_search_term") String songTitleSearchTerm) throws Exception {
         return new ResponseEntity<>(songService.search(pageNumber, pageSize, songTitleSearchTerm), HttpStatus.OK);
     }
 

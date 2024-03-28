@@ -10,8 +10,8 @@ import com.fithub.services.training.api.model.spotify.SpotifyTrackResponse;
 @Mapper(componentModel = "spring")
 public interface SongMapper {
 
-    public SongSearchResponse spotifyTrackResponseToSongSearchResponse(SpotifyTrackResponse trackResponse);
+    public SongSearchResponse spotifyTrackResponseToSongSearchResponse(SpotifyTrackResponse spotifyTrackResponse);
 
-    public List<SongSearchResponse> spotifyTrackResponsesToSongSearchResponses(List<SpotifyTrackResponse> trackResponses);
+    public List<SongSearchResponse> spotifyTrackResponsesToSongSearchResponses(List<SpotifyTrackResponse> spotifyTracks);
 
 }
