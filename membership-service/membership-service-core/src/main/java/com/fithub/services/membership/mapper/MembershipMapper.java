@@ -15,6 +15,6 @@ public interface MembershipMapper {
     @Mapping(source = "client.id", target = "clientId")
     public MembershipResponse entityToDto(MembershipEntity membershipEntity);
 
-    public List<MembershipResponse> entitiesToDtos(List<MembershipEntity> coachEntities);
+    public List<MembershipResponse> entitiesToDtos(List<MembershipEntity> membershipEntities);
 
 }
