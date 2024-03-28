@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fithub.services.chat.api.ChatroomService;
 import com.fithub.services.chat.api.MessageService;
 import com.fithub.services.chat.api.UserService;
+import com.fithub.services.chat.api.model.chatroom.ChatroomDataResponse;
 import com.fithub.services.chat.api.model.message.MessageResponse;
 import com.fithub.services.chat.api.model.message.MessageSendRequest;
 import com.fithub.services.chat.api.model.user.UserResponse;
@@ -32,6 +33,12 @@ public class ChatroomController {
     private final ChatroomService chatroomService;
     private final MessageService messageService;
     private final UserService userService;
+    
+    @Operation(summary = "Get chatroom data")
+    @GetMapping(value = "/{id}/data")
+    public ResponseEntity<ChatroomDataResponse> getChatroomData(@PathVariable Long id) throws Exception {
+        return new ResponseEntity<>(chatroomService.getChatroomData(id), HttpStatus.OK);
+    }
 
     @Operation(summary = "Get chatroom messages")
     @GetMapping(value = "/{id}/messages")

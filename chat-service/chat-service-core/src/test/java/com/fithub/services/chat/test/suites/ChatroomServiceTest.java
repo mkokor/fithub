@@ -15,7 +15,9 @@ import org.testng.annotations.Test;
 import com.fithub.services.chat.api.ChatroomService;
 import com.fithub.services.chat.core.impl.ChatroomServiceImpl;
 import com.fithub.services.chat.dao.repository.ChatroomRepository;
+import com.fithub.services.chat.mapper.ChatroomMapper;
 import com.fithub.services.chat.mapper.MessageMapper;
+import com.fithub.services.chat.mapper.UserMapper;
 import com.fithub.services.chat.test.configuration.BasicTestConfiguration;
 import com.fithub.services.chat.api.model.message.MessageResponse;
 import com.fithub.services.chat.dao.model.ChatroomEntity;
@@ -28,6 +30,8 @@ public class ChatroomServiceTest extends BasicTestConfiguration {
 
     @Autowired
     private MessageMapper messageMapper;
+    private ChatroomMapper chatroomMapper;
+    private UserMapper userMapper;
 
     private ChatroomRepository chatroomRepository;
 
@@ -37,7 +41,7 @@ public class ChatroomServiceTest extends BasicTestConfiguration {
     public void beforeMethod() {
         chatroomRepository = Mockito.mock(ChatroomRepository.class);
 
-        chatroomService = new ChatroomServiceImpl(chatroomRepository, messageMapper);
+        chatroomService = new ChatroomServiceImpl(chatroomRepository, messageMapper, chatroomMapper, userMapper);
     }
 
     @Test
