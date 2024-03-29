@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [MealPlanServiceTestSuite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="ClientService(failed)">
+    <classes>
+      <class name="com.fithub.services.mealplan.test.suites.ClientServiceTest">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="springTestContextBeforeTestClass"/>
+          <include name="springTestContextBeforeTestMethod"/>
+          <include name="springTestContextAfterTestClass"/>
+          <include name="springTestContextPrepareTestInstance"/>
+          <include name="springTestContextAfterTestMethod"/>
+          <include name="testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan"/>
+        </methods>
+      </class> <!-- com.fithub.services.mealplan.test.suites.ClientServiceTest -->
+    </classes>
+  </test> <!-- ClientService(failed) -->
+</suite> <!-- Failed suite [MealPlanServiceTestSuite] -->
