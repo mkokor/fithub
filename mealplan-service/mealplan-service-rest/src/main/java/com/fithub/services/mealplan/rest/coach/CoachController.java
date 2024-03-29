@@ -26,5 +26,6 @@ public class CoachController {
     public List<CoachResponse> getAll() {
         return appointmentService.getAll();
     }
+    
 
 }
