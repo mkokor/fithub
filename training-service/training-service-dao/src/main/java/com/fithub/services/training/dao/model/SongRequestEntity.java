@@ -30,7 +30,7 @@ public class SongRequestEntity {
 
     @ManyToOne
     @JoinColumn(name = "created_by", nullable = false)
-    @NotNull(message = "The client who created song request must not be specified.")
+    @NotNull(message = "The client who created song request must be specified.")
     private ClientEntity createdBy;
 
     @ManyToOne
@@ -40,6 +40,6 @@ public class SongRequestEntity {
 
     @Column(name = "spotify_id", nullable = false)
     @NotBlank(message = "The spotify ID of a song must not be null.")
-    private String spotifyId;
+    private String songSpotifyId;
 
 }
