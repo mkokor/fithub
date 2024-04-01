@@ -68,7 +68,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
             MealPlanEntity mealPlanEntity = new MealPlanEntity();
             mealPlanEntity.setId(1L);
             mealPlanEntity.setClient(clientEntity);
-            mealPlanEntity.setModified(LocalDateTime.of(2023, 5, 15, 12, 30));
+            mealPlanEntity.setModified(LocalDateTime.of(2024, 3, 14, 19, 13));
             mealPlanEntity.setModifiedBy(coachEntity);
             clientEntity.setMealPlan(mealPlanEntity);
             List<MealPlanEntity> mealPlans = new ArrayList();
@@ -76,10 +76,10 @@ public class ClientServiceTest extends BasicTestConfiguration {
             coachEntity.setMealPlans(mealPlans);
             
             MealPlanResponse expectedResponse = new MealPlanResponse();
-            expectedResponse.setId(1L);
-            expectedResponse.setClientId(1L);
+            expectedResponse.setId(mealPlanEntity.getId());
+            expectedResponse.setClientId(clientEntity.getId());
             expectedResponse.setModifiedBy(coachEntity.getId());
-            expectedResponse.setModified(LocalDateTime.of(2024, 3, 14, 19, 13));
+            expectedResponse.setModified(mealPlanEntity.getModified());
 
             Mockito.when(clientRepository.findById(clientEntity.getId())).thenReturn(Optional.of(clientEntity));
 

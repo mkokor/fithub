@@ -8,8 +8,8 @@
           <include name="beforeMethod"/>
           <include name="springTestContextBeforeTestClass"/>
           <include name="springTestContextBeforeTestMethod"/>
-          <include name="springTestContextAfterTestClass"/>
           <include name="springTestContextPrepareTestInstance"/>
+          <include name="springTestContextAfterTestClass"/>
           <include name="springTestContextAfterTestMethod"/>
           <include name="testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan"/>
         </methods>
