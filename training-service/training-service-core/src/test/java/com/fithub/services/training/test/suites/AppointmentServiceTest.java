@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.assertj.core.api.Assertions;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -26,6 +27,9 @@ import com.fithub.services.training.mapper.ReservationMapper;
 import com.fithub.services.training.test.configuration.BasicTestConfiguration;
 
 public class AppointmentServiceTest extends BasicTestConfiguration {
+
+    @Value("${message}")
+    private String message;
 
     @Autowired
     private ReservationMapper reservationMapper;

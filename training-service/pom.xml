@@ -23,8 +23,15 @@
 	</properties>
 
 	<dependencyManagement>
-		<dependencies>
-		</dependencies>
+    	<dependencies>
+        	<dependency>
+            	<groupId>org.springframework.cloud</groupId>
+            	<artifactId>spring-cloud-dependencies</artifactId>
+            	<version>2023.0.0</version>
+            	<type>pom</type>
+            	<scope>import</scope>
+        	</dependency>
+    	</dependencies>
 	</dependencyManagement>
 	
 	<modules>

@@ -25,7 +25,7 @@
       <span class="top-banner-title-font">Test results</span>
       <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite, 1 failed test</span>
+      <span class="top-banner-font-1">1 suite</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -39,7 +39,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-MealPlanServiceTestSuite" class="navigator-link">
-              <span class="suite-name border-failed">MealPlanServiceTestSuite</span>
+              <span class="suite-name border-skipped">MealPlanServiceTestSuite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -50,7 +50,7 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-MealPlanServiceTestSuite" class="navigator-link ">
-                    <span>C:\Users\Nedzla\Desktop\FitHub\mealplan-service\mealplan-service-core\src\test\resources\testng.xml</span>
+                    <span>C:\Users\Matija\Personal projects\fithub\mealplan-service\mealplan-service-core\src\test\resources\testng.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -92,21 +92,21 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">1 method, 1 failed,   </span>
+                    <span class="method-stats">1 method,  1 skipped,  </span>
                   </li>
                   <li>
-                    <span class="method-list-title failed">Failed methods</span>
-                    <span class="show-or-hide-methods failed">
-                      <a href="#" panel-name="suite-MealPlanServiceTestSuite" class="hide-methods failed suite-MealPlanServiceTestSuite"> (hide)</a> <!-- hide-methods failed suite-MealPlanServiceTestSuite -->
-                      <a href="#" panel-name="suite-MealPlanServiceTestSuite" class="show-methods failed suite-MealPlanServiceTestSuite"> (show)</a> <!-- show-methods failed suite-MealPlanServiceTestSuite -->
+                    <span class="method-list-title skipped">Skipped methods</span>
+                    <span class="show-or-hide-methods skipped">
+                      <a href="#" panel-name="suite-MealPlanServiceTestSuite" class="hide-methods skipped suite-MealPlanServiceTestSuite"> (hide)</a> <!-- hide-methods skipped suite-MealPlanServiceTestSuite -->
+                      <a href="#" panel-name="suite-MealPlanServiceTestSuite" class="show-methods skipped suite-MealPlanServiceTestSuite"> (show)</a> <!-- show-methods skipped suite-MealPlanServiceTestSuite -->
                     </span>
-                    <div class="method-list-content failed suite-MealPlanServiceTestSuite">
+                    <div class="method-list-content skipped suite-MealPlanServiceTestSuite">
                       <span>
-                        <img src="failed.png" width="3%"/>
+                        <img src="skipped.png" width="3%"/>
                         <a href="#" panel-name="suite-MealPlanServiceTestSuite" title="com.fithub.services.mealplan.test.suites.ClientServiceTest" class="method navigator-link" hash-for-method="testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan">testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan</a> <!-- method navigator-link -->
                       </span>
                       <br/>
-                    </div> <!-- method-list-content failed suite-MealPlanServiceTestSuite -->
+                    </div> <!-- method-list-content skipped suite-MealPlanServiceTestSuite -->
                   </li>
                 </ul>
               </div> <!-- suite-section-content -->
@@ -118,9 +118,9 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-MealPlanServiceTestSuite" class="panel MealPlanServiceTestSuite">
-          <div class="suite-MealPlanServiceTestSuite-class-failed">
+          <div class="suite-MealPlanServiceTestSuite-class-skipped">
             <div class="main-panel-header rounded-window-top">
-              <img src="failed.png"/>
+              <img src="skipped.png"/>
               <span class="class-name">com.fithub.services.mealplan.test.suites.ClientServiceTest</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
@@ -129,22 +129,51 @@
                   <a name="testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan">
                   </a> <!-- testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan -->
                   <span class="method-name">testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan</span>
-                  <div class="stack-trace">org.opentest4j.AssertionFailedError: 
-expected: MealPlanResponse(id=1, clientId=1, modified=2024-03-14T19:13, modifiedBy=1)
- but was: null
-	at com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan(ClientServiceTest.java:81)
-	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:154)
+                  <div class="stack-trace">java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@6ebd78d1 testClass = com.fithub.services.mealplan.test.suites.ClientServiceTest, locations = [], classes = [com.fithub.services.mealplan.test.configuration.MealPlanServiceCoreTestApplication], contextInitializerClasses = [], activeProfiles = [], propertySourceDescriptors = [], propertySourceProperties = [&quot;org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true&quot;], contextCustomizers = [org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@49c90a9c, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@f58853c, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@5038d0b5, org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizer@638ef7ed, org.springframework.boot.test.context.SpringBootTestAnnotation@6da34ec8], resourceBasePath = &quot;src/main/webapp&quot;, contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:180)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:130)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:191)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:130)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:260)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextPrepareTestInstance(AbstractTestNGSpringContextTests.java:119)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-... Removed 33 stack frames
+Caused by: org.springframework.cloud.commons.ConfigDataMissingEnvironmentPostProcessor$ImportException: No spring.config.import set
+	at org.springframework.cloud.commons.ConfigDataMissingEnvironmentPostProcessor.postProcessEnvironment(ConfigDataMissingEnvironmentPostProcessor.java:82)
+	at org.springframework.boot.env.EnvironmentPostProcessorApplicationListener.onApplicationEnvironmentPreparedEvent(EnvironmentPostProcessorApplicationListener.java:109)
+	at org.springframework.boot.env.EnvironmentPostProcessorApplicationListener.onApplicationEvent(EnvironmentPostProcessorApplicationListener.java:94)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:138)
+	at org.springframework.boot.context.event.EventPublishingRunListener.multicastInitialEvent(EventPublishingRunListener.java:136)
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:81)
+	at org.springframework.boot.SpringApplicationRunListeners.lambda$environmentPrepared$2(SpringApplicationRunListeners.java:64)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112)
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:63)
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:369)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:329)
+	at org.springframework.boot.test.context.SpringBootContextLoader.lambda$loadContext$3(SpringBootContextLoader.java:137)
+	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:58)
+	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:46)
+	at org.springframework.boot.SpringApplication.withHook(SpringApplication.java:1454)
+	at org.springframework.boot.test.context.SpringBootContextLoader$ContextLoaderHook.run(SpringBootContextLoader.java:553)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:137)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:108)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:225)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:152)
+	... 31 more
+... Removed 25 stack frames
 </div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-MealPlanServiceTestSuite-class-failed -->
+          </div> <!-- suite-MealPlanServiceTestSuite-class-skipped -->
         </div> <!-- panel MealPlanServiceTestSuite -->
         <div panel-name="test-xml-MealPlanServiceTestSuite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\Nedzla\Desktop\FitHub\mealplan-service\mealplan-service-core\src\test\resources\testng.xml</span>
+            <span class="header-content">C:\Users\Matija\Personal projects\fithub\mealplan-service\mealplan-service-core\src\test\resources\testng.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -197,12 +226,12 @@ data.addRows(1);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan')
 data.setCell(0, 2, 'com.fithub.services.mealplan.test.suites.ClientServiceTest')
-data.setCell(0, 3, 283);
+data.setCell(0, 3, 0);
 window.suiteTableData['MealPlanServiceTestSuite']= { tableData: data, tableDiv: 'times-div-MealPlanServiceTestSuite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 283 ms</span>
+              <span class="suite-total-time">Total running time: 0 ms</span>
               <div id="times-div-MealPlanServiceTestSuite">
               </div> <!-- times-div-MealPlanServiceTestSuite -->
             </div> <!-- times-div -->
@@ -234,30 +263,26 @@ return data;
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="configuration-class before">
-                <span class="method-name">springTestContextPrepareTestInstance</span>
-                <span class="method-start">22 ms</span>
-              </div> <!-- configuration-class before -->
-              <div class="configuration-method before">
-                <span class="method-name">springTestContextBeforeTestMethod(public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_ValidClientId...)</span>
-                <span class="method-start">4641 ms</span>
-              </div> <!-- configuration-method before -->
-              <div class="configuration-method before">
-                <span class="method-name">beforeMethod</span>
-                <span class="method-start">6492 ms</span>
-              </div> <!-- configuration-method before -->
-              <div class="test-method">
                 <img src="failed.png">
                 </img>
-                <span class="method-name">testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan</span>
-                <span class="method-start">7271 ms</span>
-              </div> <!-- test-method -->
+                <span class="method-name">springTestContextPrepareTestInstance</span>
+                <span class="method-start">9 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-method before">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_ValidClientId...)</span>
+                <span class="method-start">324 ms</span>
+              </div> <!-- configuration-method before -->
               <div class="configuration-method after">
+                <img src="failed.png">
+                </img>
                 <span class="method-name">springTestContextAfterTestMethod(public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_ValidClientId...)</span>
-                <span class="method-start">7600 ms</span>
+                <span class="method-start">345 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-class after">
                 <span class="method-name">springTestContextAfterTestClass</span>
-                <span class="method-start">7650 ms</span>
+                <span class="method-start">355 ms</span>
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

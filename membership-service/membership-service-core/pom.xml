@@ -19,14 +19,20 @@
 	</properties>
   	
   	<dependencies>
-		 <dependency>
+		<dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>2023.0.0</version>
+            <type>pom</type>
+        </dependency>
+		<dependency>
    			<groupId>org.springframework.boot</groupId>
     		<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.fithub.services</groupId>
 			<artifactId>membership-service-dao</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fithub.services</groupId>
@@ -47,7 +53,12 @@
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+    		<groupId>org.springframework.cloud</groupId>
+    		<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
 		
+		<!-- Testing -->
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-test</artifactId>
