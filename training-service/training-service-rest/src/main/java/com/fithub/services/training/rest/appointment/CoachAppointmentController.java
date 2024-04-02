@@ -26,7 +26,7 @@ public class CoachAppointmentController {
     private final AppointmentService appointmentService;
     
     @Operation(summary = "Get appointments for coach")
-    @GetMapping(value = "/coach-appointments/{id}")
+    @GetMapping(value = "/coach/{id}")
     public ResponseEntity<List<CoachAppointmentResponse>> getAppointmentsForCoach(@Valid @PathVariable String id) throws Exception {
         return new ResponseEntity<>(appointmentService.getAppointmentsForCoach(id), HttpStatus.OK);
     }

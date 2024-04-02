@@ -5,6 +5,7 @@ import java.util.List;
 import com.fithub.services.training.api.model.appointment.AppointmentResponse;
 import com.fithub.services.training.api.model.appointment.ClientAppointmentResponse;
 import com.fithub.services.training.api.model.appointment.CoachAppointmentResponse;
+import com.fithub.services.training.api.model.reservation.NewReservationRequest;
 import com.fithub.services.training.api.model.reservation.ReservationResponse;
 
 public interface AppointmentService {
@@ -16,5 +17,7 @@ public interface AppointmentService {
     List<CoachAppointmentResponse> getAppointmentsForCoach(String userId) throws Exception;
     
     List<AppointmentResponse> getAvailableAppointments(String userId) throws Exception;
+    
+    ReservationResponse makeReservationForAppointment(String userId, NewReservationRequest newReservationRequest) throws Exception;
     
 }

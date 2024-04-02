@@ -34,7 +34,7 @@ public class AppointmentController {
     }
 
     @Operation(summary = "Get available appointments")
-    @GetMapping(value = "/{id}/available-appointments")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<List<AppointmentResponse>> getAvailableAppointments(@Valid @PathVariable String id) throws Exception {
         return new ResponseEntity<>(appointmentService.getAvailableAppointments(id), HttpStatus.OK);
     }
