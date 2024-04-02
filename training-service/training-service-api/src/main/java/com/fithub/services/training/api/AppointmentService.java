@@ -8,4 +8,6 @@ public interface AppointmentService {
 
     List<ReservationResponse> getReservations(Long appointmentId) throws Exception;
 
+    String testLoadBalancer();
+
 }

@@ -38,7 +38,13 @@ public class AppointmentController {
     // connection.
     @GetMapping("/service-instances/{applicationName}")
     public ResponseEntity<List<ServiceInstance>> getServiceInstanceByApplicationName(@PathVariable String applicationName) {
-        return new ResponseEntity<>(this.discoveryClient.getInstances(applicationName), HttpStatus.OK);
+        return new ResponseEntity<>(discoveryClient.getInstances(applicationName), HttpStatus.OK);
+    }
+
+    // This method was made only for purposes of testing Ribbon load balancer.
+    @GetMapping("/load-balance/test")
+    public ResponseEntity<String> testLoadBalancing() {
+        return new ResponseEntity<>(appointmentService.testLoadBalancer(), HttpStatus.OK);
     }
 
 }

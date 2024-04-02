@@ -42,7 +42,7 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
     public void beforeMethod() {
         appointmentRepository = Mockito.mock(AppointmentRepository.class);
 
-        appointmentService = new AppointmentServiceImpl(appointmentRepository, reservationMapper);
+        appointmentService = new AppointmentServiceImpl(appointmentRepository, reservationMapper, null);
     }
 
     @Test

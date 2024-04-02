@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.fithub.services.training.api.AppointmentService;
 import com.fithub.services.training.api.exception.NotFoundException;
 import com.fithub.services.training.api.model.reservation.ReservationResponse;
+import com.fithub.services.training.core.client.AuthServiceClient;
 import com.fithub.services.training.dao.model.AppointmentEntity;
 import com.fithub.services.training.dao.repository.AppointmentRepository;
 import com.fithub.services.training.mapper.ReservationMapper;
@@ -20,6 +21,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
     private final ReservationMapper reservationMapper;
+    private final AuthServiceClient authServiceClient;
 
     @Override
     public List<ReservationResponse> getReservations(Long appointmentId) throws Exception {
@@ -30,6 +32,11 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
 
         return reservationMapper.entitiesToDtos(appointmentEntity.get().getReservations());
+    }
+
+    @Override
+    public String testLoadBalancer() {
+        return authServiceClient.testLoadBalancing().getBody();
     }
 
 }
