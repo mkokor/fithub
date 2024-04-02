@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-03-28T20:19:03 CET" name="Default suite" finished-at="2024-03-28T20:19:06 CET" duration-ms="3351">
+    <groups>
+    </groups>
+    <test started-at="2024-03-28T20:19:03 CET" name="Default test" finished-at="2024-03-28T20:19:06 CET" duration-ms="3351">
+      <class name="com.fithub.services.chat.test.suites.ChatroomServiceTest">
+        <test-method is-config="true" signature="springTestContextBeforeTestClass()[pri:0, instance:com.fithub.services.chat.test.suites.ChatroomServiceTest@54dcfa5a]" started-at="2024-03-28T20:19:03 CET" name="springTestContextBeforeTestClass" finished-at="2024-03-28T20:19:03 CET" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestClass -->
+        <test-method is-config="true" signature="springTestContextPrepareTestInstance()[pri:0, instance:com.fithub.services.chat.test.suites.ChatroomServiceTest@54dcfa5a]" started-at="2024-03-28T20:19:03 CET" name="springTestContextPrepareTestInstance" finished-at="2024-03-28T20:19:05 CET" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" duration-ms="1956" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextPrepareTestInstance -->
+        <test-method is-config="true" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.chat.test.suites.ChatroomServiceTest@54dcfa5a]" started-at="2024-03-28T20:19:05 CET" name="springTestContextBeforeTestMethod" finished-at="2024-03-28T20:19:06 CET" duration-ms="905" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.fithub.services.chat.test.suites.ChatroomServiceTest.testGetMessages_ValidChatroomIdIsProvided_ReturnsMessages()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.fithub.services.chat.test.suites.ChatroomServiceTest@54dcfa5a]" started-at="2024-03-28T20:19:06 CET" name="beforeMethod" finished-at="2024-03-28T20:19:06 CET" duration-ms="307" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="testGetMessages_ValidChatroomIdIsProvided_ReturnsMessages()[pri:0, instance:com.fithub.services.chat.test.suites.ChatroomServiceTest@54dcfa5a]" started-at="2024-03-28T20:19:06 CET" name="testGetMessages_ValidChatroomIdIsProvided_ReturnsMessages" finished-at="2024-03-28T20:19:06 CET" duration-ms="115" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetMessages_ValidChatroomIdIsProvided_ReturnsMessages -->
+        <test-method is-config="true" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.chat.test.suites.ChatroomServiceTest@54dcfa5a]" started-at="2024-03-28T20:19:06 CET" name="springTestContextAfterTestMethod" finished-at="2024-03-28T20:19:06 CET" duration-ms="8" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.fithub.services.chat.test.suites.ChatroomServiceTest.testGetMessages_ValidChatroomIdIsProvided_ReturnsMessages()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method is-config="true" signature="springTestContextAfterTestClass()[pri:0, instance:com.fithub.services.chat.test.suites.ChatroomServiceTest@54dcfa5a]" started-at="2024-03-28T20:19:06 CET" name="springTestContextAfterTestClass" finished-at="2024-03-28T20:19:06 CET" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestClass -->
+      </class> <!-- com.fithub.services.chat.test.suites.ChatroomServiceTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

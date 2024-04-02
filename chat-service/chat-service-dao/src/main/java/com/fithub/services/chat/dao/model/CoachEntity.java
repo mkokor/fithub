@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
@@ -33,5 +34,8 @@ public class CoachEntity implements Serializable {
 
     @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL)
     private List<ClientEntity> clients;
+    
+    @OneToOne(mappedBy = "admin")
+    private ChatroomEntity chatroom;
 
 }

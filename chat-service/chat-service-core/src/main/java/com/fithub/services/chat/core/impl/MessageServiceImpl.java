@@ -50,7 +50,6 @@ public class MessageServiceImpl implements MessageService {
         }
 
         final MessageEntity newMessage = new MessageEntity();
-        newMessage.setId(1L);
         newMessage.setContent(messageSendRequest.getContent());
         newMessage.setCreated(messageSendRequest.getCreated());
         newMessage.setChatroom(chatroom.get());

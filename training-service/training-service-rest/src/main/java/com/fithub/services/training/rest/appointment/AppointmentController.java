@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fithub.services.training.api.AppointmentService;
+import com.fithub.services.training.api.model.appointment.ClientAppointmentResponse;
 import com.fithub.services.training.api.model.reservation.ReservationResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,6 +30,12 @@ public class AppointmentController {
     @GetMapping(value = "/{id}/reservation")
     public ResponseEntity<List<ReservationResponse>> getReservations(@Valid @PathVariable Long id) throws Exception {
         return new ResponseEntity<>(appointmentService.getReservations(id), HttpStatus.OK);
+    }
+    
+    @Operation(summary = "Get appointments for client")
+    @GetMapping(value = "/client-appointments/{id}")
+    public ResponseEntity<List<ClientAppointmentResponse>> getAppointmentsForClient(@Valid @PathVariable Long id) throws Exception {
+        return new ResponseEntity<>(appointmentService.getAppointmentsForClient(id), HttpStatus.OK);
     }
 
 }
