@@ -5,7 +5,7 @@
   	
   	<parent>
     	<groupId>com.fithub.services</groupId>
-    	<artifactId>training-service-parent</artifactId>
+    	<artifactId>chat-service-parent</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
   	</parent>
   	
@@ -13,10 +13,6 @@
   	
   	<name>Chat Service</name>
   	<description>Chat Service</description>
-  	
-  	<properties>
-		<java.version>17</java.version>
-	</properties>
 	
 	<dependencies>
 		<dependency>
