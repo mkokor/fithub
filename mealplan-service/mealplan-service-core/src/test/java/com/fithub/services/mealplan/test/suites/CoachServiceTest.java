@@ -40,7 +40,7 @@ public class CoachServiceTest extends BasicTestConfiguration {
     public void testGetCoachNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName() {
         try {
             UserEntity userEntity = new UserEntity();
-            userEntity.setUuid("user-id");
+            userEntity.setUuid("user-id-coach");
             userEntity.setFirstName("John");
             userEntity.setLastName("Doe");
 

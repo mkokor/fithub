@@ -6,12 +6,12 @@
       <class name="com.fithub.services.mealplan.test.suites.ClientServiceTest">
         <methods>
           <include name="beforeMethod"/>
+          <include name="testGetClientNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName"/>
           <include name="springTestContextBeforeTestClass"/>
           <include name="springTestContextBeforeTestMethod"/>
           <include name="springTestContextPrepareTestInstance"/>
           <include name="springTestContextAfterTestClass"/>
           <include name="springTestContextAfterTestMethod"/>
-          <include name="testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan"/>
         </methods>
       </class> <!-- com.fithub.services.mealplan.test.suites.ClientServiceTest -->
     </classes>

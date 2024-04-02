@@ -1,8 +1,6 @@
 package com.fithub.services.mealplan.test.suites;
 
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -13,9 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import com.fithub.services.mealplan.api.ClientService;
 import com.fithub.services.mealplan.api.model.mealplan.MealPlanResponse;
+import com.fithub.services.mealplan.api.model.user.UserResponse;
 import com.fithub.services.mealplan.core.impl.ClientServiceImpl;
 import com.fithub.services.mealplan.dao.model.ClientEntity;
 import com.fithub.services.mealplan.dao.model.CoachEntity;
@@ -23,6 +21,7 @@ import com.fithub.services.mealplan.dao.model.MealPlanEntity;
 import com.fithub.services.mealplan.dao.model.UserEntity;
 import com.fithub.services.mealplan.dao.repository.ClientRepository;
 import com.fithub.services.mealplan.mapper.MealPlanMapper;
+import com.fithub.services.mealplan.mapper.UserMapper;
 import com.fithub.services.mealplan.test.configuration.BasicTestConfiguration;
 
 
@@ -30,8 +29,13 @@ public class ClientServiceTest extends BasicTestConfiguration {
 
     @Autowired
     private MealPlanMapper mealPlanMapper;
+    
+    @Autowired
+    private UserMapper userMapper;
 
     private ClientRepository clientRepository;
+    
+    //private ClientRepository clientRepository1;
     
     private ClientService clientService;
 
@@ -39,8 +43,9 @@ public class ClientServiceTest extends BasicTestConfiguration {
     @BeforeMethod
     public void beforeMethod() {
         clientRepository = Mockito.mock(ClientRepository.class);
+        //clientRepository1 = Mockito.mock(ClientRepository.class);
 
-        clientService = new ClientServiceImpl(clientRepository, mealPlanMapper);
+        clientService = new ClientServiceImpl(clientRepository, mealPlanMapper, userMapper);
     }
 
     @Test
@@ -86,6 +91,39 @@ public class ClientServiceTest extends BasicTestConfiguration {
             MealPlanResponse actualResponse = clientService.getMealPlan(clientEntity.getId());
             
 
+            Assertions.assertThat(actualResponse).isEqualTo(expectedResponse);
+        } catch (Exception exception) {
+            Assert.fail();
+        }
+    }
+        
+    @Test
+    public void testGetClientNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName() {
+        try {
+        	 // Kreirajte korisnika za kojeg ćemo tražiti klijenta
+            UserEntity userEntity = new UserEntity();
+            userEntity.setUuid("user-id-client");
+            userEntity.setFirstName("Augustine II");
+            userEntity.setLastName("Cartier II");
+
+            // Kreirajte klijenta povezanog s tim korisnikom
+            ClientEntity clientEntity = new ClientEntity();
+            clientEntity.setId(1L);
+            clientEntity.setUser(userEntity);
+            userEntity.setClient(clientEntity);
+
+            // Očekivani odgovor
+            UserResponse expectedResponse = new UserResponse();
+            expectedResponse.setFirstName("Augustine II");
+            expectedResponse.setLastName("Cartier II");
+
+            // Mockanje metode findByUserUuid
+            Mockito.when(clientRepository.findByUserUuid(userEntity.getUuid())).thenReturn(Optional.of(clientEntity));
+            
+            UserResponse actualResponse = clientService.getClientNameAndLastName(clientEntity.getUser().getUuid());
+
+
+            // Provjera jesu li očekivani i stvarni odgovor isti
             Assertions.assertThat(actualResponse).isEqualTo(expectedResponse);
         } catch (Exception exception) {
             Assert.fail();

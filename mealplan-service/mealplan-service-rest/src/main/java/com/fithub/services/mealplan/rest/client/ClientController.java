@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fithub.services.mealplan.api.ClientService;
+import com.fithub.services.mealplan.api.CoachService;
+import com.fithub.services.mealplan.api.exception.NotFoundException;
 import com.fithub.services.mealplan.api.model.mealplan.MealPlanResponse;
+import com.fithub.services.mealplan.api.model.user.UserResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,4 +29,16 @@ public class ClientController {
 	public ResponseEntity<MealPlanResponse> getMealPlan(@PathVariable Long id) throws Exception {
 		return new ResponseEntity<>(clientService.getMealPlan(id), HttpStatus.OK);
 	}
+    
+    @Operation(summary = "Get name of client by id")
+    @GetMapping("/{userId}/name")
+    public ResponseEntity<UserResponse> getClientNameAndLastName(@PathVariable String userId) {
+        try {
+            UserResponse clientNameAndLastName = clientService.getClientNameAndLastName(userId);
+            //System.out.println("Coach name and last name: " + coachNameAndLastName.getFirstName() + " " + coachNameAndLastName.getLastName());
+            return ResponseEntity.ok(clientNameAndLastName);
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 }
