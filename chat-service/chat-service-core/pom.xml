@@ -9,7 +9,7 @@
     	<version>0.0.1-SNAPSHOT</version>
   	</parent>
   	
-  	<artifactId>Chat-service-core</artifactId>
+  	<artifactId>chat-service-core</artifactId>
   	
   	<name>Chat Service Core</name>
   	<description>Chat Service Core</description>
