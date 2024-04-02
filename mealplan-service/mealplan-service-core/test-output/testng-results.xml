@@ -1,21 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
+<testng-results ignored="0" total="12" passed="11" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-04-02T14:49:25 CEST" name="MealPlanServiceTestSuite" finished-at="2024-04-02T14:49:36 CEST" duration-ms="10105">
+  <suite started-at="2024-04-03T01:47:18 CEST" name="MealPlanServiceTestSuite" finished-at="2024-04-03T01:47:27 CEST" duration-ms="9169">
     <groups>
     </groups>
-    <test started-at="2024-04-02T14:49:25 CEST" name="ClientService" finished-at="2024-04-02T14:49:35 CEST" duration-ms="9606">
+    <test started-at="2024-04-03T01:47:18 CEST" name="ClientService" finished-at="2024-04-03T01:47:27 CEST" duration-ms="8422">
       <class name="com.fithub.services.mealplan.test.suites.ClientServiceTest">
-        <test-method is-config="true" signature="springTestContextBeforeTestClass()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@34cdeda2]" started-at="2024-04-02T14:49:26 CEST" name="springTestContextBeforeTestClass" finished-at="2024-04-02T14:49:26 CEST" duration-ms="23" status="PASS">
+        <test-method is-config="true" signature="springTestContextBeforeTestClass()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:18 CEST" name="springTestContextBeforeTestClass" finished-at="2024-04-03T01:47:18 CEST" duration-ms="22" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextBeforeTestClass -->
-        <test-method is-config="true" signature="springTestContextPrepareTestInstance()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@34cdeda2]" started-at="2024-04-02T14:49:26 CEST" name="springTestContextPrepareTestInstance" finished-at="2024-04-02T14:49:30 CEST" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" duration-ms="4681" status="PASS">
+        <test-method is-config="true" signature="springTestContextPrepareTestInstance()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:18 CEST" name="springTestContextPrepareTestInstance" finished-at="2024-04-03T01:47:23 CEST" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" duration-ms="5160" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextPrepareTestInstance -->
-        <test-method is-config="true" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@34cdeda2]" started-at="2024-04-02T14:49:30 CEST" name="springTestContextBeforeTestMethod" finished-at="2024-04-02T14:49:33 CEST" duration-ms="2569" status="PASS">
+        <test-method is-config="true" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:23 CEST" name="springTestContextBeforeTestMethod" finished-at="2024-04-03T01:47:25 CEST" duration-ms="1652" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetClientNameAndLastName_EmptyUserId_ReturnsNotFoundException()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:25 CEST" name="beforeMethod" finished-at="2024-04-03T01:47:26 CEST" duration-ms="801" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="testGetClientNameAndLastName_EmptyUserId_ReturnsNotFoundException()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:26 CEST" name="testGetClientNameAndLastName_EmptyUserId_ReturnsNotFoundException" finished-at="2024-04-03T01:47:26 CEST" duration-ms="92" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetClientNameAndLastName_EmptyUserId_ReturnsNotFoundException -->
+        <test-method is-config="true" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:26 CEST" name="springTestContextAfterTestMethod" finished-at="2024-04-03T01:47:26 CEST" duration-ms="38" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetClientNameAndLastName_EmptyUserId_ReturnsNotFoundException()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method is-config="true" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:26 CEST" name="springTestContextBeforeTestMethod" finished-at="2024-04-03T01:47:26 CEST" duration-ms="13" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetClientNameAndLastName_InvalidUserId_ReturnsNotFoundException()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:26 CEST" name="beforeMethod" finished-at="2024-04-03T01:47:26 CEST" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="testGetClientNameAndLastName_InvalidUserId_ReturnsNotFoundException()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:26 CEST" name="testGetClientNameAndLastName_InvalidUserId_ReturnsNotFoundException" finished-at="2024-04-03T01:47:26 CEST" duration-ms="37" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetClientNameAndLastName_InvalidUserId_ReturnsNotFoundException -->
+        <test-method is-config="true" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:26 CEST" name="springTestContextAfterTestMethod" finished-at="2024-04-03T01:47:26 CEST" duration-ms="6" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetClientNameAndLastName_InvalidUserId_ReturnsNotFoundException()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method is-config="true" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:26 CEST" name="springTestContextBeforeTestMethod" finished-at="2024-04-03T01:47:26 CEST" duration-ms="10" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetClientNameAndLastName_NullUserId_ReturnsNotFoundException()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:26 CEST" name="beforeMethod" finished-at="2024-04-03T01:47:26 CEST" duration-ms="4" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="testGetClientNameAndLastName_NullUserId_ReturnsNotFoundException()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:26 CEST" name="testGetClientNameAndLastName_NullUserId_ReturnsNotFoundException" finished-at="2024-04-03T01:47:26 CEST" duration-ms="11" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetClientNameAndLastName_NullUserId_ReturnsNotFoundException -->
+        <test-method is-config="true" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:26 CEST" name="springTestContextAfterTestMethod" finished-at="2024-04-03T01:47:26 CEST" duration-ms="4" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetClientNameAndLastName_NullUserId_ReturnsNotFoundException()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method is-config="true" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:26 CEST" name="springTestContextBeforeTestMethod" finished-at="2024-04-03T01:47:26 CEST" duration-ms="6" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -26,15 +116,15 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextBeforeTestMethod -->
-        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@34cdeda2]" started-at="2024-04-02T14:49:33 CEST" name="beforeMethod" finished-at="2024-04-02T14:49:34 CEST" duration-ms="1435" status="PASS">
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:26 CEST" name="beforeMethod" finished-at="2024-04-03T01:47:26 CEST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeMethod -->
-        <test-method signature="testGetClientNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@34cdeda2]" started-at="2024-04-02T14:49:34 CEST" name="testGetClientNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName" finished-at="2024-04-02T14:49:34 CEST" duration-ms="248" status="PASS">
+        <test-method signature="testGetClientNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:26 CEST" name="testGetClientNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName" finished-at="2024-04-03T01:47:26 CEST" duration-ms="158" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testGetClientNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName -->
-        <test-method is-config="true" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@34cdeda2]" started-at="2024-04-02T14:49:35 CEST" name="springTestContextAfterTestMethod" finished-at="2024-04-02T14:49:35 CEST" duration-ms="52" status="PASS">
+        <test-method is-config="true" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:26 CEST" name="springTestContextAfterTestMethod" finished-at="2024-04-03T01:47:26 CEST" duration-ms="10" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -45,53 +135,203 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestMethod -->
-        <test-method is-config="true" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@34cdeda2]" started-at="2024-04-02T14:49:35 CEST" name="springTestContextBeforeTestMethod" finished-at="2024-04-02T14:49:35 CEST" duration-ms="79" status="PASS">
+        <test-method is-config="true" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:26 CEST" name="springTestContextBeforeTestMethod" finished-at="2024-04-03T01:47:26 CEST" duration-ms="6" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan()]]>
+                <![CDATA[public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_EmptyClientId_ReturnsNotFoundException()]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextBeforeTestMethod -->
-        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@34cdeda2]" started-at="2024-04-02T14:49:35 CEST" name="beforeMethod" finished-at="2024-04-02T14:49:35 CEST" duration-ms="135" status="PASS">
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:26 CEST" name="beforeMethod" finished-at="2024-04-03T01:47:26 CEST" duration-ms="3" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeMethod -->
-        <test-method signature="testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@34cdeda2]" started-at="2024-04-02T14:49:35 CEST" name="testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan" finished-at="2024-04-02T14:49:35 CEST" duration-ms="89" status="PASS">
+        <test-method signature="testGetMealPlan_EmptyClientId_ReturnsNotFoundException()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:26 CEST" name="testGetMealPlan_EmptyClientId_ReturnsNotFoundException" finished-at="2024-04-03T01:47:26 CEST" duration-ms="8" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan -->
-        <test-method is-config="true" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@34cdeda2]" started-at="2024-04-02T14:49:35 CEST" name="springTestContextAfterTestMethod" finished-at="2024-04-02T14:49:35 CEST" duration-ms="15" status="PASS">
+        </test-method> <!-- testGetMealPlan_EmptyClientId_ReturnsNotFoundException -->
+        <test-method is-config="true" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:26 CEST" name="springTestContextAfterTestMethod" finished-at="2024-04-03T01:47:26 CEST" duration-ms="4" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan()]]>
+                <![CDATA[public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_EmptyClientId_ReturnsNotFoundException()]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestMethod -->
-        <test-method is-config="true" signature="springTestContextAfterTestClass()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@34cdeda2]" started-at="2024-04-02T14:49:35 CEST" name="springTestContextAfterTestClass" finished-at="2024-04-02T14:49:35 CEST" duration-ms="13" status="PASS">
+        <test-method is-config="true" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:26 CEST" name="springTestContextBeforeTestMethod" finished-at="2024-04-03T01:47:26 CEST" duration-ms="6" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_InvalidClientId_ReturnsNotFoundException()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:26 CEST" name="beforeMethod" finished-at="2024-04-03T01:47:26 CEST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="testGetMealPlan_InvalidClientId_ReturnsNotFoundException()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:26 CEST" name="testGetMealPlan_InvalidClientId_ReturnsNotFoundException" finished-at="2024-04-03T01:47:26 CEST" duration-ms="6" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetMealPlan_InvalidClientId_ReturnsNotFoundException -->
+        <test-method is-config="true" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:26 CEST" name="springTestContextAfterTestMethod" finished-at="2024-04-03T01:47:27 CEST" duration-ms="4" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_InvalidClientId_ReturnsNotFoundException()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method is-config="true" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:27 CEST" name="springTestContextBeforeTestMethod" finished-at="2024-04-03T01:47:27 CEST" duration-ms="4" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_NullClientId_ReturnsNotFoundException()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:27 CEST" name="beforeMethod" finished-at="2024-04-03T01:47:27 CEST" duration-ms="4" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="testGetMealPlan_NullClientId_ReturnsNotFoundException()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:27 CEST" name="testGetMealPlan_NullClientId_ReturnsNotFoundException" finished-at="2024-04-03T01:47:27 CEST" duration-ms="80" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetMealPlan_NullClientId_ReturnsNotFoundException -->
+        <test-method is-config="true" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:27 CEST" name="springTestContextAfterTestMethod" finished-at="2024-04-03T01:47:27 CEST" duration-ms="3" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_NullClientId_ReturnsNotFoundException()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method is-config="true" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:27 CEST" name="springTestContextBeforeTestMethod" finished-at="2024-04-03T01:47:27 CEST" duration-ms="2" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan1()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:27 CEST" name="beforeMethod" finished-at="2024-04-03T01:47:27 CEST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan1()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:27 CEST" name="testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan1" finished-at="2024-04-03T01:47:27 CEST" duration-ms="7" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan1 -->
+        <test-method is-config="true" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:27 CEST" name="springTestContextAfterTestMethod" finished-at="2024-04-03T01:47:27 CEST" duration-ms="2" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan1()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method is-config="true" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:27 CEST" name="springTestContextBeforeTestMethod" finished-at="2024-04-03T01:47:27 CEST" duration-ms="4" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan2()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:27 CEST" name="beforeMethod" finished-at="2024-04-03T01:47:27 CEST" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan2()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:27 CEST" name="testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan2" finished-at="2024-04-03T01:47:27 CEST" duration-ms="5" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan2 -->
+        <test-method is-config="true" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:27 CEST" name="springTestContextAfterTestMethod" finished-at="2024-04-03T01:47:27 CEST" duration-ms="4" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan2()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method is-config="true" signature="springTestContextAfterTestClass()[pri:0, instance:com.fithub.services.mealplan.test.suites.ClientServiceTest@74960bfa]" started-at="2024-04-03T01:47:27 CEST" name="springTestContextAfterTestClass" finished-at="2024-04-03T01:47:27 CEST" duration-ms="6" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestClass -->
       </class> <!-- com.fithub.services.mealplan.test.suites.ClientServiceTest -->
     </test> <!-- ClientService -->
-    <test started-at="2024-04-02T14:49:35 CEST" name="CoachService" finished-at="2024-04-02T14:49:36 CEST" duration-ms="236">
+    <test started-at="2024-04-03T01:47:27 CEST" name="CoachService" finished-at="2024-04-03T01:47:27 CEST" duration-ms="262">
       <class name="com.fithub.services.mealplan.test.suites.CoachServiceTest">
-        <test-method is-config="true" signature="springTestContextBeforeTestClass()[pri:0, instance:com.fithub.services.mealplan.test.suites.CoachServiceTest@54c62d71]" started-at="2024-04-02T14:49:35 CEST" name="springTestContextBeforeTestClass" finished-at="2024-04-02T14:49:35 CEST" duration-ms="4" status="PASS">
+        <test-method is-config="true" signature="springTestContextBeforeTestClass()[pri:0, instance:com.fithub.services.mealplan.test.suites.CoachServiceTest@57ea113a]" started-at="2024-04-03T01:47:27 CEST" name="springTestContextBeforeTestClass" finished-at="2024-04-03T01:47:27 CEST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextBeforeTestClass -->
-        <test-method is-config="true" signature="springTestContextPrepareTestInstance()[pri:0, instance:com.fithub.services.mealplan.test.suites.CoachServiceTest@54c62d71]" started-at="2024-04-02T14:49:35 CEST" name="springTestContextPrepareTestInstance" finished-at="2024-04-02T14:49:35 CEST" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" duration-ms="14" status="PASS">
+        <test-method is-config="true" signature="springTestContextPrepareTestInstance()[pri:0, instance:com.fithub.services.mealplan.test.suites.CoachServiceTest@57ea113a]" started-at="2024-04-03T01:47:27 CEST" name="springTestContextPrepareTestInstance" finished-at="2024-04-03T01:47:27 CEST" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" duration-ms="48" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextPrepareTestInstance -->
-        <test-method is-config="true" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.CoachServiceTest@54c62d71]" started-at="2024-04-02T14:49:35 CEST" name="springTestContextBeforeTestMethod" finished-at="2024-04-02T14:49:35 CEST" duration-ms="3" status="PASS">
+        <test-method is-config="true" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.CoachServiceTest@57ea113a]" started-at="2024-04-03T01:47:27 CEST" name="springTestContextBeforeTestMethod" finished-at="2024-04-03T01:47:27 CEST" duration-ms="4" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.fithub.services.mealplan.test.suites.CoachServiceTest.testGetCoachNameAndLastName_InvalidUserId_ReturnsNotFound()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.fithub.services.mealplan.test.suites.CoachServiceTest@57ea113a]" started-at="2024-04-03T01:47:27 CEST" name="beforeMethod" finished-at="2024-04-03T01:47:27 CEST" duration-ms="142" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="testGetCoachNameAndLastName_InvalidUserId_ReturnsNotFound()[pri:0, instance:com.fithub.services.mealplan.test.suites.CoachServiceTest@57ea113a]" started-at="2024-04-03T01:47:27 CEST" name="testGetCoachNameAndLastName_InvalidUserId_ReturnsNotFound" finished-at="2024-04-03T01:47:27 CEST" duration-ms="7" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetCoachNameAndLastName_InvalidUserId_ReturnsNotFound -->
+        <test-method is-config="true" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.CoachServiceTest@57ea113a]" started-at="2024-04-03T01:47:27 CEST" name="springTestContextAfterTestMethod" finished-at="2024-04-03T01:47:27 CEST" duration-ms="5" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.fithub.services.mealplan.test.suites.CoachServiceTest.testGetCoachNameAndLastName_InvalidUserId_ReturnsNotFound()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method is-config="true" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.CoachServiceTest@57ea113a]" started-at="2024-04-03T01:47:27 CEST" name="springTestContextBeforeTestMethod" finished-at="2024-04-03T01:47:27 CEST" duration-ms="2" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -102,15 +342,15 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextBeforeTestMethod -->
-        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.fithub.services.mealplan.test.suites.CoachServiceTest@54c62d71]" started-at="2024-04-02T14:49:35 CEST" name="beforeMethod" finished-at="2024-04-02T14:49:35 CEST" duration-ms="150" status="PASS">
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.fithub.services.mealplan.test.suites.CoachServiceTest@57ea113a]" started-at="2024-04-03T01:47:27 CEST" name="beforeMethod" finished-at="2024-04-03T01:47:27 CEST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeMethod -->
-        <test-method signature="testGetCoachNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName()[pri:0, instance:com.fithub.services.mealplan.test.suites.CoachServiceTest@54c62d71]" started-at="2024-04-02T14:49:35 CEST" name="testGetCoachNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName" finished-at="2024-04-02T14:49:36 CEST" duration-ms="9" status="PASS">
+        <test-method signature="testGetCoachNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName()[pri:0, instance:com.fithub.services.mealplan.test.suites.CoachServiceTest@57ea113a]" started-at="2024-04-03T01:47:27 CEST" name="testGetCoachNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName" finished-at="2024-04-03T01:47:27 CEST" duration-ms="5" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testGetCoachNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName -->
-        <test-method is-config="true" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.CoachServiceTest@54c62d71]" started-at="2024-04-02T14:49:36 CEST" name="springTestContextAfterTestMethod" finished-at="2024-04-02T14:49:36 CEST" duration-ms="8" status="PASS">
+        <test-method is-config="true" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.CoachServiceTest@57ea113a]" started-at="2024-04-03T01:47:27 CEST" name="springTestContextAfterTestMethod" finished-at="2024-04-03T01:47:27 CEST" duration-ms="3" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -121,11 +361,100 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestMethod -->
-        <test-method is-config="true" signature="springTestContextAfterTestClass()[pri:0, instance:com.fithub.services.mealplan.test.suites.CoachServiceTest@54c62d71]" started-at="2024-04-02T14:49:36 CEST" name="springTestContextAfterTestClass" finished-at="2024-04-02T14:49:36 CEST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="springTestContextAfterTestClass()[pri:0, instance:com.fithub.services.mealplan.test.suites.CoachServiceTest@57ea113a]" started-at="2024-04-03T01:47:27 CEST" name="springTestContextAfterTestClass" finished-at="2024-04-03T01:47:27 CEST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestClass -->
       </class> <!-- com.fithub.services.mealplan.test.suites.CoachServiceTest -->
     </test> <!-- CoachService -->
+    <test started-at="2024-04-03T01:47:27 CEST" name="MealPlanService" finished-at="2024-04-03T01:47:27 CEST" duration-ms="146">
+      <class name="com.fithub.services.mealplan.test.suites.MealPlanServiceTest">
+        <test-method is-config="true" signature="springTestContextBeforeTestClass()[pri:0, instance:com.fithub.services.mealplan.test.suites.MealPlanServiceTest@2ceb80a1]" started-at="2024-04-03T01:47:27 CEST" name="springTestContextBeforeTestClass" finished-at="2024-04-03T01:47:27 CEST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestClass -->
+        <test-method is-config="true" signature="springTestContextPrepareTestInstance()[pri:0, instance:com.fithub.services.mealplan.test.suites.MealPlanServiceTest@2ceb80a1]" started-at="2024-04-03T01:47:27 CEST" name="springTestContextPrepareTestInstance" finished-at="2024-04-03T01:47:27 CEST" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" duration-ms="7" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextPrepareTestInstance -->
+        <test-method is-config="true" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.MealPlanServiceTest@2ceb80a1]" started-at="2024-04-03T01:47:27 CEST" name="springTestContextBeforeTestMethod" finished-at="2024-04-03T01:47:27 CEST" duration-ms="2" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.fithub.services.mealplan.test.suites.MealPlanServiceTest.testGetDailyMealByDay_ValidMealPlanIdIsProvided_ReturnsMealPlans()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.fithub.services.mealplan.test.suites.MealPlanServiceTest@2ceb80a1]" started-at="2024-04-03T01:47:27 CEST" name="beforeMethod" finished-at="2024-04-03T01:47:27 CEST" duration-ms="99" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="testGetDailyMealByDay_ValidMealPlanIdIsProvided_ReturnsMealPlans()[pri:0, instance:com.fithub.services.mealplan.test.suites.MealPlanServiceTest@2ceb80a1]" started-at="2024-04-03T01:47:27 CEST" name="testGetDailyMealByDay_ValidMealPlanIdIsProvided_ReturnsMealPlans" finished-at="2024-04-03T01:47:27 CEST" duration-ms="3" status="FAIL">
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[null]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: null
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.fail(Assert.java:116)
+at com.fithub.services.mealplan.test.suites.MealPlanServiceTest.testGetDailyMealByDay_ValidMealPlanIdIsProvided_ReturnsMealPlans(MealPlanServiceTest.java:92)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.MethodInvocationHelper$1.runTestMethod(MethodInvocationHelper.java:258)
+at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:154)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeHookable(MethodInvocationHelper.java:272)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:656)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:228)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:961)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:201)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:819)
+at org.testng.TestRunner.run(TestRunner.java:619)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1228)
+at org.testng.TestNG.runSuites(TestNG.java:1134)
+at org.testng.TestNG.run(TestNG.java:1101)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetDailyMealByDay_ValidMealPlanIdIsProvided_ReturnsMealPlans -->
+        <test-method is-config="true" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.mealplan.test.suites.MealPlanServiceTest@2ceb80a1]" started-at="2024-04-03T01:47:27 CEST" name="springTestContextAfterTestMethod" finished-at="2024-04-03T01:47:27 CEST" duration-ms="4" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.fithub.services.mealplan.test.suites.MealPlanServiceTest.testGetDailyMealByDay_ValidMealPlanIdIsProvided_ReturnsMealPlans()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method is-config="true" signature="springTestContextAfterTestClass()[pri:0, instance:com.fithub.services.mealplan.test.suites.MealPlanServiceTest@2ceb80a1]" started-at="2024-04-03T01:47:27 CEST" name="springTestContextAfterTestClass" finished-at="2024-04-03T01:47:27 CEST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestClass -->
+      </class> <!-- com.fithub.services.mealplan.test.suites.MealPlanServiceTest -->
+    </test> <!-- MealPlanService -->
   </suite> <!-- MealPlanServiceTestSuite -->
 </testng-results>

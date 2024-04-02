@@ -193,57 +193,23 @@ public class DatabaseSeeder implements ApplicationRunner {
             mealPlanRepository.save(mealPlanEntity5);
         }
         
-        DailyMealPlanEntity dailyMealPlanEntity1 = new DailyMealPlanEntity();
-        DailyMealPlanEntity dailyMealEntity2 = new DailyMealPlanEntity();
-        DailyMealPlanEntity dailyMealEntity3 = new DailyMealPlanEntity();
-        DailyMealPlanEntity dailyMealEntity4 = new DailyMealPlanEntity();
-        DailyMealPlanEntity dailyMealEntity5 = new DailyMealPlanEntity();
-        
+        String[] meals = {"Oatmeal", "Apple", "Grilled Chicken Salad", "Salmon with Quinoa", "Yogurt"};
+        String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+
+        // Provjerite je li baza prazna
         if (dailyMealPlanRepository.findAll().isEmpty()) {
-            dailyMealPlanEntity1.setDay("Monday");
-            dailyMealPlanEntity1.setBreakfast("Oatmeal");
-            dailyMealPlanEntity1.setAmSnack("Apple");
-            dailyMealPlanEntity1.setLunch("Grilled Chicken Salad");
-            dailyMealPlanEntity1.setDinner("Salmon with Quinoa");
-            dailyMealPlanEntity1.setPmSnack("Yogurt");
-            dailyMealPlanEntity1.setMealPlan(mealPlanEntity1);
-            dailyMealPlanRepository.save(dailyMealPlanEntity1);
-            
-            dailyMealEntity2.setDay("Tuesday");
-            dailyMealEntity2.setBreakfast("Avocado Toast");
-            dailyMealEntity2.setAmSnack("Orange");
-            dailyMealEntity2.setLunch("Quinoa Salad");
-            dailyMealEntity2.setDinner("Baked Chicken with Sweet Potatoes");
-            dailyMealEntity2.setPmSnack("Mixed Nuts");
-            dailyMealEntity2.setMealPlan(mealPlanEntity2);
-            dailyMealPlanRepository.save(dailyMealEntity2);
-
-            dailyMealEntity3.setDay("Wednesday");
-            dailyMealEntity3.setBreakfast("Blueberry Pancakes");
-            dailyMealEntity3.setAmSnack("Pear");
-            dailyMealEntity3.setLunch("Vegetable Stir-Fry");
-            dailyMealEntity3.setDinner("Shrimp Pasta");
-            dailyMealEntity3.setPmSnack("Cottage Cheese");
-            dailyMealEntity3.setMealPlan(mealPlanEntity3);
-            dailyMealPlanRepository.save(dailyMealEntity3);
-
-            dailyMealEntity4.setDay("Thursday");
-            dailyMealEntity4.setBreakfast("Yogurt Parfait");
-            dailyMealEntity4.setAmSnack("Grapes");
-            dailyMealEntity4.setLunch("Turkey Sandwich");
-            dailyMealEntity4.setDinner("Beef Stir-Fry");
-            dailyMealEntity4.setPmSnack("Rice Cakes");
-            dailyMealEntity4.setMealPlan(mealPlanEntity4);
-            dailyMealPlanRepository.save(dailyMealEntity4);
-
-            dailyMealEntity5.setDay("Friday");
-            dailyMealEntity5.setBreakfast("Bagel with Cream Cheese");
-            dailyMealEntity5.setAmSnack("Kiwi");
-            dailyMealEntity5.setLunch("Salmon Wrap");
-            dailyMealEntity5.setDinner("Vegetarian Pizza");
-            dailyMealEntity5.setPmSnack("Trail Mix");
-            dailyMealEntity5.setMealPlan(mealPlanEntity5);
-            dailyMealPlanRepository.save(dailyMealEntity5);
+            // Iterirajte kroz dane i stvarajte i spremajte entitete
+            for (int i = 0; i < days.length; i++) {
+                DailyMealPlanEntity dailyMealPlanEntity = new DailyMealPlanEntity();
+                dailyMealPlanEntity.setDay(days[i]);
+                dailyMealPlanEntity.setBreakfast(meals[0] + (i + 1)); // Dodajte broj uz obrok
+                dailyMealPlanEntity.setAmSnack(meals[1] + (i + 1)); // Dodajte broj uz obrok
+                dailyMealPlanEntity.setLunch(meals[2] + (i + 1)); // Dodajte broj uz obrok
+                dailyMealPlanEntity.setDinner(meals[3] + (i + 1)); // Dodajte broj uz obrok
+                dailyMealPlanEntity.setPmSnack(meals[4] + (i + 1)); // Dodajte broj uz obrok
+                dailyMealPlanEntity.setMealPlan(mealPlanEntity1);
+                dailyMealPlanRepository.save(dailyMealPlanEntity);
+            }
         }
 
 

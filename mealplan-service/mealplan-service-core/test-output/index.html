@@ -25,7 +25,7 @@
       <span class="top-banner-title-font">Test results</span>
       <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">1 suite, 1 failed test</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -39,7 +39,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-MealPlanServiceTestSuite" class="navigator-link">
-              <span class="suite-name border-passed">MealPlanServiceTestSuite</span>
+              <span class="suite-name border-failed">MealPlanServiceTestSuite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -55,7 +55,7 @@
                 </li>
                 <li>
                   <a href="#" panel-name="testlist-MealPlanServiceTestSuite" class="navigator-link ">
-                    <span class="test-stats">2 tests</span>
+                    <span class="test-stats">3 tests</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -92,7 +92,21 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">3 methods,   3 passed</span>
+                    <span class="method-stats">12 methods, 1 failed,   11 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-MealPlanServiceTestSuite" class="hide-methods failed suite-MealPlanServiceTestSuite"> (hide)</a> <!-- hide-methods failed suite-MealPlanServiceTestSuite -->
+                      <a href="#" panel-name="suite-MealPlanServiceTestSuite" class="show-methods failed suite-MealPlanServiceTestSuite"> (show)</a> <!-- show-methods failed suite-MealPlanServiceTestSuite -->
+                    </span>
+                    <div class="method-list-content failed suite-MealPlanServiceTestSuite">
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-MealPlanServiceTestSuite" title="com.fithub.services.mealplan.test.suites.MealPlanServiceTest" class="method navigator-link" hash-for-method="testGetDailyMealByDay_ValidMealPlanIdIsProvided_ReturnsMealPlans">testGetDailyMealByDay_ValidMealPlanIdIsProvided_ReturnsMealPlans</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-MealPlanServiceTestSuite -->
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -103,7 +117,27 @@
                     <div class="method-list-content passed suite-MealPlanServiceTestSuite">
                       <span>
                         <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-MealPlanServiceTestSuite" title="com.fithub.services.mealplan.test.suites.ClientServiceTest" class="method navigator-link" hash-for-method="testGetClientNameAndLastName_EmptyUserId_ReturnsNotFoundException">testGetClientNameAndLastName_EmptyUserId_ReturnsNotFoundException</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-MealPlanServiceTestSuite" title="com.fithub.services.mealplan.test.suites.ClientServiceTest" class="method navigator-link" hash-for-method="testGetClientNameAndLastName_InvalidUserId_ReturnsNotFoundException">testGetClientNameAndLastName_InvalidUserId_ReturnsNotFoundException</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-MealPlanServiceTestSuite" title="com.fithub.services.mealplan.test.suites.ClientServiceTest" class="method navigator-link" hash-for-method="testGetClientNameAndLastName_NullUserId_ReturnsNotFoundException">testGetClientNameAndLastName_NullUserId_ReturnsNotFoundException</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
                         <a href="#" panel-name="suite-MealPlanServiceTestSuite" title="com.fithub.services.mealplan.test.suites.ClientServiceTest" class="method navigator-link" hash-for-method="testGetClientNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName">testGetClientNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-MealPlanServiceTestSuite" title="com.fithub.services.mealplan.test.suites.CoachServiceTest" class="method navigator-link" hash-for-method="testGetCoachNameAndLastName_InvalidUserId_ReturnsNotFound">testGetCoachNameAndLastName_InvalidUserId_ReturnsNotFound</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
@@ -113,7 +147,27 @@
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-MealPlanServiceTestSuite" title="com.fithub.services.mealplan.test.suites.ClientServiceTest" class="method navigator-link" hash-for-method="testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan">testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-MealPlanServiceTestSuite" title="com.fithub.services.mealplan.test.suites.ClientServiceTest" class="method navigator-link" hash-for-method="testGetMealPlan_EmptyClientId_ReturnsNotFoundException">testGetMealPlan_EmptyClientId_ReturnsNotFoundException</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-MealPlanServiceTestSuite" title="com.fithub.services.mealplan.test.suites.ClientServiceTest" class="method navigator-link" hash-for-method="testGetMealPlan_InvalidClientId_ReturnsNotFoundException">testGetMealPlan_InvalidClientId_ReturnsNotFoundException</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-MealPlanServiceTestSuite" title="com.fithub.services.mealplan.test.suites.ClientServiceTest" class="method navigator-link" hash-for-method="testGetMealPlan_NullClientId_ReturnsNotFoundException">testGetMealPlan_NullClientId_ReturnsNotFoundException</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-MealPlanServiceTestSuite" title="com.fithub.services.mealplan.test.suites.ClientServiceTest" class="method navigator-link" hash-for-method="testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan1">testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan1</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-MealPlanServiceTestSuite" title="com.fithub.services.mealplan.test.suites.ClientServiceTest" class="method navigator-link" hash-for-method="testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan2">testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan2</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-MealPlanServiceTestSuite -->
@@ -128,12 +182,54 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-MealPlanServiceTestSuite" class="panel MealPlanServiceTestSuite">
+          <div class="suite-MealPlanServiceTestSuite-class-failed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="failed.png"/>
+              <span class="class-name">com.fithub.services.mealplan.test.suites.MealPlanServiceTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="testGetDailyMealByDay_ValidMealPlanIdIsProvided_ReturnsMealPlans">
+                  </a> <!-- testGetDailyMealByDay_ValidMealPlanIdIsProvided_ReturnsMealPlans -->
+                  <span class="method-name">testGetDailyMealByDay_ValidMealPlanIdIsProvided_ReturnsMealPlans</span>
+                  <div class="stack-trace">java.lang.AssertionError: null
+	at com.fithub.services.mealplan.test.suites.MealPlanServiceTest.testGetDailyMealByDay_ValidMealPlanIdIsProvided_ReturnsMealPlans(MealPlanServiceTest.java:92)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:154)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 31 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-MealPlanServiceTestSuite-class-failed -->
           <div class="suite-MealPlanServiceTestSuite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
               <span class="class-name">com.fithub.services.mealplan.test.suites.ClientServiceTest</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="testGetClientNameAndLastName_EmptyUserId_ReturnsNotFoundException">
+                  </a> <!-- testGetClientNameAndLastName_EmptyUserId_ReturnsNotFoundException -->
+                  <span class="method-name">testGetClientNameAndLastName_EmptyUserId_ReturnsNotFoundException</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testGetClientNameAndLastName_InvalidUserId_ReturnsNotFoundException">
+                  </a> <!-- testGetClientNameAndLastName_InvalidUserId_ReturnsNotFoundException -->
+                  <span class="method-name">testGetClientNameAndLastName_InvalidUserId_ReturnsNotFoundException</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testGetClientNameAndLastName_NullUserId_ReturnsNotFoundException">
+                  </a> <!-- testGetClientNameAndLastName_NullUserId_ReturnsNotFoundException -->
+                  <span class="method-name">testGetClientNameAndLastName_NullUserId_ReturnsNotFoundException</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
                   <a name="testGetClientNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName">
@@ -143,9 +239,37 @@
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan">
-                  </a> <!-- testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan -->
-                  <span class="method-name">testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan</span>
+                  <a name="testGetMealPlan_EmptyClientId_ReturnsNotFoundException">
+                  </a> <!-- testGetMealPlan_EmptyClientId_ReturnsNotFoundException -->
+                  <span class="method-name">testGetMealPlan_EmptyClientId_ReturnsNotFoundException</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testGetMealPlan_InvalidClientId_ReturnsNotFoundException">
+                  </a> <!-- testGetMealPlan_InvalidClientId_ReturnsNotFoundException -->
+                  <span class="method-name">testGetMealPlan_InvalidClientId_ReturnsNotFoundException</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testGetMealPlan_NullClientId_ReturnsNotFoundException">
+                  </a> <!-- testGetMealPlan_NullClientId_ReturnsNotFoundException -->
+                  <span class="method-name">testGetMealPlan_NullClientId_ReturnsNotFoundException</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan1">
+                  </a> <!-- testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan1 -->
+                  <span class="method-name">testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan1</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan2">
+                  </a> <!-- testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan2 -->
+                  <span class="method-name">testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan2</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -156,6 +280,13 @@
               <span class="class-name">com.fithub.services.mealplan.test.suites.CoachServiceTest</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="testGetCoachNameAndLastName_InvalidUserId_ReturnsNotFound">
+                  </a> <!-- testGetCoachNameAndLastName_InvalidUserId_ReturnsNotFound -->
+                  <span class="method-name">testGetCoachNameAndLastName_InvalidUserId_ReturnsNotFound</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
                   <a name="testGetCoachNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName">
@@ -185,6 +316,11 @@
       &lt;class name=&quot;com.fithub.services.mealplan.test.suites.CoachServiceTest&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- CoachService --&gt;
+  &lt;test thread-count=&quot;5&quot; name=&quot;MealPlanService&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.fithub.services.mealplan.test.suites.MealPlanServiceTest&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- MealPlanService --&gt;
 &lt;/suite&gt; &lt;!-- MealPlanServiceTestSuite --&gt;
             </pre>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -200,6 +336,9 @@
               </li>
               <li>
                 <span class="test-name">CoachService (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">MealPlanService (1 class)</span>
               </li>
             </ul>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -225,24 +364,60 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(3);
+data.addRows(12);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'testGetClientNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName')
 data.setCell(0, 2, 'com.fithub.services.mealplan.test.suites.ClientServiceTest')
-data.setCell(0, 3, 248);
+data.setCell(0, 3, 158);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan')
+data.setCell(1, 1, 'testGetClientNameAndLastName_EmptyUserId_ReturnsNotFoundException')
 data.setCell(1, 2, 'com.fithub.services.mealplan.test.suites.ClientServiceTest')
-data.setCell(1, 3, 89);
+data.setCell(1, 3, 92);
 data.setCell(2, 0, 2)
-data.setCell(2, 1, 'testGetCoachNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName')
-data.setCell(2, 2, 'com.fithub.services.mealplan.test.suites.CoachServiceTest')
-data.setCell(2, 3, 9);
+data.setCell(2, 1, 'testGetMealPlan_NullClientId_ReturnsNotFoundException')
+data.setCell(2, 2, 'com.fithub.services.mealplan.test.suites.ClientServiceTest')
+data.setCell(2, 3, 80);
+data.setCell(3, 0, 3)
+data.setCell(3, 1, 'testGetClientNameAndLastName_InvalidUserId_ReturnsNotFoundException')
+data.setCell(3, 2, 'com.fithub.services.mealplan.test.suites.ClientServiceTest')
+data.setCell(3, 3, 37);
+data.setCell(4, 0, 4)
+data.setCell(4, 1, 'testGetClientNameAndLastName_NullUserId_ReturnsNotFoundException')
+data.setCell(4, 2, 'com.fithub.services.mealplan.test.suites.ClientServiceTest')
+data.setCell(4, 3, 11);
+data.setCell(5, 0, 5)
+data.setCell(5, 1, 'testGetMealPlan_EmptyClientId_ReturnsNotFoundException')
+data.setCell(5, 2, 'com.fithub.services.mealplan.test.suites.ClientServiceTest')
+data.setCell(5, 3, 8);
+data.setCell(6, 0, 6)
+data.setCell(6, 1, 'testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan1')
+data.setCell(6, 2, 'com.fithub.services.mealplan.test.suites.ClientServiceTest')
+data.setCell(6, 3, 7);
+data.setCell(7, 0, 7)
+data.setCell(7, 1, 'testGetCoachNameAndLastName_InvalidUserId_ReturnsNotFound')
+data.setCell(7, 2, 'com.fithub.services.mealplan.test.suites.CoachServiceTest')
+data.setCell(7, 3, 7);
+data.setCell(8, 0, 8)
+data.setCell(8, 1, 'testGetMealPlan_InvalidClientId_ReturnsNotFoundException')
+data.setCell(8, 2, 'com.fithub.services.mealplan.test.suites.ClientServiceTest')
+data.setCell(8, 3, 6);
+data.setCell(9, 0, 9)
+data.setCell(9, 1, 'testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan2')
+data.setCell(9, 2, 'com.fithub.services.mealplan.test.suites.ClientServiceTest')
+data.setCell(9, 3, 5);
+data.setCell(10, 0, 10)
+data.setCell(10, 1, 'testGetCoachNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName')
+data.setCell(10, 2, 'com.fithub.services.mealplan.test.suites.CoachServiceTest')
+data.setCell(10, 3, 5);
+data.setCell(11, 0, 11)
+data.setCell(11, 1, 'testGetDailyMealByDay_ValidMealPlanIdIsProvided_ReturnsMealPlans')
+data.setCell(11, 2, 'com.fithub.services.mealplan.test.suites.MealPlanServiceTest')
+data.setCell(11, 3, 3);
 window.suiteTableData['MealPlanServiceTestSuite']= { tableData: data, tableDiv: 'times-div-MealPlanServiceTestSuite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 346 ms</span>
+              <span class="suite-total-time">Total running time: 419 ms</span>
               <div id="times-div-MealPlanServiceTestSuite">
               </div> <!-- times-div-MealPlanServiceTestSuite -->
             </div> <!-- times-div -->
@@ -275,74 +450,235 @@ return data;
               </div> <!-- configuration-class before -->
               <div class="configuration-class before">
                 <span class="method-name">springTestContextPrepareTestInstance</span>
-                <span class="method-start">24 ms</span>
+                <span class="method-start">23 ms</span>
               </div> <!-- configuration-class before -->
               <div class="configuration-method before">
                 <span class="method-name">springTestContextBeforeTestMethod(public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetClientNameAndLastName_...)</span>
-                <span class="method-start">4724 ms</span>
+                <span class="method-start">5207 ms</span>
               </div> <!-- configuration-method before -->
               <div class="configuration-method before">
                 <span class="method-name">beforeMethod</span>
-                <span class="method-start">7295 ms</span>
+                <span class="method-start">6860 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">testGetClientNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName</span>
-                <span class="method-start">8732 ms</span>
+                <span class="method-name">testGetClientNameAndLastName_EmptyUserId_ReturnsNotFoundException</span>
+                <span class="method-start">7662 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">springTestContextAfterTestMethod(public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetClientNameAndLastName_...)</span>
-                <span class="method-start">9120 ms</span>
+                <span class="method-start">7782 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-method before">
-                <span class="method-name">springTestContextBeforeTestMethod(public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_ValidClientId...)</span>
-                <span class="method-start">9184 ms</span>
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetClientNameAndLastName_...)</span>
+                <span class="method-start">7836 ms</span>
               </div> <!-- configuration-method before -->
               <div class="configuration-method before">
                 <span class="method-name">beforeMethod</span>
-                <span class="method-start">9267 ms</span>
+                <span class="method-start">7851 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan</span>
-                <span class="method-start">9404 ms</span>
+                <span class="method-name">testGetClientNameAndLastName_InvalidUserId_ReturnsNotFoundException</span>
+                <span class="method-start">7853 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetClientNameAndLastName_...)</span>
+                <span class="method-start">7917 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetClientNameAndLastName_...)</span>
+                <span class="method-start">7928 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethod</span>
+                <span class="method-start">7939 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testGetClientNameAndLastName_NullUserId_ReturnsNotFoundException</span>
+                <span class="method-start">7944 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetClientNameAndLastName_...)</span>
+                <span class="method-start">7966 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetClientNameAndLastName_...)</span>
+                <span class="method-start">7974 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethod</span>
+                <span class="method-start">7980 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testGetClientNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName</span>
+                <span class="method-start">7981 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetClientNameAndLastName_...)</span>
+                <span class="method-start">8148 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_EmptyClientId...)</span>
+                <span class="method-start">8161 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethod</span>
+                <span class="method-start">8167 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testGetMealPlan_EmptyClientId_ReturnsNotFoundException</span>
+                <span class="method-start">8170 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_EmptyClientId...)</span>
+                <span class="method-start">8185 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_InvalidClient...)</span>
+                <span class="method-start">8190 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethod</span>
+                <span class="method-start">8197 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testGetMealPlan_InvalidClientId_ReturnsNotFoundException</span>
+                <span class="method-start">8198 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_InvalidClient...)</span>
+                <span class="method-start">8212 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_NullClientId_...)</span>
+                <span class="method-start">8217 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethod</span>
+                <span class="method-start">8224 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testGetMealPlan_NullClientId_ReturnsNotFoundException</span>
+                <span class="method-start">8228 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_NullClientId_...)</span>
+                <span class="method-start">8318 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_ValidClientId...)</span>
+                <span class="method-start">8322 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethod</span>
+                <span class="method-start">8325 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan1</span>
+                <span class="method-start">8326 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">springTestContextAfterTestMethod(public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_ValidClientId...)</span>
-                <span class="method-start">9512 ms</span>
+                <span class="method-start">8340 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_ValidClientId...)</span>
+                <span class="method-start">8344 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethod</span>
+                <span class="method-start">8348 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan2</span>
+                <span class="method-start">8350 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_ValidClientId...)</span>
+                <span class="method-start">8368 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-class after">
                 <span class="method-name">springTestContextAfterTestClass</span>
-                <span class="method-start">9529 ms</span>
+                <span class="method-start">8375 ms</span>
               </div> <!-- configuration-class after -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
               <div class="chronological-class-name">com.fithub.services.mealplan.test.suites.CoachServiceTest</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
                 <span class="method-name">springTestContextBeforeTestClass</span>
-                <span class="method-start">9823 ms</span>
+                <span class="method-start">8620 ms</span>
               </div> <!-- configuration-class before -->
               <div class="configuration-class before">
                 <span class="method-name">springTestContextPrepareTestInstance</span>
-                <span class="method-start">9827 ms</span>
+                <span class="method-start">8622 ms</span>
               </div> <!-- configuration-class before -->
               <div class="configuration-method before">
-                <span class="method-name">springTestContextBeforeTestMethod(public void com.fithub.services.mealplan.test.suites.CoachServiceTest.testGetCoachNameAndLastName_Va...)</span>
-                <span class="method-start">9843 ms</span>
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.fithub.services.mealplan.test.suites.CoachServiceTest.testGetCoachNameAndLastName_In...)</span>
+                <span class="method-start">8671 ms</span>
               </div> <!-- configuration-method before -->
               <div class="configuration-method before">
                 <span class="method-name">beforeMethod</span>
-                <span class="method-start">9847 ms</span>
+                <span class="method-start">8675 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testGetCoachNameAndLastName_InvalidUserId_ReturnsNotFound</span>
+                <span class="method-start">8817 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.fithub.services.mealplan.test.suites.CoachServiceTest.testGetCoachNameAndLastName_In...)</span>
+                <span class="method-start">8851 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.fithub.services.mealplan.test.suites.CoachServiceTest.testGetCoachNameAndLastName_Va...)</span>
+                <span class="method-start">8857 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethod</span>
+                <span class="method-start">8860 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">testGetCoachNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName</span>
-                <span class="method-start">9997 ms</span>
+                <span class="method-start">8861 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">springTestContextAfterTestMethod(public void com.fithub.services.mealplan.test.suites.CoachServiceTest.testGetCoachNameAndLastName_Va...)</span>
-                <span class="method-start">10044 ms</span>
+                <span class="method-start">8874 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-class after">
                 <span class="method-name">springTestContextAfterTestClass</span>
-                <span class="method-start">10053 ms</span>
+                <span class="method-start">8878 ms</span>
+              </div> <!-- configuration-class after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.fithub.services.mealplan.test.suites.MealPlanServiceTest</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">springTestContextBeforeTestClass</span>
+                <span class="method-start">8988 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-class before">
+                <span class="method-name">springTestContextPrepareTestInstance</span>
+                <span class="method-start">8989 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.fithub.services.mealplan.test.suites.MealPlanServiceTest.testGetDailyMealByDay_Valid...)</span>
+                <span class="method-start">8997 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethod</span>
+                <span class="method-start">8999 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">testGetDailyMealByDay_ValidMealPlanIdIsProvided_ReturnsMealPlans</span>
+                <span class="method-start">9099 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.fithub.services.mealplan.test.suites.MealPlanServiceTest.testGetDailyMealByDay_Valid...)</span>
+                <span class="method-start">9126 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-class after">
+                <span class="method-name">springTestContextAfterTestClass</span>
+                <span class="method-start">9130 ms</span>
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

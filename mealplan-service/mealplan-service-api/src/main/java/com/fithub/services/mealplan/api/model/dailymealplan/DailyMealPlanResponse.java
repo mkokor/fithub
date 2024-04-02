@@ -13,7 +13,7 @@ public class DailyMealPlanResponse implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
+	//private Long id;
 	
 	private String day;
 	
@@ -27,7 +27,7 @@ public class DailyMealPlanResponse implements Serializable{
 	
 	private String pmSnack;
 	
-	private Long mealPlanId;
+	//private Long mealPlanId;
 
 	
 }

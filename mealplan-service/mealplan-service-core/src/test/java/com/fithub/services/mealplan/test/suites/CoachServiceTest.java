@@ -1,15 +1,20 @@
 package com.fithub.services.mealplan.test.suites;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.fail;
+
 import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
 import org.mockito.Mockito;
+import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.fithub.services.mealplan.api.CoachService;
+import com.fithub.services.mealplan.api.exception.NotFoundException;
 import com.fithub.services.mealplan.api.model.user.UserResponse;
 import com.fithub.services.mealplan.core.impl.CoachServiceImpl;
 import com.fithub.services.mealplan.dao.model.CoachEntity;
@@ -65,5 +70,21 @@ public class CoachServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     }
+    
+    @Test
+    public void testGetCoachNameAndLastName_InvalidUserId_ReturnsNotFound() {
+        try {
+            String invalidUserId = "invalid-user-id";
+            
+            Mockito.when(coachRepository.findByUserUuid(invalidUserId)).thenReturn(Optional.empty());
+
+            Assert.assertThrows(NotFoundException.class, () -> {
+                coachService.getCoachNameAndLastName(invalidUserId);
+            });
+        } catch (Exception exception) {
+            fail("Exception should not have been thrown");
+        }
+    }
+
 
 }
