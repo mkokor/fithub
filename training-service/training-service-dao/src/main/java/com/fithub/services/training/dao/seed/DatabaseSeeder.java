@@ -61,12 +61,13 @@ public class DatabaseSeeder implements ApplicationRunner {
             appointmentRepository.save(appointmentEntity);
 
             UserEntity clientUser = new UserEntity();
-            clientUser.setUuid(UUID.randomUUID().toString());
+            clientUser.setUuid("mary-ann");
             clientUser.setFirstName("Mary");
             clientUser.setLastName("Ann");
+            userRepository.save(clientUser);
 
             ClientEntity clientEntity = new ClientEntity();
-            clientEntity.setUser(userEntity);
+            clientEntity.setUser(clientUser);
             clientEntity.setCoach(coachEntity);
             clientRepository.save(clientEntity);
 

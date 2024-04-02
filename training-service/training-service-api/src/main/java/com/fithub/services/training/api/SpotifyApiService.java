@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fithub.services.training.api.exception.ThirdPartyApiException;
 import com.fithub.services.training.api.model.spotify.SpotifyAccessTokenResponse;
+import com.fithub.services.training.api.model.spotify.SpotifyTrackResponse;
 import com.fithub.services.training.api.model.spotify.TracksSearchResponse;
 
 public interface SpotifyApiService {
@@ -12,5 +13,7 @@ public interface SpotifyApiService {
 
     TracksSearchResponse search(String accessToken, String searchTerm, List<String> expectedContentTypes, Integer pageNumber,
             Integer pageSize) throws ThirdPartyApiException;
+
+    SpotifyTrackResponse getTrack(String accessToken, String trackId) throws ThirdPartyApiException;
 
 }
