@@ -1,6 +1,7 @@
 package com.fithub.services.training.test.suites;
 
 import java.time.DayOfWeek;
+
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +23,9 @@ import com.fithub.services.training.dao.model.CoachEntity;
 import com.fithub.services.training.dao.model.ReservationEntity;
 import com.fithub.services.training.dao.model.UserEntity;
 import com.fithub.services.training.dao.repository.AppointmentRepository;
-import com.fithub.services.training.dao.repository.ClientRepository;
+import com.fithub.services.training.dao.repository.UserRepository;
 import com.fithub.services.training.mapper.ClientAppointmentMapper;
+import com.fithub.services.training.mapper.CoachAppointmentMapper;
 import com.fithub.services.training.mapper.ReservationMapper;
 import com.fithub.services.training.test.configuration.BasicTestConfiguration;
 
@@ -32,9 +34,10 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
     @Autowired
     private ReservationMapper reservationMapper;
     private ClientAppointmentMapper clientAppointmentMapper;
+    private CoachAppointmentMapper coachAppointmentMapper;
 
     private AppointmentRepository appointmentRepository;
-    private ClientRepository clientRepository;
+    private UserRepository userRepository;
 
     private AppointmentService appointmentService;
 
@@ -42,7 +45,7 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
     public void beforeMethod() {
         appointmentRepository = Mockito.mock(AppointmentRepository.class);
 
-        appointmentService = new AppointmentServiceImpl(appointmentRepository, clientRepository, reservationMapper, clientAppointmentMapper);
+        appointmentService = new AppointmentServiceImpl(appointmentRepository, userRepository, reservationMapper, null, clientAppointmentMapper, coachAppointmentMapper);
     }
 
     @Test

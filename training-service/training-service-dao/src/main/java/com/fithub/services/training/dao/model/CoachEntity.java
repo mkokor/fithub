@@ -33,5 +33,8 @@ public class CoachEntity {
 
     @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
     private List<ProgressionStatsEntity> progressionStats;
+    
+    @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL)
+    private List<AppointmentEntity> appointments;
 
 }

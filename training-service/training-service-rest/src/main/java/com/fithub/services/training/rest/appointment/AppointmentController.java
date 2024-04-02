@@ -2,6 +2,7 @@ package com.fithub.services.training.rest.appointment;
 
 import java.util.List;
 
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fithub.services.training.api.AppointmentService;
-import com.fithub.services.training.api.model.appointment.ClientAppointmentResponse;
+import com.fithub.services.training.api.model.appointment.AppointmentResponse;
 import com.fithub.services.training.api.model.reservation.ReservationResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,11 +32,10 @@ public class AppointmentController {
     public ResponseEntity<List<ReservationResponse>> getReservations(@Valid @PathVariable Long id) throws Exception {
         return new ResponseEntity<>(appointmentService.getReservations(id), HttpStatus.OK);
     }
-    
-    @Operation(summary = "Get appointments for client")
-    @GetMapping(value = "/client-appointments/{id}")
-    public ResponseEntity<List<ClientAppointmentResponse>> getAppointmentsForClient(@Valid @PathVariable Long id) throws Exception {
-        return new ResponseEntity<>(appointmentService.getAppointmentsForClient(id), HttpStatus.OK);
-    }
 
+    @Operation(summary = "Get available appointments")
+    @GetMapping(value = "/{id}/available-appointments")
+    public ResponseEntity<List<AppointmentResponse>> getAvailableAppointments(@Valid @PathVariable String id) throws Exception {
+        return new ResponseEntity<>(appointmentService.getAvailableAppointments(id), HttpStatus.OK);
+    }
 }

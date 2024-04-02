@@ -7,16 +7,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(description = "The properties of a client appointment response object")
-public class ClientAppointmentResponse implements Serializable {
+@Schema(description = "The properties of a coach appointment response object")
+public class CoachAppointmentResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    private Long id;
 
     private LocalTime startTime;
 
     private LocalTime endTime;
+
+    private Integer capacity;
 
     private String day;
     
