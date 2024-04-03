@@ -18,6 +18,7 @@ import com.fithub.services.training.api.model.reservation.ReservationResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @Tag(name = "appointment", description = "Appointment API")

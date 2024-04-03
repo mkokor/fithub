@@ -81,9 +81,8 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
         localValidatorFactoryBean.afterPropertiesSet();
         validator = localValidatorFactoryBean;
         
-        appointmentService = new AppointmentServiceImpl(appointmentRepository, userRepository, reservationRepository, reservationMapper, appointmentMapper, clientAppointmentMapper, coachAppointmentMapper, validator);
+        appointmentService = new AppointmentServiceImpl(appointmentRepository, userRepository, reservationRepository, reservationMapper, appointmentMapper, clientAppointmentMapper, coachAppointmentMapper, validator, null);
 
-        appointmentService = new AppointmentServiceImpl(appointmentRepository, reservationMapper, null);
     }
 
     @Test
