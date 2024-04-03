@@ -1,6 +1,7 @@
 package com.fithub.services.chat.dao.model;
 
 import java.io.Serializable;
+
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -13,7 +14,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity

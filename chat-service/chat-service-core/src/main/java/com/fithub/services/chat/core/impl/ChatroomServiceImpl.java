@@ -1,8 +1,6 @@
 package com.fithub.services.chat.core.impl;
 
 import java.util.ArrayList;
-
-
 import java.util.List;
 
 import java.util.Optional;
@@ -77,23 +75,25 @@ public class ChatroomServiceImpl implements ChatroomService {
         }
         
     	ClientEntity clientEntity = userEntity.get().getClient();
-    	Long chatroomId = null;
+    	Long coachId = null;
     	if (clientEntity != null) {
     		CoachEntity coachEntity = clientEntity.getCoach();
-    		chatroomId = coachEntity.getChatroom().getId();
+    		coachId = coachEntity.getId();
     	} else {
     		CoachEntity coachEntity = userEntity.get().getCoach();
-     		chatroomId = coachEntity.getChatroom().getId();
+     		coachId = coachEntity.getId();
     	}
     	
-    	Optional<ChatroomEntity> chatroomEntity = chatroomRepository.findById(chatroomId);
-        if (!chatroomEntity.isPresent()) {
+    	ChatroomEntity chatroomEntity = chatroomRepository.findByCoachId(coachId);
+        if (chatroomEntity == null) {
             throw new NotFoundException("The chatroom with provided ID could not be found.");
         }
         
-        ChatroomResponse chatroomDetails = chatroomMapper.entityToDto(chatroomEntity.get());
+        Long chatroomId = chatroomEntity.getId();
         
-        List<MessageResponse> messages = messageMapper.entitiesToDtos(chatroomEntity.get().getMessages());
+        ChatroomResponse chatroomDetails = chatroomMapper.entityToDto(chatroomEntity);
+        
+        List<MessageResponse> messages = messageMapper.entitiesToDtos(chatroomEntity.getMessages());
         
         List<UserResponse> participants = getParticipants(chatroomId);
         
@@ -121,12 +121,12 @@ public class ChatroomServiceImpl implements ChatroomService {
     	   throw new BadRequestException("The chatroom for given admin already exists.");
        }
        
-       final ChatroomEntity newChatroom = new ChatroomEntity();
+       ChatroomEntity newChatroom = new ChatroomEntity();
        newChatroom.setRoomName(newChatroomRequest.getRoomName());
        newChatroom.setAdmin(chatroomAdmin.get());
        chatroomRepository.save(newChatroom);
        
-       ChatroomDataResponse chatroomDataResponse = getChatroomData(chatroomAdmin.get().getUser().getUuid());
+       ChatroomDataResponse chatroomDataResponse = getChatroomData(newChatroom.getAdmin().getUser().getUuid());
        
        return chatroomDataResponse;
     }

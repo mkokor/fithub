@@ -15,6 +15,6 @@ public class ChatroomResponse implements Serializable {
 
     private String roomName;
     
-    private String admin;
+    private Long admin;
 
 }

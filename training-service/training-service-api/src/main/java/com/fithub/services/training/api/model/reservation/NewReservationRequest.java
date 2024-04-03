@@ -2,8 +2,8 @@ package com.fithub.services.training.api.model.reservation;
 
 import java.io.Serializable;
 
+
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 

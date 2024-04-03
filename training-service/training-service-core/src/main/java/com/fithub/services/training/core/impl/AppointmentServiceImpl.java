@@ -69,14 +69,17 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
         
         ClientEntity client = userEntity.get().getClient();
-        CoachEntity coach = userEntity.get().getCoach();
+        CoachEntity coach = null;
         if(client != null)  {
         	coach = client.getCoach();
+        } else {
+        	coach = userEntity.get().getCoach();
         }
         
         List<AppointmentEntity> availableAppointments = appointmentRepository.findAvailableAppointmentsByCoachId(coach.getId());	
 
-        return appointmentMapper.entitiesToDtos(availableAppointments);
+        List<AppointmentResponse> response = appointmentMapper.entitiesToDtos(availableAppointments);
+        return response;
     }
     
     @Override
@@ -134,7 +137,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     	
     	Optional<UserEntity> userEntity = userRepository.findById(userId);
     	
-        if (userEntity.isEmpty()) {
+        if (!userEntity.isPresent()) {
             throw new NotFoundException("The user with provided ID could not be found.");
         }
         
@@ -149,7 +152,8 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
         
         List<AppointmentResponse> availableAppointments = getAvailableAppointments(userId);
-        if (availableAppointments.contains(appointmentMapper.entityToDto(appointment.get()))) {
+        AppointmentResponse appointmentResponse = appointmentMapper.entityToDto(appointment.get());
+        if (availableAppointments.contains(appointmentResponse)) {
         	
         	ReservationEntity existingReservation = reservationRepository.findReservationByClientId(appointment.get().getId(), userEntity.get().getClient().getId());
         	if (existingReservation != null) {
