@@ -14,6 +14,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
@@ -28,13 +30,15 @@ public class MealPlanEntity {
     
     @OneToOne
     @JoinColumn(name = "client_id", nullable = false)
+    @NotNull(message = "It must be specific whose meal it is..")
     private ClientEntity client;
     
     @Column(name = "modified")
-    private LocalDateTime modifiedDate;
+    private LocalDateTime modified;
     
     @ManyToOne
     @JoinColumn(name = "modified_by", nullable = false)
+    @NotNull(message = "Creator of meal plan must not be blank.")
     private CoachEntity modifiedBy;
     
     @OneToMany(mappedBy = "mealPlan", cascade = CascadeType.ALL)

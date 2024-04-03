@@ -19,5 +19,7 @@ public interface AppointmentService {
     List<AppointmentResponse> getAvailableAppointments(String userId) throws Exception;
     
     ReservationResponse makeReservationForAppointment(String userId, NewReservationRequest newReservationRequest) throws Exception;
-    
+
+    String testLoadBalancer();
+
 }

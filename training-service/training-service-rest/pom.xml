@@ -14,11 +14,11 @@
   	<name>Training Service Rest</name>
   	<description>Training Service Rest</description>
   	
-  	<properties>
-		<java.version>17</java.version>
-	</properties>
-  	
   	<dependencies>
+		  <dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.fithub.services</groupId>
 			<artifactId>training-service-core</artifactId>

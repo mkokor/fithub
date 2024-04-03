@@ -14,6 +14,7 @@ import org.assertj.core.api.Assertions;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -45,6 +46,9 @@ import com.fithub.services.training.test.configuration.BasicTestConfiguration;
 import jakarta.validation.Validator;
 
 public class AppointmentServiceTest extends BasicTestConfiguration {
+
+    @Value("${message}")
+    private String message;
 
     @Autowired
     private ReservationMapper reservationMapper;
@@ -78,6 +82,8 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
         validator = localValidatorFactoryBean;
         
         appointmentService = new AppointmentServiceImpl(appointmentRepository, userRepository, reservationRepository, reservationMapper, appointmentMapper, clientAppointmentMapper, coachAppointmentMapper, validator);
+
+        appointmentService = new AppointmentServiceImpl(appointmentRepository, reservationMapper, null);
     }
 
     @Test

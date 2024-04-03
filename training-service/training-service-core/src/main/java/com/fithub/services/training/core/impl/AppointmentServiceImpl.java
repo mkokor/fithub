@@ -18,6 +18,7 @@ import com.fithub.services.training.api.model.appointment.ClientAppointmentRespo
 import com.fithub.services.training.api.model.appointment.CoachAppointmentResponse;
 import com.fithub.services.training.api.model.reservation.NewReservationRequest;
 import com.fithub.services.training.api.model.reservation.ReservationResponse;
+import com.fithub.services.training.core.client.AuthServiceClient;
 import com.fithub.services.training.dao.model.AppointmentEntity;
 import com.fithub.services.training.dao.model.ClientEntity;
 import com.fithub.services.training.dao.model.CoachEntity;
@@ -48,6 +49,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final ClientAppointmentMapper clientAppointmentMapper;
     private final CoachAppointmentMapper coachAppointmentMapper;
     private final Validator validator;
+    private final AuthServiceClient authServiceClient;
 
     @Override
     public List<ReservationResponse> getReservations(Long appointmentId) throws Exception {
@@ -169,6 +171,11 @@ public class AppointmentServiceImpl implements AppointmentService {
         } else {
         	throw new BadRequestException("Appointment with provided id is not available.");
         }
+    }
+
+    @Override
+    public String testLoadBalancer() {
+        return authServiceClient.testLoadBalancing().getBody();
     }
 
 }

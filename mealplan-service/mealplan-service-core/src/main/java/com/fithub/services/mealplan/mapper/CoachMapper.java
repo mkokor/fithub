@@ -11,8 +11,7 @@ import com.fithub.services.mealplan.dao.model.CoachEntity;
 @Mapper(componentModel = "spring")
 public interface CoachMapper {
 
-    @Mapping(source = "user.firstName", target = "firstName")
-    @Mapping(source = "user.lastName", target = "lastName")
+    @Mapping(source = "user.uuid", target = "userId")
     public CoachResponse entityToDto(CoachEntity coachEntity);
 
     public List<CoachResponse> entitiesToDtos(List<CoachEntity> coachEntities);
