@@ -3,6 +3,8 @@ package com.fithub.services.mealplan.api.model.mealplan;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import com.fithub.services.mealplan.dao.model.CoachEntity;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

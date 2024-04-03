@@ -9,30 +9,521 @@
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
 <tr><th colspan="8">MealPlanServiceTestSuite</th></tr>
-<tr><td><a href="#t0">ClientService</a></td><td class="num">9</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">8,422</td><td></td><td></td></tr>
-<tr class="stripe"><td><a href="#t1">CoachService</a></td><td class="num">2</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">262</td><td></td><td></td></tr>
-<tr><td><a href="#t2">MealPlanService</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num attn">1</td><td class="num">146</td><td></td><td></td></tr>
-<tr><th>Total</th><th class="num">11</th><th class="num">0</th><th class="num">0</th><th class="num attn">1</th><th class="num">8,830</th><th colspan="2"></th></tr>
+<tr><td><a href="#t0">ClientService</a></td><td class="num">0</td><td class="num attn">10</td><td class="num">0</td><td class="num">0</td><td class="num">8,091</td><td></td><td></td></tr>
+<tr class="stripe"><td><a href="#t1">CoachService</a></td><td class="num">0</td><td class="num attn">2</td><td class="num">0</td><td class="num">0</td><td class="num">134</td><td></td><td></td></tr>
+<tr><td><a href="#t2">MealPlanService</a></td><td class="num">0</td><td class="num attn">1</td><td class="num">0</td><td class="num">0</td><td class="num">293</td><td></td><td></td></tr>
+<tr><th>Total</th><th class="num">0</th><th class="num attn">13</th><th class="num">0</th><th class="num">0</th><th class="num">8,518</th><th colspan="2"></th></tr>
 </table>
-<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">MealPlanServiceTestSuite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">ClientService &#8212; passed</th></tr><tr class="passedeven"><td rowspan="9">com.fithub.services.mealplan.test.suites.ClientServiceTest</td><td><a href="#m0">testGetClientNameAndLastName_EmptyUserId_ReturnsNotFoundException</a></td><td rowspan="1">1712101646449</td><td rowspan="1">92</td></tr><tr class="passedeven"><td><a href="#m1">testGetClientNameAndLastName_InvalidUserId_ReturnsNotFoundException</a></td><td rowspan="1">1712101646640</td><td rowspan="1">37</td></tr><tr class="passedeven"><td><a href="#m2">testGetClientNameAndLastName_NullUserId_ReturnsNotFoundException</a></td><td rowspan="1">1712101646731</td><td rowspan="1">11</td></tr><tr class="passedeven"><td><a href="#m3">testGetClientNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName</a></td><td rowspan="1">1712101646768</td><td rowspan="1">158</td></tr><tr class="passedeven"><td><a href="#m4">testGetMealPlan_EmptyClientId_ReturnsNotFoundException</a></td><td rowspan="1">1712101646957</td><td rowspan="1">8</td></tr><tr class="passedeven"><td><a href="#m5">testGetMealPlan_InvalidClientId_ReturnsNotFoundException</a></td><td rowspan="1">1712101646985</td><td rowspan="1">6</td></tr><tr class="passedeven"><td><a href="#m6">testGetMealPlan_NullClientId_ReturnsNotFoundException</a></td><td rowspan="1">1712101647015</td><td rowspan="1">80</td></tr><tr class="passedeven"><td><a href="#m7">testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan1</a></td><td rowspan="1">1712101647113</td><td rowspan="1">7</td></tr><tr class="passedeven"><td><a href="#m8">testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan2</a></td><td rowspan="1">1712101647137</td><td rowspan="1">5</td></tr></tbody>
-<tbody id="t1"><tr><th colspan="4">CoachService &#8212; passed</th></tr><tr class="passedeven"><td rowspan="2">com.fithub.services.mealplan.test.suites.CoachServiceTest</td><td><a href="#m9">testGetCoachNameAndLastName_InvalidUserId_ReturnsNotFound</a></td><td rowspan="1">1712101647604</td><td rowspan="1">7</td></tr><tr class="passedeven"><td><a href="#m10">testGetCoachNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName</a></td><td rowspan="1">1712101647648</td><td rowspan="1">5</td></tr></tbody>
-<tbody id="t2"><tr><th colspan="4">MealPlanService &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">com.fithub.services.mealplan.test.suites.MealPlanServiceTest</td><td><a href="#m11">testGetDailyMealByDay_ValidMealPlanIdIsProvided_ReturnsMealPlans</a></td><td rowspan="1">1712101647886</td><td rowspan="1">3</td></tr></tbody>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">MealPlanServiceTestSuite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">ClientService &#8212; failed (configuration methods)</th></tr><tr class="failedeven"><td rowspan="10">com.fithub.services.mealplan.test.suites.ClientServiceTest</td><td><a href="#m0">springTestContextBeforeTestMethod</a></td><td rowspan="9">1712187019457</td><td rowspan="9">21</td></tr><tr class="failedeven"><td><a href="#m1">springTestContextBeforeTestMethod</a></td></tr><tr class="failedeven"><td><a href="#m2">springTestContextBeforeTestMethod</a></td></tr><tr class="failedeven"><td><a href="#m3">springTestContextBeforeTestMethod</a></td></tr><tr class="failedeven"><td><a href="#m4">springTestContextBeforeTestMethod</a></td></tr><tr class="failedeven"><td><a href="#m5">springTestContextBeforeTestMethod</a></td></tr><tr class="failedeven"><td><a href="#m6">springTestContextBeforeTestMethod</a></td></tr><tr class="failedeven"><td><a href="#m7">springTestContextBeforeTestMethod</a></td></tr><tr class="failedeven"><td><a href="#m8">springTestContextBeforeTestMethod</a></td></tr><tr class="failedeven"><td><a href="#m9">springTestContextPrepareTestInstance</a></td><td rowspan="1">1712187011961</td><td rowspan="1">7128</td></tr><tr><th colspan="4">ClientService &#8212; skipped (configuration methods)</th></tr><tr class="skippedeven"><td rowspan="10">com.fithub.services.mealplan.test.suites.ClientServiceTest</td><td><a href="#m10">beforeMethod</a></td><td rowspan="10">1712187019491</td><td rowspan="10">0</td></tr><tr class="skippedeven"><td><a href="#m11">beforeMethod</a></td></tr><tr class="skippedeven"><td><a href="#m12">beforeMethod</a></td></tr><tr class="skippedeven"><td><a href="#m13">beforeMethod</a></td></tr><tr class="skippedeven"><td><a href="#m14">beforeMethod</a></td></tr><tr class="skippedeven"><td><a href="#m15">beforeMethod</a></td></tr><tr class="skippedeven"><td><a href="#m16">beforeMethod</a></td></tr><tr class="skippedeven"><td><a href="#m17">beforeMethod</a></td></tr><tr class="skippedeven"><td><a href="#m18">beforeMethod</a></td></tr><tr class="skippedeven"><td><a href="#m19">beforeMethod</a></td></tr><tr><th colspan="4">ClientService &#8212; skipped</th></tr><tr class="skippedeven"><td rowspan="10">com.fithub.services.mealplan.test.suites.ClientServiceTest</td><td><a href="#m20">testGetClientNameAndLastName_EmptyUserId_ReturnsNotFoundException</a></td><td rowspan="1">1712187019340</td><td rowspan="1">1</td></tr><tr class="skippedeven"><td><a href="#m21">testGetClientNameAndLastName_InvalidUserId_ReturnsNotFoundException</a></td><td rowspan="1">1712187019437</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m22">testGetClientNameAndLastName_NullUserId_ReturnsNotFoundException</a></td><td rowspan="1">1712187019494</td><td rowspan="1">1</td></tr><tr class="skippedeven"><td><a href="#m23">testGetClientNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName</a></td><td rowspan="1">1712187019557</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m24">testGetDailyMealPlanByClientId_InvalidClientId_ReturnsNotFoundException</a></td><td rowspan="1">1712187019645</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m25">testGetMealPlan_EmptyClientId_ReturnsNotFoundException</a></td><td rowspan="1">1712187019775</td><td rowspan="1">1</td></tr><tr class="skippedeven"><td><a href="#m26">testGetMealPlan_InvalidClientId_ReturnsNotFoundException</a></td><td rowspan="1">1712187019837</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m27">testGetMealPlan_NullClientId_ReturnsNotFoundException</a></td><td rowspan="1">1712187019870</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m28">testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan1</a></td><td rowspan="1">1712187019905</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m29">testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan2</a></td><td rowspan="1">1712187019968</td><td rowspan="1">0</td></tr></tbody>
+<tbody id="t1"><tr><th colspan="4">CoachService &#8212; failed (configuration methods)</th></tr><tr class="failedeven"><td rowspan="2">com.fithub.services.mealplan.test.suites.CoachServiceTest</td><td><a href="#m30">springTestContextBeforeTestMethod</a></td><td rowspan="1">1712187020288</td><td rowspan="1">18</td></tr><tr class="failedeven"><td><a href="#m31">springTestContextPrepareTestInstance</a></td><td rowspan="1">1712187020215</td><td rowspan="1">53</td></tr><tr><th colspan="4">CoachService &#8212; skipped (configuration methods)</th></tr><tr class="skippedeven"><td rowspan="2">com.fithub.services.mealplan.test.suites.CoachServiceTest</td><td><a href="#m32">beforeMethod</a></td><td rowspan="2">1712187020333</td><td rowspan="2">0</td></tr><tr class="skippedeven"><td><a href="#m33">beforeMethod</a></td></tr><tr><th colspan="4">CoachService &#8212; skipped</th></tr><tr class="skippedeven"><td rowspan="2">com.fithub.services.mealplan.test.suites.CoachServiceTest</td><td><a href="#m34">testGetCoachNameAndLastName_InvalidUserId_ReturnsNotFound</a></td><td rowspan="1">1712187020280</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m35">testGetCoachNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName</a></td><td rowspan="1">1712187020335</td><td rowspan="1">0</td></tr></tbody>
+<tbody id="t2"><tr><th colspan="4">MealPlanService &#8212; failed (configuration methods)</th></tr><tr class="failedeven"><td rowspan="1">com.fithub.services.mealplan.test.suites.MealPlanServiceTest</td><td><a href="#m36">springTestContextPrepareTestInstance</a></td><td rowspan="1">1712187020355</td><td rowspan="1">255</td></tr><tr><th colspan="4">MealPlanService &#8212; skipped (configuration methods)</th></tr><tr class="skippedeven"><td rowspan="1">com.fithub.services.mealplan.test.suites.MealPlanServiceTest</td><td><a href="#m37">beforeMethod</a></td><td rowspan="1">1712187020624</td><td rowspan="1">0</td></tr><tr><th colspan="4">MealPlanService &#8212; skipped</th></tr><tr class="skippedeven"><td rowspan="1">com.fithub.services.mealplan.test.suites.MealPlanServiceTest</td><td><a href="#m38">testGetDailyMealByDay_ValidMealPlanIdIsProvided_ReturnsMealPlans</a></td><td rowspan="1">1712187020628</td><td rowspan="1">0</td></tr></tbody>
 </table>
-<h2>ClientService</h2><h3 id="m0">com.fithub.services.mealplan.test.suites.ClientServiceTest#testGetClientNameAndLastName_EmptyUserId_ReturnsNotFoundException</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m1">com.fithub.services.mealplan.test.suites.ClientServiceTest#testGetClientNameAndLastName_InvalidUserId_ReturnsNotFoundException</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m2">com.fithub.services.mealplan.test.suites.ClientServiceTest#testGetClientNameAndLastName_NullUserId_ReturnsNotFoundException</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m3">com.fithub.services.mealplan.test.suites.ClientServiceTest#testGetClientNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m4">com.fithub.services.mealplan.test.suites.ClientServiceTest#testGetMealPlan_EmptyClientId_ReturnsNotFoundException</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m5">com.fithub.services.mealplan.test.suites.ClientServiceTest#testGetMealPlan_InvalidClientId_ReturnsNotFoundException</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m6">com.fithub.services.mealplan.test.suites.ClientServiceTest#testGetMealPlan_NullClientId_ReturnsNotFoundException</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m7">com.fithub.services.mealplan.test.suites.ClientServiceTest#testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan1</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m8">com.fithub.services.mealplan.test.suites.ClientServiceTest#testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan2</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h2>CoachService</h2><h3 id="m9">com.fithub.services.mealplan.test.suites.CoachServiceTest#testGetCoachNameAndLastName_InvalidUserId_ReturnsNotFound</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m10">com.fithub.services.mealplan.test.suites.CoachServiceTest#testGetCoachNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h2>MealPlanService</h2><h3 id="m11">com.fithub.services.mealplan.test.suites.MealPlanServiceTest#testGetDailyMealByDay_ValidMealPlanIdIsProvided_ReturnsMealPlans</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.AssertionError: null
-	at com.fithub.services.mealplan.test.suites.MealPlanServiceTest.testGetDailyMealByDay_ValidMealPlanIdIsProvided_ReturnsMealPlans(MealPlanServiceTest.java:92)
-	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:154)
+<h2>ClientService</h2><h3 id="m0">com.fithub.services.mealplan.test.suites.ClientServiceTest#springTestContextBeforeTestMethod</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetClientNameAndLastName_NullUserId_ReturnsNotFoundException()</td></tr><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.ClientServiceTest&apos;: Unsatisfied dependency expressed through field &apos;mealPlanMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.beforeTestMethod(DependencyInjectionTestExecutionListener.java:122)
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:320)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestMethod(AbstractTestNGSpringContextTests.java:131)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 41 more
 ... Removed 31 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">com.fithub.services.mealplan.test.suites.ClientServiceTest#springTestContextBeforeTestMethod</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan2()</td></tr><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.ClientServiceTest&apos;: Unsatisfied dependency expressed through field &apos;mealPlanMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.beforeTestMethod(DependencyInjectionTestExecutionListener.java:122)
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:320)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestMethod(AbstractTestNGSpringContextTests.java:131)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 41 more
+... Removed 31 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m2">com.fithub.services.mealplan.test.suites.ClientServiceTest#springTestContextBeforeTestMethod</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetClientNameAndLastName_InvalidUserId_ReturnsNotFoundException()</td></tr><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.ClientServiceTest&apos;: Unsatisfied dependency expressed through field &apos;mealPlanMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.beforeTestMethod(DependencyInjectionTestExecutionListener.java:122)
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:320)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestMethod(AbstractTestNGSpringContextTests.java:131)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 41 more
+... Removed 31 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m3">com.fithub.services.mealplan.test.suites.ClientServiceTest#springTestContextBeforeTestMethod</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetDailyMealPlanByClientId_InvalidClientId_ReturnsNotFoundException()</td></tr><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.ClientServiceTest&apos;: Unsatisfied dependency expressed through field &apos;mealPlanMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.beforeTestMethod(DependencyInjectionTestExecutionListener.java:122)
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:320)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestMethod(AbstractTestNGSpringContextTests.java:131)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 41 more
+... Removed 31 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m4">com.fithub.services.mealplan.test.suites.ClientServiceTest#springTestContextBeforeTestMethod</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_EmptyClientId_ReturnsNotFoundException()</td></tr><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.ClientServiceTest&apos;: Unsatisfied dependency expressed through field &apos;mealPlanMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.beforeTestMethod(DependencyInjectionTestExecutionListener.java:122)
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:320)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestMethod(AbstractTestNGSpringContextTests.java:131)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 41 more
+... Removed 31 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m5">com.fithub.services.mealplan.test.suites.ClientServiceTest#springTestContextBeforeTestMethod</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan1()</td></tr><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.ClientServiceTest&apos;: Unsatisfied dependency expressed through field &apos;mealPlanMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.beforeTestMethod(DependencyInjectionTestExecutionListener.java:122)
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:320)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestMethod(AbstractTestNGSpringContextTests.java:131)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 41 more
+... Removed 31 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m6">com.fithub.services.mealplan.test.suites.ClientServiceTest#springTestContextBeforeTestMethod</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_InvalidClientId_ReturnsNotFoundException()</td></tr><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.ClientServiceTest&apos;: Unsatisfied dependency expressed through field &apos;mealPlanMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.beforeTestMethod(DependencyInjectionTestExecutionListener.java:122)
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:320)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestMethod(AbstractTestNGSpringContextTests.java:131)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 41 more
+... Removed 31 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m7">com.fithub.services.mealplan.test.suites.ClientServiceTest#springTestContextBeforeTestMethod</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetClientNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName()</td></tr><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.ClientServiceTest&apos;: Unsatisfied dependency expressed through field &apos;mealPlanMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.beforeTestMethod(DependencyInjectionTestExecutionListener.java:122)
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:320)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestMethod(AbstractTestNGSpringContextTests.java:131)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 41 more
+... Removed 31 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m8">com.fithub.services.mealplan.test.suites.ClientServiceTest#springTestContextBeforeTestMethod</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>public void com.fithub.services.mealplan.test.suites.ClientServiceTest.testGetMealPlan_NullClientId_ReturnsNotFoundException()</td></tr><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.ClientServiceTest&apos;: Unsatisfied dependency expressed through field &apos;mealPlanMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.beforeTestMethod(DependencyInjectionTestExecutionListener.java:122)
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:320)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestMethod(AbstractTestNGSpringContextTests.java:131)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 41 more
+... Removed 31 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m9">com.fithub.services.mealplan.test.suites.ClientServiceTest#springTestContextPrepareTestInstance</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.ClientServiceTest&apos;: Unsatisfied dependency expressed through field &apos;mealPlanMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:98)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:260)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextPrepareTestInstance(AbstractTestNGSpringContextTests.java:119)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 35 more
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m10">com.fithub.services.mealplan.test.suites.ClientServiceTest#beforeMethod</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m11">com.fithub.services.mealplan.test.suites.ClientServiceTest#beforeMethod</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m12">com.fithub.services.mealplan.test.suites.ClientServiceTest#beforeMethod</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m13">com.fithub.services.mealplan.test.suites.ClientServiceTest#beforeMethod</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m14">com.fithub.services.mealplan.test.suites.ClientServiceTest#beforeMethod</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m15">com.fithub.services.mealplan.test.suites.ClientServiceTest#beforeMethod</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m16">com.fithub.services.mealplan.test.suites.ClientServiceTest#beforeMethod</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m17">com.fithub.services.mealplan.test.suites.ClientServiceTest#beforeMethod</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m18">com.fithub.services.mealplan.test.suites.ClientServiceTest#beforeMethod</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m19">com.fithub.services.mealplan.test.suites.ClientServiceTest#beforeMethod</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m20">com.fithub.services.mealplan.test.suites.ClientServiceTest#testGetClientNameAndLastName_EmptyUserId_ReturnsNotFoundException</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.ClientServiceTest&apos;: Unsatisfied dependency expressed through field &apos;mealPlanMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:98)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:260)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextPrepareTestInstance(AbstractTestNGSpringContextTests.java:119)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 35 more
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m21">com.fithub.services.mealplan.test.suites.ClientServiceTest#testGetClientNameAndLastName_InvalidUserId_ReturnsNotFoundException</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.ClientServiceTest&apos;: Unsatisfied dependency expressed through field &apos;mealPlanMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:98)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:260)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextPrepareTestInstance(AbstractTestNGSpringContextTests.java:119)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 35 more
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m22">com.fithub.services.mealplan.test.suites.ClientServiceTest#testGetClientNameAndLastName_NullUserId_ReturnsNotFoundException</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.ClientServiceTest&apos;: Unsatisfied dependency expressed through field &apos;mealPlanMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.beforeTestMethod(DependencyInjectionTestExecutionListener.java:122)
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:320)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestMethod(AbstractTestNGSpringContextTests.java:131)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 41 more
+... Removed 31 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m23">com.fithub.services.mealplan.test.suites.ClientServiceTest#testGetClientNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.ClientServiceTest&apos;: Unsatisfied dependency expressed through field &apos;mealPlanMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.beforeTestMethod(DependencyInjectionTestExecutionListener.java:122)
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:320)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestMethod(AbstractTestNGSpringContextTests.java:131)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 41 more
+... Removed 31 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m24">com.fithub.services.mealplan.test.suites.ClientServiceTest#testGetDailyMealPlanByClientId_InvalidClientId_ReturnsNotFoundException</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.ClientServiceTest&apos;: Unsatisfied dependency expressed through field &apos;mealPlanMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.beforeTestMethod(DependencyInjectionTestExecutionListener.java:122)
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:320)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestMethod(AbstractTestNGSpringContextTests.java:131)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 41 more
+... Removed 31 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m25">com.fithub.services.mealplan.test.suites.ClientServiceTest#testGetMealPlan_EmptyClientId_ReturnsNotFoundException</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.ClientServiceTest&apos;: Unsatisfied dependency expressed through field &apos;mealPlanMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.beforeTestMethod(DependencyInjectionTestExecutionListener.java:122)
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:320)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestMethod(AbstractTestNGSpringContextTests.java:131)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 41 more
+... Removed 31 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m26">com.fithub.services.mealplan.test.suites.ClientServiceTest#testGetMealPlan_InvalidClientId_ReturnsNotFoundException</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.ClientServiceTest&apos;: Unsatisfied dependency expressed through field &apos;mealPlanMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.beforeTestMethod(DependencyInjectionTestExecutionListener.java:122)
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:320)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestMethod(AbstractTestNGSpringContextTests.java:131)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 41 more
+... Removed 31 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m27">com.fithub.services.mealplan.test.suites.ClientServiceTest#testGetMealPlan_NullClientId_ReturnsNotFoundException</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.ClientServiceTest&apos;: Unsatisfied dependency expressed through field &apos;mealPlanMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.beforeTestMethod(DependencyInjectionTestExecutionListener.java:122)
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:320)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestMethod(AbstractTestNGSpringContextTests.java:131)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 41 more
+... Removed 31 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m28">com.fithub.services.mealplan.test.suites.ClientServiceTest#testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan1</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.ClientServiceTest&apos;: Unsatisfied dependency expressed through field &apos;mealPlanMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.beforeTestMethod(DependencyInjectionTestExecutionListener.java:122)
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:320)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestMethod(AbstractTestNGSpringContextTests.java:131)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 41 more
+... Removed 31 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m29">com.fithub.services.mealplan.test.suites.ClientServiceTest#testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan2</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.ClientServiceTest&apos;: Unsatisfied dependency expressed through field &apos;mealPlanMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.beforeTestMethod(DependencyInjectionTestExecutionListener.java:122)
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:320)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestMethod(AbstractTestNGSpringContextTests.java:131)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.MealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 41 more
+... Removed 31 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h2>CoachService</h2><h3 id="m30">com.fithub.services.mealplan.test.suites.CoachServiceTest#springTestContextBeforeTestMethod</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>public void com.fithub.services.mealplan.test.suites.CoachServiceTest.testGetCoachNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName()</td></tr><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.CoachServiceTest&apos;: Unsatisfied dependency expressed through field &apos;userMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.UserMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.beforeTestMethod(DependencyInjectionTestExecutionListener.java:122)
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:320)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestMethod(AbstractTestNGSpringContextTests.java:131)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.UserMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 41 more
+... Removed 31 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m31">com.fithub.services.mealplan.test.suites.CoachServiceTest#springTestContextPrepareTestInstance</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.CoachServiceTest&apos;: Unsatisfied dependency expressed through field &apos;userMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.UserMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:98)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:260)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextPrepareTestInstance(AbstractTestNGSpringContextTests.java:119)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.UserMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 35 more
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m32">com.fithub.services.mealplan.test.suites.CoachServiceTest#beforeMethod</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m33">com.fithub.services.mealplan.test.suites.CoachServiceTest#beforeMethod</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m34">com.fithub.services.mealplan.test.suites.CoachServiceTest#testGetCoachNameAndLastName_InvalidUserId_ReturnsNotFound</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.CoachServiceTest&apos;: Unsatisfied dependency expressed through field &apos;userMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.UserMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:98)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:260)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextPrepareTestInstance(AbstractTestNGSpringContextTests.java:119)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.UserMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 35 more
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m35">com.fithub.services.mealplan.test.suites.CoachServiceTest#testGetCoachNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.CoachServiceTest&apos;: Unsatisfied dependency expressed through field &apos;userMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.UserMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.beforeTestMethod(DependencyInjectionTestExecutionListener.java:122)
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:320)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestMethod(AbstractTestNGSpringContextTests.java:131)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.UserMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 41 more
+... Removed 31 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h2>MealPlanService</h2><h3 id="m36">com.fithub.services.mealplan.test.suites.MealPlanServiceTest#springTestContextPrepareTestInstance</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.MealPlanServiceTest&apos;: Unsatisfied dependency expressed through field &apos;dailyMealPlanMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.DailyMealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:98)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:260)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextPrepareTestInstance(AbstractTestNGSpringContextTests.java:119)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.DailyMealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 35 more
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m37">com.fithub.services.mealplan.test.suites.MealPlanServiceTest#beforeMethod</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m38">com.fithub.services.mealplan.test.suites.MealPlanServiceTest#testGetDailyMealByDay_ValidMealPlanIdIsProvided_ReturnsMealPlans</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;com.fithub.services.mealplan.test.suites.MealPlanServiceTest&apos;: Unsatisfied dependency expressed through field &apos;dailyMealPlanMapper&apos;: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.DailyMealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:98)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:260)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextPrepareTestInstance(AbstractTestNGSpringContextTests.java:119)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.fithub.services.mealplan.mapper.DailyMealPlanMapper&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784)
+	... 35 more
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 </body>
 </html>

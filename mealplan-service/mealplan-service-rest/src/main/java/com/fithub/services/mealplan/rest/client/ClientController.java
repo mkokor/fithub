@@ -1,5 +1,8 @@
 package com.fithub.services.mealplan.rest.client;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fithub.services.mealplan.api.ClientService;
 import com.fithub.services.mealplan.api.CoachService;
 import com.fithub.services.mealplan.api.exception.NotFoundException;
+import com.fithub.services.mealplan.api.model.dailymealplan.DailyMealPlanResponse;
 import com.fithub.services.mealplan.api.model.mealplan.MealPlanResponse;
 import com.fithub.services.mealplan.api.model.user.UserResponse;
 
@@ -41,4 +45,18 @@ public class ClientController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+    
+    @Operation(summary = "Get daily meal plan of client by id")
+    @GetMapping("/{id}/dailyMealPlan")
+    public ResponseEntity<List<DailyMealPlanResponse>> getDailyMealPlan(@PathVariable Long id) {
+        try {
+            List<DailyMealPlanResponse> dailyMealPlan = clientService.getDailyMealPlanByClientId(id);
+            return ResponseEntity.ok(dailyMealPlan);
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 }

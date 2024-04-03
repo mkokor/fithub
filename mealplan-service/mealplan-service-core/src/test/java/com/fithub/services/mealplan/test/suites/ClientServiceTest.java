@@ -8,13 +8,17 @@ import java.util.List;
 import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import com.fithub.services.mealplan.api.ClientService;
+import com.fithub.services.mealplan.api.MealPlanService;
 import com.fithub.services.mealplan.api.exception.NotFoundException;
+import com.fithub.services.mealplan.api.model.dailymealplan.DailyMealPlanResponse;
 import com.fithub.services.mealplan.api.model.mealplan.MealPlanResponse;
 import com.fithub.services.mealplan.api.model.user.UserResponse;
 import com.fithub.services.mealplan.core.impl.ClientServiceImpl;
@@ -23,6 +27,7 @@ import com.fithub.services.mealplan.dao.model.CoachEntity;
 import com.fithub.services.mealplan.dao.model.MealPlanEntity;
 import com.fithub.services.mealplan.dao.model.UserEntity;
 import com.fithub.services.mealplan.dao.repository.ClientRepository;
+import com.fithub.services.mealplan.mapper.DailyMealPlanMapper;
 import com.fithub.services.mealplan.mapper.MealPlanMapper;
 import com.fithub.services.mealplan.mapper.UserMapper;
 import com.fithub.services.mealplan.test.configuration.BasicTestConfiguration;
@@ -37,12 +42,18 @@ public class ClientServiceTest extends BasicTestConfiguration {
     
     @Autowired
     private UserMapper userMapper;
+    
+    @Autowired
+    private DailyMealPlanMapper dailyMealPlanMapper;
 
     private ClientRepository clientRepository;
     
     //private ClientRepository clientRepository1;
     
     private ClientService clientService;
+    
+    @Mock
+    private MealPlanService mealPlanService;
 
 
     @BeforeMethod
@@ -50,7 +61,8 @@ public class ClientServiceTest extends BasicTestConfiguration {
         clientRepository = Mockito.mock(ClientRepository.class);
         //clientRepository1 = Mockito.mock(ClientRepository.class);
 
-        clientService = new ClientServiceImpl(clientRepository, mealPlanMapper, userMapper);
+        clientService = new ClientServiceImpl(clientRepository, mealPlanMapper, userMapper, dailyMealPlanMapper, mealPlanService);
+
     }
 
     @Test
@@ -254,6 +266,35 @@ public class ClientServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     }
+    /*
+    @Test
+    public void testGetDailyMealPlanByClientId_ValidClientId_ReturnsDailyMealPlanList() {
+        try {
+ 
 
+        } catch (Exception exception) {
+            Assert.fail("Exception occurred: " + exception.getMessage());
+        }
+    }*/
+
+    @Test
+    public void testGetDailyMealPlanByClientId_InvalidClientId_ReturnsNotFoundException() {
+        try {
+            Long invalidClientId = 999L; // A non-existent client ID
+
+            // Mockanje poziva metode getMealPlan koja će vratiti null
+            Mockito.when(clientService.getMealPlan(any(Long.class))).thenReturn(null);
+
+            // Pozivanje metode koja se testira
+            clientService.getDailyMealPlanByClientId(invalidClientId);
+
+            // Ako metoda ne baci iznimku, test bi trebao propasti
+            Assert.fail("NotFoundException expected, but method executed without throwing an exception");
+        } catch (NotFoundException e) {
+            // Ako se očekuje iznimka, test bi trebao uspjeti
+        } catch (Exception exception) {
+            Assert.fail();
+        }
+    }
 
 }

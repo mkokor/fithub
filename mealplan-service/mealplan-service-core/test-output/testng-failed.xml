@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [MealPlanServiceTestSuite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="ClientService(failed)">
+    <classes>
+      <class name="com.fithub.services.mealplan.test.suites.ClientServiceTest">
+        <methods>
+          <include name="testGetMealPlan_InvalidClientId_ReturnsNotFoundException"/>
+          <include name="beforeMethod"/>
+          <include name="springTestContextBeforeTestClass"/>
+          <include name="testGetClientNameAndLastName_NullUserId_ReturnsNotFoundException"/>
+          <include name="testGetDailyMealPlanByClientId_InvalidClientId_ReturnsNotFoundException"/>
+          <include name="springTestContextBeforeTestMethod"/>
+          <include name="testGetClientNameAndLastName_EmptyUserId_ReturnsNotFoundException"/>
+          <include name="springTestContextPrepareTestInstance"/>
+          <include name="testGetMealPlan_NullClientId_ReturnsNotFoundException"/>
+          <include name="testGetMealPlan_EmptyClientId_ReturnsNotFoundException"/>
+          <include name="testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan2"/>
+          <include name="testGetClientNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName"/>
+          <include name="testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan1"/>
+          <include name="testGetClientNameAndLastName_InvalidUserId_ReturnsNotFoundException"/>
+          <include name="springTestContextAfterTestClass"/>
+          <include name="springTestContextAfterTestMethod"/>
+        </methods>
+      </class> <!-- com.fithub.services.mealplan.test.suites.ClientServiceTest -->
+    </classes>
+  </test> <!-- ClientService(failed) -->
+  <test thread-count="5" name="CoachService(failed)">
+    <classes>
+      <class name="com.fithub.services.mealplan.test.suites.CoachServiceTest">
+        <methods>
+          <include name="testGetCoachNameAndLastName_InvalidUserId_ReturnsNotFound"/>
+          <include name="springTestContextBeforeTestClass"/>
+          <include name="beforeMethod"/>
+          <include name="springTestContextBeforeTestMethod"/>
+          <include name="springTestContextPrepareTestInstance"/>
+          <include name="springTestContextAfterTestClass"/>
+          <include name="springTestContextAfterTestMethod"/>
+          <include name="testGetCoachNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName"/>
+        </methods>
+      </class> <!-- com.fithub.services.mealplan.test.suites.CoachServiceTest -->
+    </classes>
+  </test> <!-- CoachService(failed) -->
   <test thread-count="5" name="MealPlanService(failed)">
     <classes>
       <class name="com.fithub.services.mealplan.test.suites.MealPlanServiceTest">
@@ -8,8 +48,8 @@
           <include name="beforeMethod"/>
           <include name="springTestContextBeforeTestClass"/>
           <include name="springTestContextBeforeTestMethod"/>
-          <include name="springTestContextAfterTestClass"/>
           <include name="springTestContextPrepareTestInstance"/>
+          <include name="springTestContextAfterTestClass"/>
           <include name="springTestContextAfterTestMethod"/>
           <include name="testGetDailyMealByDay_ValidMealPlanIdIsProvided_ReturnsMealPlans"/>
         </methods>
