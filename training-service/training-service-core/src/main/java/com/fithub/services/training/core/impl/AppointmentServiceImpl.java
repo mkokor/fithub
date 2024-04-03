@@ -142,7 +142,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
         
         if (userEntity.get().getClient() == null) {
-            throw new NotFoundException("Only client users can make reservations.");
+            throw new BadRequestException("Only client users can make reservations.");
         }
         
         Optional<AppointmentEntity> appointment = appointmentRepository.findById(newReservationRequest.getAppointmentId());

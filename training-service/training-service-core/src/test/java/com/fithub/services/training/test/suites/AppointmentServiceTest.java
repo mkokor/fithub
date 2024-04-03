@@ -21,6 +21,8 @@ import org.testng.annotations.Test;
 import com.fithub.services.training.api.exception.BadRequestException;
 import com.fithub.services.training.api.AppointmentService;
 import com.fithub.services.training.api.model.appointment.AppointmentResponse;
+import com.fithub.services.training.api.model.appointment.ClientAppointmentResponse;
+import com.fithub.services.training.api.model.appointment.CoachAppointmentResponse;
 import com.fithub.services.training.api.model.reservation.NewReservationRequest;
 import com.fithub.services.training.api.model.reservation.ReservationResponse;
 import com.fithub.services.training.core.impl.AppointmentServiceImpl;
@@ -325,5 +327,190 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     }
+    
+    
+    @Test
+    public void testMakeReservationForAppointment_CoachTriedToMakeAReservation_ThrowsBadRequestException() {
+        try {
+            UserEntity userEntity = new UserEntity();
+            userEntity.setUuid("user-id");
+            userEntity.setFirstName("John");
+            userEntity.setLastName("Doe");
+
+            CoachEntity coachEntity = new CoachEntity();
+            coachEntity.setId(1L);
+            coachEntity.setUser(userEntity);
+            userEntity.setCoach(coachEntity);
+            
+            LocalTime time1 = LocalTime.now();
+            LocalTime time2 = LocalTime.now();
+
+            AppointmentEntity appointmentEntity = new AppointmentEntity();
+            appointmentEntity.setId(1L);
+            appointmentEntity.setCapacity(5);
+            appointmentEntity.setDay(DayOfWeek.MONDAY.toString());
+            appointmentEntity.setCoach(coachEntity);
+            appointmentEntity.setStartTime(time1);
+            appointmentEntity.setEndTime(time2);
+            
+            List<AppointmentEntity> availableAppointments = new ArrayList<>();
+            availableAppointments.add(appointmentEntity);
+            
+            NewReservationRequest reservationRequest = new NewReservationRequest();
+            reservationRequest.setAppointmentId(1L);     
+
+            Mockito.when(userRepository.findById(userEntity.getUuid())).thenReturn(Optional.of(userEntity));
+            Mockito.when(coachRepository.findById(coachEntity.getId())).thenReturn(Optional.of(coachEntity));
+            Mockito.when(appointmentRepository.findAvailableAppointmentsByCoachId(coachEntity.getId())).thenReturn(availableAppointments);
+            Mockito.when(appointmentRepository.findById(appointmentEntity.getId())).thenReturn(Optional.of(appointmentEntity));
+            
+            assertThrows(BadRequestException.class, () -> appointmentService.makeReservationForAppointment(userEntity.getUuid(), reservationRequest));
+        } catch (Exception exception) {
+            Assert.fail();
+        }
+    }
+    
+    
+    @Test
+    public void testGetAppointmentsForCoach_ValidUserIdIsProvided_ReturnsAppointments() {
+        try {
+            UserEntity userEntity = new UserEntity();
+            userEntity.setUuid("user-id");
+            userEntity.setFirstName("John");
+            userEntity.setLastName("Doe");
+
+            CoachEntity coachEntity = new CoachEntity();
+            coachEntity.setId(1L);
+            coachEntity.setUser(userEntity);
+            userEntity.setCoach(coachEntity);
+            
+            userEntity.setCoach(coachEntity);
+            
+            LocalTime time1 = LocalTime.now(); 
+            LocalTime time2 = time1.plusHours(1);
+            LocalTime time3 = time2.plusHours(1);
+            LocalTime time4 = time3.plusHours(1);
+
+            AppointmentEntity appointmentEntity = new AppointmentEntity();
+            appointmentEntity.setId(1L);
+            appointmentEntity.setCapacity(5);
+            appointmentEntity.setDay(DayOfWeek.MONDAY.toString());
+            appointmentEntity.setCoach(coachEntity);
+            appointmentEntity.setStartTime(time1);
+            appointmentEntity.setEndTime(time2);
+            
+            AppointmentEntity appointmentEntity2 = new AppointmentEntity();
+            appointmentEntity2.setId(2L);
+            appointmentEntity2.setCapacity(2);
+            appointmentEntity2.setDay(DayOfWeek.MONDAY.toString());
+            appointmentEntity2.setCoach(coachEntity);
+            appointmentEntity2.setStartTime(time3);
+            appointmentEntity2.setEndTime(time4);
+
+            List<CoachAppointmentResponse> expectedResponse = new ArrayList<>();
+            CoachAppointmentResponse availableAppointment = new CoachAppointmentResponse();
+            availableAppointment.setCapacity(5);
+            availableAppointment.setStartTime(time1);
+            availableAppointment.setEndTime(time2);
+            availableAppointment.setDay(DayOfWeek.MONDAY.toString());
+            expectedResponse.add(availableAppointment);
+            
+            CoachAppointmentResponse availableAppointment2 = new CoachAppointmentResponse();
+            availableAppointment2.setCapacity(2);
+            availableAppointment2.setStartTime(time3);
+            availableAppointment2.setEndTime(time4);
+            availableAppointment2.setDay(DayOfWeek.MONDAY.toString());
+            expectedResponse.add(availableAppointment2);
+            
+            List<AppointmentEntity> availableAppointments = new ArrayList<>();
+            availableAppointments.add(appointmentEntity);
+            availableAppointments.add(appointmentEntity2);
+            
+            coachEntity.setAppointments(availableAppointments);
+            
+            Mockito.when(userRepository.findById(userEntity.getUuid())).thenReturn(Optional.of(userEntity));
+            Mockito.when(appointmentRepository.findById(appointmentEntity.getId())).thenReturn(Optional.of(appointmentEntity));
+            Mockito.when(appointmentRepository.findAvailableAppointmentsByCoachId(coachEntity.getId())).thenReturn(availableAppointments);
+
+            List<CoachAppointmentResponse> actualResponse = appointmentService.getAppointmentsForCoach(userEntity.getUuid());
+
+            Assertions.assertThat(actualResponse).hasSameElementsAs(expectedResponse);
+        } catch (Exception exception) {
+            Assert.fail();
+        }
+    } 
+    
+    @Test
+    public void testGetAppointmentsForClient_ValidUserIdIsProvided_ReturnsAppointments() {
+        try {
+            UserEntity userEntity = new UserEntity();
+            userEntity.setUuid("user-id");
+            userEntity.setFirstName("John");
+            userEntity.setLastName("Doe");
+
+            CoachEntity coachEntity = new CoachEntity();
+            coachEntity.setId(1L);
+            coachEntity.setUser(userEntity);
+            userEntity.setCoach(coachEntity);
+            
+            userEntity.setCoach(coachEntity);
+            
+            UserEntity clientUser = new UserEntity();
+            clientUser.setUuid("client-123");
+            clientUser.setFirstName("Emma");
+            clientUser.setLastName("Clinton");
+            
+            ClientEntity clientEntity = new ClientEntity();
+            clientEntity.setCoach(coachEntity);
+            clientEntity.setId(1L);
+            clientEntity.setUser(clientUser);
+            
+            clientUser.setClient(clientEntity);
+            
+            LocalTime time1 = LocalTime.now(); 
+            LocalTime time2 = time1.plusHours(1);
+
+            AppointmentEntity appointmentEntity = new AppointmentEntity();
+            appointmentEntity.setId(1L);
+            appointmentEntity.setCapacity(5);
+            appointmentEntity.setDay(DayOfWeek.MONDAY.toString());
+            appointmentEntity.setCoach(coachEntity);
+            appointmentEntity.setStartTime(time1);
+            appointmentEntity.setEndTime(time2);
+            
+            ReservationEntity reservationEntity = new ReservationEntity();
+            reservationEntity.setId(1L);
+            reservationEntity.setAppointment(appointmentEntity);
+            reservationEntity.setClient(clientEntity);
+            
+            List<ReservationEntity> reservations = new ArrayList<>();
+            reservations.add(reservationEntity);
+            
+            clientEntity.setReservations(reservations);
+            appointmentEntity.setReservations(reservations);
+
+            
+            List<ClientAppointmentResponse> expectedResponse = new ArrayList<>();
+            ClientAppointmentResponse availableAppointment = new ClientAppointmentResponse();
+            availableAppointment.setStartTime(time1);
+            availableAppointment.setEndTime(time2);
+            availableAppointment.setId(1L);
+            availableAppointment.setDay(DayOfWeek.MONDAY.toString());
+            expectedResponse.add(availableAppointment);
+            
+            List<AppointmentEntity> availableAppointments = new ArrayList<>();
+            availableAppointments.add(appointmentEntity);
+            
+            coachEntity.setAppointments(availableAppointments);
+            
+            Mockito.when(userRepository.findById(clientUser.getUuid())).thenReturn(Optional.of(clientUser));
+  
+            List<ClientAppointmentResponse> actualResponse = appointmentService.getAppointmentsForClient(clientUser.getUuid());
+
+            Assertions.assertThat(actualResponse).hasSameElementsAs(expectedResponse);
+        } catch (Exception exception) {
+            Assert.fail();
+        }
+    } 
 
 }
