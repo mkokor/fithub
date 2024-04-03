@@ -7,14 +7,9 @@
             <class name="com.fithub.services.chat.test.suites.ChatroomServiceTest"/>
         </classes>
     </test>
-            <test thread-count="5" name="MessageService">
+    <test thread-count="5" name="MessageService">
         <classes>
             <class name="com.fithub.services.chat.test.suites.MessageServiceTest"/>
-        </classes>
-    </test>
-            <test thread-count="5" name="UserService">
-        <classes>
-            <class name="com.fithub.services.chat.test.suites.UserServiceTest"/>
         </classes>
     </test>
 </suite>

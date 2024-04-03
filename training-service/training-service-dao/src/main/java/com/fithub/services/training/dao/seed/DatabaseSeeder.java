@@ -53,7 +53,7 @@ public class DatabaseSeeder implements ApplicationRunner {
 
         if (appointmentRepository.findAll().isEmpty()) {
             AppointmentEntity appointmentEntity = new AppointmentEntity();
-            appointmentEntity.setCapacity(5);
+            appointmentEntity.setCapacity(2);
             appointmentEntity.setDay(DayOfWeek.MONDAY.toString());
             appointmentEntity.setStartTime(LocalTime.parse("09:00:00"));
             appointmentEntity.setEndTime(LocalTime.parse("10:30:00"));
@@ -70,6 +70,17 @@ public class DatabaseSeeder implements ApplicationRunner {
             clientEntity.setUser(clientUser);
             clientEntity.setCoach(coachEntity);
             clientRepository.save(clientEntity);
+            
+            UserEntity clientUser2 = new UserEntity();
+            clientUser2.setUuid(UUID.randomUUID().toString());
+            clientUser2.setFirstName("John");
+            clientUser2.setLastName("Roberts");
+            userRepository.save(clientUser2);
+
+            ClientEntity clientEntity2 = new ClientEntity();
+            clientEntity2.setUser(clientUser2);
+            clientEntity2.setCoach(coachEntity);
+            clientRepository.save(clientEntity2);
 
             ReservationEntity reservationEntity = new ReservationEntity();
             reservationEntity.setAppointment(appointmentEntity);

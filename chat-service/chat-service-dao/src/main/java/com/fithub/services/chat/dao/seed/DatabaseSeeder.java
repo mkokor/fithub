@@ -40,6 +40,7 @@ public class DatabaseSeeder implements ApplicationRunner {
         UserEntity userEntity1 = new UserEntity();
         UserEntity userEntity2 = new UserEntity();
         UserEntity userEntity3 = new UserEntity();
+        UserEntity userEntity4 = new UserEntity();
         if (userRepository.findAll().isEmpty()) {
             userEntity1.setUuid(UUID.randomUUID().toString());
             userEntity1.setUsername("johndoe");
@@ -50,12 +51,18 @@ public class DatabaseSeeder implements ApplicationRunner {
         	userEntity3.setUuid(UUID.randomUUID().toString());
         	userEntity3.setUsername("lea_43");
         	userRepository.save(userEntity3);
+        	userEntity4.setUuid(UUID.randomUUID().toString());
+        	userEntity4.setUsername("coach_98");
+        	userRepository.save(userEntity4);
         }
 
         CoachEntity coachEntity = new CoachEntity();
+        CoachEntity coachEntity2 = new CoachEntity();
         if (coachRepository.findAll().isEmpty()) {
             coachEntity.setUser(userEntity1);
             coachRepository.save(coachEntity);
+            coachEntity2.setUser(userEntity4);
+            coachRepository.save(coachEntity2);
         }
         
         ClientEntity clientEntity1 = new ClientEntity();

@@ -1,11 +1,12 @@
 package com.fithub.services.chat.api;
 
-import java.util.List;
-
-import com.fithub.services.chat.api.model.message.MessageResponse;
+import com.fithub.services.chat.api.model.chatroom.ChatroomDataResponse;
+import com.fithub.services.chat.api.model.chatroom.NewChatroomRequest;
 
 public interface ChatroomService {
+    
+    ChatroomDataResponse getChatroomData(String chatroomId) throws Exception;
 
-    List<MessageResponse> getMessages(Long chatroomId) throws Exception;
+	ChatroomDataResponse createNewChatroom(NewChatroomRequest newChatroomRequest) throws Exception;
 
 }

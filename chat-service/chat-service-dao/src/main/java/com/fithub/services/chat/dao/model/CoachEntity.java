@@ -1,6 +1,7 @@
 package com.fithub.services.chat.dao.model;
 
 import java.io.Serializable;
+
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -33,5 +34,8 @@ public class CoachEntity implements Serializable {
 
     @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL)
     private List<ClientEntity> clients;
+    
+    @OneToOne(mappedBy = "admin")
+    private ChatroomEntity chatroom;
 
 }

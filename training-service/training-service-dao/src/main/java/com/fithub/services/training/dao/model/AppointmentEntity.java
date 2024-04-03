@@ -1,6 +1,7 @@
 package com.fithub.services.training.dao.model;
 
 import java.time.LocalTime;
+
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -10,8 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -26,7 +27,7 @@ public class AppointmentEntity {
     @Column(updatable = false)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "coach_id", nullable = false)
     @NotNull(message = "The coach must not be null.")
     private CoachEntity coach;

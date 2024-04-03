@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-04-03T18:16:53 CEST" name="Default suite" finished-at="2024-04-03T18:16:56 CEST" duration-ms="3221">
+    <groups>
+    </groups>
+    <test started-at="2024-04-03T18:16:53 CEST" name="Default test" finished-at="2024-04-03T18:16:56 CEST" duration-ms="3221">
+      <class name="com.fithub.services.chat.test.suites.ChatroomServiceTest">
+        <test-method is-config="true" signature="springTestContextBeforeTestClass()[pri:0, instance:com.fithub.services.chat.test.suites.ChatroomServiceTest@17a1e4ca]" started-at="2024-04-03T18:16:53 CEST" name="springTestContextBeforeTestClass" finished-at="2024-04-03T18:16:53 CEST" duration-ms="12" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestClass -->
+        <test-method is-config="true" signature="springTestContextPrepareTestInstance()[pri:0, instance:com.fithub.services.chat.test.suites.ChatroomServiceTest@17a1e4ca]" started-at="2024-04-03T18:16:53 CEST" name="springTestContextPrepareTestInstance" finished-at="2024-04-03T18:16:55 CEST" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" duration-ms="1541" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextPrepareTestInstance -->
+        <test-method is-config="true" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.chat.test.suites.ChatroomServiceTest@17a1e4ca]" started-at="2024-04-03T18:16:55 CEST" name="springTestContextBeforeTestMethod" finished-at="2024-04-03T18:16:55 CEST" duration-ms="847" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.fithub.services.chat.test.suites.ChatroomServiceTest.testCreateNewChatroom_ValidDataProvided_ReturnsNewChatroomData()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.fithub.services.chat.test.suites.ChatroomServiceTest@17a1e4ca]" started-at="2024-04-03T18:16:55 CEST" name="beforeMethod" finished-at="2024-04-03T18:16:56 CEST" duration-ms="555" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="testCreateNewChatroom_ValidDataProvided_ReturnsNewChatroomData()[pri:0, instance:com.fithub.services.chat.test.suites.ChatroomServiceTest@17a1e4ca]" started-at="2024-04-03T18:16:56 CEST" name="testCreateNewChatroom_ValidDataProvided_ReturnsNewChatroomData" finished-at="2024-04-03T18:16:56 CEST" duration-ms="212" status="FAIL">
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[null]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: null
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.fail(Assert.java:116)
+at com.fithub.services.chat.test.suites.ChatroomServiceTest.testCreateNewChatroom_ValidDataProvided_ReturnsNewChatroomData(ChatroomServiceTest.java:159)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.MethodInvocationHelper$1.runTestMethod(MethodInvocationHelper.java:258)
+at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:154)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeHookable(MethodInvocationHelper.java:272)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:656)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:228)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:961)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:201)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:819)
+at org.testng.TestRunner.run(TestRunner.java:619)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1228)
+at org.testng.TestNG.runSuites(TestNG.java:1134)
+at org.testng.TestNG.run(TestNG.java:1101)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCreateNewChatroom_ValidDataProvided_ReturnsNewChatroomData -->
+        <test-method is-config="true" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.fithub.services.chat.test.suites.ChatroomServiceTest@17a1e4ca]" started-at="2024-04-03T18:16:56 CEST" name="springTestContextAfterTestMethod" finished-at="2024-04-03T18:16:56 CEST" duration-ms="13" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.fithub.services.chat.test.suites.ChatroomServiceTest.testCreateNewChatroom_ValidDataProvided_ReturnsNewChatroomData()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method is-config="true" signature="springTestContextAfterTestClass()[pri:0, instance:com.fithub.services.chat.test.suites.ChatroomServiceTest@17a1e4ca]" started-at="2024-04-03T18:16:56 CEST" name="springTestContextAfterTestClass" finished-at="2024-04-03T18:16:56 CEST" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestClass -->
+      </class> <!-- com.fithub.services.chat.test.suites.ChatroomServiceTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

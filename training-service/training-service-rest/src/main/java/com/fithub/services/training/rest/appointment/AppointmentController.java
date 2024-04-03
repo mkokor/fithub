@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fithub.services.training.api.AppointmentService;
+import com.fithub.services.training.api.model.appointment.AppointmentResponse;
 import com.fithub.services.training.api.model.reservation.ReservationResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,6 +35,12 @@ public class AppointmentController {
         return new ResponseEntity<>(appointmentService.getReservations(id), HttpStatus.OK);
     }
 
+    @Operation(summary = "Get available appointments")
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<List<AppointmentResponse>> getAvailableAppointments(@Valid @PathVariable String id) throws Exception {
+        return new ResponseEntity<>(appointmentService.getAvailableAppointments(id), HttpStatus.OK);
+    }
+  
     // This method was made only for purposes of testing Eureka registry service
     // connection.
     @GetMapping("/service-instances/{applicationName}")
