@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(description = "Properties of an client response object")
+@Schema(description = "Properties of a client response object")
 public class ClientResponse implements Serializable{/**
 	 * 
 	 */

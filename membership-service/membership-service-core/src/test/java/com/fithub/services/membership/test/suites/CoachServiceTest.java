@@ -4,16 +4,13 @@ import org.testng.annotations.Test;
 
 import com.fithub.services.membership.api.CoachService;
 import com.fithub.services.membership.api.model.client.ClientResponse;
-import com.fithub.services.membership.api.model.paymentrecord.PaymentRecordResponse;
 import com.fithub.services.membership.core.impl.CoachServiceImpl;
-import com.fithub.services.membership.core.impl.MembershipServiceImpl;
 import com.fithub.services.membership.dao.model.ClientEntity;
 import com.fithub.services.membership.dao.model.CoachEntity;
 import com.fithub.services.membership.dao.model.MembershipEntity;
 import com.fithub.services.membership.dao.model.PaymentRecordEntity;
 import com.fithub.services.membership.dao.model.UserEntity;
 import com.fithub.services.membership.dao.repository.CoachRepository;
-import com.fithub.services.membership.dao.repository.MembershipRepository;
 import com.fithub.services.membership.mapper.ClientMapper;
 import com.fithub.services.membership.test.configuration.BasicTestConfiguration;
 

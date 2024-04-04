@@ -7,7 +7,11 @@ import com.fithub.services.membership.api.model.paymentrecord.PaymentRecordRespo
 public interface MembershipService {
 	
 	
+	
+	
 	List<PaymentRecordResponse> getPaymentRecord(Long membershipId) throws Exception;
+	
+	//public void updatePaymentRecord(PaymentRecordEntity paymentRecordEntity);
 	
 	
 
