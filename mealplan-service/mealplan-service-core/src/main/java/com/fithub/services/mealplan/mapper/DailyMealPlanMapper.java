@@ -12,9 +12,7 @@ import com.fithub.services.mealplan.dao.model.DailyMealPlanEntity;
 @Mapper(componentModel = "spring")
 public interface DailyMealPlanMapper {
     
-    @Mapping(source = "mealPlan.id", target = "mealPlanId")
-    public DailyMealPlanResponse entityToDto(DailyMealPlanEntity dailyMealPlanEntity);
-
+    //@Mapping(source = "mealPlan.id", target = "mealPlanId")
 	public List<DailyMealPlanResponse> entitiesToDtos (List<DailyMealPlanEntity> dailyMealPlanEntities);
 
 }

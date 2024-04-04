@@ -15,6 +15,5 @@ public class CoachResponse implements Serializable {
 
     private String userId;
     
-
-
+    
 }
