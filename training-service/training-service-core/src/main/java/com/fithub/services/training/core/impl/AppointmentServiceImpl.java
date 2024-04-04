@@ -7,6 +7,7 @@ import java.util.List;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -78,8 +79,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         	coach = userEntity.get().getCoach();
         }
         
-        List<AppointmentEntity> availableAppointments = appointmentRepository.findAvailableAppointmentsByCoachId(coach.getId());	
-
+        List<AppointmentEntity> availableAppointments = appointmentRepository.findAvailableAppointmentsByCoachId(coach.getId());
         List<AppointmentResponse> response = appointmentMapper.entitiesToDtos(availableAppointments);
         return response;
     }

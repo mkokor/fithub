@@ -10,7 +10,7 @@ import com.fithub.services.chat.api.model.chatroom.ChatroomResponse;
 public interface ChatroomMapper {
 
     @Mapping(source = "roomName", target = "roomName")
-    @Mapping(source = "admin.user.username", target = "admin")
+    @Mapping(source = "admin.id", target = "admin")
     public ChatroomResponse entityToDto(ChatroomEntity chatroomEntity);
 
 }
