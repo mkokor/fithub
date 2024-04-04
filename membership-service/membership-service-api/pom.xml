@@ -33,7 +33,12 @@
     		<groupId>org.springframework</groupId>
     		<artifactId>spring-web</artifactId>
 		</dependency>
-	</dependencies>
+		<dependency>
+			<groupId>com.fithub.services</groupId>
+			<artifactId>membership-service-dao</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+  	</dependencies>
 	
 	<build>
     	<plugins>

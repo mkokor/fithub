@@ -21,6 +21,7 @@ public class MembershipResponse implements Serializable{
 	private double amount;
 	
 	
+	
 
 	 
 }
