@@ -20,6 +20,7 @@ import com.fithub.services.membership.dao.model.MembershipEntity;
 import com.fithub.services.membership.dao.model.PaymentRecordEntity;
 import com.fithub.services.membership.dao.model.UserEntity;
 import com.fithub.services.membership.dao.repository.MembershipRepository;
+import com.fithub.services.membership.mapper.ClientMapper;
 import com.fithub.services.membership.mapper.PaymentRecordMapper;
 import com.fithub.services.membership.test.configuration.BasicTestConfiguration;
 
@@ -31,6 +32,9 @@ public class MembershipServiceTest extends BasicTestConfiguration {
 
     @Autowired
     private PaymentRecordMapper paymentRecordMapper;
+    
+    @Autowired
+    private ClientMapper clientMapper;
 
     @BeforeMethod
     public void beforeMethod() {
@@ -88,5 +92,39 @@ public class MembershipServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     }
+    
+    @Test
+    public void testPaymentRecord_ValidPaymentStatusIsProvided_ReturnTrue() {
+    	try {
+    		PaymentRecordEntity paymentRecordEntity = new PaymentRecordEntity();
+            paymentRecordEntity.setId(1L);
+            paymentRecordEntity.setPaid(true);
+            
+            
+            Assertions.assertThat(paymentRecordEntity.isPaid()).isTrue();
+    	} catch (Exception exception) {
+    		Assert.fail();
+    	}
+    	
+    	
+        
+    }
+    
+    @Test
+    public void testPaymentRecord_ValidIdIsProvided_ReturnTrue() {
+    	
+    	try {
+    		PaymentRecordEntity paymentRecordEntity = new PaymentRecordEntity();
+            paymentRecordEntity.setId(1L);
+            paymentRecordEntity.setPaid(true);
+            
+            
+            Assertions.assertThat(paymentRecordEntity.getId()).isNotEqualTo(null);
+    	} catch (Exception exception) {
+    		exception.getStackTrace();
+    	}
+    }
+    
+    
 
 }

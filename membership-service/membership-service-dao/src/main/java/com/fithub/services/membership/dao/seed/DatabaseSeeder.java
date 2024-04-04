@@ -1,5 +1,7 @@
 package com.fithub.services.membership.dao.seed;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -75,9 +77,20 @@ public class DatabaseSeeder implements ApplicationRunner {
         }
         
         PaymentRecordEntity paymentRecordEntity = new PaymentRecordEntity();
+        PaymentRecordEntity paymentRecordEntity2 = new PaymentRecordEntity();
         if (paymentRecordRepository.findAll().isEmpty()) {
         	paymentRecordEntity.setPaid(false);
+        	paymentRecordEntity.setId(1L);
         	paymentRecordEntity.setMembership(membershipEntity);
+        	
+        	paymentRecordEntity2.setPaid(false);
+        	paymentRecordEntity2.setId(1L);
+        	paymentRecordEntity2.setMembership(membershipEntity);
+        	
+        	List<PaymentRecordEntity> records = new ArrayList<>();
+        	records.add(paymentRecordEntity);
+        	records.add(paymentRecordEntity2);
+        	membershipEntity.setPaymentRecord(records);
             paymentRecordRepository.save(paymentRecordEntity);
         }
         

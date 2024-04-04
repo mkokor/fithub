@@ -11,6 +11,7 @@ target/
 .cache-main
 .cache-tests
 .factorypath
+test-output
 
 # OSX Stuff
 .DS_Store
