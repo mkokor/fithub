@@ -1,5 +1,6 @@
 package com.fithub.services.mealplan.test.suites;
 
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 
 import java.time.LocalDateTime;
@@ -24,9 +25,11 @@ import com.fithub.services.mealplan.api.model.user.UserResponse;
 import com.fithub.services.mealplan.core.impl.ClientServiceImpl;
 import com.fithub.services.mealplan.dao.model.ClientEntity;
 import com.fithub.services.mealplan.dao.model.CoachEntity;
+import com.fithub.services.mealplan.dao.model.DailyMealPlanEntity;
 import com.fithub.services.mealplan.dao.model.MealPlanEntity;
 import com.fithub.services.mealplan.dao.model.UserEntity;
 import com.fithub.services.mealplan.dao.repository.ClientRepository;
+import com.fithub.services.mealplan.dao.repository.MealPlanRepository;
 import com.fithub.services.mealplan.mapper.DailyMealPlanMapper;
 import com.fithub.services.mealplan.mapper.MealPlanMapper;
 import com.fithub.services.mealplan.mapper.UserMapper;
@@ -47,7 +50,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
     private DailyMealPlanMapper dailyMealPlanMapper;
 
     private ClientRepository clientRepository;
-    
+    private MealPlanRepository mealPlanRepository;
     //private ClientRepository clientRepository1;
     
     private ClientService clientService;
@@ -59,6 +62,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
     @BeforeMethod
     public void beforeMethod() {
         clientRepository = Mockito.mock(ClientRepository.class);
+        mealPlanRepository = Mockito.mock(MealPlanRepository.class);
         //clientRepository1 = Mockito.mock(ClientRepository.class);
 
         clientService = new ClientServiceImpl(clientRepository, mealPlanMapper, userMapper, dailyMealPlanMapper, mealPlanService);
@@ -266,16 +270,63 @@ public class ClientServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     }
-    /*
+    
     @Test
     public void testGetDailyMealPlanByClientId_ValidClientId_ReturnsDailyMealPlanList() {
         try {
- 
+            UserEntity userEntity = new UserEntity();
+            userEntity.setUuid("uuid");
+            userEntity.setFirstName("John");
+            userEntity.setLastName("Doe");
+
+            ClientEntity clientEntity = new ClientEntity();
+            clientEntity.setId(1L);
+            clientEntity.setUser(userEntity);
+            userEntity.setClient(clientEntity);
+
+            MealPlanEntity mealPlanEntity = new MealPlanEntity();
+            mealPlanEntity.setId(1L);
+            mealPlanEntity.setClient(clientEntity);
+            mealPlanEntity.setMealPlans(new ArrayList<>());
+            clientEntity.setMealPlan(mealPlanEntity);
+            
+            DailyMealPlanEntity dailyMealPlanEntity = new DailyMealPlanEntity();
+            dailyMealPlanEntity.setId(1L);
+            dailyMealPlanEntity.setDay("Monday");
+            dailyMealPlanEntity.setBreakfast("Oatmeal");
+            dailyMealPlanEntity.setAmSnack("Snack1");
+            dailyMealPlanEntity.setLunch("Chicken Salad");
+            dailyMealPlanEntity.setDinner("Grilled Fish");
+            dailyMealPlanEntity.setPmSnack("Snack2");
+            List<DailyMealPlanEntity> dailyMealPlanEntities = new ArrayList<>();
+            dailyMealPlanEntities.add(dailyMealPlanEntity);
+            mealPlanEntity.setMealPlans(dailyMealPlanEntities);
+            
+            List<DailyMealPlanResponse> expectedResponse = new ArrayList<>();
+            
+            DailyMealPlanResponse dailyMealPlanResponse = new DailyMealPlanResponse();
+            dailyMealPlanResponse.setDay("Monday");
+            dailyMealPlanResponse.setBreakfast("Oatmeal");
+            dailyMealPlanResponse.setAmSnack("Snack1");
+            dailyMealPlanResponse.setLunch("Chicken Salad");
+            dailyMealPlanResponse.setDinner("Grilled Fish");
+            dailyMealPlanResponse.setPmSnack("Snack2");
+            
+        	expectedResponse.add(dailyMealPlanResponse);
+
+            Mockito.when(clientRepository.findById(clientEntity.getId())).thenReturn(Optional.of(clientEntity));
+            Mockito.when(mealPlanService.getDailyMealByDay(any(Long.class))).thenReturn(expectedResponse);
+
+            List<DailyMealPlanResponse> actualResponse = clientService.getDailyMealPlanByClientId(clientEntity.getId());
+
+            Assertions.assertThat(actualResponse).isEqualTo(expectedResponse);
+
 
         } catch (Exception exception) {
             Assert.fail("Exception occurred: " + exception.getMessage());
         }
-    }*/
+    }
+
 
     @Test
     public void testGetDailyMealPlanByClientId_InvalidClientId_ReturnsNotFoundException() {
