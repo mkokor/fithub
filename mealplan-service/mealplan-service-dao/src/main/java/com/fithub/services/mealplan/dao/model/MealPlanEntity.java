@@ -16,7 +16,9 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
@@ -30,7 +32,7 @@ public class MealPlanEntity {
     
     @OneToOne
     @JoinColumn(name = "client_id", nullable = false)
-    @NotNull(message = "It must be specific whose meal it is..")
+    @NotNull(message = "The client id must not be blank.")
     private ClientEntity client;
     
     @Column(name = "modified")

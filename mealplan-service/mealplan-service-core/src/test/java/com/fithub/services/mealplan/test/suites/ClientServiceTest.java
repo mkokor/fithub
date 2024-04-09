@@ -1,7 +1,9 @@
 package com.fithub.services.mealplan.test.suites;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertThrows;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,11 +15,13 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import com.fithub.services.mealplan.api.ClientService;
 import com.fithub.services.mealplan.api.MealPlanService;
+import com.fithub.services.mealplan.api.exception.BadRequestException;
 import com.fithub.services.mealplan.api.exception.NotFoundException;
 import com.fithub.services.mealplan.api.model.dailymealplan.DailyMealPlanResponse;
 import com.fithub.services.mealplan.api.model.mealplan.MealPlanResponse;
@@ -30,10 +34,15 @@ import com.fithub.services.mealplan.dao.model.MealPlanEntity;
 import com.fithub.services.mealplan.dao.model.UserEntity;
 import com.fithub.services.mealplan.dao.repository.ClientRepository;
 import com.fithub.services.mealplan.dao.repository.MealPlanRepository;
+import com.fithub.services.mealplan.dao.repository.UserRepository;
+import com.fithub.services.mealplan.mapper.ClientMapper;
 import com.fithub.services.mealplan.mapper.DailyMealPlanMapper;
 import com.fithub.services.mealplan.mapper.MealPlanMapper;
 import com.fithub.services.mealplan.mapper.UserMapper;
 import com.fithub.services.mealplan.test.configuration.BasicTestConfiguration;
+
+import jakarta.validation.Validator;
+
 import static org.mockito.ArgumentMatchers.any;
 
 
@@ -42,30 +51,36 @@ public class ClientServiceTest extends BasicTestConfiguration {
 
     @Autowired
     private MealPlanMapper mealPlanMapper;
-    
     @Autowired
     private UserMapper userMapper;
-    
     @Autowired
     private DailyMealPlanMapper dailyMealPlanMapper;
+    @Autowired
+	private ClientMapper clientMapper;
 
     private ClientRepository clientRepository;
     private MealPlanRepository mealPlanRepository;
-    //private ClientRepository clientRepository1;
+	private UserRepository userRepository;
     
     private ClientService clientService;
     
     @Mock
     private MealPlanService mealPlanService;
+    
+    private Validator validator;
 
 
     @BeforeMethod
     public void beforeMethod() {
         clientRepository = Mockito.mock(ClientRepository.class);
         mealPlanRepository = Mockito.mock(MealPlanRepository.class);
-        //clientRepository1 = Mockito.mock(ClientRepository.class);
+        userRepository = Mockito.mock(UserRepository.class);
 
-        clientService = new ClientServiceImpl(clientRepository, mealPlanMapper, userMapper, dailyMealPlanMapper, mealPlanService);
+        LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
+        localValidatorFactoryBean.afterPropertiesSet();
+        validator = localValidatorFactoryBean;
+        
+        clientService = new ClientServiceImpl(clientRepository, userRepository, mealPlanRepository, mealPlanMapper, userMapper, dailyMealPlanMapper, clientMapper, mealPlanService, validator);
 
     }
 
@@ -331,21 +346,83 @@ public class ClientServiceTest extends BasicTestConfiguration {
     @Test
     public void testGetDailyMealPlanByClientId_InvalidClientId_ReturnsNotFoundException() {
         try {
-            Long invalidClientId = 999L; // A non-existent client ID
+        	
+            Long invalid = 99L; // An empty user ID
 
-            // Mockanje poziva metode getMealPlan koja će vratiti null
-            Mockito.when(clientService.getMealPlan(any(Long.class))).thenReturn(null);
-
-            // Pozivanje metode koja se testira
-            clientService.getDailyMealPlanByClientId(invalidClientId);
-
-            // Ako metoda ne baci iznimku, test bi trebao propasti
-            Assert.fail("NotFoundException expected, but method executed without throwing an exception");
-        } catch (NotFoundException e) {
-            // Ako se očekuje iznimka, test bi trebao uspjeti
+            Assert.assertThrows(NotFoundException.class, () -> {
+                clientService.getDailyMealPlanByClientId(invalid);
+            });      
         } catch (Exception exception) {
             Assert.fail();
         }
     }
+    
+    @Test
+    public void testMakeMealPlanForClient_MealPlanForClientExists_ReturnsMealPlanResponse() throws Exception {
+    	try {
+            UserEntity userEntity = new UserEntity();
+            userEntity.setUuid("valid-user-id");
+
+            UserEntity userEntity1 = new UserEntity();
+            userEntity.setUuid("valid-user-id-1");
+            
+            CoachEntity coachEntity = new CoachEntity();
+            coachEntity.setId(100L);
+            coachEntity.setUser(userEntity1);
+            userEntity1.setCoach(coachEntity);
+
+            ClientEntity clientEntity = new ClientEntity();
+            clientEntity.setId(99L);
+            clientEntity.setUser(userEntity);
+            clientEntity.setCoach(coachEntity);
+            userEntity.setClient(clientEntity); 
+            
+            MealPlanEntity mealPlanEntity = new MealPlanEntity();
+            mealPlanEntity.setId(99L);
+            mealPlanEntity.setClient(clientEntity);
+            mealPlanEntity.setModifiedBy(coachEntity);
+            clientEntity.setMealPlan(mealPlanEntity);
+            
+            Mockito.when(userRepository.findById(userEntity.getUuid())).thenReturn(Optional.of(userEntity));
+            Mockito.when(clientRepository.findById(clientEntity.getId())).thenReturn(Optional.of(clientEntity));
+            Mockito.when(mealPlanRepository.findMealPlanByClientId(mealPlanEntity.getId())).thenReturn(mealPlanEntity);            
+            assertThrows(BadRequestException.class, () -> clientService.makeMealPlanForClient(userEntity.getUuid()));
+    		
+    	} catch (Exception exception) {
+            Assert.fail();
+        }
+    }
+    
+    @Test
+    public void testMakeMealPlanForClient_MealPlanForClientNotExists_ReturnsMealPlanResponse() throws Exception {
+        try {
+            UserEntity userEntity = new UserEntity();
+            userEntity.setUuid("valid-user-id");
+
+            CoachEntity coachEntity = new CoachEntity();
+            coachEntity.setId(100L);
+            coachEntity.setUser(userEntity);
+            userEntity.setCoach(coachEntity);
+
+            ClientEntity clientEntity = new ClientEntity();
+            clientEntity.setId(99L);
+            clientEntity.setUser(userEntity);
+            clientEntity.setCoach(coachEntity);
+            userEntity.setClient(clientEntity); 
+
+            Mockito.when(userRepository.findById(userEntity.getUuid())).thenReturn(Optional.of(userEntity));
+            Mockito.when(clientRepository.findById(clientEntity.getId())).thenReturn(Optional.of(clientEntity));
+            Mockito.when(mealPlanRepository.findMealPlanByClientId(clientEntity.getId())).thenReturn(null);
+
+            MealPlanResponse mealPlanResponse = clientService.makeMealPlanForClient(userEntity.getUuid());
+
+            assertNotNull(mealPlanResponse);
+            assertEquals(clientEntity.getId(), mealPlanResponse.getClientId());
+
+        } catch (Exception exception) {
+            Assert.fail();
+        }
+    }
+
 
 }

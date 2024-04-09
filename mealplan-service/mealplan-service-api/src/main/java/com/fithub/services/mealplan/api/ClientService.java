@@ -5,6 +5,7 @@ import java.util.List;
 import com.fithub.services.mealplan.api.exception.NotFoundException;
 import com.fithub.services.mealplan.api.model.dailymealplan.DailyMealPlanResponse;
 import com.fithub.services.mealplan.api.model.mealplan.MealPlanResponse;
+import com.fithub.services.mealplan.api.model.mealplan.NewMealPlanRequest;
 import com.fithub.services.mealplan.api.model.user.UserResponse;
 
 public interface ClientService {
@@ -14,5 +15,7 @@ public interface ClientService {
 	UserResponse getClientNameAndLastName(String userId) throws NotFoundException;
 	
 	List<DailyMealPlanResponse> getDailyMealPlanByClientId(Long clientId) throws Exception;
+	
+	MealPlanResponse makeMealPlanForClient(String userId) throws Exception;
 
 }
