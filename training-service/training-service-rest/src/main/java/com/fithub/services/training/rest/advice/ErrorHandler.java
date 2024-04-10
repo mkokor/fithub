@@ -81,4 +81,5 @@ public class ErrorHandler {
         return new ApiErrorResponse(errorCollection.stream()
                 .map(error -> new ApiError(ApiErrorType.MODEL_VALIDATION, errorMessageGetter.apply(error))).collect(Collectors.toList()));
     }
+
 }

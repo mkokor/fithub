@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
+import org.springframework.cloud.netflix.ribbon.RibbonClients;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
@@ -17,7 +18,8 @@ import com.fithub.services.training.configuration.RibbonConfig;
 @EntityScan(basePackages = { "com.fithub.services.training.dao.model" })
 @EnableFeignClients("com.fithub.services.training.core.client")
 @PropertySource("classpath:spotify-api.properties")
-@RibbonClient(name = "fithub-auth-service", configuration = RibbonConfig.class)
+@RibbonClients({ @RibbonClient(name = "fithub-auth-service", configuration = RibbonConfig.class),
+        @RibbonClient(name = "fithub-membership-service", configuration = RibbonConfig.class) })
 public class TrainingServiceLauncher {
 
     public static void main(String[] args) {

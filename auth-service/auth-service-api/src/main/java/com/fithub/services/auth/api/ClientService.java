@@ -6,5 +6,4 @@ import com.fithub.services.auth.api.model.client.ClientSignUpRequest;
 public interface ClientService {
 
     ClientResponse signUp(ClientSignUpRequest clientSignUpRequest) throws Exception;
-
 }
