@@ -21,5 +21,7 @@ public class PaymentRecordResponse implements Serializable{
 	
 	private boolean paid;
 	
+	private String month;
+	
 
 }
