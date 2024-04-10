@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fithub.services.membership.api.CoachService;
 import com.fithub.services.membership.api.model.client.ClientResponse;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -24,9 +25,9 @@ public class CoachController {
     private final CoachService coachService;
 
     @Operation(summary = "Get clients")
-	@GetMapping(value = "/{id}/clients")
-	public ResponseEntity<List<ClientResponse>> getClients(@PathVariable Long id) throws Exception{
-			return new ResponseEntity<>(coachService.getClients(id), HttpStatus.OK);
-	}
+    @GetMapping(value = "/{id}/clients")
+    public ResponseEntity<List<ClientResponse>> getClients(@PathVariable Long id) throws Exception {
+        return new ResponseEntity<>(coachService.getClients(id), HttpStatus.OK);
+    }
 
 }

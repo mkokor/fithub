@@ -19,20 +19,21 @@ import lombok.Data;
 @Data
 @Table(name = "membership")
 public class MembershipEntity {
-		
-	 	@Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    @Column(updatable = false)
-	    private Long id;
-	 	
-	 	@Column(name = "amount", nullable = false)
-	 	@NotNull(message = "The amount must be specified")
-	 	private double amount;
-	 	
-	 	@OneToOne
-	    @JoinColumn(name = "client_id", nullable = false)
-	    private ClientEntity client;
-	 	
-	 	@OneToMany(mappedBy = "membership", cascade = CascadeType.ALL)
-	    private List<PaymentRecordEntity> paymentRecord;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(updatable = false)
+    private Long id;
+
+    @Column(name = "amount", nullable = false)
+    @NotNull(message = "The amount must be specified")
+    private double amount;
+
+    @OneToOne
+    @JoinColumn(name = "client_id", nullable = false)
+    private ClientEntity client;
+
+    @OneToMany(mappedBy = "membership", cascade = CascadeType.ALL)
+    private List<PaymentRecordEntity> paymentRecord;
+
 }
