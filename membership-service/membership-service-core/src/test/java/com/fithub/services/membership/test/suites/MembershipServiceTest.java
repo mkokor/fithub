@@ -1,5 +1,6 @@
 package com.fithub.services.membership.test.suites;
 
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,28 +21,21 @@ import com.fithub.services.membership.dao.model.MembershipEntity;
 import com.fithub.services.membership.dao.model.PaymentRecordEntity;
 import com.fithub.services.membership.dao.model.UserEntity;
 import com.fithub.services.membership.dao.repository.MembershipRepository;
-import com.fithub.services.membership.mapper.ClientMapper;
 import com.fithub.services.membership.mapper.PaymentRecordMapper;
 import com.fithub.services.membership.test.configuration.BasicTestConfiguration;
 
 public class MembershipServiceTest extends BasicTestConfiguration {
 
-    private MembershipService membershipService;
-
-    private MembershipRepository membershipRepository;
-
     @Autowired
     private PaymentRecordMapper paymentRecordMapper;
-    
-    @Autowired
-    private ClientMapper clientMapper;
+
+    private MembershipService membershipService;
+    private MembershipRepository membershipRepository;
 
     @BeforeMethod
     public void beforeMethod() {
-
         membershipRepository = Mockito.mock(MembershipRepository.class);
-
-        membershipService = new MembershipServiceImpl(membershipRepository, paymentRecordMapper);
+        membershipService = new MembershipServiceImpl(membershipRepository, null, null, paymentRecordMapper, null);
     }
 
     @Test
@@ -69,6 +63,8 @@ public class MembershipServiceTest extends BasicTestConfiguration {
 
             PaymentRecordEntity paymentRecordEntity = new PaymentRecordEntity();
             paymentRecordEntity.setId(1L);
+            paymentRecordEntity.setYear(2024);
+            paymentRecordEntity.setMonth(Month.JANUARY.toString());
             paymentRecordEntity.setPaid(false);
             paymentRecordEntity.setMembership(membershipEntity);
 
@@ -92,39 +88,37 @@ public class MembershipServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     }
-    
+
     @Test
     public void testPaymentRecord_ValidPaymentStatusIsProvided_ReturnTrue() {
-    	try {
-    		PaymentRecordEntity paymentRecordEntity = new PaymentRecordEntity();
+        try {
+            PaymentRecordEntity paymentRecordEntity = new PaymentRecordEntity();
             paymentRecordEntity.setId(1L);
+            paymentRecordEntity.setYear(2024);
+            paymentRecordEntity.setMonth(Month.JANUARY.toString());
             paymentRecordEntity.setPaid(true);
-            
-            
-            Assertions.assertThat(paymentRecordEntity.isPaid()).isTrue();
-    	} catch (Exception exception) {
-    		Assert.fail();
-    	}
-    	
-    	
-        
+
+            Assertions.assertThat(paymentRecordEntity.getPaid()).isTrue();
+        } catch (Exception exception) {
+            Assert.fail();
+        }
+
     }
-    
+
     @Test
     public void testPaymentRecord_ValidIdIsProvided_ReturnTrue() {
-    	
-    	try {
-    		PaymentRecordEntity paymentRecordEntity = new PaymentRecordEntity();
+
+        try {
+            PaymentRecordEntity paymentRecordEntity = new PaymentRecordEntity();
             paymentRecordEntity.setId(1L);
+            paymentRecordEntity.setYear(2024);
+            paymentRecordEntity.setMonth(Month.JANUARY.toString());
             paymentRecordEntity.setPaid(true);
-            
-            
+
             Assertions.assertThat(paymentRecordEntity.getId()).isNotEqualTo(null);
-    	} catch (Exception exception) {
-    		exception.getStackTrace();
-    	}
+        } catch (Exception exception) {
+            exception.getStackTrace();
+        }
     }
-    
-    
 
 }

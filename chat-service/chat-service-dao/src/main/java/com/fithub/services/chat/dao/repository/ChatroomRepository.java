@@ -8,7 +8,7 @@ import com.fithub.services.chat.dao.model.ChatroomEntity;
 
 @Repository
 public interface ChatroomRepository extends JpaRepository<ChatroomEntity, Long> {
-	@Query("select c from ChatroomEntity c where c.admin.id = ?1")
-	ChatroomEntity findByCoachId(Long coachId);
+    @Query("select c from ChatroomEntity c where c.admin.id = ?1")
+    ChatroomEntity findByCoachId(Long coachId);
 
 }
