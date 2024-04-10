@@ -81,10 +81,12 @@ public class DatabaseSeeder implements ApplicationRunner {
         if (paymentRecordRepository.findAll().isEmpty()) {
         	paymentRecordEntity.setPaid(false);
         	paymentRecordEntity.setId(1L);
+        	paymentRecordEntity.setMonth("April");        	
         	paymentRecordEntity.setMembership(membershipEntity);
         	
         	paymentRecordEntity2.setPaid(false);
         	paymentRecordEntity2.setId(1L);
+        	paymentRecordEntity2.setMonth("June");
         	paymentRecordEntity2.setMembership(membershipEntity);
         	
         	List<PaymentRecordEntity> records = new ArrayList<>();
@@ -92,6 +94,7 @@ public class DatabaseSeeder implements ApplicationRunner {
         	records.add(paymentRecordEntity2);
         	membershipEntity.setPaymentRecord(records);
             paymentRecordRepository.save(paymentRecordEntity);
+            //paymentRecordRepository.save(paymentRecordEntity2);
         }
         
     }

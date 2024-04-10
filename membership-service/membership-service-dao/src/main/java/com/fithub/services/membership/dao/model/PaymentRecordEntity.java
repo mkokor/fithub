@@ -28,4 +28,8 @@ public class PaymentRecordEntity {
 	@ManyToOne
 	@JoinColumn(name = "membership_id", nullable = false)
 	private MembershipEntity membership;
+	
+	@Column(name = "month", nullable = false)
+	@NotNull(message = "The month must be specified")
+	private String month;
 }
