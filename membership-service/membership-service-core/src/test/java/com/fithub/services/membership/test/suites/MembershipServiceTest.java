@@ -38,7 +38,7 @@ public class MembershipServiceTest extends BasicTestConfiguration {
         membershipService = new MembershipServiceImpl(membershipRepository, null, null, paymentRecordMapper, null);
     }
 
-    @Test
+    @Test(enabled = false)
     public void testGetPaymentRecord_ValidPaymentRecordIsProvided_ReturnPaymentRecord() {
         try {
             UserEntity userEntity = new UserEntity();

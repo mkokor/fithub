@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.fithub.services.training.api.AppointmentService;
@@ -17,9 +18,11 @@ import com.fithub.services.training.api.exception.NotFoundException;
 import com.fithub.services.training.api.model.appointment.AppointmentResponse;
 import com.fithub.services.training.api.model.appointment.ClientAppointmentResponse;
 import com.fithub.services.training.api.model.appointment.CoachAppointmentResponse;
+import com.fithub.services.training.api.model.membership.MembershipPaymentReportResponse;
 import com.fithub.services.training.api.model.reservation.NewReservationRequest;
 import com.fithub.services.training.api.model.reservation.ReservationResponse;
 import com.fithub.services.training.core.client.AuthServiceClient;
+import com.fithub.services.training.core.client.MembershipServiceClient;
 import com.fithub.services.training.dao.model.AppointmentEntity;
 import com.fithub.services.training.dao.model.ClientEntity;
 import com.fithub.services.training.dao.model.CoachEntity;
@@ -51,6 +54,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final CoachAppointmentMapper coachAppointmentMapper;
     private final Validator validator;
     private final AuthServiceClient authServiceClient;
+    private final MembershipServiceClient membershipServiceClient;
 
     @Override
     public List<ReservationResponse> getReservations(Long appointmentId) throws Exception {
@@ -151,6 +155,10 @@ public class AppointmentServiceImpl implements AppointmentService {
         
         if (appointment.isEmpty()) {
             throw new NotFoundException("The appointment with provided ID could not be found.");
+        }
+        
+        if (membershipServiceClient.getMembershipPaymentReport(userId).getBody().getHasDebt()) {
+        	throw new BadRequestException("The user has unpayed debt.");
         }
         
         List<AppointmentResponse> availableAppointments = getAvailableAppointments(userId);
