@@ -1,7 +1,6 @@
 package com.fithub.services.training.test.suites;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 import static org.testng.Assert.assertThrows;
 
 import java.time.DayOfWeek;
@@ -14,15 +13,17 @@ import org.assertj.core.api.Assertions;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.fithub.services.training.api.exception.BadRequestException;
 import com.fithub.services.training.api.AppointmentService;
+import com.fithub.services.training.api.exception.BadRequestException;
 import com.fithub.services.training.api.model.appointment.AppointmentResponse;
 import com.fithub.services.training.api.model.appointment.ClientAppointmentResponse;
 import com.fithub.services.training.api.model.appointment.CoachAppointmentResponse;
@@ -52,9 +53,6 @@ import jakarta.validation.Validator;
 
 public class AppointmentServiceTest extends BasicTestConfiguration {
 
-    @Value("${message}")
-    private String message;
-
     @Autowired
     private ReservationMapper reservationMapper;
     @Autowired
@@ -72,7 +70,7 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
     private MembershipServiceClient membershipServiceClient;
 
     private AppointmentService appointmentService;
-    
+
     private Validator validator;
 
     @BeforeMethod
@@ -83,7 +81,7 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
         clientRepository = Mockito.mock(ClientRepository.class);
         coachRepository = Mockito.mock(CoachRepository.class);
         reservationRepository = Mockito.mock(ReservationRepository.class);
-        
+
         LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
         localValidatorFactoryBean.afterPropertiesSet();
         validator = localValidatorFactoryBean;
@@ -149,7 +147,7 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     }
-    
+
     @Test
     public void testGetAvailableAppointments_ValidUserIdIsProvided_ReturnsAvailableAppointments() {
         try {
@@ -162,7 +160,7 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             coachEntity.setId(1L);
             coachEntity.setUser(userEntity);
             userEntity.setCoach(coachEntity);
-            
+
             userEntity.setCoach(coachEntity);
 
             UserEntity clientUser = new UserEntity();
@@ -175,9 +173,9 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             clientEntity.setUser(clientUser);
             clientEntity.setCoach(coachEntity);
             clientUser.setClient(clientEntity);
-            
+
             clientUser.setClient(clientEntity);
-            
+
             LocalTime time1 = LocalTime.now();
             LocalTime time2 = LocalTime.now();
 
@@ -198,7 +196,7 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             availableAppointment.setEndTime(time2);
             availableAppointment.setDay(DayOfWeek.MONDAY.toString());
             expectedResponse.add(availableAppointment);
-            
+
             List<AppointmentEntity> availableAppointments = new ArrayList<>();
             availableAppointments.add(appointmentEntity);
 
@@ -214,7 +212,7 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     }
-    
+
     @Test
     public void testMakeReservationForAppointment_ValidDataIsProvided_ReturnsNewReservation() {
         try {
@@ -238,7 +236,7 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             clientEntity.setUser(clientUser);
             clientEntity.setCoach(coachEntity);
             clientUser.setClient(clientEntity);
-            
+
             LocalTime time1 = LocalTime.now();
             LocalTime time2 = LocalTime.now();
 
@@ -249,17 +247,18 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             appointmentEntity.setCoach(coachEntity);
             appointmentEntity.setStartTime(time1);
             appointmentEntity.setEndTime(time2);
-            
+
             List<AppointmentEntity> availableAppointments = new ArrayList<>();
             availableAppointments.add(appointmentEntity);
-            
+
             NewReservationRequest reservationRequest = new NewReservationRequest();
             reservationRequest.setAppointmentId(1L);
-            
+
             String userId = clientUser.getUuid();
-            
+
             ReservationResponse expectedResponse = new ReservationResponse();
             expectedResponse.setClientId(1L);
+
             expectedResponse.setAppointmentId(1L); 
             
             ClientMembershipResponse clientMembership = new ClientMembershipResponse();
@@ -276,13 +275,14 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(paymentReport, HttpStatus.OK);
             
             Mockito.when(membershipServiceClient.getMembershipPaymentReport(userId)).thenReturn(paymentReportResponse);
+
             Mockito.when(userRepository.findById(clientUser.getUuid())).thenReturn(Optional.of(clientUser));
             Mockito.when(coachRepository.findById(coachEntity.getId())).thenReturn(Optional.of(coachEntity));
             Mockito.when(clientRepository.findById(clientEntity.getId())).thenReturn(Optional.of(clientEntity));
             Mockito.when(appointmentRepository.findAvailableAppointmentsByCoachId(coachEntity.getId())).thenReturn(availableAppointments);
             Mockito.when(appointmentRepository.findById(appointmentEntity.getId())).thenReturn(Optional.of(appointmentEntity));
             Mockito.when(reservationRepository.findReservationByClientId(appointmentEntity.getId(), clientEntity.getId())).thenReturn(null);
-            
+
             ReservationResponse actualResponse = appointmentService.makeReservationForAppointment(userId, reservationRequest);
 
             assertThat(actualResponse).usingRecursiveComparison().ignoringFields("id").isEqualTo(expectedResponse);
@@ -290,7 +290,7 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     }
-    
+
     @Test
     public void testMakeReservationForAppointment_ClientAlreadyHasAReservationForAppointment_ThrowsBadRequestException() {
         try {
@@ -316,7 +316,6 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             clientUser.setClient(clientEntity);
             
             String userId = clientUser.getUuid();
-            
             LocalTime time1 = LocalTime.now();
             LocalTime time2 = LocalTime.now();
 
@@ -327,20 +326,21 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             appointmentEntity.setCoach(coachEntity);
             appointmentEntity.setStartTime(time1);
             appointmentEntity.setEndTime(time2);
-            
+
             ReservationEntity reservationEntity = new ReservationEntity();
             reservationEntity.setId(1L);
             reservationEntity.setAppointment(appointmentEntity);
             reservationEntity.setClient(clientEntity);
-            
+
             List<AppointmentEntity> availableAppointments = new ArrayList<>();
             availableAppointments.add(appointmentEntity);
-            
+
             NewReservationRequest reservationRequest = new NewReservationRequest();
             reservationRequest.setAppointmentId(1L);
-            
+
             ReservationResponse expectedResponse = new ReservationResponse();
             expectedResponse.setClientId(1L);
+
             expectedResponse.setAppointmentId(1L);  
             
             ClientMembershipResponse clientMembership = new ClientMembershipResponse();
@@ -357,20 +357,22 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(paymentReport, HttpStatus.OK);
             
             Mockito.when(membershipServiceClient.getMembershipPaymentReport(userId)).thenReturn(paymentReportResponse);
+
             Mockito.when(userRepository.findById(clientUser.getUuid())).thenReturn(Optional.of(clientUser));
             Mockito.when(coachRepository.findById(coachEntity.getId())).thenReturn(Optional.of(coachEntity));
             Mockito.when(clientRepository.findById(clientEntity.getId())).thenReturn(Optional.of(clientEntity));
             Mockito.when(appointmentRepository.findAvailableAppointmentsByCoachId(coachEntity.getId())).thenReturn(availableAppointments);
             Mockito.when(appointmentRepository.findById(appointmentEntity.getId())).thenReturn(Optional.of(appointmentEntity));
-            Mockito.when(reservationRepository.findReservationByClientId(appointmentEntity.getId(), clientEntity.getId())).thenReturn(reservationEntity);
-            
-            assertThrows(BadRequestException.class, () -> appointmentService.makeReservationForAppointment(clientUser.getUuid(), reservationRequest));
+            Mockito.when(reservationRepository.findReservationByClientId(appointmentEntity.getId(), clientEntity.getId()))
+                    .thenReturn(reservationEntity);
+
+            assertThrows(BadRequestException.class,
+                    () -> appointmentService.makeReservationForAppointment(clientUser.getUuid(), reservationRequest));
         } catch (Exception exception) {
             Assert.fail();
         }
     }
-    
-    
+
     @Test
     public void testMakeReservationForAppointment_CoachTriedToMakeAReservation_ThrowsBadRequestException() {
         try {
@@ -383,7 +385,7 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             coachEntity.setId(1L);
             coachEntity.setUser(userEntity);
             userEntity.setCoach(coachEntity);
-            
+
             LocalTime time1 = LocalTime.now();
             LocalTime time2 = LocalTime.now();
 
@@ -394,11 +396,12 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             appointmentEntity.setCoach(coachEntity);
             appointmentEntity.setStartTime(time1);
             appointmentEntity.setEndTime(time2);
-            
+
             List<AppointmentEntity> availableAppointments = new ArrayList<>();
             availableAppointments.add(appointmentEntity);
-            
+
             NewReservationRequest reservationRequest = new NewReservationRequest();
+
             reservationRequest.setAppointmentId(1L);     
             
             ClientMembershipResponse clientMembership = new ClientMembershipResponse();
@@ -415,12 +418,14 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(paymentReport, HttpStatus.OK);
             
             Mockito.when(membershipServiceClient.getMembershipPaymentReport(userEntity.getUuid())).thenReturn(paymentReportResponse);
+
             Mockito.when(userRepository.findById(userEntity.getUuid())).thenReturn(Optional.of(userEntity));
             Mockito.when(coachRepository.findById(coachEntity.getId())).thenReturn(Optional.of(coachEntity));
             Mockito.when(appointmentRepository.findAvailableAppointmentsByCoachId(coachEntity.getId())).thenReturn(availableAppointments);
             Mockito.when(appointmentRepository.findById(appointmentEntity.getId())).thenReturn(Optional.of(appointmentEntity));
-            
-            assertThrows(BadRequestException.class, () -> appointmentService.makeReservationForAppointment(userEntity.getUuid(), reservationRequest));
+
+            assertThrows(BadRequestException.class,
+                    () -> appointmentService.makeReservationForAppointment(userEntity.getUuid(), reservationRequest));
         } catch (Exception exception) {
             Assert.fail();
         }
@@ -480,7 +485,7 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     } 
-    
+
     @Test
     public void testGetAppointmentsForCoach_ValidUserIdIsProvided_ReturnsAppointments() {
         try {
@@ -493,10 +498,10 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             coachEntity.setId(1L);
             coachEntity.setUser(userEntity);
             userEntity.setCoach(coachEntity);
-            
+
             userEntity.setCoach(coachEntity);
-            
-            LocalTime time1 = LocalTime.now(); 
+
+            LocalTime time1 = LocalTime.now();
             LocalTime time2 = time1.plusHours(1);
             LocalTime time3 = time2.plusHours(1);
             LocalTime time4 = time3.plusHours(1);
@@ -508,7 +513,7 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             appointmentEntity.setCoach(coachEntity);
             appointmentEntity.setStartTime(time1);
             appointmentEntity.setEndTime(time2);
-            
+
             AppointmentEntity appointmentEntity2 = new AppointmentEntity();
             appointmentEntity2.setId(2L);
             appointmentEntity2.setCapacity(2);
@@ -524,20 +529,20 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             availableAppointment.setEndTime(time2);
             availableAppointment.setDay(DayOfWeek.MONDAY.toString());
             expectedResponse.add(availableAppointment);
-            
+
             CoachAppointmentResponse availableAppointment2 = new CoachAppointmentResponse();
             availableAppointment2.setCapacity(2);
             availableAppointment2.setStartTime(time3);
             availableAppointment2.setEndTime(time4);
             availableAppointment2.setDay(DayOfWeek.MONDAY.toString());
             expectedResponse.add(availableAppointment2);
-            
+
             List<AppointmentEntity> availableAppointments = new ArrayList<>();
             availableAppointments.add(appointmentEntity);
             availableAppointments.add(appointmentEntity2);
-            
+
             coachEntity.setAppointments(availableAppointments);
-            
+
             Mockito.when(userRepository.findById(userEntity.getUuid())).thenReturn(Optional.of(userEntity));
             Mockito.when(appointmentRepository.findById(appointmentEntity.getId())).thenReturn(Optional.of(appointmentEntity));
             Mockito.when(appointmentRepository.findAvailableAppointmentsByCoachId(coachEntity.getId())).thenReturn(availableAppointments);
@@ -548,8 +553,8 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
         } catch (Exception exception) {
             Assert.fail();
         }
-    } 
-    
+    }
+
     @Test
     public void testGetAppointmentsForClient_ValidUserIdIsProvided_ReturnsAppointments() {
         try {
@@ -562,22 +567,22 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             coachEntity.setId(1L);
             coachEntity.setUser(userEntity);
             userEntity.setCoach(coachEntity);
-            
+
             userEntity.setCoach(coachEntity);
-            
+
             UserEntity clientUser = new UserEntity();
             clientUser.setUuid("client-123");
             clientUser.setFirstName("Emma");
             clientUser.setLastName("Clinton");
-            
+
             ClientEntity clientEntity = new ClientEntity();
             clientEntity.setCoach(coachEntity);
             clientEntity.setId(1L);
             clientEntity.setUser(clientUser);
-            
+
             clientUser.setClient(clientEntity);
-            
-            LocalTime time1 = LocalTime.now(); 
+
+            LocalTime time1 = LocalTime.now();
             LocalTime time2 = time1.plusHours(1);
 
             AppointmentEntity appointmentEntity = new AppointmentEntity();
@@ -587,19 +592,18 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             appointmentEntity.setCoach(coachEntity);
             appointmentEntity.setStartTime(time1);
             appointmentEntity.setEndTime(time2);
-            
+
             ReservationEntity reservationEntity = new ReservationEntity();
             reservationEntity.setId(1L);
             reservationEntity.setAppointment(appointmentEntity);
             reservationEntity.setClient(clientEntity);
-            
+
             List<ReservationEntity> reservations = new ArrayList<>();
             reservations.add(reservationEntity);
-            
+
             clientEntity.setReservations(reservations);
             appointmentEntity.setReservations(reservations);
 
-            
             List<ClientAppointmentResponse> expectedResponse = new ArrayList<>();
             ClientAppointmentResponse availableAppointment = new ClientAppointmentResponse();
             availableAppointment.setStartTime(time1);
@@ -607,20 +611,20 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             availableAppointment.setId(1L);
             availableAppointment.setDay(DayOfWeek.MONDAY.toString());
             expectedResponse.add(availableAppointment);
-            
+
             List<AppointmentEntity> availableAppointments = new ArrayList<>();
             availableAppointments.add(appointmentEntity);
-            
+
             coachEntity.setAppointments(availableAppointments);
-            
+
             Mockito.when(userRepository.findById(clientUser.getUuid())).thenReturn(Optional.of(clientUser));
-  
+
             List<ClientAppointmentResponse> actualResponse = appointmentService.getAppointmentsForClient(clientUser.getUuid());
 
             Assertions.assertThat(actualResponse).hasSameElementsAs(expectedResponse);
         } catch (Exception exception) {
             Assert.fail();
         }
-    } 
+    }
 
 }

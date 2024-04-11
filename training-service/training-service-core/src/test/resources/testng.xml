@@ -6,4 +6,10 @@
             <class name="com.fithub.services.training.test.suites.AppointmentServiceTest"/>
         </classes>
     </test>
+    
+    <test thread-count="5" name="ClientService">
+        <classes>
+            <class name="com.fithub.services.training.test.suites.ClientServiceTest"/>
+        </classes>
+    </test>
 </suite>

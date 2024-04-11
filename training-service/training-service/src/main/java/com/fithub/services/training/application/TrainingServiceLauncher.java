@@ -21,7 +21,6 @@ import com.fithub.services.training.configuration.RibbonConfig;
 @RibbonClients({ @RibbonClient(name = "fithub-auth-service", configuration = RibbonConfig.class),
 	@RibbonClient(name = "fithub-membership-service", configuration = RibbonConfig.class)
 })
-
 public class TrainingServiceLauncher {
 
     public static void main(String[] args) {

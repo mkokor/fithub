@@ -1,13 +1,13 @@
 package com.fithub.services.auth.dao.seed;
 
-import java.util.UUID;
-
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import com.fithub.services.auth.dao.model.ClientEntity;
 import com.fithub.services.auth.dao.model.CoachEntity;
 import com.fithub.services.auth.dao.model.UserEntity;
+import com.fithub.services.auth.dao.repository.ClientRepository;
 import com.fithub.services.auth.dao.repository.CoachRepository;
 import com.fithub.services.auth.dao.repository.UserRepository;
 
@@ -19,6 +19,7 @@ public class DatabaseSeeder implements ApplicationRunner {
 
     private final CoachRepository coachRepository;
     private final UserRepository userRepository;
+    private final ClientRepository clientRepository;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -26,22 +27,41 @@ public class DatabaseSeeder implements ApplicationRunner {
     }
 
     private void seed() {
-        UserEntity userEntity = new UserEntity();
+        UserEntity coachJohnUserEntity = new UserEntity();
+        UserEntity coachAlbertUserEntity = new UserEntity();
+        UserEntity clientUserEntity = new UserEntity();
         if (userRepository.findAll().isEmpty()) {
-            userEntity.setUuid(UUID.randomUUID().toString());
-            userEntity.setFirstName("John");
-            userEntity.setLastName("Doe");
-            userEntity.setUsername("johndoe");
-            userEntity.setEmail("johndoe@email.com");
-            userEntity.setPasswordHash("password123");
-            userRepository.save(userEntity);
+            coachJohnUserEntity.setUuid("john-doe-coach");
+            coachJohnUserEntity.setFirstName("John");
+            coachJohnUserEntity.setLastName("Doe");
+            userRepository.save(coachJohnUserEntity);
+
+            coachAlbertUserEntity.setUuid("albert-johnson-coach");
+            coachAlbertUserEntity.setFirstName("Albert");
+            coachAlbertUserEntity.setLastName("Johnson");
+            userRepository.save(coachAlbertUserEntity);
+
+            clientUserEntity.setUuid("mary-ann-client");
+            clientUserEntity.setFirstName("Mary");
+            clientUserEntity.setLastName("Ann");
+            userRepository.save(clientUserEntity);
         }
 
-        CoachEntity coachEntity = new CoachEntity();
+        CoachEntity coachJohnEntity = new CoachEntity();
+        CoachEntity coachAlbertEntity = new CoachEntity();
         if (coachRepository.findAll().isEmpty()) {
-            coachEntity.setUser(userEntity);
-            coachEntity.setBiography("John Doe is the head coach.");
-            coachRepository.save(coachEntity);
+            coachAlbertEntity.setUser(coachAlbertUserEntity);
+            coachRepository.save(coachAlbertEntity);
+
+            coachJohnEntity.setUser(coachJohnUserEntity);
+            coachRepository.save(coachJohnEntity);
+        }
+
+        if (clientRepository.findAll().isEmpty()) {
+            ClientEntity clientEntity = new ClientEntity();
+            clientEntity.setUser(clientUserEntity);
+            clientEntity.setCoach(coachJohnEntity);
+            clientRepository.save(clientEntity);
         }
     }
 

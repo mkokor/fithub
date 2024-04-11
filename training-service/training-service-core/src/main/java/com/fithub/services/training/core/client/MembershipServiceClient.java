@@ -12,4 +12,5 @@ public interface MembershipServiceClient {
 
     @GetMapping("/membership/report")
     ResponseEntity<MembershipPaymentReportResponse> getMembershipPaymentReport(@RequestParam("client_uuid") String clientUuid);
+  
 }
