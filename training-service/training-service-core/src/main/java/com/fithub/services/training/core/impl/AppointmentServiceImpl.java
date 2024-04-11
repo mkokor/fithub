@@ -157,7 +157,8 @@ public class AppointmentServiceImpl implements AppointmentService {
             throw new NotFoundException("The appointment with provided ID could not be found.");
         }
         
-        if (membershipServiceClient.getMembershipPaymentReport(userId).getBody().getHasDebt()) {
+        ResponseEntity<MembershipPaymentReportResponse> paymentReport = membershipServiceClient.getMembershipPaymentReport(userId);        
+        if (paymentReport.getBody().getHasDebt()) {
         	throw new BadRequestException("The user has unpayed debt.");
         }
         

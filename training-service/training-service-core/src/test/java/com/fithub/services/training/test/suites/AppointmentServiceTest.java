@@ -3,6 +3,7 @@ package com.fithub.services.training.test.suites;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
+
 import static org.testng.Assert.assertThrows;
 
 import java.time.DayOfWeek;
@@ -29,6 +30,7 @@ import com.fithub.services.training.api.model.appointment.CoachAppointmentRespon
 import com.fithub.services.training.api.model.reservation.NewReservationRequest;
 import com.fithub.services.training.api.model.reservation.ReservationResponse;
 import com.fithub.services.training.api.model.membership.MembershipPaymentReportResponse;
+import com.fithub.services.training.api.model.client.ClientMembershipResponse;
 import com.fithub.services.training.core.client.MembershipServiceClient;
 import com.fithub.services.training.core.impl.AppointmentServiceImpl;
 import com.fithub.services.training.dao.model.AppointmentEntity;
@@ -212,9 +214,10 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
         } catch (Exception exception) {
             Assert.fail();
         }
-    } 
+    }
+    /*
     
-   /* @Test
+    @Test
     public void testMakeReservationForAppointment_ValidDataIsProvided_ReturnsNewReservation() {
         try {
             UserEntity userEntity = new UserEntity();
@@ -259,11 +262,18 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             
             ReservationResponse expectedResponse = new ReservationResponse();
             expectedResponse.setClientId(1L);
-            expectedResponse.setAppointmentId(1L);      
+            expectedResponse.setAppointmentId(1L); 
+            
+            ClientMembershipResponse clientMembership = new ClientMembershipResponse();
+            clientMembership.setEmail("email@.com");
+            clientMembership.setFirstName("Mary");
+            clientMembership.setLastName("Ann");
+            clientMembership.setUuid("client-id");
+            
             
             MembershipPaymentReportResponse paymentReport = new MembershipPaymentReportResponse();
             paymentReport.setHasDebt(false);
-            paymentReport.setClient(null);
+            paymentReport.setClient(clientMembership);
             
             ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(paymentReport, null);
             
@@ -335,9 +345,16 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             expectedResponse.setClientId(1L);
             expectedResponse.setAppointmentId(1L);  
             
+            ClientMembershipResponse clientMembership = new ClientMembershipResponse();
+            clientMembership.setEmail("email@.com");
+            clientMembership.setFirstName("Mary");
+            clientMembership.setLastName("Ann");
+            clientMembership.setUuid("client-id");
+            
+            
             MembershipPaymentReportResponse paymentReport = new MembershipPaymentReportResponse();
             paymentReport.setHasDebt(false);
-            paymentReport.setClient(null);
+            paymentReport.setClient(clientMembership);
             
             ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(paymentReport, null);
             
@@ -386,9 +403,16 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             NewReservationRequest reservationRequest = new NewReservationRequest();
             reservationRequest.setAppointmentId(1L);     
             
+            ClientMembershipResponse clientMembership = new ClientMembershipResponse();
+            clientMembership.setEmail("email@.com");
+            clientMembership.setFirstName("Mary");
+            clientMembership.setLastName("Ann");
+            clientMembership.setUuid("client-id");
+            
+            
             MembershipPaymentReportResponse paymentReport = new MembershipPaymentReportResponse();
             paymentReport.setHasDebt(false);
-            paymentReport.setClient(null);
+            paymentReport.setClient(clientMembership);
             
             ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(paymentReport, null);
             
@@ -402,8 +426,63 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
         } catch (Exception exception) {
             Assert.fail();
         }
-    } */
+    } 
     
+    @Test
+    public void testMakeReservationForAppointment_ClientHasUnpayedDebt_ThrowsBadRequestException() {
+        try {
+            UserEntity userEntity = new UserEntity();
+            userEntity.setUuid("user-id");
+            userEntity.setFirstName("John");
+            userEntity.setLastName("Doe");
+
+            CoachEntity coachEntity = new CoachEntity();
+            coachEntity.setId(1L);
+            coachEntity.setUser(userEntity);
+            userEntity.setCoach(coachEntity);
+            
+            LocalTime time1 = LocalTime.now();
+            LocalTime time2 = LocalTime.now();
+
+            AppointmentEntity appointmentEntity = new AppointmentEntity();
+            appointmentEntity.setId(1L);
+            appointmentEntity.setCapacity(5);
+            appointmentEntity.setDay(DayOfWeek.MONDAY.toString());
+            appointmentEntity.setCoach(coachEntity);
+            appointmentEntity.setStartTime(time1);
+            appointmentEntity.setEndTime(time2);
+            
+            List<AppointmentEntity> availableAppointments = new ArrayList<>();
+            availableAppointments.add(appointmentEntity);
+            
+            NewReservationRequest reservationRequest = new NewReservationRequest();
+            reservationRequest.setAppointmentId(1L);     
+            
+            ClientMembershipResponse clientMembership = new ClientMembershipResponse();
+            clientMembership.setEmail("email@.com");
+            clientMembership.setFirstName("Mary");
+            clientMembership.setLastName("Ann");
+            clientMembership.setUuid("client-id");
+            
+            
+            MembershipPaymentReportResponse paymentReport = new MembershipPaymentReportResponse();
+            paymentReport.setHasDebt(true);
+            paymentReport.setClient(clientMembership);
+            
+            ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(paymentReport, null);
+            
+            Mockito.when(membershipServiceClient.getMembershipPaymentReport(userEntity.getUuid())).thenReturn(paymentReportResponse);
+            Mockito.when(userRepository.findById(userEntity.getUuid())).thenReturn(Optional.of(userEntity));
+            Mockito.when(coachRepository.findById(coachEntity.getId())).thenReturn(Optional.of(coachEntity));
+            Mockito.when(appointmentRepository.findAvailableAppointmentsByCoachId(coachEntity.getId())).thenReturn(availableAppointments);
+            Mockito.when(appointmentRepository.findById(appointmentEntity.getId())).thenReturn(Optional.of(appointmentEntity));
+            
+            assertThrows(BadRequestException.class, () -> appointmentService.makeReservationForAppointment(userEntity.getUuid(), reservationRequest));
+        } catch (Exception exception) {
+            Assert.fail();
+        }
+    } 
+     */
     
     @Test
     public void testGetAppointmentsForCoach_ValidUserIdIsProvided_ReturnsAppointments() {

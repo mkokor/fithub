@@ -10,6 +10,6 @@ import com.fithub.services.training.api.model.membership.MembershipPaymentReport
 @FeignClient(name = "fithub-membership-service")
 public interface MembershipServiceClient {
 
-    @GetMapping("/report")
+    @GetMapping("/membership/report")
     ResponseEntity<MembershipPaymentReportResponse> getMembershipPaymentReport(@RequestParam("client_uuid") String clientUuid);
 }

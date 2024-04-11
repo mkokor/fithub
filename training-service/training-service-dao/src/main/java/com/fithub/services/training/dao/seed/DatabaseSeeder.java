@@ -37,18 +37,28 @@ public class DatabaseSeeder implements ApplicationRunner {
     }
 
     private void seed() {
-        UserEntity userEntity = new UserEntity();
+        UserEntity coachJohnUserEntity = new UserEntity();
+        UserEntity coachAlbertUserEntity = new UserEntity();
         if (userRepository.findAll().isEmpty()) {
-            userEntity.setUuid(UUID.randomUUID().toString());
-            userEntity.setFirstName("John");
-            userEntity.setLastName("Doe");
-            userRepository.save(userEntity);
+            coachJohnUserEntity.setUuid("john-doe-coach");
+            coachJohnUserEntity.setFirstName("John");
+            coachJohnUserEntity.setLastName("Doe");
+            userRepository.save(coachJohnUserEntity);
+
+            coachAlbertUserEntity.setUuid("albert-johnson-coach");
+            coachAlbertUserEntity.setFirstName("Albert");
+            coachAlbertUserEntity.setLastName("Johnson");
+            userRepository.save(coachAlbertUserEntity);
         }
 
-        CoachEntity coachEntity = new CoachEntity();
+        CoachEntity coachJohnEntity = new CoachEntity();
+        CoachEntity coachAlbertEntity = new CoachEntity();
         if (coachRepository.findAll().isEmpty()) {
-            coachEntity.setUser(userEntity);
-            coachRepository.save(coachEntity);
+            coachAlbertEntity.setUser(coachAlbertUserEntity);
+            coachRepository.save(coachAlbertEntity);
+
+            coachJohnEntity.setUser(coachJohnUserEntity);
+            coachRepository.save(coachJohnEntity);
         }
 
         if (appointmentRepository.findAll().isEmpty()) {
@@ -57,20 +67,20 @@ public class DatabaseSeeder implements ApplicationRunner {
             appointmentEntity.setDay(DayOfWeek.MONDAY.toString());
             appointmentEntity.setStartTime(LocalTime.parse("09:00:00"));
             appointmentEntity.setEndTime(LocalTime.parse("10:30:00"));
-            appointmentEntity.setCoach(coachEntity);
+            appointmentEntity.setCoach(coachJohnEntity);
             appointmentRepository.save(appointmentEntity);
 
-            UserEntity clientUser = new UserEntity();
-            clientUser.setUuid("mary-ann");
-            clientUser.setFirstName("Mary");
-            clientUser.setLastName("Ann");
-            userRepository.save(clientUser);
+            UserEntity clientUserEntity = new UserEntity();
+            clientUserEntity.setUuid("mary-ann-client");
+            clientUserEntity.setFirstName("Mary");
+            clientUserEntity.setLastName("Ann");
+            userRepository.save(clientUserEntity);
 
             ClientEntity clientEntity = new ClientEntity();
-            clientEntity.setUser(clientUser);
-            clientEntity.setCoach(coachEntity);
+            clientEntity.setUser(clientUserEntity);
+            clientEntity.setCoach(coachJohnEntity);
             clientRepository.save(clientEntity);
-            
+
             UserEntity clientUser2 = new UserEntity();
             clientUser2.setUuid(UUID.randomUUID().toString());
             clientUser2.setFirstName("John");
@@ -79,7 +89,7 @@ public class DatabaseSeeder implements ApplicationRunner {
 
             ClientEntity clientEntity2 = new ClientEntity();
             clientEntity2.setUser(clientUser2);
-            clientEntity2.setCoach(coachEntity);
+            clientEntity2.setCoach(coachJohnEntity);
             clientRepository.save(clientEntity2);
 
             ReservationEntity reservationEntity = new ReservationEntity();
@@ -88,4 +98,5 @@ public class DatabaseSeeder implements ApplicationRunner {
             reservationRepository.save(reservationEntity);
         }
     }
+
 }
