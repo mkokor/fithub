@@ -2,8 +2,6 @@ package com.fithub.services.training.test.suites;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
-
 import static org.testng.Assert.assertThrows;
 
 import java.time.DayOfWeek;
@@ -17,6 +15,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -215,7 +214,6 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     }
-    /*
     
     @Test
     public void testMakeReservationForAppointment_ValidDataIsProvided_ReturnsNewReservation() {
@@ -275,7 +273,7 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             paymentReport.setHasDebt(false);
             paymentReport.setClient(clientMembership);
             
-            ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(paymentReport, null);
+            ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(paymentReport, HttpStatus.OK);
             
             Mockito.when(membershipServiceClient.getMembershipPaymentReport(userId)).thenReturn(paymentReportResponse);
             Mockito.when(userRepository.findById(clientUser.getUuid())).thenReturn(Optional.of(clientUser));
@@ -356,7 +354,7 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             paymentReport.setHasDebt(false);
             paymentReport.setClient(clientMembership);
             
-            ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(paymentReport, null);
+            ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(paymentReport, HttpStatus.OK);
             
             Mockito.when(membershipServiceClient.getMembershipPaymentReport(userId)).thenReturn(paymentReportResponse);
             Mockito.when(userRepository.findById(clientUser.getUuid())).thenReturn(Optional.of(clientUser));
@@ -414,7 +412,7 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             paymentReport.setHasDebt(false);
             paymentReport.setClient(clientMembership);
             
-            ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(paymentReport, null);
+            ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(paymentReport, HttpStatus.OK);
             
             Mockito.when(membershipServiceClient.getMembershipPaymentReport(userEntity.getUuid())).thenReturn(paymentReportResponse);
             Mockito.when(userRepository.findById(userEntity.getUuid())).thenReturn(Optional.of(userEntity));
@@ -469,7 +467,7 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             paymentReport.setHasDebt(true);
             paymentReport.setClient(clientMembership);
             
-            ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(paymentReport, null);
+            ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(paymentReport, HttpStatus.OK);
             
             Mockito.when(membershipServiceClient.getMembershipPaymentReport(userEntity.getUuid())).thenReturn(paymentReportResponse);
             Mockito.when(userRepository.findById(userEntity.getUuid())).thenReturn(Optional.of(userEntity));
@@ -482,7 +480,6 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     } 
-     */
     
     @Test
     public void testGetAppointmentsForCoach_ValidUserIdIsProvided_ReturnsAppointments() {
