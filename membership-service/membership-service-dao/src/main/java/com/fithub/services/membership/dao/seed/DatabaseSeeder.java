@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -42,7 +41,7 @@ public class DatabaseSeeder implements ApplicationRunner {
         UserEntity coachUserEntity = new UserEntity();
         UserEntity clientUserEntity = new UserEntity();
         if (userRepository.findAll().isEmpty()) {
-            coachUserEntity.setUuid(UUID.randomUUID().toString());
+            coachUserEntity.setUuid("john-doe-coach");
             coachUserEntity.setFirstName("John");
             coachUserEntity.setLastName("Doe");
             coachUserEntity.setUsername("johndoe");
@@ -50,7 +49,7 @@ public class DatabaseSeeder implements ApplicationRunner {
             coachUserEntity.setPasswordHash("coach-password");
             userRepository.save(coachUserEntity);
 
-            clientUserEntity.setUuid(UUID.randomUUID().toString());
+            clientUserEntity.setUuid("mary-ann-client");
             clientUserEntity.setFirstName("Mary");
             clientUserEntity.setLastName("Ann");
             clientUserEntity.setUsername("maryann");
