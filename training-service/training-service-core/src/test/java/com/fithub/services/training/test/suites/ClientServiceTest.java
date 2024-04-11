@@ -57,7 +57,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
     }
 
     @Test
-    public void testChangeCoach_clientHasUnresolvedDebt_throwsAnBadRequestException() {
+    public void testChangeCoach_ClientHasUnresolvedDebt_ThrowsAnBadRequestException() {
         try {
             UserEntity clientUserEntity = new UserEntity();
             clientUserEntity.setUuid("mary-ann-client");
@@ -83,7 +83,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
     }
 
     @Test
-    public void testChangeCoach_validDataIsSent_returnsUpdatedState() {
+    public void testChangeCoach_ValidDataIsSent_ReturnsUpdatedState() {
         try {
             UserEntity clientUserEntity = new UserEntity();
             clientUserEntity.setUuid("mary-ann-client");
