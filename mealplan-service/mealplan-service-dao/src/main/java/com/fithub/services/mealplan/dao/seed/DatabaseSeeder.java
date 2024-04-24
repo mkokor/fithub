@@ -50,6 +50,11 @@ public class DatabaseSeeder implements ApplicationRunner {
     	UserEntity userEntity9 = new UserEntity();
     	UserEntity userEntity10 = new UserEntity();
     	
+    	UserEntity userEntity11 = new UserEntity();
+    	UserEntity userEntity12 = new UserEntity();
+    	
+    	UserEntity userEntity13 = new UserEntity();
+    	
     	if (userRepository.findAll().isEmpty()) {
     	//For coaches
     	
@@ -78,6 +83,11 @@ public class DatabaseSeeder implements ApplicationRunner {
     	userEntity5.setLastName("Doe5");
     	userRepository.save(userEntity5);
     	
+    	userEntity11.setUuid(UUID.randomUUID().toString());
+    	userEntity11.setFirstName("PostProba");
+    	userEntity11.setLastName("PostPost");
+    	userRepository.save(userEntity11);
+    	
     	//For clients
     	userEntity6.setUuid(UUID.randomUUID().toString());
     	userEntity6.setFirstName("Jane6");
@@ -103,6 +113,16 @@ public class DatabaseSeeder implements ApplicationRunner {
     	userEntity10.setFirstName("Jane10");
     	userEntity10.setLastName("Smith10");
     	userRepository.save(userEntity10);
+    	
+    	userEntity12.setUuid(UUID.randomUUID().toString());
+    	userEntity12.setFirstName("Probaaaaa");
+    	userEntity12.setLastName("Probaa");
+    	userRepository.save(userEntity10);
+    	
+    	userEntity13.setUuid(UUID.randomUUID().toString());
+    	userEntity13.setFirstName("Nejla");
+    	userEntity13.setLastName("Helac");
+    	userRepository.save(userEntity13);
 
     	}
 
@@ -112,6 +132,8 @@ public class DatabaseSeeder implements ApplicationRunner {
     	CoachEntity coachEntity3 = new CoachEntity();
     	CoachEntity coachEntity4 = new CoachEntity();
     	CoachEntity coachEntity5 = new CoachEntity();
+    	
+    	CoachEntity coachEntity6 = new CoachEntity();
     	
     	if (coachRepository.findAll().isEmpty()) {
     	    coachEntity1.setUser(userEntity1);
@@ -128,6 +150,9 @@ public class DatabaseSeeder implements ApplicationRunner {
     	    
     	    coachEntity5.setUser(userEntity5);
     	    coachRepository.save(coachEntity5);
+    	    
+    	    coachEntity6.setUser(userEntity6);
+    	    coachRepository.save(coachEntity6);
     	}
 
     	ClientEntity clientEntity1 = new ClientEntity();
@@ -135,6 +160,10 @@ public class DatabaseSeeder implements ApplicationRunner {
     	ClientEntity clientEntity3 = new ClientEntity();
     	ClientEntity clientEntity4 = new ClientEntity();
     	ClientEntity clientEntity5 = new ClientEntity();
+    	
+    	ClientEntity clientEntity6 = new ClientEntity();
+    	
+    	ClientEntity clientEntity7 = new ClientEntity();
     	        
     	if (clientRepository.findAll().isEmpty()) {
     	    clientEntity1.setUser(userEntity6);
@@ -156,6 +185,11 @@ public class DatabaseSeeder implements ApplicationRunner {
     	    clientEntity5.setUser(userEntity10);
     	    clientEntity5.setCoach(coachEntity5);
     	    clientRepository.save(clientEntity5);
+    	    
+    	    clientEntity6.setUser(userEntity11);
+    	    clientEntity6.setCoach(coachEntity6);
+    	    clientRepository.save(clientEntity6);
+    	    
     	}
 
         

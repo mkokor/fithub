@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.BeforeMethod;
 
 import com.fithub.services.mealplan.api.MealPlanService;
+import com.fithub.services.mealplan.api.exception.NotFoundException;
 import com.fithub.services.mealplan.api.model.dailymealplan.DailyMealPlanResponse;
 import com.fithub.services.mealplan.core.impl.MealPlanServiceImpl;
 import com.fithub.services.mealplan.dao.model.DailyMealPlanEntity;
@@ -80,6 +81,22 @@ public class MealPlanServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     }
+    
+    @Test
+    public void testGetDailyMealByDay_InvalidMealPlanId_ReturnsNotFoundException() {
+        try {
+            Long invalidMealPlanId = 999L; 
+
+            Mockito.when(mealPlanRepository.findById(invalidMealPlanId)).thenReturn(Optional.empty());
+
+            Assertions.assertThatThrownBy(() -> mealPlanService.getDailyMealByDay(invalidMealPlanId))
+                .isInstanceOf(NotFoundException.class)
+                .hasMessage("The client with provided ID could not be found");
+        } catch (Exception exception) {
+            Assert.fail();
+        }
+    }
+
     
 
 }

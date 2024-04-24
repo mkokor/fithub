@@ -30,5 +30,7 @@ public class MealPlanServiceImpl implements MealPlanService{
 		}
 		return dailyMealPlanMapper.entitiesToDtos(mealPlanEntity.get().getMealPlans());
 	}
+	
+	
 		
 }

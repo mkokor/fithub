@@ -17,6 +17,6 @@ public interface MealPlanMapper {
     @Mapping(source = "modifiedBy.id", target = "modifiedBy")
     public MealPlanResponse entityToDto(MealPlanEntity mealPlanEntity);
 
-	public List<MealPlanResponse> entitiesToDtos (List<MealPlanEntity> mealPlanEntities);
+	public List<MealPlanResponse> entitiesToDtos(List<MealPlanEntity> mealPlanEntities);
 
 }
