@@ -7,7 +7,6 @@
             <class name="com.fithub.services.mealplan.test.suites.ClientServiceTest"/>
         </classes>
     </test>
-    
     <test thread-count="5" name="CoachService">
         <classes>
             <class name="com.fithub.services.mealplan.test.suites.CoachServiceTest"/>

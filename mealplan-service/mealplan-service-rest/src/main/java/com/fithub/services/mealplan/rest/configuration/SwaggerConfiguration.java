@@ -25,5 +25,6 @@ public class SwaggerConfiguration {
     public GroupedOpenApi mealPlanApi() {
         return GroupedOpenApi.builder().group("mealplan-api").packagesToScan("com.fithub.services.mealplan.rest.mealplan").build();
     }
+    
 
 }

@@ -3,6 +3,7 @@ package com.fithub.services.mealplan.test.suites;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertThrows;
 
 import java.time.LocalDateTime;
@@ -23,8 +24,10 @@ import com.fithub.services.mealplan.api.ClientService;
 import com.fithub.services.mealplan.api.MealPlanService;
 import com.fithub.services.mealplan.api.exception.BadRequestException;
 import com.fithub.services.mealplan.api.exception.NotFoundException;
+import com.fithub.services.mealplan.api.model.coach.CoachResponse;
 import com.fithub.services.mealplan.api.model.dailymealplan.DailyMealPlanResponse;
 import com.fithub.services.mealplan.api.model.mealplan.MealPlanResponse;
+import com.fithub.services.mealplan.api.model.user.NewUserRequest;
 import com.fithub.services.mealplan.api.model.user.UserResponse;
 import com.fithub.services.mealplan.core.impl.ClientServiceImpl;
 import com.fithub.services.mealplan.dao.model.ClientEntity;
@@ -68,6 +71,8 @@ public class ClientServiceTest extends BasicTestConfiguration {
     private MealPlanService mealPlanService;
     
     private Validator validator;
+    
+
 
 
     @BeforeMethod
@@ -80,7 +85,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
         localValidatorFactoryBean.afterPropertiesSet();
         validator = localValidatorFactoryBean;
         
-        clientService = new ClientServiceImpl(clientRepository, userRepository, mealPlanRepository, mealPlanMapper, userMapper, dailyMealPlanMapper, clientMapper, mealPlanService, validator);
+        clientService = new ClientServiceImpl(clientRepository, userRepository, mealPlanRepository, mealPlanMapper, userMapper, dailyMealPlanMapper, clientMapper, null, mealPlanService, validator);
 
     }
 
@@ -423,6 +428,58 @@ public class ClientServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     }
+    
+    /*@Test
+    public void testPostCoachForClient_ClientHasCoach_RemovesOldCoachAndAssignsNewCoach() throws Exception {
+        try {
+            // Priprema podataka za testiranje
+            UserEntity userEntity = new UserEntity();
+            userEntity.setUuid("valid-user-id");
+
+            UserEntity coachUserEntity = new UserEntity();
+            coachUserEntity.setFirstName("John2");
+            coachUserEntity.setLastName("Doe2");
+
+            CoachEntity oldCoachEntity = new CoachEntity();
+            oldCoachEntity.setId(100L);
+            oldCoachEntity.setUser(coachUserEntity);
+
+            CoachEntity newCoachEntity = new CoachEntity();
+            newCoachEntity.setId(101L);
+            newCoachEntity.setUser(coachUserEntity);
+
+            ClientEntity clientEntity = new ClientEntity();
+            clientEntity.setId(99L);
+            clientEntity.setUser(userEntity);
+            clientEntity.setCoach(oldCoachEntity);
+            userEntity.setClient(clientEntity);
+
+            NewUserRequest newUserRequest = new NewUserRequest();
+            newUserRequest.setFirstName("John2");
+            newUserRequest.setLastName("Doe2");
+
+            // Postavljanje mockova za repozitorije
+            Mockito.when(userRepository.findById(userEntity.getUuid())).thenReturn(Optional.of(userEntity));
+            Mockito.when(userRepository.findByFirstNameAndLastName(newUserRequest.getFirstName(), newUserRequest.getLastName()))
+            .thenReturn(Optional.of(coachUserEntity));
+
+            // Pokretanje metode koju testiramo
+            CoachResponse coachResponse = clientService.postCoachForClient(userEntity.getUuid(), newUserRequest);
+
+            // Provjera da li je postavljen novi coach
+            assertNotNull(coachResponse);
+            assertEquals(newCoachEntity.getId(), coachResponse.getCoachId());
+
+            // Provjera da li je stari coach uklonjen
+            assertNull(clientEntity.getCoach());
+
+        } catch (Exception exception) {
+            // Ako se izuzetak baci, test nije prošao
+            exception.printStackTrace();
+            Assert.fail(exception.getMessage());
+        }
+    }*/
+
 
 
 }

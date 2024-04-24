@@ -11,9 +11,10 @@ public class CoachResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
-
-    private String userId;
+    private Long coachId;
     
+    private String coachName;
+    
+    private String coachSurname;
     
 }

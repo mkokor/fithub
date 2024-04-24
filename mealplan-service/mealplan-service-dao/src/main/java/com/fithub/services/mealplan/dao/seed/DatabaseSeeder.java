@@ -53,6 +53,8 @@ public class DatabaseSeeder implements ApplicationRunner {
     	UserEntity userEntity11 = new UserEntity();
     	UserEntity userEntity12 = new UserEntity();
     	
+    	UserEntity userEntity13 = new UserEntity();
+    	
     	if (userRepository.findAll().isEmpty()) {
     	//For coaches
     	
@@ -116,6 +118,11 @@ public class DatabaseSeeder implements ApplicationRunner {
     	userEntity12.setFirstName("Probaaaaa");
     	userEntity12.setLastName("Probaa");
     	userRepository.save(userEntity10);
+    	
+    	userEntity13.setUuid(UUID.randomUUID().toString());
+    	userEntity13.setFirstName("Nejla");
+    	userEntity13.setLastName("Helac");
+    	userRepository.save(userEntity13);
 
     	}
 
@@ -155,6 +162,8 @@ public class DatabaseSeeder implements ApplicationRunner {
     	ClientEntity clientEntity5 = new ClientEntity();
     	
     	ClientEntity clientEntity6 = new ClientEntity();
+    	
+    	ClientEntity clientEntity7 = new ClientEntity();
     	        
     	if (clientRepository.findAll().isEmpty()) {
     	    clientEntity1.setUser(userEntity6);
@@ -180,6 +189,7 @@ public class DatabaseSeeder implements ApplicationRunner {
     	    clientEntity6.setUser(userEntity11);
     	    clientEntity6.setCoach(coachEntity6);
     	    clientRepository.save(clientEntity6);
+    	    
     	}
 
         

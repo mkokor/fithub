@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.fithub.services.mealplan.api.ClientService;
@@ -16,6 +17,7 @@ import com.fithub.services.mealplan.api.model.coach.CoachResponse;
 import com.fithub.services.mealplan.api.model.dailymealplan.DailyMealPlanResponse;
 import com.fithub.services.mealplan.api.model.mealplan.MealPlanResponse;
 import com.fithub.services.mealplan.api.model.mealplan.NewMealPlanRequest;
+import com.fithub.services.mealplan.api.model.user.NewUserRequest;
 import com.fithub.services.mealplan.api.model.user.UserResponse;
 import com.fithub.services.mealplan.dao.model.ClientEntity;
 import com.fithub.services.mealplan.dao.model.CoachEntity;
@@ -26,6 +28,7 @@ import com.fithub.services.mealplan.dao.repository.CoachRepository;
 import com.fithub.services.mealplan.dao.repository.MealPlanRepository;
 import com.fithub.services.mealplan.dao.repository.UserRepository;
 import com.fithub.services.mealplan.mapper.ClientMapper;
+import com.fithub.services.mealplan.mapper.CoachMapper;
 import com.fithub.services.mealplan.mapper.DailyMealPlanMapper;
 import com.fithub.services.mealplan.mapper.MealPlanMapper;
 import com.fithub.services.mealplan.mapper.UserMapper;
@@ -47,10 +50,13 @@ public class ClientServiceImpl implements ClientService {
 	private final UserMapper userMapper;
 	private final DailyMealPlanMapper dailyMealPlanMapper;
 	private final ClientMapper clientMapper;
+	private final CoachMapper coachMapper;
 
 	private final MealPlanService mealPlanService;
 
 	private final Validator validator;
+	
+
 
 	// private final ClientRepository clientRepository1;
 
@@ -97,7 +103,7 @@ public class ClientServiceImpl implements ClientService {
 			throw new NotFoundException("The user with provided ID could not be found.");
 		}
 		if (userEntity.get().getClient().getCoach() == null) {
-			System.out.println("coach: " + userEntity.get().getClient().getCoach());
+			//System.out.println("coach: " + userEntity.get().getClient().getCoach());
 			throw new BadRequestException("Only coach users can make meal plan for client.");
 		}
 
@@ -110,7 +116,7 @@ public class ClientServiceImpl implements ClientService {
 		
     	MealPlanEntity existingMealPlan = mealPlanRepository.findMealPlanByClientId(client.get().getId());
     	if (existingMealPlan != null) {
-    		throw new BadRequestException("Client already has a meal plan for this appointment.");
+    		throw new BadRequestException("Client already has a meal plan..");
     	}
     	
     	MealPlanEntity mealPlanEntity = new MealPlanEntity();
@@ -122,5 +128,43 @@ public class ClientServiceImpl implements ClientService {
     	return mealPlanMapper.entityToDto(mealPlanEntity);
  
 	}
+	@Override
+	public CoachResponse postCoachForClient(String userId, NewUserRequest newUserRequest) throws Exception {
+		
+		Set<ConstraintViolation<NewUserRequest>> violations = validator.validate(newUserRequest);
+	    if (!violations.isEmpty()) {
+	    	throw new ConstraintViolationException(violations);
+	    }
+		
+	    
+		Optional<UserEntity> userOptional = userRepository.findById(userId);
+
+		if (!userOptional.isPresent()) {
+			throw new NotFoundException("The user with provided ID could not be found.");
+		}
+		
+        UserEntity user = userOptional.get();
+	        ClientEntity client = user.getClient();
+	        
+	        Optional<UserEntity> coachOptional = userRepository.findByFirstNameAndLastName(newUserRequest.getFirstName(), newUserRequest.getLastName());
+	        if (coachOptional.isEmpty() || coachOptional.get().getCoach() == null) {
+	            throw new NotFoundException("Coach with specified first name and last name not found.");
+	        }
+	        
+	        CoachEntity existingCoach = client.getCoach();
+	        if (existingCoach != null) {
+	            client.setCoach(null); // Uklanjanje postojećeg coacha i dodaje novoizabranog
+	        }
+	        CoachEntity coach = coachOptional.get().getCoach();
+	        client.setCoach(coach);
+	        clientRepository.save(client);
+	        
+	        CoachResponse response = new CoachResponse();
+	        response.setCoachId(coach.getId());
+	        response.setCoachName(coach.getUser().getFirstName());
+	        response.setCoachSurname(coach.getUser().getLastName());
+	        return response;
+	}
+
 
 }
