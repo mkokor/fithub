@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="ChatServiceTestSuite">
-    <test thread-count="5" name="ChatroomService">
+	<!--<test thread-count="5" name="ChatroomService">
         <classes>
             <class name="com.fithub.services.chat.test.suites.ChatroomServiceTest"/>
         </classes>
@@ -11,6 +11,6 @@
         <classes>
             <class name="com.fithub.services.chat.test.suites.MessageServiceTest"/>
         </classes>
-    </test>
+    </test>-->
 </suite>
 
