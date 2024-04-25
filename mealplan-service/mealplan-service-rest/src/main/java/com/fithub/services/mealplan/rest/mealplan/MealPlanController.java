@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.fithub.services.mealplan.api.MealPlanService;
+import com.fithub.services.mealplan.api.exception.ApiException;
 import com.fithub.services.mealplan.api.exception.NotFoundException;
 import com.fithub.services.mealplan.api.model.dailymealplan.DailyMealPlanResponse;
 
@@ -29,14 +30,8 @@ public class MealPlanController {
 	
     @Operation(summary = "Get daily meals for a meal plan by ID")
     @GetMapping("/{mealPlanId}/dailymeals")
-    public ResponseEntity<List<DailyMealPlanResponse>> getDailyMealByDay(@PathVariable Long mealPlanId) {
-        try {
-        	return new ResponseEntity<>(mealPlanService.getDailyMealByDay(mealPlanId), HttpStatus.OK);
-        } catch (NotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+    public ResponseEntity<List<DailyMealPlanResponse>> getDailyMealByDay(@PathVariable Long mealPlanId) throws Exception {
+        return new ResponseEntity<>(mealPlanService.getDailyMealByDay(mealPlanId), HttpStatus.OK);
     }
 	
 
