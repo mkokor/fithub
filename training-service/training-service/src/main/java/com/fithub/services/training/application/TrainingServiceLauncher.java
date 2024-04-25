@@ -19,8 +19,7 @@ import com.fithub.services.training.configuration.RibbonConfig;
 @EnableFeignClients("com.fithub.services.training.core.client")
 @PropertySource("classpath:spotify-api.properties")
 @RibbonClients({ @RibbonClient(name = "fithub-auth-service", configuration = RibbonConfig.class),
-	@RibbonClient(name = "fithub-membership-service", configuration = RibbonConfig.class)
-})
+        @RibbonClient(name = "fithub-membership-service", configuration = RibbonConfig.class) })
 public class TrainingServiceLauncher {
 
     public static void main(String[] args) {
