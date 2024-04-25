@@ -9,7 +9,6 @@ import com.fithub.services.mealplan.api.model.mealplan.MealPlanResponse;
 import com.fithub.services.mealplan.api.model.mealplan.NewMealPlanRequest;
 import com.fithub.services.mealplan.api.model.user.NewUserRequest;
 import com.fithub.services.mealplan.api.model.user.UserResponse;
-
 public interface ClientService {
 	
 	MealPlanResponse getMealPlan(Long clientId) throws Exception;
@@ -22,5 +21,8 @@ public interface ClientService {
 	
 	CoachResponse postCoachForClient(String userId, NewUserRequest newUserRequest) throws Exception;;
 	
+	//MealPlanResponse makeFakeMealPlanForClient(String userId) throws Exception;
+
+    String testLoadBalancer();
 
 }

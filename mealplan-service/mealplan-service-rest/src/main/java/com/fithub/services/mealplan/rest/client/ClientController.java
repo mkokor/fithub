@@ -77,6 +77,11 @@ public class ClientController {
     	return new ResponseEntity<>(clientService.postCoachForClient(id, newUserRequest), HttpStatus.OK);
     }
     
+    // This method was made only for purposes of testing Ribbon load balancer.
+    @GetMapping("/load-balance/test")
+    public ResponseEntity<String> testLoadBalancing() {
+        return new ResponseEntity<>(clientService.testLoadBalancer(), HttpStatus.OK);
+    }
 
 
 }

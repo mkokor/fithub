@@ -47,22 +47,7 @@ public class DatabaseSeeder implements ApplicationRunner {
             userRepository.save(clientUserEntity);
         }
 
-        CoachEntity coachJohnEntity = new CoachEntity();
-        CoachEntity coachAlbertEntity = new CoachEntity();
-        if (coachRepository.findAll().isEmpty()) {
-            coachAlbertEntity.setUser(coachAlbertUserEntity);
-            coachRepository.save(coachAlbertEntity);
-
-            coachJohnEntity.setUser(coachJohnUserEntity);
-            coachRepository.save(coachJohnEntity);
-        }
-
-        if (clientRepository.findAll().isEmpty()) {
-            ClientEntity clientEntity = new ClientEntity();
-            clientEntity.setUser(clientUserEntity);
-            clientEntity.setCoach(coachJohnEntity);
-            clientRepository.save(clientEntity);
-        }
+        
     }
 
 }

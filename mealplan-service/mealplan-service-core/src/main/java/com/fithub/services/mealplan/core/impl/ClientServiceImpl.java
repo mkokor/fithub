@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.fithub.services.mealplan.api.ClientService;
@@ -32,6 +33,9 @@ import com.fithub.services.mealplan.mapper.CoachMapper;
 import com.fithub.services.mealplan.mapper.DailyMealPlanMapper;
 import com.fithub.services.mealplan.mapper.MealPlanMapper;
 import com.fithub.services.mealplan.mapper.UserMapper;
+import com.fithub.services.mealplan.core.client.AuthServiceClient;
+import com.fithub.services.mealplan.api.model.membership.MembershipPaymentReportResponse;
+import com.fithub.services.mealplan.core.client.MembershipServiceClient;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -55,6 +59,8 @@ public class ClientServiceImpl implements ClientService {
 	private final MealPlanService mealPlanService;
 
 	private final Validator validator;
+    private final AuthServiceClient authServiceClient;
+    private final MembershipServiceClient membershipServiceClient;
 	
 
 
@@ -98,6 +104,47 @@ public class ClientServiceImpl implements ClientService {
 	public MealPlanResponse makeMealPlanForClient(String userId) throws Exception {
 
 		Optional<UserEntity> userEntity = userRepository.findById(userId);
+		System.out.println(userEntity.get().getUuid());
+		if (!userEntity.isPresent()) {
+			throw new NotFoundException("The user with provided ID could not be found.");
+		}
+		if (userEntity.get().getClient().getCoach() == null) {
+			//System.out.println("coach: " + userEntity.get().getClient().getCoach());
+			throw new BadRequestException("Only coach users can make meal plan for client.");
+		}
+		
+		Optional<ClientEntity> client = clientRepository.findById(userEntity.get().getClient().getId());
+		System.out.println(client.get().getId());
+		if (client.isEmpty()) {
+			throw new NotFoundException("The client with provided ID could not be found.");
+
+		}
+		
+        ResponseEntity<MembershipPaymentReportResponse> paymentReport = membershipServiceClient.getMembershipPaymentReport(userId);        
+        System.out.print(paymentReport.getBody().getHasDebt());
+        if (paymentReport.getBody().getHasDebt()) {
+        	throw new BadRequestException("The user has unpayed debt.");
+        }
+        
+        MealPlanEntity existingMealPlan = mealPlanRepository.findMealPlanByClientId(client.get().getId());
+    	if (existingMealPlan != null) {
+    		throw new BadRequestException("Client already has a meal plan..");
+    	}
+    	
+    	MealPlanEntity mealPlanEntity = new MealPlanEntity();
+    	mealPlanEntity.setModified(LocalDateTime.now());
+    	mealPlanEntity.setClient(client.get());
+    	mealPlanEntity.setModifiedBy(client.get().getCoach());
+    	
+    	mealPlanRepository.save(mealPlanEntity);
+    	return mealPlanMapper.entityToDto(mealPlanEntity);
+ 
+	}
+	/*
+	@Override
+	public MealPlanResponse makeFakeMealPlanForClient(String userId) throws Exception {
+
+		Optional<UserEntity> userEntity = userRepository.findById(userId);
 
 		if (!userEntity.isPresent()) {
 			throw new NotFoundException("The user with provided ID could not be found.");
@@ -113,11 +160,18 @@ public class ClientServiceImpl implements ClientService {
 			throw new NotFoundException("The client with provided ID could not be found.");
 
 		}
+        ResponseEntity<MembershipPaymentReportResponse> paymentReport = membershipServiceClient.getMembershipPaymentReport(userId);        
+        if (paymentReport.getBody().getHasDebt()) {
+        	throw new BadRequestException("The user has unpayed debt.");
+        }
 		
     	MealPlanEntity existingMealPlan = mealPlanRepository.findMealPlanByClientId(client.get().getId());
     	if (existingMealPlan != null) {
     		throw new BadRequestException("Client already has a meal plan..");
     	}
+    	
+
+        
     	
     	MealPlanEntity mealPlanEntity = new MealPlanEntity();
     	mealPlanEntity.setModified(LocalDateTime.now());
@@ -127,7 +181,7 @@ public class ClientServiceImpl implements ClientService {
     	mealPlanRepository.save(mealPlanEntity);
     	return mealPlanMapper.entityToDto(mealPlanEntity);
  
-	}
+	}*/
 	@Override
 	public CoachResponse postCoachForClient(String userId, NewUserRequest newUserRequest) throws Exception {
 		
@@ -165,6 +219,10 @@ public class ClientServiceImpl implements ClientService {
 	        response.setCoachSurname(coach.getUser().getLastName());
 	        return response;
 	}
+    @Override
+    public String testLoadBalancer() {
+        return authServiceClient.testLoadBalancing().getBody();
+    }
 
 
 }
