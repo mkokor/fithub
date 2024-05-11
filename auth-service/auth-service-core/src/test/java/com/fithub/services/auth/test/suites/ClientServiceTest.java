@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.fithub.services.auth.api.ClientService;
+import com.fithub.services.auth.api.EmailConfirmationCodeService;
 import com.fithub.services.auth.api.model.client.ClientResponse;
 import com.fithub.services.auth.api.model.client.ClientSignUpRequest;
 import com.fithub.services.auth.core.impl.ClientServiceImpl;
@@ -20,6 +21,7 @@ import com.fithub.services.auth.dao.model.CoachEntity;
 import com.fithub.services.auth.dao.model.UserEntity;
 import com.fithub.services.auth.dao.repository.ClientRepository;
 import com.fithub.services.auth.dao.repository.CoachRepository;
+import com.fithub.services.auth.dao.repository.EmailConfirmationCodeRepository;
 import com.fithub.services.auth.dao.repository.UserRepository;
 import com.fithub.services.auth.mapper.ClientMapper;
 import com.fithub.services.auth.test.configuration.BasicTestConfiguration;
@@ -32,24 +34,29 @@ public class ClientServiceTest extends BasicTestConfiguration {
     @Autowired
     private ClientMapper clientMapper;
 
+    private EmailConfirmationCodeService emailConfirmationCodeService;
     private CoachRepository coachRepository;
     private ClientRepository clientRepository;
     private UserRepository userRepository;
+    private EmailConfirmationCodeRepository emailConfirmationCodeRepository;
     private Validator validator;
 
     private ClientService clientService;
 
     @BeforeMethod
     public void beforeMethod() {
+        emailConfirmationCodeService = Mockito.mock(EmailConfirmationCodeService.class);
         coachRepository = Mockito.mock(CoachRepository.class);
         clientRepository = Mockito.mock(ClientRepository.class);
         userRepository = Mockito.mock(UserRepository.class);
+        emailConfirmationCodeRepository = Mockito.mock(EmailConfirmationCodeRepository.class);
 
         LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
         localValidatorFactoryBean.afterPropertiesSet();
         validator = localValidatorFactoryBean;
 
-        clientService = new ClientServiceImpl(coachRepository, clientRepository, userRepository, clientMapper, validator);
+        clientService = new ClientServiceImpl(emailConfirmationCodeService, emailConfirmationCodeRepository, coachRepository,
+                clientRepository, userRepository, clientMapper, validator);
     }
 
     @Test
@@ -61,7 +68,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
             clientSignUpRequest.setUsername("johndoe");
             clientSignUpRequest.setEmail("invalid");
             clientSignUpRequest.setCoachId(1L);
-            clientSignUpRequest.setPassword("password123");
+            clientSignUpRequest.setPassword("password123#");
 
             assertThrows(ConstraintViolationException.class, () -> {
                 clientService.signUp(clientSignUpRequest);
@@ -78,7 +85,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
             coachUser.setEmail("maryann@email.com");
             coachUser.setFirstName("Mary");
             coachUser.setLastName("Ann");
-            coachUser.setPasswordHash("password123");
+            coachUser.setPasswordHash("password123#");
             coachUser.setUsername("maryann");
             coachUser.setUuid("coach-id");
 
@@ -92,7 +99,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
             clientSignUpRequest.setUsername("johndoe");
             clientSignUpRequest.setEmail("johndoe@email.com");
             clientSignUpRequest.setCoachId(1L);
-            clientSignUpRequest.setPassword("password123");
+            clientSignUpRequest.setPassword("password123#");
 
             ClientResponse expectedResponse = new ClientResponse();
             expectedResponse.setUsername("johndoe");
@@ -105,7 +112,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
 
             ClientResponse actualResponse = clientService.signUp(clientSignUpRequest);
 
-            assertThat(actualResponse).usingRecursiveComparison().ignoringFields("id").isEqualTo(expectedResponse);
+            assertThat(actualResponse).usingRecursiveComparison().ignoringFields("id", "password").isEqualTo(expectedResponse);
         } catch (Exception exception) {
             Assert.fail();
         }

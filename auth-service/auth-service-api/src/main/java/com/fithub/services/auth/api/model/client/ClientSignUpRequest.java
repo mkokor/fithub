@@ -2,6 +2,8 @@ package com.fithub.services.auth.api.model.client;
 
 import java.io.Serializable;
 
+import com.fithub.services.auth.api.validation.annotation.Password;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -32,7 +34,7 @@ public class ClientSignUpRequest implements Serializable {
     private String email;
 
     @Schema(description = "The password to be set on client's account")
-    @NotBlank(message = "The password must not be blank.")
+    @Password
     private String password;
 
     @Schema(description = "The ID of a coach to be set on a client")

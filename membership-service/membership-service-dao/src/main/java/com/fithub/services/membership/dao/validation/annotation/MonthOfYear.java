@@ -1,4 +1,4 @@
-package com.fithub.services.membership.core.validation.annotation;
+package com.fithub.services.membership.dao.validation.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -6,7 +6,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.fithub.services.membership.core.validation.validator.MonthOfYearValidator;
+import com.fithub.services.membership.dao.validation.validator.MonthOfYearValidator;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

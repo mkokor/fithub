@@ -45,6 +45,9 @@ public class UserEntity implements Serializable {
     @Email(message = "The email address is not valid.")
     private String email;
 
+    @Column(name = "email_confirmed", nullable = false)
+    private Boolean emailConfirmed;
+
     @OneToOne(mappedBy = "user")
     private ClientEntity client;
 

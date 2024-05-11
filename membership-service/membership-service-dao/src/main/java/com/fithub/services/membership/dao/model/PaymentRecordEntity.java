@@ -2,7 +2,7 @@ package com.fithub.services.membership.dao.model;
 
 import java.time.LocalDateTime;
 
-import com.fithub.services.membership.core.validation.annotation.MonthOfYear;
+import com.fithub.services.membership.dao.validation.annotation.MonthOfYear;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

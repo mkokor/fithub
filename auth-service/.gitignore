@@ -18,3 +18,5 @@ test-output
 
 # JVM crash logs
 hs_err_pid*
+
+auth-service/src/main/resources/email.properties
