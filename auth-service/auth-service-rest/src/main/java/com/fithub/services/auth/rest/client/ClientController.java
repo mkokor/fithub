@@ -13,7 +13,6 @@ import com.fithub.services.auth.api.ClientService;
 import com.fithub.services.auth.api.EmailConfirmationCodeService;
 import com.fithub.services.auth.api.model.GenericResponse;
 import com.fithub.services.auth.api.model.client.ClientEmailConfirmationRequest;
-import com.fithub.services.auth.api.model.client.ClientResponse;
 import com.fithub.services.auth.api.model.client.ClientSignUpRequest;
 import com.fithub.services.auth.api.model.emailconfirmationcode.EmailConfirmationCodeCreateOrUpdateRequest;
 
@@ -33,7 +32,7 @@ public class ClientController {
 
     @Operation(summary = "Sign up a new client")
     @PostMapping(value = "/sign-up")
-    public ResponseEntity<ClientResponse> signUp(@Valid @RequestBody ClientSignUpRequest clientSignUpRequest) throws Exception {
+    public ResponseEntity<GenericResponse> signUp(@Valid @RequestBody ClientSignUpRequest clientSignUpRequest) throws Exception {
         return new ResponseEntity<>(clientService.signUp(clientSignUpRequest), HttpStatus.OK);
     }
 

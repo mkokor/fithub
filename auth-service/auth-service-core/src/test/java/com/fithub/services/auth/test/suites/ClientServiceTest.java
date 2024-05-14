@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 
 import com.fithub.services.auth.api.ClientService;
 import com.fithub.services.auth.api.EmailConfirmationCodeService;
-import com.fithub.services.auth.api.model.client.ClientResponse;
+import com.fithub.services.auth.api.model.GenericResponse;
 import com.fithub.services.auth.api.model.client.ClientSignUpRequest;
 import com.fithub.services.auth.core.impl.ClientServiceImpl;
 import com.fithub.services.auth.dao.model.CoachEntity;
@@ -101,18 +101,14 @@ public class ClientServiceTest extends BasicTestConfiguration {
             clientSignUpRequest.setCoachId(1L);
             clientSignUpRequest.setPassword("password123#");
 
-            ClientResponse expectedResponse = new ClientResponse();
-            expectedResponse.setUsername("johndoe");
-            expectedResponse.setEmail("johndoe@email.com");
-            expectedResponse.setLastName("Doe");
-            expectedResponse.setFirstName("John");
-            expectedResponse.setCoachId(1L);
+            GenericResponse expectedResponse = new GenericResponse();
+            expectedResponse.setMessage("The email confirmation code is successfully sent to johndoe@email.com.");
 
             Mockito.when(coachRepository.findById(clientSignUpRequest.getCoachId())).thenReturn(Optional.of(coachEntity));
 
-            ClientResponse actualResponse = clientService.signUp(clientSignUpRequest);
+            GenericResponse actualResponse = clientService.signUp(clientSignUpRequest);
 
-            assertThat(actualResponse).usingRecursiveComparison().ignoringFields("id", "password").isEqualTo(expectedResponse);
+            assertThat(actualResponse).isEqualTo(expectedResponse);
         } catch (Exception exception) {
             Assert.fail();
         }

@@ -15,7 +15,7 @@ import com.fithub.services.auth.api.model.GenericResponse;
 import com.fithub.services.auth.api.model.emailconfirmationcode.EmailConfirmationCodeCreateOrUpdateRequest;
 import com.fithub.services.auth.core.utils.CryptoUtil;
 import com.fithub.services.auth.core.utils.EmailHelper;
-import com.fithub.services.auth.core.utils.TokenUtil;
+import com.fithub.services.auth.core.utils.TokenHelper;
 import com.fithub.services.auth.dao.model.EmailConfirmationCodeEntity;
 import com.fithub.services.auth.dao.model.UserEntity;
 import com.fithub.services.auth.dao.repository.EmailConfirmationCodeRepository;
@@ -86,7 +86,7 @@ public class EmailConfirmationCodeImpl implements EmailConfirmationCodeService {
             throw new BadRequestException("The user with the provided email address already has confirmed it.");
         }
 
-        final String emailConfirmationCode = TokenUtil.generateConfirmationCode();
+        final String emailConfirmationCode = TokenHelper.generateConfirmationCode();
 
         Optional<EmailConfirmationCodeEntity> emailConfirmationCodeEntity = emailConfirmationCodeRepository.findByUser(user.get());
         if (emailConfirmationCodeEntity.isEmpty()) {

@@ -12,15 +12,10 @@ public class ClientResponse implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
-
     private String firstName;
-
     private String lastName;
-
     private String username;
-
     private String email;
-
     private Long coachId;
 
 }

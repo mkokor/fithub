@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -31,7 +32,8 @@ public class ErrorHandler {
     public ResponseEntity<ApiErrorResponse> handleModelConstraintViolationException(ConstraintViolationException exception) {
         final Set<ConstraintViolation<?>> violations = exception.getConstraintViolations();
 
-        return new ResponseEntity<>(createApiErrorResponse(violations, ConstraintViolation::getMessage), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(createApiModelValidationErrorResponse(violations, ConstraintViolation::getMessage),
+                HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -39,7 +41,13 @@ public class ErrorHandler {
         final BindingResult bindingResult = exception.getBindingResult();
         final List<FieldError> fieldErrors = bindingResult.getFieldErrors();
 
-        return new ResponseEntity<>(createApiErrorResponse(fieldErrors, DefaultMessageSourceResolvable::getDefaultMessage),
+        return new ResponseEntity<>(createApiModelValidationErrorResponse(fieldErrors, DefaultMessageSourceResolvable::getDefaultMessage),
+                HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ApiErrorResponse> handleMissingRequestBody(HttpMessageNotReadableException ex) {
+        return new ResponseEntity<>(createApiErrorResponse(ApiErrorType.BAD_REQUEST, "The request body is not properly set."),
                 HttpStatus.BAD_REQUEST);
     }
 
@@ -59,7 +67,12 @@ public class ErrorHandler {
         return new ResponseEntity<>(new ApiErrorResponse(errors), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    private <T> ApiErrorResponse createApiErrorResponse(Collection<T> errorCollection, Function<T, String> errorMessageGetter) {
+    private ApiErrorResponse createApiErrorResponse(ApiErrorType errorType, String message) {
+        return new ApiErrorResponse(List.of(new ApiError(errorType, message)));
+    }
+
+    private <T> ApiErrorResponse createApiModelValidationErrorResponse(Collection<T> errorCollection,
+            Function<T, String> errorMessageGetter) {
         if (errorCollection == null || errorCollection.isEmpty()) {
             return new ApiErrorResponse(new ArrayList<>());
         }
@@ -67,4 +80,5 @@ public class ErrorHandler {
         return new ApiErrorResponse(errorCollection.stream()
                 .map(error -> new ApiError(ApiErrorType.MODEL_VALIDATION, errorMessageGetter.apply(error))).collect(Collectors.toList()));
     }
+
 }

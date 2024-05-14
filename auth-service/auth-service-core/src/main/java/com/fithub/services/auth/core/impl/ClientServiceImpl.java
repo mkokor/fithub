@@ -13,7 +13,6 @@ import com.fithub.services.auth.api.exception.BadRequestException;
 import com.fithub.services.auth.api.exception.NotFoundException;
 import com.fithub.services.auth.api.model.GenericResponse;
 import com.fithub.services.auth.api.model.client.ClientEmailConfirmationRequest;
-import com.fithub.services.auth.api.model.client.ClientResponse;
 import com.fithub.services.auth.api.model.client.ClientSignUpRequest;
 import com.fithub.services.auth.api.model.emailconfirmationcode.EmailConfirmationCodeCreateOrUpdateRequest;
 import com.fithub.services.auth.core.utils.CryptoUtil;
@@ -45,7 +44,7 @@ public class ClientServiceImpl implements ClientService {
     private final Validator validator;
 
     @Override
-    public ClientResponse signUp(ClientSignUpRequest clientSignUpRequest) throws Exception {
+    public GenericResponse signUp(ClientSignUpRequest clientSignUpRequest) throws Exception {
         Set<ConstraintViolation<ClientSignUpRequest>> violations = validator.validate(clientSignUpRequest);
         if (!violations.isEmpty()) {
             throw new ConstraintViolationException(violations);
@@ -86,7 +85,9 @@ public class ClientServiceImpl implements ClientService {
         emailConfirmationCodeCreateRequest.setUserEmail(newClient.getUser().getEmail());
         emailConfirmationCodeService.createOrUpdateEmailConfirmationCode(emailConfirmationCodeCreateRequest);
 
-        return clientMapper.entityToDto(newClient);
+        GenericResponse genericResponse = new GenericResponse();
+        genericResponse.setMessage(String.format("The email confirmation code is successfully sent to %s.", newUser.getEmail()));
+        return genericResponse;
     }
 
     @Override

@@ -11,8 +11,11 @@ public class PasswordValidator implements ConstraintValidator<Password, String> 
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        final String passwordStructureRegex = "^(?=.*[0-9])(?=.*[$#&%])[a-zA-Z0-9$#&%]{8,}$";
+        if (value == null) {
+            return false;
+        }
 
+        final String passwordStructureRegex = "^(?=.*[0-9])(?=.*[$#&%])[a-zA-Z0-9$#&%]{8,}$";
         return Pattern.matches(passwordStructureRegex, value);
     }
 
