@@ -1,14 +1,18 @@
 package com.fithub.services.auth.core.impl;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.fithub.services.auth.api.UserService;
 import com.fithub.services.auth.api.enums.Role;
+import com.fithub.services.auth.api.exception.ApiException;
 import com.fithub.services.auth.api.exception.BadRequestException;
 import com.fithub.services.auth.api.exception.ForbiddenException;
 import com.fithub.services.auth.api.exception.NotFoundException;
@@ -29,17 +33,23 @@ import com.fithub.services.auth.dao.repository.RefreshTokenRepository;
 import com.fithub.services.auth.dao.repository.UserRepository;
 
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
-import javafx.util.Pair;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     @Value("${password.reset.code.expiration.minutes}")
     private Integer passwordResetCodeExpirationMinutes;
+
+    @Value("${refresh-token.expiration.hours}")
+    private Integer refreshTokenExpirationHours;
+
+    @Value("${refresh-token.cookie.name}")
+    private String refreshTokenCookieName;
 
     private final TokenHelper tokenHelper;
     private final EmailHelper emailHelper;
@@ -62,9 +72,10 @@ public class UserServiceImpl implements UserService {
         return userEntity.getClient() != null ? Role.CLIENT : Role.COACH;
     }
 
-    private Cookie createCookie(final String identifier, final String value, final Boolean isHttpOnly) {
+    private Cookie createCookie(final String identifier, final String value, final Boolean isHttpOnly, final int expiration) {
         Cookie cookie = new Cookie(identifier, value);
         cookie.setHttpOnly(isHttpOnly);
+        cookie.setMaxAge(expiration);
 
         return cookie;
     }
@@ -95,8 +106,9 @@ public class UserServiceImpl implements UserService {
         userSignInResponse.setRole(getRole(userEntity).getValue());
 
         final Pair<RefreshTokenEntity, String> refreshToken = tokenHelper.generateRefreshToken(userEntity);
-        httpResponse.addCookie(createCookie("refresh_token", refreshToken.getValue(), true));
-        refreshTokenRepository.save(refreshToken.getKey());
+        httpResponse.addCookie(createCookie(refreshTokenCookieName, refreshToken.getValue1(), true,
+                (int) Duration.ofHours(refreshTokenExpirationHours).getSeconds()));
+        refreshTokenRepository.save(refreshToken.getValue0());
 
         return userSignInResponse;
     }
@@ -174,6 +186,99 @@ public class UserServiceImpl implements UserService {
 
         GenericResponse genericResponse = new GenericResponse();
         genericResponse.setMessage("The password is successfully updated.");
+        return genericResponse;
+    }
+
+    private String getRefreshTokenFromCookie(HttpServletRequest httpRequest) {
+        Cookie[] cookies = httpRequest.getCookies();
+
+        if (cookies == null) {
+            return null;
+        }
+
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals(refreshTokenCookieName)) {
+                return cookie.getValue();
+            }
+        }
+
+        return null;
+    }
+
+    private void removeRefreshTokenFromCookie(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
+        Cookie[] cookies = httpRequest.getCookies();
+
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals(refreshTokenCookieName)) {
+                cookie.setMaxAge(0);
+                httpResponse.addCookie(cookie);
+            }
+        }
+    }
+
+    @Override
+    public UserSignInResponse refreshAccessToken(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws ApiException {
+        String refreshTokenValue = getRefreshTokenFromCookie(httpRequest);
+
+        if (refreshTokenValue == null) {
+            throw new UnauthorizedException("The refresh token is missing.");
+        }
+
+        String tokenOwnerUsername = tokenHelper.getUsernameFromJwt(refreshTokenValue);
+        Optional<UserEntity> userEntity = userRepository.findByUsername(tokenOwnerUsername);
+        if (userEntity.isEmpty()) {
+            throw new NotFoundException("The owner of the refresh token could not be found.");
+        }
+
+        List<RefreshTokenEntity> refreshTokenEntities = refreshTokenRepository.findByUser(userEntity.get());
+        Optional<RefreshTokenEntity> refreshTokenEntity = refreshTokenEntities.stream()
+                .filter(refreshToken -> CryptoUtil.compare(refreshTokenValue, refreshToken.getTokenHash())).findFirst();
+
+        if (refreshTokenEntity.isEmpty() || refreshTokenEntity.get().getExpirationDate().isBefore(LocalDateTime.now())) {
+            removeRefreshTokenFromCookie(httpRequest, httpResponse);
+            throw new UnauthorizedException("The refresh token is not valid.");
+        }
+
+        RefreshTokenEntity oldRefreshToken = refreshTokenEntity.get();
+        Pair<RefreshTokenEntity, String> newRefreshToken = tokenHelper.generateRefreshToken(userEntity.get());
+
+        refreshTokenRepository.delete(oldRefreshToken);
+        refreshTokenRepository.save(newRefreshToken.getValue0());
+
+        httpResponse.addCookie(createCookie(refreshTokenCookieName, newRefreshToken.getValue1(), true,
+                (int) Duration.ofHours(refreshTokenExpirationHours).getSeconds()));
+
+        UserSignInResponse userSignInResponse = new UserSignInResponse();
+        userSignInResponse.setAccessToken(tokenHelper.generateAccessToken(userEntity.get()));
+        userSignInResponse.setRole(getRole(userEntity.get()).getValue());
+        return userSignInResponse;
+    }
+
+    @Override
+    public GenericResponse signOut(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
+        String refreshTokenValue = getRefreshTokenFromCookie(httpRequest);
+
+        GenericResponse genericResponse = new GenericResponse();
+        genericResponse.setMessage("The user is successfully signed out.");
+
+        if (refreshTokenValue == null) {
+            return genericResponse;
+        }
+
+        String tokenOwnerUsername = tokenHelper.getUsernameFromJwt(refreshTokenValue);
+        Optional<UserEntity> userEntity = userRepository.findByUsername(tokenOwnerUsername);
+        if (userEntity.isEmpty()) {
+            return genericResponse;
+        }
+
+        List<RefreshTokenEntity> refreshTokenEntities = refreshTokenRepository.findByUser(userEntity.get());
+        Optional<RefreshTokenEntity> refreshTokenEntity = refreshTokenEntities.stream()
+                .filter(refreshToken -> CryptoUtil.compare(refreshTokenValue, refreshToken.getTokenHash())).findFirst();
+        if (refreshTokenEntity.isPresent()) {
+            refreshTokenRepository.delete(refreshTokenEntity.get());
+        }
+
+        removeRefreshTokenFromCookie(httpRequest, httpResponse);
         return genericResponse;
     }
 

@@ -21,4 +21,9 @@ public class SwaggerConfiguration {
         return GroupedOpenApi.builder().group("client-api").packagesToScan("com.fithub.services.auth.rest.client").build();
     }
 
+    @Bean
+    public GroupedOpenApi userApi() {
+        return GroupedOpenApi.builder().group("user-api").packagesToScan("com.fithub.services.auth.rest.user").build();
+    }
+
 }

@@ -3,12 +3,12 @@ package com.fithub.services.auth.core.utils;
 import java.security.Key;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
-import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +23,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import javafx.util.Pair;
 
 @Component
 public class TokenHelper {
@@ -64,24 +63,28 @@ public class TokenHelper {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String generateAccessToken(UserEntity user) {
+    private String generateJwt(UserEntity userEntity, Integer tokenExpirationMinutes) {
         Long currentMilliseconds = System.currentTimeMillis();
 
         final JwtBuilder jwtBuilder = Jwts.builder();
-        jwtBuilder.setClaims(configureAccessTokenClaims(user));
-        jwtBuilder.setSubject(user.getUsername());
+        jwtBuilder.setClaims(configureAccessTokenClaims(userEntity));
+        jwtBuilder.setSubject(userEntity.getUsername());
         jwtBuilder.setIssuedAt(new Date(currentMilliseconds));
-        jwtBuilder.setExpiration(new Date(currentMilliseconds + accessTokenExpirationMinutes * 60 * 1000));
+        jwtBuilder.setExpiration(new Date(currentMilliseconds + tokenExpirationMinutes * 60 * 1000));
         jwtBuilder.signWith(generateSignKey(), SignatureAlgorithm.HS256);
 
         return jwtBuilder.compact();
+    }
+
+    public String generateAccessToken(UserEntity user) {
+        return generateJwt(user, accessTokenExpirationMinutes);
     }
 
     public Pair<RefreshTokenEntity, String> generateRefreshToken(UserEntity userEntity) {
         SecureRandom secureRandom = new SecureRandom();
         byte[] randomBytes = new byte[64];
         secureRandom.nextBytes(randomBytes);
-        final String refreshTokenValue = Base64.getEncoder().encodeToString(randomBytes);
+        final String refreshTokenValue = generateJwt(userEntity, refreshTokenExpirationHours * 60);
 
         RefreshTokenEntity refreshTokenEntity = new RefreshTokenEntity();
         refreshTokenEntity.setTokenHash(CryptoUtil.hash(refreshTokenValue));
@@ -89,6 +92,12 @@ public class TokenHelper {
         refreshTokenEntity.setExpirationDate(LocalDateTime.now().plusHours(refreshTokenExpirationHours));
 
         return new Pair<>(refreshTokenEntity, refreshTokenValue);
+    }
+
+    public String getUsernameFromJwt(String jwt) {
+        var jwtParse = Jwts.parserBuilder().setSigningKey(generateSignKey()).build().parse(jwt);
+        Claims claims = (Claims) jwtParse.getBody();
+        return claims.getSubject();
     }
 
 }

@@ -17,6 +17,7 @@ import com.fithub.services.auth.api.model.user.UserSignInResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -52,6 +53,13 @@ public class UserController {
         passwordResetRequest.setUserEmail(email);
 
         return new ResponseEntity<>(userService.resetPassword(passwordResetRequest), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Refresh access and refresh token")
+    @PostMapping(value = "/access-refresh")
+    public ResponseEntity<UserSignInResponse> refreshAccessToken(HttpServletRequest httpRequest, HttpServletResponse httpResponse)
+            throws Exception {
+        return new ResponseEntity<>(userService.refreshAccessToken(httpRequest, httpResponse), HttpStatus.OK);
     }
 
 }
