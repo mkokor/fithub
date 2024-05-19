@@ -8,7 +8,9 @@ public enum ApiErrorType {
 
     BAD_REQUEST("BAD_REQUEST"),
 
-    INTERNAL_SERVER("INTERNAL_SERVER");
+    INTERNAL_SERVER("INTERNAL_SERVER"),
+
+    AUTHORIZATION("AUTHORIZATION");
 
     private final String value;
 

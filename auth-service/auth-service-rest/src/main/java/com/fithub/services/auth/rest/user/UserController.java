@@ -2,6 +2,7 @@ package com.fithub.services.auth.rest.user;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +13,7 @@ import com.fithub.services.auth.api.UserService;
 import com.fithub.services.auth.api.model.GenericResponse;
 import com.fithub.services.auth.api.model.passwordresetcode.PasswordResetCodeRequest;
 import com.fithub.services.auth.api.model.user.PasswordResetRequest;
+import com.fithub.services.auth.api.model.user.UserAccessTokenVerificationResponse;
 import com.fithub.services.auth.api.model.user.UserSignInRequest;
 import com.fithub.services.auth.api.model.user.UserSignInResponse;
 
@@ -60,6 +62,12 @@ public class UserController {
     public ResponseEntity<UserSignInResponse> refreshAccessToken(HttpServletRequest httpRequest, HttpServletResponse httpResponse)
             throws Exception {
         return new ResponseEntity<>(userService.refreshAccessToken(httpRequest, httpResponse), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Verify access token")
+    @GetMapping(value = "/access-token/verification")
+    public ResponseEntity<UserAccessTokenVerificationResponse> verifyAccessToken() {
+        return new ResponseEntity<>(userService.verifyAccessToken(), HttpStatus.OK);
     }
 
 }

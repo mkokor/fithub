@@ -10,9 +10,10 @@ import java.util.Random;
 
 import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.fithub.services.auth.api.enums.AccessTokenClaimType;
+import com.fithub.services.auth.api.enums.JwtClaimType;
 import com.fithub.services.auth.api.enums.Role;
 import com.fithub.services.auth.dao.model.RefreshTokenEntity;
 import com.fithub.services.auth.dao.model.UserEntity;
@@ -46,14 +47,13 @@ public class TokenHelper {
     private static Claims configureAccessTokenClaims(UserEntity user) {
         Map<String, Object> claims = new HashMap<>();
 
-        claims.put(AccessTokenClaimType.EMAIL.getValue(), user.getEmail());
-        claims.put(AccessTokenClaimType.USERNAME.getValue(), user.getUsername());
+        claims.put(JwtClaimType.USERNAME.getValue(), user.getUsername());
 
         String role = Role.COACH.getValue();
         if (user.getClient() == null) {
             role = Role.CLIENT.getValue();
         }
-        claims.put(AccessTokenClaimType.ROLE.getValue(), role);
+        claims.put(JwtClaimType.ROLE.getValue(), role);
 
         return Jwts.claims(claims);
     }
@@ -68,7 +68,7 @@ public class TokenHelper {
 
         final JwtBuilder jwtBuilder = Jwts.builder();
         jwtBuilder.setClaims(configureAccessTokenClaims(userEntity));
-        jwtBuilder.setSubject(userEntity.getUsername());
+        jwtBuilder.setSubject(userEntity.getUuid());
         jwtBuilder.setIssuedAt(new Date(currentMilliseconds));
         jwtBuilder.setExpiration(new Date(currentMilliseconds + tokenExpirationMinutes * 60 * 1000));
         jwtBuilder.signWith(generateSignKey(), SignatureAlgorithm.HS256);
@@ -94,10 +94,31 @@ public class TokenHelper {
         return new Pair<>(refreshTokenEntity, refreshTokenValue);
     }
 
-    public String getUsernameFromJwt(String jwt) {
+    private Claims getAllClaims(String jwt) {
         var jwtParse = Jwts.parserBuilder().setSigningKey(generateSignKey()).build().parse(jwt);
-        Claims claims = (Claims) jwtParse.getBody();
-        return claims.getSubject();
+        return (Claims) jwtParse.getBody();
+    }
+
+    private String getStringClaim(String jwt, JwtClaimType claimName) {
+        final Claims claims = getAllClaims(jwt);
+        return (String) claims.get(claimName.getValue());
+    }
+
+    public String getUsernameFromJwt(String jwt) {
+        return getStringClaim(jwt, JwtClaimType.USERNAME);
+    }
+
+    public Date getJwtExpirationDate(String jwt) {
+        return getAllClaims(jwt).getExpiration();
+    }
+
+    public Boolean isJwtValid(String jwt, UserDetails userDetails) {
+        final String username = getUsernameFromJwt(jwt);
+        return username.equals(userDetails.getUsername()) && isJwtExpired(jwt);
+    }
+
+    private Boolean isJwtExpired(String jwt) {
+        return !getJwtExpirationDate(jwt).before(new Date());
     }
 
 }

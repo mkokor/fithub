@@ -4,6 +4,7 @@ import com.fithub.services.auth.api.exception.ApiException;
 import com.fithub.services.auth.api.model.GenericResponse;
 import com.fithub.services.auth.api.model.passwordresetcode.PasswordResetCodeRequest;
 import com.fithub.services.auth.api.model.user.PasswordResetRequest;
+import com.fithub.services.auth.api.model.user.UserAccessTokenVerificationResponse;
 import com.fithub.services.auth.api.model.user.UserSignInRequest;
 import com.fithub.services.auth.api.model.user.UserSignInResponse;
 
@@ -21,5 +22,7 @@ public interface UserService {
     UserSignInResponse refreshAccessToken(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws ApiException;
 
     GenericResponse signOut(HttpServletRequest httpRequest, HttpServletResponse httpResponse);
+
+    UserAccessTokenVerificationResponse verifyAccessToken();
 
 }

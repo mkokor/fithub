@@ -1,12 +1,12 @@
 package com.fithub.services.auth.api.enums;
 
-public enum AccessTokenClaimType {
+public enum JwtClaimType {
 
-    EMAIL("email"), USERNAME("username"), ROLE("role");
+    USERNAME("username"), ROLE("role");
 
     private String value;
 
-    private AccessTokenClaimType(String value) {
+    private JwtClaimType(String value) {
         this.value = value;
     }
 

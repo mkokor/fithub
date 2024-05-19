@@ -8,6 +8,9 @@ import java.util.Set;
 
 import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.fithub.services.auth.api.UserService;
@@ -20,6 +23,7 @@ import com.fithub.services.auth.api.exception.UnauthorizedException;
 import com.fithub.services.auth.api.model.GenericResponse;
 import com.fithub.services.auth.api.model.passwordresetcode.PasswordResetCodeRequest;
 import com.fithub.services.auth.api.model.user.PasswordResetRequest;
+import com.fithub.services.auth.api.model.user.UserAccessTokenVerificationResponse;
 import com.fithub.services.auth.api.model.user.UserSignInRequest;
 import com.fithub.services.auth.api.model.user.UserSignInResponse;
 import com.fithub.services.auth.core.utils.CryptoUtil;
@@ -280,6 +284,20 @@ public class UserServiceImpl implements UserService {
 
         removeRefreshTokenFromCookie(httpRequest, httpResponse);
         return genericResponse;
+    }
+
+    @Override
+    public UserAccessTokenVerificationResponse verifyAccessToken() {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        final UserEntity user = (UserEntity) authentication.getPrincipal();
+        final String role = ((SimpleGrantedAuthority) authentication.getAuthorities().toArray()[0]).getAuthority();
+
+        UserAccessTokenVerificationResponse userAccessTokenVerificationResponse = new UserAccessTokenVerificationResponse();
+        userAccessTokenVerificationResponse.setUserUuid(user.getUuid());
+        userAccessTokenVerificationResponse.setUsername(user.getUsername());
+        userAccessTokenVerificationResponse.setRole(role);
+
+        return userAccessTokenVerificationResponse;
     }
 
 }

@@ -1,0 +1,14 @@
+routes:
+  unauthorized:
+    - "^/client/.*"
+    - "^/user/sign-in"
+    - "^/user/.*/password-reset-code"
+    - "^/user/.*/password-reset"
+    - "^/user/access-refresh"
+  authorized:
+    any:
+      - "^/user/access-token/refresh"
+    client:
+      - "^something/.*"
+    coach:
+      - "^/appointment/.*/reservation"
