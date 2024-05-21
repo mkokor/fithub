@@ -97,11 +97,8 @@ public class ClientServiceImpl implements ClientService {
         newClient.setUser(newUser);
         newClient.setCoach(coach.get());
 
-        coachEntity.setClientCapacity(coachEntity.getClientCapacity() + 1);
-
         userRepository.save(newUser);
         clientRepository.save(newClient);
-        coachRepository.save(coachEntity);
 
         EmailConfirmationCodeCreateOrUpdateRequest emailConfirmationCodeCreateRequest = new EmailConfirmationCodeCreateOrUpdateRequest();
         emailConfirmationCodeCreateRequest.setUserEmail(newClient.getUser().getEmail());
