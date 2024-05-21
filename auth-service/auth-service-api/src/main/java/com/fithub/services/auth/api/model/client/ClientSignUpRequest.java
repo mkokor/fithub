@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
@@ -26,6 +27,7 @@ public class ClientSignUpRequest implements Serializable {
 
     @Schema(description = "The username of the client")
     @NotBlank(message = "The username must not be blank.")
+    @Size(min = 3, message = "The username must be at least 3 characters long.")
     private String username;
 
     @Schema(description = "The email of the client")

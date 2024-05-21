@@ -14,6 +14,6 @@ public interface ClientMapper {
     @Mapping(source = "user.username", target = "username")
     @Mapping(source = "user.email", target = "email")
     @Mapping(source = "coach.id", target = "coachId")
-    public ClientResponse entityToDto(ClientEntity clientEntity);
+    ClientResponse entityToDto(ClientEntity clientEntity);
 
 }

@@ -13,6 +13,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Entity
@@ -27,7 +29,15 @@ public class CoachEntity implements Serializable {
     @Column(updatable = false)
     private Long id;
 
+    @Size(max = 4000, message = "The biography must be up to 4000 characters long.")
     private String biography;
+
+    @Column(name = "image_path")
+    private String imagePath;
+
+    @Column(name = "client_capacity")
+    @Min(value = 1, message = "The maximum number of client must be at least 1.")
+    private Integer clientCapacity;
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false, updatable = false)

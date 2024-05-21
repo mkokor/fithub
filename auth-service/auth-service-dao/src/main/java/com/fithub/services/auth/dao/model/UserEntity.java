@@ -19,6 +19,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Entity
@@ -42,6 +43,7 @@ public class UserEntity implements Serializable, UserDetails {
 
     @Column(unique = true, nullable = false)
     @NotBlank(message = "The username must not be blank.")
+    @Size(min = 3, message = "The username must be at least 3 characters long.")
     private String username;
 
     @Column(name = "password_hash", nullable = false)

@@ -16,6 +16,7 @@ import com.fithub.services.auth.api.model.client.ClientEmailConfirmationRequest;
 import com.fithub.services.auth.api.model.client.ClientSignUpRequest;
 import com.fithub.services.auth.api.model.emailconfirmationcode.EmailConfirmationCodeCreateOrUpdateRequest;
 import com.fithub.services.auth.core.utils.CryptoUtil;
+import com.fithub.services.auth.core.utils.RabbitMQHelper;
 import com.fithub.services.auth.dao.model.ClientEntity;
 import com.fithub.services.auth.dao.model.CoachEntity;
 import com.fithub.services.auth.dao.model.EmailConfirmationCodeEntity;
@@ -24,7 +25,6 @@ import com.fithub.services.auth.dao.repository.ClientRepository;
 import com.fithub.services.auth.dao.repository.CoachRepository;
 import com.fithub.services.auth.dao.repository.EmailConfirmationCodeRepository;
 import com.fithub.services.auth.dao.repository.UserRepository;
-import com.fithub.services.auth.mapper.ClientMapper;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -40,8 +40,30 @@ public class ClientServiceImpl implements ClientService {
     private final CoachRepository coachRepository;
     private final ClientRepository clientRepository;
     private final UserRepository userRepository;
-    private final ClientMapper clientMapper;
     private final Validator validator;
+    private final RabbitMQHelper rabbitMQHelper;
+
+    private void checkUserInformationAvailability(final String username, final String email) throws BadRequestException {
+        if (userRepository.existsByUsername(username)) {
+            throw new BadRequestException("The provided username is already registered.");
+        }
+
+        if (userRepository.existsByEmail(email)) {
+            throw new BadRequestException("The provided email is already registered.");
+        }
+    }
+
+    private void checkCoachAvailability(final CoachEntity coachEntity) throws BadRequestException {
+        if (coachEntity.getClients() == null) {
+            return;
+        }
+
+        final Integer coachCurrentClientCapacity = coachEntity.getClients().size();
+
+        if (coachCurrentClientCapacity == coachEntity.getClientCapacity()) {
+            throw new BadRequestException("The provided coach is not available.");
+        }
+    }
 
     @Override
     public GenericResponse signUp(ClientSignUpRequest clientSignUpRequest) throws Exception {
@@ -54,13 +76,10 @@ public class ClientServiceImpl implements ClientService {
         if (!coach.isPresent()) {
             throw new NotFoundException("The coach with provided ID could not be found.");
         }
+        CoachEntity coachEntity = coach.get();
 
-        if (userRepository.existsByEmail(clientSignUpRequest.getEmail())) {
-            throw new BadRequestException("The provided email is already registered.");
-        }
-        if (userRepository.existsByUsername(clientSignUpRequest.getUsername())) {
-            throw new BadRequestException("The provided username is already registered.");
-        }
+        checkUserInformationAvailability(clientSignUpRequest.getUsername(), clientSignUpRequest.getEmail());
+        checkCoachAvailability(coach.get());
 
         final UserEntity newUser = new UserEntity();
         newUser.setUuid(UUID.randomUUID().toString());
@@ -78,12 +97,17 @@ public class ClientServiceImpl implements ClientService {
         newClient.setUser(newUser);
         newClient.setCoach(coach.get());
 
+        coachEntity.setClientCapacity(coachEntity.getClientCapacity() + 1);
+
         userRepository.save(newUser);
         clientRepository.save(newClient);
+        coachRepository.save(coachEntity);
 
         EmailConfirmationCodeCreateOrUpdateRequest emailConfirmationCodeCreateRequest = new EmailConfirmationCodeCreateOrUpdateRequest();
         emailConfirmationCodeCreateRequest.setUserEmail(newClient.getUser().getEmail());
         emailConfirmationCodeService.createOrUpdateEmailConfirmationCode(emailConfirmationCodeCreateRequest);
+
+        rabbitMQHelper.sendUserRegistrationEventToQueue(newUser);
 
         GenericResponse genericResponse = new GenericResponse();
         genericResponse.setMessage(String.format("The email confirmation code is successfully sent to %s.", newUser.getEmail()));

@@ -6,7 +6,6 @@ import static org.testng.Assert.assertThrows;
 import java.util.Optional;
 
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -17,13 +16,13 @@ import com.fithub.services.auth.api.EmailConfirmationCodeService;
 import com.fithub.services.auth.api.model.GenericResponse;
 import com.fithub.services.auth.api.model.client.ClientSignUpRequest;
 import com.fithub.services.auth.core.impl.ClientServiceImpl;
+import com.fithub.services.auth.core.utils.RabbitMQHelper;
 import com.fithub.services.auth.dao.model.CoachEntity;
 import com.fithub.services.auth.dao.model.UserEntity;
 import com.fithub.services.auth.dao.repository.ClientRepository;
 import com.fithub.services.auth.dao.repository.CoachRepository;
 import com.fithub.services.auth.dao.repository.EmailConfirmationCodeRepository;
 import com.fithub.services.auth.dao.repository.UserRepository;
-import com.fithub.services.auth.mapper.ClientMapper;
 import com.fithub.services.auth.test.configuration.BasicTestConfiguration;
 
 import jakarta.validation.ConstraintViolationException;
@@ -31,15 +30,13 @@ import jakarta.validation.Validator;
 
 public class ClientServiceTest extends BasicTestConfiguration {
 
-    @Autowired
-    private ClientMapper clientMapper;
-
     private EmailConfirmationCodeService emailConfirmationCodeService;
     private CoachRepository coachRepository;
     private ClientRepository clientRepository;
     private UserRepository userRepository;
     private EmailConfirmationCodeRepository emailConfirmationCodeRepository;
     private Validator validator;
+    private RabbitMQHelper rabbitMQHelper;
 
     private ClientService clientService;
 
@@ -50,13 +47,14 @@ public class ClientServiceTest extends BasicTestConfiguration {
         clientRepository = Mockito.mock(ClientRepository.class);
         userRepository = Mockito.mock(UserRepository.class);
         emailConfirmationCodeRepository = Mockito.mock(EmailConfirmationCodeRepository.class);
+        rabbitMQHelper = Mockito.mock(RabbitMQHelper.class);
 
         LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
         localValidatorFactoryBean.afterPropertiesSet();
         validator = localValidatorFactoryBean;
 
         clientService = new ClientServiceImpl(emailConfirmationCodeService, emailConfirmationCodeRepository, coachRepository,
-                clientRepository, userRepository, clientMapper, validator);
+                clientRepository, userRepository, validator, rabbitMQHelper);
     }
 
     @Test
@@ -92,6 +90,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
             CoachEntity coachEntity = new CoachEntity();
             coachEntity.setId(1L);
             coachEntity.setUser(coachUser);
+            coachEntity.setClientCapacity(3);
 
             ClientSignUpRequest clientSignUpRequest = new ClientSignUpRequest();
             clientSignUpRequest.setFirstName("John");

@@ -1,12 +1,8 @@
 package com.fithub.services.membership.dao.model;
 
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -32,10 +28,6 @@ public class UserEntity {
     @Column(unique = true, nullable = false)
     @NotBlank(message = "The username must not be blank.")
     private String username;
-
-    @Column(name = "password_hash", nullable = false)
-    @NotBlank(message = "The password must not be blank.")
-    private String passwordHash;
 
     @Column(unique = true, nullable = false)
     @NotBlank(message = "The email address is not valid.")

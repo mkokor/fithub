@@ -46,7 +46,6 @@ public class DatabaseSeeder implements ApplicationRunner {
             coachUserEntity.setLastName("Doe");
             coachUserEntity.setUsername("johndoe");
             coachUserEntity.setEmail("johndoe@email.com");
-            coachUserEntity.setPasswordHash("coach-password");
             userRepository.save(coachUserEntity);
 
             clientUserEntity.setUuid("mary-ann-client");
@@ -54,7 +53,6 @@ public class DatabaseSeeder implements ApplicationRunner {
             clientUserEntity.setLastName("Ann");
             clientUserEntity.setUsername("maryann");
             clientUserEntity.setEmail("maryann@email.com");
-            clientUserEntity.setPasswordHash("client-password");
             userRepository.save(clientUserEntity);
         }
 

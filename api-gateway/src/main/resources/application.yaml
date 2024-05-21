@@ -5,6 +5,9 @@ routes:
     - "^/user/.*/password-reset-code"
     - "^/user/.*/password-reset"
     - "^/user/access-refresh"
+    - "^/images/.*"
+    - "^/coach"
+    - "^/coach/.*"
   authorized:
     any:
       - "^/user/access-token/refresh"
