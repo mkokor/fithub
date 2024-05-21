@@ -39,8 +39,8 @@ public class MealPlanUpdateRequest {
     @Size(max = 250, message = "A meal cannot contain more than 250 characters.")
     private String pmSnack;
     
-    @NotNull
-    private Long coachId;
+    
+    //private Long coachId;
     
    
 }

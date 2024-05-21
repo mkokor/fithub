@@ -14,5 +14,7 @@ public interface DailyMealPlanMapper {
     
     //@Mapping(source = "mealPlan.id", target = "mealPlanId")
 	public List<DailyMealPlanResponse> entitiesToDtos (List<DailyMealPlanEntity> dailyMealPlanEntities);
+	
+	public DailyMealPlanResponse entityToDto (DailyMealPlanEntity dailyMealPlanEntity);
 
 }
