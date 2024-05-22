@@ -3,7 +3,6 @@ package com.fithub.services.training.core.impl;
 import java.util.Optional;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +18,12 @@ import com.fithub.services.training.api.exception.BadRequestException;
 import com.fithub.services.training.api.exception.NotFoundException;
 import com.fithub.services.training.api.model.client.CoachChangeRequest;
 import com.fithub.services.training.api.model.client.CoachChangeResponse;
+import com.fithub.services.training.api.rabbitmq.ClientRegistrationMessage;
 import com.fithub.services.training.core.client.MembershipServiceClient;
+import com.fithub.services.training.dao.model.ClientEntity;
+import com.fithub.services.training.dao.model.CoachEntity;
 import com.fithub.services.training.dao.model.UserEntity;
+import com.fithub.services.training.dao.repository.ClientRepository;
 import com.fithub.services.training.dao.repository.UserRepository;
 import com.fithub.services.training.mapper.ClientMapper;
 
@@ -28,13 +31,16 @@ import io.grpc.stub.StreamObserver;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
+import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 
 @Service
+@RequiredArgsConstructor
 public class ClientServiceImpl implements ClientService {
 
     private final MembershipServiceClient membershipServiceClient;
     private final UserRepository userRepository;
+    private final ClientRepository clientRepository;
     private final ClientMapper clientMapper;
     private final Validator validator;
 
@@ -43,16 +49,6 @@ public class ClientServiceImpl implements ClientService {
 
     @GrpcClient("system-events")
     private ActionLoggerServiceGrpc.ActionLoggerServiceStub systemEventsClient;
-
-    @Autowired
-    public ClientServiceImpl(MembershipServiceClient membershipServiceClient, UserRepository userRepository, ClientMapper clientMapper,
-            Validator validator) {
-        this.membershipServiceClient = membershipServiceClient;
-        this.userRepository = userRepository;
-        this.clientMapper = clientMapper;
-        this.validator = validator;
-
-    }
 
     private void sendActionLogRequest(ActionType actionType, ResponseType responseType) {
         ActionLogRequest actionLogRequest = ActionLogRequest.newBuilder().setMicroserviceName(microserviceName)
@@ -111,6 +107,30 @@ public class ClientServiceImpl implements ClientService {
 
         sendActionLogRequest(ActionType.UPDATE, ResponseType.SUCCESS);
         return clientMapper.clientEntityToCoachChangeResponse(client.getClient());
+    }
+
+    @Override
+    public void addClient(ClientRegistrationMessage clientRegistrationMessage) throws ApiException {
+        Optional<UserEntity> coachUserEntity = userRepository.findById(clientRegistrationMessage.getCoachUuid());
+        if (coachUserEntity.isEmpty() || coachUserEntity.get().getCoach() == null) {
+            throw new NotFoundException("The coach with provided ID could not be found.");
+        }
+        final CoachEntity coachEntity = coachUserEntity.get().getCoach();
+
+        UserEntity newClientUserEntity = new UserEntity();
+        newClientUserEntity.setUuid(clientRegistrationMessage.getUuid());
+        newClientUserEntity.setFirstName(clientRegistrationMessage.getFirstName());
+        newClientUserEntity.setLastName(clientRegistrationMessage.getLastName());
+
+        ClientEntity clientEntity = new ClientEntity();
+        clientEntity.setUser(newClientUserEntity);
+        clientEntity.setCoach(coachEntity);
+
+        userRepository.save(newClientUserEntity);
+        clientRepository.save(clientEntity);
+
+        newClientUserEntity.setClient(clientEntity);
+        userRepository.save(newClientUserEntity);
     }
 
 }

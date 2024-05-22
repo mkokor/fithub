@@ -91,7 +91,6 @@ public class DatabaseSeeder implements ApplicationRunner {
             coachJamesEntity.setUser(coachJamesUserEntity);
 
             coachRepository.save(coachJamesEntity);
-
         }
     }
 

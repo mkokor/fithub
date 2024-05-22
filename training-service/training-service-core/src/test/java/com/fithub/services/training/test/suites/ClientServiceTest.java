@@ -23,6 +23,7 @@ import com.fithub.services.training.core.impl.ClientServiceImpl;
 import com.fithub.services.training.dao.model.ClientEntity;
 import com.fithub.services.training.dao.model.CoachEntity;
 import com.fithub.services.training.dao.model.UserEntity;
+import com.fithub.services.training.dao.repository.ClientRepository;
 import com.fithub.services.training.dao.repository.UserRepository;
 import com.fithub.services.training.mapper.ClientMapper;
 import com.fithub.services.training.test.configuration.BasicTestConfiguration;
@@ -35,6 +36,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
     private ClientMapper clientMapper;
 
     private UserRepository userRepository;
+    private ClientRepository clientRepository;
     private MembershipServiceClient membershipServiceClient;
 
     private ClientService clientService;
@@ -44,13 +46,14 @@ public class ClientServiceTest extends BasicTestConfiguration {
     @BeforeMethod
     public void beforeMethod() {
         userRepository = Mockito.mock(UserRepository.class);
+        clientRepository = Mockito.mock(ClientRepository.class);
         membershipServiceClient = Mockito.mock(MembershipServiceClient.class);
 
         LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
         localValidatorFactoryBean.afterPropertiesSet();
         validator = localValidatorFactoryBean;
 
-        clientService = new ClientServiceImpl(membershipServiceClient, userRepository, clientMapper, validator);
+        clientService = new ClientServiceImpl(membershipServiceClient, userRepository, clientRepository, clientMapper, validator);
 
     }
 

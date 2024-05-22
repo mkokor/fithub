@@ -9,7 +9,7 @@ import com.fithub.services.auth.dao.model.UserEntity;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    @Mapping(source = "coach.user.uuid", target = "coachUuid")
+    @Mapping(source = "client.coach.user.uuid", target = "coachUuid")
     ClientRegistrationMessage entityToClientRegistrationMessage(UserEntity userEntity);
 
 }

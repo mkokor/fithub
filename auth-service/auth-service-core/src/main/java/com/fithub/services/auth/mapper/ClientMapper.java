@@ -13,7 +13,7 @@ public interface ClientMapper {
     @Mapping(source = "user.lastName", target = "lastName")
     @Mapping(source = "user.username", target = "username")
     @Mapping(source = "user.email", target = "email")
-    @Mapping(source = "coach.id", target = "coachId")
+    @Mapping(source = "coach.user.uuid", target = "coachId")
     ClientResponse entityToDto(ClientEntity clientEntity);
 
 }

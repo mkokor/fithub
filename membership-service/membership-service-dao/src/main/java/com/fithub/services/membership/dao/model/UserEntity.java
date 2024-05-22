@@ -25,14 +25,6 @@ public class UserEntity {
     @NotBlank(message = "The last name must not be blank.")
     private String lastName;
 
-    @Column(unique = true, nullable = false)
-    @NotBlank(message = "The username must not be blank.")
-    private String username;
-
-    @Column(unique = true, nullable = false)
-    @NotBlank(message = "The email address is not valid.")
-    private String email;
-
     @OneToOne(mappedBy = "user")
     private ClientEntity client;
 

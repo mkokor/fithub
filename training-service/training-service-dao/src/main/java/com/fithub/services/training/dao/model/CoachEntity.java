@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
 import lombok.Data;
 
 @Entity
@@ -24,6 +25,10 @@ public class CoachEntity {
     @Column(updatable = false)
     private Long id;
 
+    @Column(name = "client_capacity")
+    @Min(value = 1, message = "The maximum number of client must be at least 1.")
+    private Integer clientCapacity;
+
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
@@ -33,7 +38,7 @@ public class CoachEntity {
 
     @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
     private List<ProgressionStatsEntity> progressionStats;
-    
+
     @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL)
     private List<AppointmentEntity> appointments;
 

@@ -76,7 +76,6 @@ public class ClientServiceImpl implements ClientService {
         if (!coach.isPresent()) {
             throw new NotFoundException("The coach with provided ID could not be found.");
         }
-        CoachEntity coachEntity = coach.get();
 
         checkUserInformationAvailability(clientSignUpRequest.getUsername(), clientSignUpRequest.getEmail());
         checkCoachAvailability(coach.get());
@@ -100,11 +99,14 @@ public class ClientServiceImpl implements ClientService {
         userRepository.save(newUser);
         clientRepository.save(newClient);
 
+        newUser.setClient(newClient);
+        userRepository.save(newUser);
+
         EmailConfirmationCodeCreateOrUpdateRequest emailConfirmationCodeCreateRequest = new EmailConfirmationCodeCreateOrUpdateRequest();
         emailConfirmationCodeCreateRequest.setUserEmail(newClient.getUser().getEmail());
         emailConfirmationCodeService.createOrUpdateEmailConfirmationCode(emailConfirmationCodeCreateRequest);
 
-        rabbitMQHelper.sendUserRegistrationEventToQueue(newUser);
+        rabbitMQHelper.sendClientRegistrationEventToQueue(newUser);
 
         GenericResponse genericResponse = new GenericResponse();
         genericResponse.setMessage(String.format("The email confirmation code is successfully sent to %s.", newUser.getEmail()));

@@ -16,8 +16,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RabbitMQHelper {
 
-    @Value("${rabbitmq.queue.client-registration}")
-    private String clientRegistrationQueueTitle;
+    @Value("${rabbitmq.queue.client-registration-training}")
+    private String clientRegistrationTrainingQueueTitle;
+
+    @Value("${rabbitmq.queue.client-registration-chat}")
+    private String clientRegistrationChatQueueTitle;
+
+    @Value("${rabbitmq.queue.client-registration-membership}")
+    private String clientRegistrationMembershipQueueTitle;
+
+    @Value("${rabbitmq.queue.client-registration-mealplan}")
+    private String clientRegistrationMealplanQueueTitle;
 
     @Value("${rabbitmq.exchange.direct}")
     private String directExchangeTitle;
@@ -30,11 +39,14 @@ public class RabbitMQHelper {
         return objectMapper.writeValueAsString(object);
     }
 
-    public void sendUserRegistrationEventToQueue(final UserEntity newClient) throws JsonProcessingException {
+    public void sendClientRegistrationEventToQueue(final UserEntity newClient) throws JsonProcessingException {
         final ClientRegistrationMessage clientRegistrationMessage = userMapper.entityToClientRegistrationMessage(newClient);
-
         final String newClientJsonString = writeObjectAsJsonString(clientRegistrationMessage);
-        rabbitTemplate.convertAndSend(directExchangeTitle, clientRegistrationQueueTitle, newClientJsonString);
+
+        rabbitTemplate.convertAndSend(directExchangeTitle, clientRegistrationTrainingQueueTitle, newClientJsonString);
+        rabbitTemplate.convertAndSend(directExchangeTitle, clientRegistrationChatQueueTitle, newClientJsonString);
+        rabbitTemplate.convertAndSend(directExchangeTitle, clientRegistrationMembershipQueueTitle, newClientJsonString);
+        rabbitTemplate.convertAndSend(directExchangeTitle, clientRegistrationMealplanQueueTitle, newClientJsonString);
     }
 
 }

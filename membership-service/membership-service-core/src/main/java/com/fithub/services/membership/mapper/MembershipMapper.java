@@ -22,7 +22,6 @@ public interface MembershipMapper {
     @Mapping(source = "clientEntity.user.uuid", target = "client.uuid")
     @Mapping(source = "clientEntity.user.firstName", target = "client.firstName")
     @Mapping(source = "clientEntity.user.lastName", target = "client.lastName")
-    @Mapping(source = "clientEntity.user.email", target = "client.email")
     MembershipPaymentReportResponse clientEntityToMembershipPaymentReportResponse(ClientEntity clientEntity);
 
 }

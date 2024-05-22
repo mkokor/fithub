@@ -1,9 +1,8 @@
 package com.fithub.services.mealplan.test.suites;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertThrows;
 
 import java.time.LocalDateTime;
@@ -15,19 +14,17 @@ import org.assertj.core.api.Assertions;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 import com.fithub.services.mealplan.api.ClientService;
 import com.fithub.services.mealplan.api.MealPlanService;
 import com.fithub.services.mealplan.api.exception.BadRequestException;
 import com.fithub.services.mealplan.api.exception.NotFoundException;
-import com.fithub.services.mealplan.api.model.coach.CoachResponse;
 import com.fithub.services.mealplan.api.model.dailymealplan.DailyMealPlanResponse;
 import com.fithub.services.mealplan.api.model.mealplan.MealPlanResponse;
-import com.fithub.services.mealplan.api.model.user.NewUserRequest;
 import com.fithub.services.mealplan.api.model.user.UserResponse;
 import com.fithub.services.mealplan.core.impl.ClientServiceImpl;
 import com.fithub.services.mealplan.dao.model.ClientEntity;
@@ -38,42 +35,30 @@ import com.fithub.services.mealplan.dao.model.UserEntity;
 import com.fithub.services.mealplan.dao.repository.ClientRepository;
 import com.fithub.services.mealplan.dao.repository.MealPlanRepository;
 import com.fithub.services.mealplan.dao.repository.UserRepository;
-import com.fithub.services.mealplan.mapper.ClientMapper;
-import com.fithub.services.mealplan.mapper.DailyMealPlanMapper;
 import com.fithub.services.mealplan.mapper.MealPlanMapper;
 import com.fithub.services.mealplan.mapper.UserMapper;
 import com.fithub.services.mealplan.test.configuration.BasicTestConfiguration;
 
 import jakarta.validation.Validator;
 
-import static org.mockito.ArgumentMatchers.any;
-
-
-
 public class ClientServiceTest extends BasicTestConfiguration {
 
     @Autowired
     private MealPlanMapper mealPlanMapper;
+
     @Autowired
     private UserMapper userMapper;
-    @Autowired
-    private DailyMealPlanMapper dailyMealPlanMapper;
-    @Autowired
-	private ClientMapper clientMapper;
 
     private ClientRepository clientRepository;
     private MealPlanRepository mealPlanRepository;
-	private UserRepository userRepository;
-    
+    private UserRepository userRepository;
+
     private ClientService clientService;
-    
+
     @Mock
     private MealPlanService mealPlanService;
-    
+
     private Validator validator;
-    
-
-
 
     @BeforeMethod
     public void beforeMethod() {
@@ -84,8 +69,9 @@ public class ClientServiceTest extends BasicTestConfiguration {
         LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
         localValidatorFactoryBean.afterPropertiesSet();
         validator = localValidatorFactoryBean;
-        
-        clientService = new ClientServiceImpl(clientRepository, userRepository, mealPlanRepository, mealPlanMapper, userMapper, dailyMealPlanMapper, clientMapper, null, mealPlanService, validator);
+
+        clientService = new ClientServiceImpl(clientRepository, userRepository, mealPlanRepository, mealPlanMapper, userMapper, null,
+                validator);
 
     }
 
@@ -110,7 +96,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
             List<ClientEntity> clients = new ArrayList<>();
             clients.add(clientEntity);
             coachEntity.setClients(clients);
-            
+
             MealPlanEntity mealPlanEntity = new MealPlanEntity();
             mealPlanEntity.setId(1L);
             mealPlanEntity.setClient(clientEntity);
@@ -120,7 +106,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
             List<MealPlanEntity> mealPlans = new ArrayList();
             mealPlans.add(mealPlanEntity);
             coachEntity.setMealPlans(mealPlans);
-            
+
             MealPlanResponse expectedResponse = new MealPlanResponse();
             expectedResponse.setId(mealPlanEntity.getId());
             expectedResponse.setClientId(clientEntity.getId());
@@ -132,37 +118,38 @@ public class ClientServiceTest extends BasicTestConfiguration {
             MealPlanResponse actualResponse = clientService.getMealPlan(clientEntity.getId());
 
             Assertions.assertThat(actualResponse).isEqualTo(expectedResponse);
-            
+
         } catch (Exception exception) {
             Assert.fail();
         }
     }
-    
+
     @Test
     public void testGetMealPlan_ValidClientIdIsProvided_ReturnsMealPlan2() {
         try {
             ClientEntity clientEntity = new ClientEntity();
             clientEntity.setId(1L);
-            
+
             CoachEntity coachEntity = new CoachEntity();
             coachEntity.setId(1L);
-            
+
             MealPlanEntity mealPlanEntity = new MealPlanEntity();
             mealPlanEntity.setId(1L);
             mealPlanEntity.setClient(clientEntity);
             mealPlanEntity.setModified(LocalDateTime.of(2024, 7, 2, 14, 1));
             mealPlanEntity.setModifiedBy(coachEntity);
             clientEntity.setMealPlan(mealPlanEntity);
-            
+
             MealPlanResponse expectedResponse = new MealPlanResponse();
             expectedResponse.setId(mealPlanEntity.getId());
             expectedResponse.setClientId(clientEntity.getId());
             expectedResponse.setModifiedBy(coachEntity.getId());
             expectedResponse.setModified(mealPlanEntity.getModified());
 
-            // Mockanje clientRepository da vrati klijenta s praznim planom obroka
+            // Mockanje clientRepository da vrati klijenta s praznim planom
+            // obroka
             Mockito.when(clientRepository.findById(clientEntity.getId())).thenReturn(Optional.of(clientEntity));
-            
+
             // Pozivanje metode koja se testira
             MealPlanResponse actualResponse = clientService.getMealPlan(clientEntity.getId());
 
@@ -176,6 +163,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     }
+
     @Test
     public void testGetMealPlan_NullClientId_ReturnsNotFoundException() {
         try {
@@ -188,7 +176,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     }
-    
+
     @Test
     public void testGetMealPlan_EmptyClientId_ReturnsNotFoundException() {
         try {
@@ -201,7 +189,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     }
-    
+
     @Test
     public void testGetMealPlan_InvalidClientId_ReturnsNotFoundException() {
         try {
@@ -216,11 +204,11 @@ public class ClientServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     }
-    
+
     @Test
     public void testGetClientNameAndLastName_ValidUserIdIsProvided_ReturnsNameAndLastName() {
         try {
-        	 // Kreirajte korisnika za kojeg ćemo tražiti klijenta
+            // Kreirajte korisnika za kojeg ćemo tražiti klijenta
             UserEntity userEntity = new UserEntity();
             userEntity.setUuid("user-id-client");
             userEntity.setFirstName("Augustine II");
@@ -239,9 +227,8 @@ public class ClientServiceTest extends BasicTestConfiguration {
 
             // Mockanje metode findByUserUuid
             Mockito.when(clientRepository.findByUserUuid(userEntity.getUuid())).thenReturn(Optional.of(clientEntity));
-            
-            UserResponse actualResponse = clientService.getClientNameAndLastName(clientEntity.getUser().getUuid());
 
+            UserResponse actualResponse = clientService.getClientNameAndLastName(clientEntity.getUser().getUuid());
 
             // Provjera jesu li očekivani i stvarni odgovor isti
             Assertions.assertThat(actualResponse).isEqualTo(expectedResponse);
@@ -249,7 +236,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     }
-    
+
     @Test
     public void testGetClientNameAndLastName_InvalidUserId_ReturnsNotFoundException() {
         try {
@@ -264,7 +251,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     }
-    
+
     @Test
     public void testGetClientNameAndLastName_NullUserId_ReturnsNotFoundException() {
         try {
@@ -277,7 +264,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     }
-    
+
     @Test
     public void testGetClientNameAndLastName_EmptyUserId_ReturnsNotFoundException() {
         try {
@@ -290,7 +277,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     }
-    
+
     @Test
     public void testGetDailyMealPlanByClientId_ValidClientId_ReturnsDailyMealPlanList() {
         try {
@@ -309,7 +296,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
             mealPlanEntity.setClient(clientEntity);
             mealPlanEntity.setMealPlans(new ArrayList<>());
             clientEntity.setMealPlan(mealPlanEntity);
-            
+
             DailyMealPlanEntity dailyMealPlanEntity = new DailyMealPlanEntity();
             dailyMealPlanEntity.setId(1L);
             dailyMealPlanEntity.setDay("Monday");
@@ -321,9 +308,9 @@ public class ClientServiceTest extends BasicTestConfiguration {
             List<DailyMealPlanEntity> dailyMealPlanEntities = new ArrayList<>();
             dailyMealPlanEntities.add(dailyMealPlanEntity);
             mealPlanEntity.setMealPlans(dailyMealPlanEntities);
-            
+
             List<DailyMealPlanResponse> expectedResponse = new ArrayList<>();
-            
+
             DailyMealPlanResponse dailyMealPlanResponse = new DailyMealPlanResponse();
             dailyMealPlanResponse.setDay("Monday");
             dailyMealPlanResponse.setBreakfast("Oatmeal");
@@ -331,8 +318,8 @@ public class ClientServiceTest extends BasicTestConfiguration {
             dailyMealPlanResponse.setLunch("Chicken Salad");
             dailyMealPlanResponse.setDinner("Grilled Fish");
             dailyMealPlanResponse.setPmSnack("Snack2");
-            
-        	expectedResponse.add(dailyMealPlanResponse);
+
+            expectedResponse.add(dailyMealPlanResponse);
 
             Mockito.when(clientRepository.findById(clientEntity.getId())).thenReturn(Optional.of(clientEntity));
             Mockito.when(mealPlanService.getDailyMealByDay(any(Long.class))).thenReturn(expectedResponse);
@@ -341,36 +328,34 @@ public class ClientServiceTest extends BasicTestConfiguration {
 
             Assertions.assertThat(actualResponse).isEqualTo(expectedResponse);
 
-
         } catch (Exception exception) {
             Assert.fail("Exception occurred: " + exception.getMessage());
         }
     }
 
-
     @Test
     public void testGetDailyMealPlanByClientId_InvalidClientId_ReturnsNotFoundException() {
         try {
-        	
+
             Long invalid = 99L; // An empty user ID
 
             Assert.assertThrows(NotFoundException.class, () -> {
                 clientService.getDailyMealPlanByClientId(invalid);
-            });      
+            });
         } catch (Exception exception) {
             Assert.fail();
         }
     }
-    
+
     @Test
     public void testMakeMealPlanForClient_MealPlanForClientExists_ReturnsMealPlanResponse() throws Exception {
-    	try {
+        try {
             UserEntity userEntity = new UserEntity();
             userEntity.setUuid("valid-user-id");
 
             UserEntity userEntity1 = new UserEntity();
             userEntity.setUuid("valid-user-id-1");
-            
+
             CoachEntity coachEntity = new CoachEntity();
             coachEntity.setId(100L);
             coachEntity.setUser(userEntity1);
@@ -380,24 +365,24 @@ public class ClientServiceTest extends BasicTestConfiguration {
             clientEntity.setId(99L);
             clientEntity.setUser(userEntity);
             clientEntity.setCoach(coachEntity);
-            userEntity.setClient(clientEntity); 
-            
+            userEntity.setClient(clientEntity);
+
             MealPlanEntity mealPlanEntity = new MealPlanEntity();
             mealPlanEntity.setId(99L);
             mealPlanEntity.setClient(clientEntity);
             mealPlanEntity.setModifiedBy(coachEntity);
             clientEntity.setMealPlan(mealPlanEntity);
-            
+
             Mockito.when(userRepository.findById(userEntity.getUuid())).thenReturn(Optional.of(userEntity));
             Mockito.when(clientRepository.findById(clientEntity.getId())).thenReturn(Optional.of(clientEntity));
-            Mockito.when(mealPlanRepository.findMealPlanByClientId(mealPlanEntity.getId())).thenReturn(mealPlanEntity);            
+            Mockito.when(mealPlanRepository.findMealPlanByClientId(mealPlanEntity.getId())).thenReturn(mealPlanEntity);
             assertThrows(BadRequestException.class, () -> clientService.makeMealPlanForClient(userEntity.getUuid()));
-    		
-    	} catch (Exception exception) {
+
+        } catch (Exception exception) {
             Assert.fail();
         }
     }
-    
+
     @Test
     public void testMakeMealPlanForClient_MealPlanForClientNotExists_ReturnsMealPlanResponse() throws Exception {
         try {
@@ -413,7 +398,7 @@ public class ClientServiceTest extends BasicTestConfiguration {
             clientEntity.setId(99L);
             clientEntity.setUser(userEntity);
             clientEntity.setCoach(coachEntity);
-            userEntity.setClient(clientEntity); 
+            userEntity.setClient(clientEntity);
 
             Mockito.when(userRepository.findById(userEntity.getUuid())).thenReturn(Optional.of(userEntity));
             Mockito.when(clientRepository.findById(clientEntity.getId())).thenReturn(Optional.of(clientEntity));
@@ -428,58 +413,48 @@ public class ClientServiceTest extends BasicTestConfiguration {
             Assert.fail();
         }
     }
-    
-    /*@Test
-    public void testPostCoachForClient_ClientHasCoach_RemovesOldCoachAndAssignsNewCoach() throws Exception {
-        try {
-            // Priprema podataka za testiranje
-            UserEntity userEntity = new UserEntity();
-            userEntity.setUuid("valid-user-id");
 
-            UserEntity coachUserEntity = new UserEntity();
-            coachUserEntity.setFirstName("John2");
-            coachUserEntity.setLastName("Doe2");
-
-            CoachEntity oldCoachEntity = new CoachEntity();
-            oldCoachEntity.setId(100L);
-            oldCoachEntity.setUser(coachUserEntity);
-
-            CoachEntity newCoachEntity = new CoachEntity();
-            newCoachEntity.setId(101L);
-            newCoachEntity.setUser(coachUserEntity);
-
-            ClientEntity clientEntity = new ClientEntity();
-            clientEntity.setId(99L);
-            clientEntity.setUser(userEntity);
-            clientEntity.setCoach(oldCoachEntity);
-            userEntity.setClient(clientEntity);
-
-            NewUserRequest newUserRequest = new NewUserRequest();
-            newUserRequest.setFirstName("John2");
-            newUserRequest.setLastName("Doe2");
-
-            // Postavljanje mockova za repozitorije
-            Mockito.when(userRepository.findById(userEntity.getUuid())).thenReturn(Optional.of(userEntity));
-            Mockito.when(userRepository.findByFirstNameAndLastName(newUserRequest.getFirstName(), newUserRequest.getLastName()))
-            .thenReturn(Optional.of(coachUserEntity));
-
-            // Pokretanje metode koju testiramo
-            CoachResponse coachResponse = clientService.postCoachForClient(userEntity.getUuid(), newUserRequest);
-
-            // Provjera da li je postavljen novi coach
-            assertNotNull(coachResponse);
-            assertEquals(newCoachEntity.getId(), coachResponse.getCoachId());
-
-            // Provjera da li je stari coach uklonjen
-            assertNull(clientEntity.getCoach());
-
-        } catch (Exception exception) {
-            // Ako se izuzetak baci, test nije prošao
-            exception.printStackTrace();
-            Assert.fail(exception.getMessage());
-        }
-    }*/
-
-
+    /*
+     * @Test public void
+     * testPostCoachForClient_ClientHasCoach_RemovesOldCoachAndAssignsNewCoach()
+     * throws Exception { try { // Priprema podataka za testiranje UserEntity
+     * userEntity = new UserEntity(); userEntity.setUuid("valid-user-id");
+     *
+     * UserEntity coachUserEntity = new UserEntity();
+     * coachUserEntity.setFirstName("John2");
+     * coachUserEntity.setLastName("Doe2");
+     *
+     * CoachEntity oldCoachEntity = new CoachEntity();
+     * oldCoachEntity.setId(100L); oldCoachEntity.setUser(coachUserEntity);
+     *
+     * CoachEntity newCoachEntity = new CoachEntity();
+     * newCoachEntity.setId(101L); newCoachEntity.setUser(coachUserEntity);
+     *
+     * ClientEntity clientEntity = new ClientEntity(); clientEntity.setId(99L);
+     * clientEntity.setUser(userEntity); clientEntity.setCoach(oldCoachEntity);
+     * userEntity.setClient(clientEntity);
+     *
+     * NewUserRequest newUserRequest = new NewUserRequest();
+     * newUserRequest.setFirstName("John2"); newUserRequest.setLastName("Doe2");
+     *
+     * // Postavljanje mockova za repozitorije
+     * Mockito.when(userRepository.findById(userEntity.getUuid())).thenReturn(
+     * Optional.of(userEntity));
+     * Mockito.when(userRepository.findByFirstNameAndLastName(newUserRequest.
+     * getFirstName(), newUserRequest.getLastName()))
+     * .thenReturn(Optional.of(coachUserEntity));
+     *
+     * // Pokretanje metode koju testiramo CoachResponse coachResponse =
+     * clientService.postCoachForClient(userEntity.getUuid(), newUserRequest);
+     *
+     * // Provjera da li je postavljen novi coach assertNotNull(coachResponse);
+     * assertEquals(newCoachEntity.getId(), coachResponse.getCoachId());
+     *
+     * // Provjera da li je stari coach uklonjen
+     * assertNull(clientEntity.getCoach());
+     *
+     * } catch (Exception exception) { // Ako se izuzetak baci, test nije prošao
+     * exception.printStackTrace(); Assert.fail(exception.getMessage()); } }
+     */
 
 }
