@@ -33,6 +33,7 @@ public class DatabaseSeeder implements ApplicationRunner {
             userRepository.save(coachJohnUserEntity);
 
             CoachEntity coachJohnEntity = new CoachEntity();
+            coachJohnEntity.setClientCapacity(3);
             coachJohnEntity.setUser(coachJohnUserEntity);
 
             coachRepository.save(coachJohnEntity);
@@ -45,6 +46,7 @@ public class DatabaseSeeder implements ApplicationRunner {
             userRepository.save(coachMaryUserEntity);
 
             CoachEntity coachMaryEntity = new CoachEntity();
+            coachMaryEntity.setClientCapacity(3);
             coachMaryEntity.setUser(coachMaryUserEntity);
 
             coachRepository.save(coachMaryEntity);
@@ -57,6 +59,7 @@ public class DatabaseSeeder implements ApplicationRunner {
             userRepository.save(coachJamesUserEntity);
 
             CoachEntity coachJamesEntity = new CoachEntity();
+            coachJamesEntity.setClientCapacity(20);
             coachJamesEntity.setUser(coachJamesUserEntity);
 
             coachRepository.save(coachJamesEntity);

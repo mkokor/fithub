@@ -12,7 +12,6 @@ import lombok.Data;
 @Data
 public class RoutesConfig {
 
-    private List<String> unauthorized;
     private AuthorizedRoutes authorized;
 
     @Data

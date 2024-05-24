@@ -13,7 +13,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -37,6 +39,8 @@ public class CoachEntity implements Serializable {
 
     @Column(name = "client_capacity")
     @Min(value = 1, message = "The maximum number of client must be at least 1.")
+    @Max(value = 25, message = "The maximum number of client must be up to 25.")
+    @NotNull(message = "The maximum number of client must be specified.")
     private Integer clientCapacity;
 
     @OneToOne

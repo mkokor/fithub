@@ -27,7 +27,7 @@ import lombok.AllArgsConstructor;
 
 @Tag(name = "user", description = "User API")
 @RestController
-@RequestMapping(value = "user", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "user", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class UserController {
 

@@ -23,8 +23,11 @@ public class RabbitMQConfig {
     @Value("${rabbitmq.queue.client-registration-chat}")
     private String clientRegistrationChatQueueTitle;
 
-    @Value("${rabbitmq.queue.coach-capacity-update}")
-    private String coachCapacityUpdateQueueTitle;
+    @Value("${rabbitmq.queue.coach-capacity-update-training}")
+    private String coachCapacityUpdateTrainingQueueTitle;
+
+    @Value("${rabbitmq.queue.coach-capacity-update-auth}")
+    private String coachCapacityUpdateAuthQueueTitle;
 
     @Value("${rabbitmq.exchange.direct}")
     private String directExchangeTitle;
@@ -50,8 +53,13 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public Queue coachCapacityUpdateQueue() {
-        return new Queue(coachCapacityUpdateQueueTitle, true);
+    public Queue coachCapacityUpdateAuthQueue() {
+        return new Queue(coachCapacityUpdateAuthQueueTitle, true);
+    }
+
+    @Bean
+    public Queue coachCapacityUpdateTrainingQueue() {
+        return new Queue(coachCapacityUpdateTrainingQueueTitle, true);
     }
 
     @Bean
@@ -80,8 +88,13 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public Binding bindingCoachCapacityUpdateQueue(Queue coachCapacityUpdateQueue, DirectExchange directExchange) {
-        return BindingBuilder.bind(coachCapacityUpdateQueue).to(directExchange).with(coachCapacityUpdateQueueTitle);
+    public Binding bindingCoachCapacityUpdateAuthQueue(Queue coachCapacityUpdateAuthQueue, DirectExchange directExchange) {
+        return BindingBuilder.bind(coachCapacityUpdateAuthQueue).to(directExchange).with(coachCapacityUpdateAuthQueueTitle);
+    }
+
+    @Bean
+    public Binding bindingCoachCapacityUpdateTrainingQueue(Queue coachCapacityUpdateTrainingQueue, DirectExchange directExchange) {
+        return BindingBuilder.bind(coachCapacityUpdateTrainingQueue).to(directExchange).with(coachCapacityUpdateTrainingQueueTitle);
     }
 
 }

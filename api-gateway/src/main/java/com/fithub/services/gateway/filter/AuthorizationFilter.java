@@ -110,7 +110,9 @@ public class AuthorizationFilter implements GlobalFilter {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         final String requestPath = exchange.getRequest().getPath().value();
 
-        if (routeMatches(requestPath, routesConfig.getUnauthorized())) {
+        if (!(routeMatches(requestPath, routesConfig.getAuthorized().getAny())
+                || routeMatches(requestPath, routesConfig.getAuthorized().getCoach())
+                || routeMatches(requestPath, routesConfig.getAuthorized().getClient()))) {
             return chain.filter(exchange);
         }
 
