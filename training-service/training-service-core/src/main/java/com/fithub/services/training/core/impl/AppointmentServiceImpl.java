@@ -188,9 +188,4 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
     }
 
-    @Override
-    public String testLoadBalancer() {
-        return authServiceClient.testLoadBalancing().getBody();
-    }
-
 }

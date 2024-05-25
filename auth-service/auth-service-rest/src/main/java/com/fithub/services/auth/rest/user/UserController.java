@@ -71,4 +71,10 @@ public class UserController {
         return new ResponseEntity<>(userService.verifyAccessToken(), HttpStatus.OK);
     }
 
+    @Operation(summary = "Sign out")
+    @PostMapping(value = "/sign-out")
+    public ResponseEntity<GenericResponse> signOut(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws Exception {
+        return new ResponseEntity<>(userService.signOut(httpRequest, httpResponse), HttpStatus.OK);
+    }
+
 }

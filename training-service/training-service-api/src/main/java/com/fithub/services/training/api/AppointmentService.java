@@ -11,15 +11,13 @@ import com.fithub.services.training.api.model.reservation.ReservationResponse;
 public interface AppointmentService {
 
     List<ReservationResponse> getReservations(Long appointmentId) throws Exception;
-    
-    List<ClientAppointmentResponse> getAppointmentsForClient(String userId) throws Exception;
-    
-    List<CoachAppointmentResponse> getAppointmentsForCoach(String userId) throws Exception;
-    
-    List<AppointmentResponse> getAvailableAppointments(String userId) throws Exception;
-    
-    ReservationResponse makeReservationForAppointment(String userId, NewReservationRequest newReservationRequest) throws Exception;
 
-    String testLoadBalancer();
+    List<ClientAppointmentResponse> getAppointmentsForClient(String userId) throws Exception;
+
+    List<CoachAppointmentResponse> getAppointmentsForCoach(String userId) throws Exception;
+
+    List<AppointmentResponse> getAvailableAppointments(String userId) throws Exception;
+
+    ReservationResponse makeReservationForAppointment(String userId, NewReservationRequest newReservationRequest) throws Exception;
 
 }

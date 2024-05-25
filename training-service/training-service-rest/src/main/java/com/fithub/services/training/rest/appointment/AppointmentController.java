@@ -2,8 +2,6 @@ package com.fithub.services.training.rest.appointment;
 
 import java.util.List;
 
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +25,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AppointmentController {
 
-    private final DiscoveryClient discoveryClient;
     private final AppointmentService appointmentService;
 
     @Operation(summary = "Get reservations for appointment")
@@ -40,19 +37,6 @@ public class AppointmentController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<List<AppointmentResponse>> getAvailableAppointments(@Valid @PathVariable String id) throws Exception {
         return new ResponseEntity<>(appointmentService.getAvailableAppointments(id), HttpStatus.OK);
-    }
-  
-    // This method was made only for purposes of testing Eureka registry service
-    // connection.
-    @GetMapping("/service-instances/{applicationName}")
-    public ResponseEntity<List<ServiceInstance>> getServiceInstanceByApplicationName(@PathVariable String applicationName) {
-        return new ResponseEntity<>(discoveryClient.getInstances(applicationName), HttpStatus.OK);
-    }
-
-    // This method was made only for purposes of testing Ribbon load balancer.
-    @GetMapping("/load-balance/test")
-    public ResponseEntity<String> testLoadBalancing() {
-        return new ResponseEntity<>(appointmentService.testLoadBalancer(), HttpStatus.OK);
     }
 
 }

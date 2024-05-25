@@ -1,11 +1,15 @@
 package com.fithub.services.training.core.impl;
 
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
 import com.fithub.services.training.api.CoachService;
+import com.fithub.services.training.api.exception.ApiException;
 import com.fithub.services.training.api.exception.BadRequestException;
+import com.fithub.services.training.api.exception.NotFoundException;
 import com.fithub.services.training.api.model.GenericResponse;
 import com.fithub.services.training.api.model.coach.ClientCapacityUpdateRequest;
 import com.fithub.services.training.api.rabbitmq.CoachCapacityUpdateMessage;
@@ -15,6 +19,7 @@ import com.fithub.services.training.core.utils.RabbitMQHelper;
 import com.fithub.services.training.dao.model.CoachEntity;
 import com.fithub.services.training.dao.model.UserEntity;
 import com.fithub.services.training.dao.repository.CoachRepository;
+import com.fithub.services.training.dao.repository.UserRepository;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -27,7 +32,22 @@ public class CoachServiceImpl implements CoachService {
 
     private final RabbitMQHelper rabbitMQHelper;
     private final CoachRepository coachRepository;
+    private final UserRepository userRepository;
     private final Validator validator;
+
+    @Override
+    public void updateClientCapacity(String coachUuid, Integer capacityValue) throws ApiException {
+        Optional<UserEntity> coachUserEntity = userRepository.findById(coachUuid);
+        if (coachUserEntity.isEmpty() || Objects.isNull(coachUserEntity.get().getCoach())) {
+            throw new NotFoundException("The coach with provided UUID could not be found.");
+        }
+
+        CoachEntity coachEntity = coachUserEntity.get().getCoach();
+        coachEntity.setClientCapacity(capacityValue);
+
+        coachRepository.save(coachEntity);
+
+    }
 
     @Override
     public GenericResponse updateClientCapacity(ClientCapacityUpdateRequest clientCapacityUpdateRequest) throws Exception {
@@ -58,7 +78,7 @@ public class CoachServiceImpl implements CoachService {
         rabbitMQHelper.sendCoachCapacityUpdateEventToQueue(coachCapacityUpdateMessage);
 
         GenericResponse response = new GenericResponse();
-        response.setMessage("The client capacity update request is pending. Notification will be sent once it is complete.");
+        response.setMessage("The client capacity update request is pending. Email notification will be sent to %s once it is complete.");
         return response;
     }
 
