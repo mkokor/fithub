@@ -1,4 +1,4 @@
-package com.fithub.services.training.api.model.membership;
+package com.fithub.services.training.api.model.external;
 
 import java.io.Serializable;
 

@@ -12,12 +12,9 @@ import java.util.Optional;
 import org.assertj.core.api.Assertions;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -27,10 +24,10 @@ import com.fithub.services.training.api.exception.BadRequestException;
 import com.fithub.services.training.api.model.appointment.AppointmentResponse;
 import com.fithub.services.training.api.model.appointment.ClientAppointmentResponse;
 import com.fithub.services.training.api.model.appointment.CoachAppointmentResponse;
+import com.fithub.services.training.api.model.client.ClientMembershipResponse;
+import com.fithub.services.training.api.model.external.MembershipPaymentReportResponse;
 import com.fithub.services.training.api.model.reservation.NewReservationRequest;
 import com.fithub.services.training.api.model.reservation.ReservationResponse;
-import com.fithub.services.training.api.model.membership.MembershipPaymentReportResponse;
-import com.fithub.services.training.api.model.client.ClientMembershipResponse;
 import com.fithub.services.training.core.client.MembershipServiceClient;
 import com.fithub.services.training.core.impl.AppointmentServiceImpl;
 import com.fithub.services.training.dao.model.AppointmentEntity;
@@ -75,7 +72,7 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
 
     @BeforeMethod
     public void beforeMethod() {
-    	membershipServiceClient = Mockito.mock(MembershipServiceClient.class);
+        membershipServiceClient = Mockito.mock(MembershipServiceClient.class);
         appointmentRepository = Mockito.mock(AppointmentRepository.class);
         userRepository = Mockito.mock(UserRepository.class);
         clientRepository = Mockito.mock(ClientRepository.class);
@@ -85,8 +82,9 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
         LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
         localValidatorFactoryBean.afterPropertiesSet();
         validator = localValidatorFactoryBean;
-        
-        appointmentService = new AppointmentServiceImpl(appointmentRepository, userRepository, reservationRepository, reservationMapper, appointmentMapper, clientAppointmentMapper, coachAppointmentMapper, validator, null, membershipServiceClient);
+
+        appointmentService = new AppointmentServiceImpl(appointmentRepository, userRepository, reservationRepository, reservationMapper,
+                appointmentMapper, clientAppointmentMapper, coachAppointmentMapper, validator, membershipServiceClient);
 
     }
 
@@ -259,21 +257,21 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             ReservationResponse expectedResponse = new ReservationResponse();
             expectedResponse.setClientId(1L);
 
-            expectedResponse.setAppointmentId(1L); 
-            
+            expectedResponse.setAppointmentId(1L);
+
             ClientMembershipResponse clientMembership = new ClientMembershipResponse();
             clientMembership.setEmail("email@.com");
             clientMembership.setFirstName("Mary");
             clientMembership.setLastName("Ann");
             clientMembership.setUuid("client-id");
-            
-            
+
             MembershipPaymentReportResponse paymentReport = new MembershipPaymentReportResponse();
             paymentReport.setHasDebt(false);
             paymentReport.setClient(clientMembership);
-            
-            ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(paymentReport, HttpStatus.OK);
-            
+
+            ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(
+                    paymentReport, HttpStatus.OK);
+
             Mockito.when(membershipServiceClient.getMembershipPaymentReport(userId)).thenReturn(paymentReportResponse);
 
             Mockito.when(userRepository.findById(clientUser.getUuid())).thenReturn(Optional.of(clientUser));
@@ -314,7 +312,7 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             clientEntity.setUser(clientUser);
             clientEntity.setCoach(coachEntity);
             clientUser.setClient(clientEntity);
-            
+
             String userId = clientUser.getUuid();
             LocalTime time1 = LocalTime.now();
             LocalTime time2 = LocalTime.now();
@@ -341,21 +339,21 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             ReservationResponse expectedResponse = new ReservationResponse();
             expectedResponse.setClientId(1L);
 
-            expectedResponse.setAppointmentId(1L);  
-            
+            expectedResponse.setAppointmentId(1L);
+
             ClientMembershipResponse clientMembership = new ClientMembershipResponse();
             clientMembership.setEmail("email@.com");
             clientMembership.setFirstName("Mary");
             clientMembership.setLastName("Ann");
             clientMembership.setUuid("client-id");
-            
-            
+
             MembershipPaymentReportResponse paymentReport = new MembershipPaymentReportResponse();
             paymentReport.setHasDebt(false);
             paymentReport.setClient(clientMembership);
-            
-            ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(paymentReport, HttpStatus.OK);
-            
+
+            ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(
+                    paymentReport, HttpStatus.OK);
+
             Mockito.when(membershipServiceClient.getMembershipPaymentReport(userId)).thenReturn(paymentReportResponse);
 
             Mockito.when(userRepository.findById(clientUser.getUuid())).thenReturn(Optional.of(clientUser));
@@ -402,21 +400,21 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
 
             NewReservationRequest reservationRequest = new NewReservationRequest();
 
-            reservationRequest.setAppointmentId(1L);     
-            
+            reservationRequest.setAppointmentId(1L);
+
             ClientMembershipResponse clientMembership = new ClientMembershipResponse();
             clientMembership.setEmail("email@.com");
             clientMembership.setFirstName("Mary");
             clientMembership.setLastName("Ann");
             clientMembership.setUuid("client-id");
-            
-            
+
             MembershipPaymentReportResponse paymentReport = new MembershipPaymentReportResponse();
             paymentReport.setHasDebt(false);
             paymentReport.setClient(clientMembership);
-            
-            ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(paymentReport, HttpStatus.OK);
-            
+
+            ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(
+                    paymentReport, HttpStatus.OK);
+
             Mockito.when(membershipServiceClient.getMembershipPaymentReport(userEntity.getUuid())).thenReturn(paymentReportResponse);
 
             Mockito.when(userRepository.findById(userEntity.getUuid())).thenReturn(Optional.of(userEntity));
@@ -429,8 +427,8 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
         } catch (Exception exception) {
             Assert.fail();
         }
-    } 
-    
+    }
+
     @Test
     public void testMakeReservationForAppointment_ClientHasUnpayedDebt_ThrowsBadRequestException() {
         try {
@@ -443,7 +441,7 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             coachEntity.setId(1L);
             coachEntity.setUser(userEntity);
             userEntity.setCoach(coachEntity);
-            
+
             LocalTime time1 = LocalTime.now();
             LocalTime time2 = LocalTime.now();
 
@@ -454,37 +452,38 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             appointmentEntity.setCoach(coachEntity);
             appointmentEntity.setStartTime(time1);
             appointmentEntity.setEndTime(time2);
-            
+
             List<AppointmentEntity> availableAppointments = new ArrayList<>();
             availableAppointments.add(appointmentEntity);
-            
+
             NewReservationRequest reservationRequest = new NewReservationRequest();
-            reservationRequest.setAppointmentId(1L);     
-            
+            reservationRequest.setAppointmentId(1L);
+
             ClientMembershipResponse clientMembership = new ClientMembershipResponse();
             clientMembership.setEmail("email@.com");
             clientMembership.setFirstName("Mary");
             clientMembership.setLastName("Ann");
             clientMembership.setUuid("client-id");
-            
-            
+
             MembershipPaymentReportResponse paymentReport = new MembershipPaymentReportResponse();
             paymentReport.setHasDebt(true);
             paymentReport.setClient(clientMembership);
-            
-            ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(paymentReport, HttpStatus.OK);
-            
+
+            ResponseEntity<MembershipPaymentReportResponse> paymentReportResponse = new ResponseEntity<MembershipPaymentReportResponse>(
+                    paymentReport, HttpStatus.OK);
+
             Mockito.when(membershipServiceClient.getMembershipPaymentReport(userEntity.getUuid())).thenReturn(paymentReportResponse);
             Mockito.when(userRepository.findById(userEntity.getUuid())).thenReturn(Optional.of(userEntity));
             Mockito.when(coachRepository.findById(coachEntity.getId())).thenReturn(Optional.of(coachEntity));
             Mockito.when(appointmentRepository.findAvailableAppointmentsByCoachId(coachEntity.getId())).thenReturn(availableAppointments);
             Mockito.when(appointmentRepository.findById(appointmentEntity.getId())).thenReturn(Optional.of(appointmentEntity));
-            
-            assertThrows(BadRequestException.class, () -> appointmentService.makeReservationForAppointment(userEntity.getUuid(), reservationRequest));
+
+            assertThrows(BadRequestException.class,
+                    () -> appointmentService.makeReservationForAppointment(userEntity.getUuid(), reservationRequest));
         } catch (Exception exception) {
             Assert.fail();
         }
-    } 
+    }
 
     @Test
     public void testGetAppointmentsForCoach_ValidUserIdIsProvided_ReturnsAppointments() {

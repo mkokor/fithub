@@ -3,9 +3,9 @@ package com.fithub.services.training.api;
 import java.util.List;
 
 import com.fithub.services.training.api.exception.ThirdPartyApiException;
-import com.fithub.services.training.api.model.spotify.SpotifyAccessTokenResponse;
-import com.fithub.services.training.api.model.spotify.SpotifyTrackResponse;
-import com.fithub.services.training.api.model.spotify.TracksSearchResponse;
+import com.fithub.services.training.api.model.external.spotify.SpotifyAccessTokenResponse;
+import com.fithub.services.training.api.model.external.spotify.SpotifyTrackResponse;
+import com.fithub.services.training.api.model.external.spotify.TracksSearchResponse;
 
 public interface SpotifyApiService {
 

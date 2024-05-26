@@ -24,7 +24,7 @@ public class EmailController {
 
     private final EmailService emailService;
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<GenericResponse> sendFitHubEmailMessage(@Valid @RequestBody EmailSendMessageRequest emailSendMessageRequest)
             throws Exception {
         return new ResponseEntity<>(emailService.sendEmailMessage(emailSendMessageRequest), HttpStatus.OK);

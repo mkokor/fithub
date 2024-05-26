@@ -78,7 +78,7 @@ public class CoachServiceImpl implements CoachService {
         rabbitMQHelper.sendCoachCapacityUpdateEventToQueue(coachCapacityUpdateMessage);
 
         GenericResponse response = new GenericResponse();
-        response.setMessage("The client capacity update request is pending. Email notification will be sent to %s once it is complete.");
+        response.setMessage("The client capacity update request is pending. Email notification will be sent once it is complete.");
         return response;
     }
 

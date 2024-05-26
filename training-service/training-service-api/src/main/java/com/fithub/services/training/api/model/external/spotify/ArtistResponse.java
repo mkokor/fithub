@@ -1,4 +1,4 @@
-package com.fithub.services.training.api.model.spotify;
+package com.fithub.services.training.api.model.external.spotify;
 
 import java.io.Serializable;
 

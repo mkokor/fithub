@@ -15,10 +15,9 @@ import com.fithub.services.training.api.exception.UnauthorizedException;
 import com.fithub.services.training.api.model.appointment.AppointmentResponse;
 import com.fithub.services.training.api.model.appointment.ClientAppointmentResponse;
 import com.fithub.services.training.api.model.appointment.CoachAppointmentResponse;
-import com.fithub.services.training.api.model.membership.MembershipPaymentReportResponse;
+import com.fithub.services.training.api.model.external.MembershipPaymentReportResponse;
 import com.fithub.services.training.api.model.reservation.NewReservationRequest;
 import com.fithub.services.training.api.model.reservation.ReservationResponse;
-import com.fithub.services.training.core.client.AuthServiceClient;
 import com.fithub.services.training.core.client.MembershipServiceClient;
 import com.fithub.services.training.core.context.UserContext;
 import com.fithub.services.training.dao.model.AppointmentEntity;
@@ -51,7 +50,6 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final ClientAppointmentMapper clientAppointmentMapper;
     private final CoachAppointmentMapper coachAppointmentMapper;
     private final Validator validator;
-    private final AuthServiceClient authServiceClient;
     private final MembershipServiceClient membershipServiceClient;
 
     @Override

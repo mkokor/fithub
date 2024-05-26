@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.fithub.services.training.api.SpotifyApiService;
 import com.fithub.services.training.api.exception.ThirdPartyApiException;
-import com.fithub.services.training.api.model.spotify.SpotifyAccessTokenResponse;
-import com.fithub.services.training.api.model.spotify.SpotifyTrackResponse;
-import com.fithub.services.training.api.model.spotify.TracksSearchResponse;
+import com.fithub.services.training.api.model.external.spotify.SpotifyAccessTokenResponse;
+import com.fithub.services.training.api.model.external.spotify.SpotifyTrackResponse;
+import com.fithub.services.training.api.model.external.spotify.TracksSearchResponse;
 import com.fithub.services.training.core.client.SpotifyAccountsClient;
 import com.fithub.services.training.core.client.SpotifyApiClient;
 

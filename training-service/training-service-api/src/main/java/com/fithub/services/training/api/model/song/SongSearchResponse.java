@@ -3,7 +3,7 @@ package com.fithub.services.training.api.model.song;
 import java.io.Serializable;
 import java.util.List;
 
-import com.fithub.services.training.api.model.spotify.ArtistResponse;
+import com.fithub.services.training.api.model.external.spotify.ArtistResponse;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

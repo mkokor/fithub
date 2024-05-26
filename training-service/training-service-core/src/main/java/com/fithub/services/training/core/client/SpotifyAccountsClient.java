@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fithub.services.training.api.model.spotify.SpotifyAccessTokenResponse;
+import com.fithub.services.training.api.model.external.spotify.SpotifyAccessTokenResponse;
 
 @FeignClient(name = "spotify-accounts", url = "https://accounts.spotify.com/")
 public interface SpotifyAccountsClient {
