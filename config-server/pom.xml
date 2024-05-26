@@ -10,11 +10,11 @@
 		<relativePath/>
 	</parent>
 	
-	<groupId>com.fithub.services.config</groupId>
-	<artifactId>fithub-config-server</artifactId>
+	<groupId>com.fithub.services</groupId>
+	<artifactId>config-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>FitHub Configuration Server</name>
-	<description>FitHub Configuration Server</description>
+	<name>Configuration Server</name>
+	<description>Configuration Server</description>
 	
 	<properties>
 		<java.version>17</java.version>
