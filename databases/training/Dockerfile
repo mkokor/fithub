@@ -1,0 +1,6 @@
+FROM mysql:latest
+
+ENV MYSQL_DATABASE fithub_training
+ENV MYSQL_ROOT_PASSWORD root
+
+EXPOSE 3306

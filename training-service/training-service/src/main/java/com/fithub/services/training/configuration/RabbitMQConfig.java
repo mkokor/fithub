@@ -17,7 +17,7 @@ public class RabbitMQConfig {
     @Value("${rabbitmq.queue.coach-capacity-update-auth}")
     private String coachCapacityUpdateAuthQueueTitle;
 
-    @Value("${rabbitmq.queue.coach-capacity-update-auth}")
+    @Value("${rabbitmq.queue.coach-capacity-update-training}")
     private String coachCapacityUpdateTrainingQueueTitle;
 
     @Value("${rabbitmq.exchange.direct}")
