@@ -17,6 +17,9 @@ public class ClientResponse implements Serializable {
     private String userId;
     
     private Long coachId;
-
+    
+    private String firstName;
+    
+    private String lastName;
 
 }

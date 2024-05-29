@@ -12,6 +12,7 @@ import com.fithub.services.mealplan.api.MealPlanService;
 import com.fithub.services.mealplan.api.exception.ApiException;
 import com.fithub.services.mealplan.api.exception.BadRequestException;
 import com.fithub.services.mealplan.api.exception.NotFoundException;
+import com.fithub.services.mealplan.api.model.client.ClientResponse;
 import com.fithub.services.mealplan.api.model.coach.CoachResponse;
 import com.fithub.services.mealplan.api.model.dailymealplan.DailyMealPlanResponse;
 import com.fithub.services.mealplan.api.model.mealplan.MealPlanResponse;
@@ -67,7 +68,27 @@ public class ClientServiceImpl implements ClientService {
         return userMapper.entityToDto(clientEntity.get().getUser());
 
     }
+/*
+    @Override
+    public ClientResponse getClientResponse(String userId) throws NotFoundException {
+        Optional<ClientEntity> clientEntity = clientRepository.findByUserUuid(userId);
 
+        if (clientEntity.isEmpty()) {
+            throw new NotFoundException("The user associated with the client ID could not be found");
+        }
+
+        ClientResponse clientResponse = new ClientResponse();
+        clientResponse.setId(clientEntity.get().getId());
+        clientResponse.setUserId(userId);
+        clientResponse.setCoachId(clientEntity.get().getCoach().getId());
+
+        // Fetching the client name and last name
+        UserResponse userResponse = getClientNameAndLastName(userId);
+        clientResponse.setFirstName(userResponse.getFirstName());
+        clientResponse.setLastName(userResponse.getLastName());
+
+        return clientResponse;
+    }*/
     @Override
     public List<DailyMealPlanResponse> getDailyMealPlanByClientId(Long clientId) throws Exception {
         MealPlanResponse mealPlanResponse = getMealPlan(clientId);

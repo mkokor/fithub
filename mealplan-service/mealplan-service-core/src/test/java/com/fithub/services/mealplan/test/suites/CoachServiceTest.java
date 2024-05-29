@@ -28,6 +28,7 @@ public class CoachServiceTest extends BasicTestConfiguration {
 
     @Autowired
     private UserMapper userMapper;
+    
 
     private CoachRepository coachRepository;
     
@@ -38,7 +39,7 @@ public class CoachServiceTest extends BasicTestConfiguration {
     public void beforeMethod() {
         coachRepository = Mockito.mock(CoachRepository.class);
 
-        coachService = new CoachServiceImpl(coachRepository, userMapper);
+        coachService = new CoachServiceImpl(coachRepository, userMapper, null);
     }
 
     @Test
