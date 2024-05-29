@@ -1,0 +1,32 @@
+.logout-button {
+  opacity: 70%;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.logout-button:hover {
+  opacity: 100%;
+}
+
+.navbar {
+  position: absolute;
+  right: 30px;
+  margin-top: 3px;
+  height: 27px;
+  width: 27px;
+}
+
+#logout-div {
+  width: 100%;
+  margin-top: 20px;
+}
+
+#logout-div hr {
+  margin-bottom: 10px;
+}
+
+.side {
+  margin-left: 0px;
+  position: absolute;
+  left: 25px;
+}

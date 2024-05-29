@@ -1,0 +1,95 @@
+#nutrition-page-title {
+  font-size: 30px;
+}
+
+#mealplan-table {
+  border-collapse: separate; 
+  width: 100%;
+  margin-top: 30px;
+  border-spacing: 20px; 
+}
+
+.meal-data {
+  text-align: center;
+}
+
+.day-cell {
+  text-align: center;
+  color: whitesmoke;
+  background-color: #69eba6;
+}
+
+.day-cell, .meal-title {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.meal-title {
+  text-align: left;
+  color: rgb(53, 53, 53);
+  background-color: rgba(239, 244, 238, 0.996);
+}
+
+#mealplan-table-div {
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+#mealplan-bg {
+  height: 75vh;
+  overflow-y: hidden; 
+  background-image: url('../../public/images/nutrition-bg.png');
+}
+
+#mealplan-table, #mealplan-table th, #mealplan-table td {
+  border: 0px;
+  border-radius: 10px;
+}
+
+#meal-cell {
+  opacity: 0%;;
+}
+
+#header td, .meal-title {
+  font-size: 17px;
+}
+
+#header td {
+  font-weight: 500;
+}
+
+#download-link {
+  cursor: pointer;
+  transition: 0.3s ease;
+  opacity: 70%;
+  transition: 0.3s ease;
+  height: 35px;
+  width: 35px;
+  position: absolute;
+  right: 110px;
+}
+
+#download-link:hover {
+  text-decoration: underline;
+  opacity: 100%;
+}
+
+.meal-data {
+  font-style: italic;
+}
+
+.nutrition-banner {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  place-items: center;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 3px 6px, rgba(50, 50, 50, 0.2) 0px 2px 4px;
+}
+
+.nutrition-banner img {
+  height: 48px;
+  width: 48px;
+  margin-left: 10px;
+}

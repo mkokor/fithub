@@ -1,0 +1,149 @@
+#chat {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 10px;
+  height: 88vh;
+}
+
+#participants-div {
+  border-right: 1px solid rgb(226, 226, 226);
+  background-color: rgba(147, 184, 169, 0.17);
+}
+
+#divider {
+  opacity: 40%
+}
+
+#participants-title {
+  font-size: 20px;
+}
+
+.participant-div {
+  display: flex;
+  padding-left: 15px;
+  margin-bottom: 5px;
+}
+
+.participant-nickname {
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+#chat-footer {
+  display: grid;
+  grid-template-columns: 9fr 1fr;
+}
+
+#message-section {
+  display: grid;
+  gap: 0px;
+  grid-template-rows: 95% 5%;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.message {
+  display: inline-block;
+  position: relative;
+  left: 0px;
+  height: auto;
+  padding: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.message-author {
+  padding-left: 7px;
+  padding-bottom: 2px;
+  font-weight: 500;
+  font-size: 13px;
+  opacity: 85%;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  text-align: left;
+}
+
+.message-content {
+  min-height: 25px;
+  max-width: 500px;
+  min-width: 30px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+  margin-left: 5px;
+  padding: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  background-color: #dadada;
+  color: rgb(28, 28, 28);
+  justify-content: flex-start;
+  padding-left: 10px;
+}
+
+.message-content p {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.text-time-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.message-time-info {
+  display: flex;
+  font-size: 11px;
+  padding-top: 2px;
+  color: #798489;
+}
+
+.message-time {
+  width: 100%;
+  text-align: right;
+  padding-right: 5px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+#chat-footer input {
+  height: 100%;
+  flex: 85%;
+  border: 0;
+  padding: 0px;
+  font-size: 1em;
+  outline: none;
+  padding: 5px; 
+  padding-left: 20px;
+  padding-right: 20px;
+  border: none; 
+  height: 30px;
+  border-radius: 20px; 
+  box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+#send-message-button {
+  border: 0;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  opacity: 70%;
+  height: 35px;
+  width: 35px;
+  margin-left: 10px;
+  transition: 0.3s ease;
+}
+
+#send-message-button:hover {
+  opacity: 100%;
+}
+
