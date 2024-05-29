@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.fithub.services.training.api.model.GenericResponse;
 import com.fithub.services.training.api.model.external.EmailSendMessageRequest;
 
-@FeignClient(name = "fithub-auth-service")
+@FeignClient(name = "auth-service")
 public interface AuthServiceClient {
 
     @PostMapping(value = "/email", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -1,0 +1,137 @@
+services:
+  database:
+    build: ./databases
+    ports:
+      - "3306:3306"
+
+  config:
+    build: ./config-server
+    ports:
+      - "8888:8888"
+
+  eureka-service:
+    build: ./eureka-service
+    ports:
+      - "8761:8761"
+    depends_on:
+      - config
+
+  system-events:
+    build: ./system-events-service
+    ports:
+      - "9090:9090"
+    depends_on:
+      - database
+      - config
+      - eureka-service
+    environment:
+      - EUREKA_URI=http://eureka-service:8761/eureka
+      - CONFIG_SERVER_URI=configserver:http://root:s3cr3t@config:8888
+
+  rabbitmq:
+    build: ./rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  auth-service:
+    build: ./auth-service
+    ports:
+      - "9000:9000"
+    depends_on:
+      - database
+      - rabbitmq
+      - config
+      - eureka-service
+      - system-events
+    environment:
+      - EUREKA_URI=http://eureka-service:8761/eureka
+      - RABBITMQ_HOST=rabbitmq
+      - MYSQL_HOST=database
+      - CONFIG_SERVER_URI=configserver:http://root:s3cr3t@config:8888
+
+  training-service:
+    build: ./training-service
+    ports:
+      - "8000:8000"
+    depends_on:
+      - database
+      - rabbitmq
+      - config
+      - eureka-service
+      - system-events
+    environment:
+      - EUREKA_URI=http://eureka-service:8761/eureka
+      - RABBITMQ_HOST=rabbitmq
+      - MYSQL_HOST=database
+      - CONFIG_SERVER_URI=configserver:http://root:s3cr3t@config:8888
+
+  chat-service:
+    build: ./chat-service
+    ports:
+      - "8002:8002"
+    depends_on:
+      - database
+      - rabbitmq
+      - config
+      - eureka-service
+      - system-events
+    environment:
+      - EUREKA_URI=http://eureka-service:8761/eureka
+      - RABBITMQ_HOST=rabbitmq
+      - MYSQL_HOST=database
+      - CONFIG_SERVER_URI=configserver:http://root:s3cr3t@config:8888
+
+  membership-service:
+    build: ./membership-service
+    ports:
+      - "8003:8003"
+    depends_on:
+      - database
+      - rabbitmq
+      - config
+      - eureka-service
+      - system-events
+    environment:
+      - EUREKA_URI=http://eureka-service:8761/eureka
+      - RABBITMQ_HOST=rabbitmq
+      - MYSQL_HOST=database
+      - CONFIG_SERVER_URI=configserver:http://root:s3cr3t@config:8888
+
+  mealplan-service:
+    build: ./mealplan-service
+    ports:
+      - "8004:8004"
+    depends_on:
+      - database
+      - rabbitmq
+      - config
+      - eureka-service
+      - system-events
+    environment:
+      - EUREKA_URI=http://eureka-service:8761/eureka
+      - RABBITMQ_HOST=rabbitmq
+      - MYSQL_HOST=database
+      - CONFIG_SERVER_URI=configserver:http://root:s3cr3t@config:8888
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+      - rabbitmq
+      - config
+      - eureka-service
+      - system-events
+      - auth-service
+      - chat-service
+      - training-service
+      - membership-service
+      - mealplan-service
+    environment:
+      - AUTH_SERVICE_URI=http://auth-service:9000
+      - EUREKA_URI=http://eureka-service:8761/eureka
+      - RABBITMQ_HOST=rabbitmq
+      - MYSQL_HOST=database
+      - CONFIG_SERVER_URI=configserver:http://root:s3cr3t@config:8888

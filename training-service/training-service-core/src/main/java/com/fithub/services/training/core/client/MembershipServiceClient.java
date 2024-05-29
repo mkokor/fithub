@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fithub.services.training.api.model.external.MembershipPaymentReportResponse;
 
-@FeignClient(name = "fithub-membership-service")
+@FeignClient(name = "membership-service")
 public interface MembershipServiceClient {
 
     @GetMapping("/membership/report")
     ResponseEntity<MembershipPaymentReportResponse> getMembershipPaymentReport(@RequestParam("client_uuid") String clientUuid);
-  
+
 }
