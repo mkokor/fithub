@@ -43,7 +43,6 @@ services:
       - rabbitmq
       - config
       - eureka-service
-      - system-events
     environment:
       - EUREKA_URI=http://eureka-service:8761/eureka
       - RABBITMQ_HOST=rabbitmq
@@ -59,7 +58,6 @@ services:
       - rabbitmq
       - config
       - eureka-service
-      - system-events
     environment:
       - EUREKA_URI=http://eureka-service:8761/eureka
       - RABBITMQ_HOST=rabbitmq
@@ -75,7 +73,6 @@ services:
       - rabbitmq
       - config
       - eureka-service
-      - system-events
     environment:
       - EUREKA_URI=http://eureka-service:8761/eureka
       - RABBITMQ_HOST=rabbitmq
@@ -91,7 +88,6 @@ services:
       - rabbitmq
       - config
       - eureka-service
-      - system-events
     environment:
       - EUREKA_URI=http://eureka-service:8761/eureka
       - RABBITMQ_HOST=rabbitmq
@@ -107,7 +103,6 @@ services:
       - rabbitmq
       - config
       - eureka-service
-      - system-events
     environment:
       - EUREKA_URI=http://eureka-service:8761/eureka
       - RABBITMQ_HOST=rabbitmq
