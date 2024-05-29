@@ -1,6 +1,6 @@
 export const userLogIn = async (loginData) => {
   try {
-    const response = await fetch('/fithub-auth-service/user/sign-in', {
+    const response = await fetch('/auth-service/user/sign-in', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -25,7 +25,7 @@ export const userLogIn = async (loginData) => {
 
 export const userRegister = async (registerData) => {
   try {
-    const response = await fetch('/fithub-auth-service/client/sign-up', {
+    const response = await fetch('/auth-service/client/sign-up', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -50,7 +50,7 @@ export const userRegister = async (registerData) => {
 
 export const userAccessRefresh = async () => {
   try {
-    const response = await fetch('/fithub-auth-service/user/access-refresh', {
+    const response = await fetch('/auth-service/user/access-refresh', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -74,7 +74,7 @@ export const userAccessRefresh = async () => {
 
 export const getAvailableCoaches = async () => {
   try {
-    const response = await fetch('/fithub-auth-service/coach');
+    const response = await fetch('/auth-service/coach');
     
     if (!response.ok) {
       throw new Error('Failed to fetch coach data');
@@ -90,7 +90,7 @@ export const getAvailableCoaches = async () => {
 
 export const getCoachDetails = async (coachId) => {
   try {
-    const response = await fetch(`/fithub-auth-service/coach/${coachId}`);
+    const response = await fetch(`/auth-service/coach/${coachId}`);
     
     if (!response.ok) {
       throw new Error('Failed to fetch coach data');
@@ -107,7 +107,7 @@ export const getCoachDetails = async (coachId) => {
 export const confirmCode = async (confirmationData) => {
   try {
     console.log(confirmationData)
-    const response = await fetch(`/fithub-auth-service/client/${confirmationData.email}/email-confirmation`, {
+    const response = await fetch(`/auth-service/client/${confirmationData.email}/email-confirmation`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -131,7 +131,7 @@ export const confirmCode = async (confirmationData) => {
 
 export const resendConfirmationCode = async (emailData) => {
   try {
-    const response = await fetch(`/fithub-auth-service/client/${emailData}/email-confirmation-code/resend`, {
+    const response = await fetch(`/auth-service/client/${emailData}/email-confirmation-code/resend`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -155,7 +155,7 @@ export const resendConfirmationCode = async (emailData) => {
 
 export const getPasswordResetCode = async (email) => {
   try {
-    const response = await fetch(`/fithub-auth-service/user/${email}/password-reset-code`, {
+    const response = await fetch(`/auth-service/user/${email}/password-reset-code`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -178,7 +178,7 @@ export const getPasswordResetCode = async (email) => {
 
 export const resetPassword = async (resetData) => {
   try {
-    const response = await fetch(`/fithub-auth-service/user/${resetData.email}/password-reset`, {
+    const response = await fetch(`/auth-service/user/${resetData.email}/password-reset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -203,7 +203,7 @@ export const signOut = async () => {
   try {
     const user = JSON.parse(localStorage.getItem('user'));
     const refreshToken = user?.accessToken;
-    const response = await fetch(`/fithub-auth-service/user/sign-out`, {
+    const response = await fetch(`/auth-service/user/sign-out`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

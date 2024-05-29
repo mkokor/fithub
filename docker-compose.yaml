@@ -130,3 +130,10 @@ services:
       - RABBITMQ_HOST=rabbitmq
       - MYSQL_HOST=database
       - CONFIG_SERVER_URI=configserver:http://root:s3cr3t@config:8888
+
+  web-app:
+    build: ./fithub-fe
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api-gateway

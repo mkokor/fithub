@@ -1,6 +1,6 @@
 export const getMealPlan = async () => {
   try {
-    const response = await fetch('/fithub-mealplan-service/client/1/dailyMealPlan');
+    const response = await fetch('/mealplan-service/client/1/dailyMealPlan');
     
     if (!response.ok) {
       throw new Error('Failed to fetch mealplan data');
@@ -17,7 +17,7 @@ export const getMealPlan = async () => {
 
 export const getChatroomData = async () => {
   try {
-    const response = await fetch('/fithub-chat-service/chatroom/29262910-09fb-40e8-9db7-c05372ad6ae6/data');
+    const response = await fetch('/chat-service/chatroom/29262910-09fb-40e8-9db7-c05372ad6ae6/data');
     
     if (!response.ok) {
       throw new Error('Failed to fetch chatroom data');
@@ -33,7 +33,7 @@ export const getChatroomData = async () => {
 
 export const sendNewMessage = async (messageData) => {
   try {
-    const response = await fetch('/fithub-chat-service/chatroom/29262910-09fb-40e8-9db7-c05372ad6ae6/send-message', {
+    const response = await fetch('/chat-service/chatroom/29262910-09fb-40e8-9db7-c05372ad6ae6/send-message', {
       method: 'POST', 
       headers: {
         'Content-Type': 'application/json' 
