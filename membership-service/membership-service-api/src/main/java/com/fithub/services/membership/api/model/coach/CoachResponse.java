@@ -6,17 +6,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(description = "Properties of a coach response object")
+@Schema(description = "The properties of a coach response object.")
 public class CoachResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
-
+    private String uuid;
     private String firstName;
-
     private String lastName;
-
-    private String biography;
 
 }

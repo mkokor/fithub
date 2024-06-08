@@ -11,7 +11,7 @@ import com.fithub.services.membership.dao.model.ClientEntity;
 @Mapper(componentModel = "spring")
 public interface ClientMapper {
 
-    @Mapping(source = "coach.id", target = "coachId")
+    @Mapping(source = "coach.id", target = "uuid")
     public ClientResponse entityToDto(ClientEntity clientEntity);
 
     public List<ClientResponse> entitiesToDtos(List<ClientEntity> clientEntities);

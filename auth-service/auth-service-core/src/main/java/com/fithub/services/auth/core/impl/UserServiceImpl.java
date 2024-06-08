@@ -42,8 +42,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     @Value("${password.reset.code.expiration.minutes}")
@@ -61,16 +63,6 @@ public class UserServiceImpl implements UserService {
     private final RefreshTokenRepository refreshTokenRepository;
     private final PasswordResetCodeRepository passwordResetCodeRepository;
     private final Validator validator;
-
-    public UserServiceImpl(TokenHelper tokenHelper, UserRepository userRepository, RefreshTokenRepository refreshTokenRepository,
-            PasswordResetCodeRepository passwordResetCodeRepository, Validator validator, EmailHelper emailHelper) {
-        this.tokenHelper = tokenHelper;
-        this.userRepository = userRepository;
-        this.refreshTokenRepository = refreshTokenRepository;
-        this.passwordResetCodeRepository = passwordResetCodeRepository;
-        this.validator = validator;
-        this.emailHelper = emailHelper;
-    }
 
     private static Role getRole(UserEntity userEntity) {
         return userEntity.getClient() != null ? Role.CLIENT : Role.COACH;
@@ -108,6 +100,7 @@ public class UserServiceImpl implements UserService {
         UserSignInResponse userSignInResponse = new UserSignInResponse();
         userSignInResponse.setAccessToken(tokenHelper.generateAccessToken(userEntity));
         userSignInResponse.setRole(getRole(userEntity).getValue());
+        userSignInResponse.setUsername(userEntity.getUsername());
 
         final Pair<RefreshTokenEntity, String> refreshToken = tokenHelper.generateRefreshToken(userEntity);
         httpResponse.addCookie(createCookie(refreshTokenCookieName, refreshToken.getValue1(), true,

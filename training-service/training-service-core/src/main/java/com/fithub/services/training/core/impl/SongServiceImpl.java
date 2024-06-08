@@ -7,7 +7,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -25,20 +24,24 @@ import com.fithub.services.training.api.model.external.spotify.TracksSearchRespo
 import com.fithub.services.training.api.model.song.SongRequestCreateRequest;
 import com.fithub.services.training.api.model.song.SongRequestResponse;
 import com.fithub.services.training.api.model.song.SongSearchResponse;
+import com.fithub.services.training.core.context.UserContext;
 import com.fithub.services.training.core.utils.ThirdPartyApiCallable;
 import com.fithub.services.training.dao.model.AppointmentEntity;
+import com.fithub.services.training.dao.model.ClientEntity;
+import com.fithub.services.training.dao.model.ReservationEntity;
 import com.fithub.services.training.dao.model.SongRequestEntity;
 import com.fithub.services.training.dao.model.UserEntity;
 import com.fithub.services.training.dao.repository.AppointmentRepository;
 import com.fithub.services.training.dao.repository.SongRequestRepository;
-import com.fithub.services.training.dao.repository.UserRepository;
 import com.fithub.services.training.mapper.SongMapper;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class SongServiceImpl implements SongService {
 
     @Value("${spotify.client_id}")
@@ -50,21 +53,9 @@ public class SongServiceImpl implements SongService {
     private String spotifyAccessToken;
     private final SpotifyApiService spotifyApiService;
     private final AppointmentRepository appointmentRepository;
-    private final UserRepository userRepository;
     private final SongRequestRepository songRequestRepository;
     private final SongMapper songMapper;
     private final Validator validator;
-
-    @Autowired
-    public SongServiceImpl(SpotifyApiService spotifyApiService, AppointmentRepository appointmentRepository, SongMapper songMapper,
-            Validator validator, UserRepository userRepository, SongRequestRepository songRequestRepository) {
-        this.spotifyApiService = spotifyApiService;
-        this.userRepository = userRepository;
-        this.songRequestRepository = songRequestRepository;
-        this.songMapper = songMapper;
-        this.validator = validator;
-        this.appointmentRepository = appointmentRepository;
-    }
 
     private void updateSpotifyAuthentication() throws ThirdPartyApiException {
         SpotifyAccessTokenResponse spotifyAccessTokenResponse = this.spotifyApiService.retrieveAccessToken("client_credentials",
@@ -103,11 +94,6 @@ public class SongServiceImpl implements SongService {
         }
     }
 
-    // This method is made as a mock until security is implemented.
-    private UserEntity getAccessTokenOwner() {
-        return userRepository.findById("mary-ann").get();
-    }
-
     @Override
     public List<SongSearchResponse> search(Integer pageNumber, Integer pageSize, String songTitleSearchTerm) throws Exception {
         if (songTitleSearchTerm == null || songTitleSearchTerm.length() < 2) {
@@ -127,8 +113,23 @@ public class SongServiceImpl implements SongService {
         return songSearchResults;
     }
 
+    private void checkIfClientHasReservation(final ClientEntity clientEntity, final AppointmentEntity appointmentEntity)
+            throws BadRequestException {
+        final List<ReservationEntity> reservations = clientEntity.getReservations();
+
+        for (ReservationEntity reservationEntity : reservations) {
+            if (reservationEntity.getAppointment().getId().equals(appointmentEntity.getId())) {
+                return;
+            }
+        }
+
+        throw new BadRequestException("The client does not have this reservation at this appointment.");
+    }
+
     @Override
     public SongRequestResponse createSongRequest(SongRequestCreateRequest songRequestCreateRequest) throws Exception {
+        final UserEntity userEntity = UserContext.getCurrentContext().getUser();
+
         Set<ConstraintViolation<SongRequestCreateRequest>> violations = validator.validate(songRequestCreateRequest);
         if (!violations.isEmpty()) {
             throw new ConstraintViolationException(violations);
@@ -143,11 +144,15 @@ public class SongServiceImpl implements SongService {
             throw new NotFoundException("The appointment with provided ID could not be found.");
         }
 
+        final AppointmentEntity appointmentEntity = appointment.get();
+        final ClientEntity clientEntity = userEntity.getClient();
+        checkIfClientHasReservation(clientEntity, appointmentEntity);
+
         SongRequestEntity songRequestEntity = new SongRequestEntity();
         songRequestEntity.setSongSpotifyId(spotifyTrackResponse.getSpotifyId());
         songRequestEntity.setCreatedAt(LocalDateTime.now());
         songRequestEntity.setAppointment(appointment.get());
-        songRequestEntity.setCreatedBy(getAccessTokenOwner().getClient());
+        songRequestEntity.setCreatedBy(clientEntity);
         songRequestRepository.save(songRequestEntity);
 
         return songMapper.songRequestEntityToSongRequestResponse(songRequestEntity);
