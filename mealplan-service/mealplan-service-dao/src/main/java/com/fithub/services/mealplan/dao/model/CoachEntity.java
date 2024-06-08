@@ -12,7 +12,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
@@ -31,8 +30,8 @@ public class CoachEntity {
 
     @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL)
     private List<ClientEntity> clients;
-    
-    @OneToMany(mappedBy = "modifiedBy", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "lastModifiedBy", cascade = CascadeType.ALL)
     private List<MealPlanEntity> mealPlans;
 
 }

@@ -14,11 +14,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Data
@@ -29,21 +25,19 @@ public class MealPlanEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
     private Long id;
-    
+
     @OneToOne
     @JoinColumn(name = "client_id", nullable = false)
-    @NotNull(message = "The client id must not be blank.")
     private ClientEntity client;
-    
-    @Column(name = "modified")
-    private LocalDateTime modified;
-    
+
+    @Column(name = "last_modified")
+    private LocalDateTime lastModified;
+
     @ManyToOne
-    @JoinColumn(name = "modified_by", nullable = false)
-    @NotNull(message = "Creator of meal plan must not be blank.")
-    private CoachEntity modifiedBy;
-    
+    @JoinColumn(name = "last_modified_by", nullable = false)
+    private CoachEntity lastModifiedBy;
+
     @OneToMany(mappedBy = "mealPlan", cascade = CascadeType.ALL)
     private List<DailyMealPlanEntity> mealPlans;
-    
+
 }

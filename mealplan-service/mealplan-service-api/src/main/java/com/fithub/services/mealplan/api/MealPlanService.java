@@ -1,16 +1,15 @@
 package com.fithub.services.mealplan.api;
 
-import java.util.List;
-
-import com.fithub.services.mealplan.api.model.dailymealplan.DailyMealPlanResponse;
-import com.fithub.services.mealplan.api.model.dailymealplan.MealPlanUpdateRequest;
+import com.fithub.services.mealplan.api.exception.ApiException;
+import com.fithub.services.mealplan.api.model.mealplan.MealPlanResponse;
+import com.fithub.services.mealplan.dao.model.ClientEntity;
 
 public interface MealPlanService {
-	List<DailyMealPlanResponse> getDailyMealByDay(Long mealPlanId) throws Exception;
 
-	List<DailyMealPlanResponse> updateMealPlan(Long clientId, MealPlanUpdateRequest mealPlanUpdateRequest)
-			throws Exception;
+    void createMealPlan(final ClientEntity clientEntity);
+
+    MealPlanResponse getMealPlanByClientUuid(final String clientUuid) throws ApiException;
+
+    MealPlanResponse getMealPlanClient();
 
 }
-
-

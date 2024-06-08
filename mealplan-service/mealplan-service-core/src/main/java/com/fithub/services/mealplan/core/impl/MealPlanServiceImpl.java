@@ -1,95 +1,103 @@
 package com.fithub.services.mealplan.core.impl;
 
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.time.format.TextStyle;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.fithub.services.mealplan.api.MealPlanService;
+import com.fithub.services.mealplan.api.exception.ApiException;
+import com.fithub.services.mealplan.api.exception.BadRequestException;
 import com.fithub.services.mealplan.api.exception.NotFoundException;
-import com.fithub.services.mealplan.api.model.dailymealplan.DailyMealPlanResponse;
-import com.fithub.services.mealplan.api.model.dailymealplan.MealPlanUpdateRequest;
+import com.fithub.services.mealplan.api.model.mealplan.MealPlanResponse;
+import com.fithub.services.mealplan.core.context.UserContext;
 import com.fithub.services.mealplan.dao.model.ClientEntity;
+import com.fithub.services.mealplan.dao.model.CoachEntity;
 import com.fithub.services.mealplan.dao.model.DailyMealPlanEntity;
 import com.fithub.services.mealplan.dao.model.MealPlanEntity;
-import com.fithub.services.mealplan.dao.repository.ClientRepository;
+import com.fithub.services.mealplan.dao.model.UserEntity;
 import com.fithub.services.mealplan.dao.repository.DailyMealPlanRepository;
 import com.fithub.services.mealplan.dao.repository.MealPlanRepository;
+import com.fithub.services.mealplan.dao.repository.UserRepository;
 import com.fithub.services.mealplan.mapper.DailyMealPlanMapper;
+import com.fithub.services.mealplan.mapper.MealPlanMapper;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class MealPlanServiceImpl implements MealPlanService {
 
+    private final UserRepository userRepository;
     private final MealPlanRepository mealPlanRepository;
-    private final DailyMealPlanMapper dailyMealPlanMapper;
     private final DailyMealPlanRepository dailyMealPlanRepository;
-    private final ClientRepository clientRepository;
+    private final MealPlanMapper mealPlanMapper;
+    private final DailyMealPlanMapper dailyMealPlanMapper;
 
-    public MealPlanServiceImpl() {
-        this.mealPlanRepository = null;
-        this.dailyMealPlanMapper = null;
-        this.dailyMealPlanRepository = null;
-        this.clientRepository = null;
+    @Override
+    public void createMealPlan(ClientEntity clientEntity) {
+        MealPlanEntity mealPlanEntity = new MealPlanEntity();
+        mealPlanEntity.setClient(clientEntity);
+        mealPlanEntity.setLastModified(LocalDateTime.now());
+        mealPlanEntity.setLastModifiedBy(clientEntity.getCoach());
+        mealPlanRepository.save(mealPlanEntity);
 
+        final List<DayOfWeek> days = Arrays.asList(DayOfWeek.values());
+        for (DayOfWeek day : days) {
+            DailyMealPlanEntity dailyMealPlanEntity = new DailyMealPlanEntity();
+            dailyMealPlanEntity.setDay(day.getDisplayName(TextStyle.FULL, Locale.ENGLISH));
+            dailyMealPlanEntity.setAmSnack("/");
+            dailyMealPlanEntity.setBreakfast("/");
+            dailyMealPlanEntity.setDinner("/");
+            dailyMealPlanEntity.setLunch("/");
+            dailyMealPlanEntity.setMealPlan(mealPlanEntity);
+            dailyMealPlanEntity.setPmSnack("/");
+
+            dailyMealPlanRepository.save(dailyMealPlanEntity);
+        }
     }
 
-    public MealPlanServiceImpl(MealPlanRepository mealPlanRepository, DailyMealPlanMapper dailyMealPlanMapper) {
+    private MealPlanResponse createMealPlanResponse(final MealPlanEntity mealPlanEntity) {
+        MealPlanResponse mealPlanResponse = mealPlanMapper.entityToDto(mealPlanEntity);
 
-        this.mealPlanRepository = mealPlanRepository;
-        this.dailyMealPlanMapper = dailyMealPlanMapper;
-        this.dailyMealPlanRepository = null;
-        this.clientRepository = null;
+        mealPlanResponse
+                .setDailyMealPlans(dailyMealPlanMapper.entitiesToDtos(dailyMealPlanRepository.findByMealPlanId(mealPlanEntity.getId())));
 
-    }
-
-    public MealPlanServiceImpl(MealPlanRepository mealPlanRepository, DailyMealPlanMapper dailyMealPlanMapper,
-            DailyMealPlanRepository dailyMealPlanRepository, ClientRepository clientRepository) {
-        this.mealPlanRepository = mealPlanRepository;
-        this.dailyMealPlanMapper = dailyMealPlanMapper;
-        this.dailyMealPlanRepository = dailyMealPlanRepository;
-        this.clientRepository = clientRepository;
+        return mealPlanResponse;
     }
 
     @Override
-    public List<DailyMealPlanResponse> getDailyMealByDay(Long mealPlanId) throws Exception {
-        Optional<MealPlanEntity> mealPlanEntity = mealPlanRepository.findById(mealPlanId);
+    public MealPlanResponse getMealPlanByClientUuid(final String clientUuid) throws ApiException {
+        final UserEntity userEntity = UserContext.getCurrentContext().getUser();
+        final CoachEntity coachEntity = userEntity.getCoach();
 
-        if (mealPlanEntity.isEmpty()) {
-            throw new NotFoundException("The meal plan with provided ID could not be found");
+        Optional<UserEntity> clientUser = userRepository.findById(clientUuid);
+        if (clientUser.isEmpty()) {
+            throw new NotFoundException("The client with the provided UUID could not be found.");
+        }
+        if (Objects.nonNull(clientUser.get().getCoach())) {
+            throw new BadRequestException("The provided UUID is related to the coach user.");
+        }
+        if (!clientUser.get().getClient().getCoach().getId().equals(coachEntity.getId())) {
+            throw new BadRequestException("The coach and the client are not related.");
         }
 
-        return dailyMealPlanMapper.entitiesToDtos(mealPlanEntity.get().getMealPlans());
+        Optional<MealPlanEntity> mealPlan = mealPlanRepository.findByClientUuid(clientUuid);
+        return createMealPlanResponse(mealPlan.get());
     }
 
     @Override
-    public List<DailyMealPlanResponse> updateMealPlan(Long clientId, MealPlanUpdateRequest mealPlanUpdateRequest) throws Exception {
+    public MealPlanResponse getMealPlanClient() {
+        final UserEntity userEntity = UserContext.getCurrentContext().getUser();
+        final ClientEntity clientEntity = userEntity.getClient();
 
-        Optional<ClientEntity> clientEntity = clientRepository.findById(clientId);
-        if (clientEntity.isEmpty()) {
-            throw new NotFoundException("The client with the provided ID could not be found");
-        }
-
-        MealPlanEntity mealPlan = mealPlanRepository.findMealPlanByClientId(clientEntity.get().getId());
-        if (mealPlan.getMealPlans().isEmpty()) {
-            throw new NotFoundException("The meal plan the with provided ID could not be found");
-        }
-
-        List<DailyMealPlanEntity> dailyPlans = mealPlan.getMealPlans();
-
-        for (DailyMealPlanEntity dailyPlan : dailyPlans) {
-
-            dailyPlan.setAmSnack(mealPlanUpdateRequest.getAmSnack());
-            dailyPlan.setPmSnack(mealPlanUpdateRequest.getPmSnack());
-            dailyPlan.setBreakfast(mealPlanUpdateRequest.getBreakfast());
-            dailyPlan.setDinner(mealPlanUpdateRequest.getDinner());
-            dailyPlan.setLunch(mealPlanUpdateRequest.getLunch());
-            dailyMealPlanRepository.save(dailyPlan);
-        }
-
-        mealPlan.setMealPlans(dailyPlans);
-        mealPlanRepository.save(mealPlan);
-
-        return dailyMealPlanMapper.entitiesToDtos(dailyPlans);
+        return createMealPlanResponse(mealPlanRepository.findByClientUuid(clientEntity.getUser().getUuid()).get());
     }
 
 }
