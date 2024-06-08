@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -25,9 +26,10 @@ public class MembershipEntity {
     @Column(updatable = false)
     private Long id;
 
-    @Column(name = "amount", nullable = false)
-    @NotNull(message = "The amount must be specified")
-    private double amount;
+    @Column(name = "monthly_amount", nullable = false)
+    @NotNull(message = "The amount must be specified.")
+    @Min(value = 0, message = "The monthly amount must not be negative.")
+    private Double monthlyAmount;
 
     @OneToOne
     @JoinColumn(name = "client_id", nullable = false)

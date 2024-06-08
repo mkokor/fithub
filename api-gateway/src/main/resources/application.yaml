@@ -1,9 +1,0 @@
-routes:
-  authorized:
-    any:
-      - "^/user/access-token/refresh"
-    client:
-      - "^something/.*"
-    coach:
-      - "^/appointment/.*/reservation"
-      - "^/coach/client-capacity"

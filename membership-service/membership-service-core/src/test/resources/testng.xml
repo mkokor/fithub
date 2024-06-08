@@ -6,9 +6,4 @@
             <class name="com.fithub.services.membership.test.suites.MembershipServiceTest"/>
         </classes>
     </test>
-    <test thread-count="5" name="CoachService">
-        <classes>
-            <class name="com.fithub.services.membership.test.suites.CoachServiceTest"/>
-        </classes>
-    </test>
 </suite>

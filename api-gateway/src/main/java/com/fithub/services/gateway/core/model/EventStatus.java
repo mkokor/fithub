@@ -1,6 +1,6 @@
-package com.fithub.services.training.api.enums;
+package com.fithub.services.gateway.core.model;
 
-public enum ResponseType {
+public enum EventStatus {
 
     SUCCESS("SUCCESS"),
 
@@ -8,7 +8,7 @@ public enum ResponseType {
 
     private final String value;
 
-    ResponseType(final String value) {
+    EventStatus(final String value) {
         this.value = value;
     }
 

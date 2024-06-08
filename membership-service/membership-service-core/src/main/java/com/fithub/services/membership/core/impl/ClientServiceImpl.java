@@ -12,7 +12,6 @@ import com.fithub.services.membership.dao.model.ClientEntity;
 import com.fithub.services.membership.dao.model.CoachEntity;
 import com.fithub.services.membership.dao.model.UserEntity;
 import com.fithub.services.membership.dao.repository.ClientRepository;
-import com.fithub.services.membership.dao.repository.CoachRepository;
 import com.fithub.services.membership.dao.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -23,7 +22,6 @@ public class ClientServiceImpl implements ClientService {
 
     private final UserRepository userRepository;
     private final ClientRepository clientRepository;
-    private final CoachRepository coachRepository;
 
     @Override
     public void addClient(ClientRegistrationMessage clientRegistrationMessage) throws ApiException {

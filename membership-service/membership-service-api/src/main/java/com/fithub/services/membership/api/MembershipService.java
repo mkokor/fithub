@@ -1,15 +1,14 @@
 package com.fithub.services.membership.api;
 
-import java.util.List;
-
 import com.fithub.services.membership.api.exception.ApiException;
+import com.fithub.services.membership.api.model.membership.MembershipCreateRequest;
 import com.fithub.services.membership.api.model.membership.MembershipPaymentReportResponse;
-import com.fithub.services.membership.api.model.paymentrecord.PaymentRecordResponse;
+import com.fithub.services.membership.api.model.membership.MembershipResponse;
 
 public interface MembershipService {
 
-    List<PaymentRecordResponse> getPaymentRecord(Long membershipId) throws Exception;
+    MembershipPaymentReportResponse getMembershipPaymentReport(final String clientUuid) throws ApiException;
 
-    MembershipPaymentReportResponse getMembershipPaymentReport(String clientUuid) throws ApiException;
+    MembershipResponse createClientMembership(final MembershipCreateRequest membershipCreateRequest) throws Exception;
 
 }

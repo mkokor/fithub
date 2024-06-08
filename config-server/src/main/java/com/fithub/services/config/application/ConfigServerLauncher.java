@@ -6,10 +6,10 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 
 @EnableConfigServer
 @SpringBootApplication
-public class FitHubConfigServerLauncher {
+public class ConfigServerLauncher {
 
     public static void main(String[] args) {
-        SpringApplication.run(FitHubConfigServerLauncher.class, args);
+        SpringApplication.run(ConfigServerLauncher.class, args);
     }
 
 }

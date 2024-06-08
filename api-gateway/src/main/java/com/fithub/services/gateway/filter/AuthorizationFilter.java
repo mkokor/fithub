@@ -1,6 +1,7 @@
 package com.fithub.services.gateway.filter;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,6 +36,10 @@ public class AuthorizationFilter implements GlobalFilter {
     private final RoutesConfig routesConfig;
 
     private static Boolean routeMatches(final String route, final List<String> patterns) {
+        if (Objects.isNull(patterns)) {
+            return false;
+        }
+
         for (final String patternString : patterns) {
             Pattern pattern = Pattern.compile(patternString);
             Matcher matcher = pattern.matcher(route);

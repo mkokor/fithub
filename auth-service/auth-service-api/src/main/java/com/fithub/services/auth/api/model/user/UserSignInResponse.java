@@ -13,5 +13,6 @@ public class UserSignInResponse implements Serializable {
 
     private String accessToken;
     private String role;
+    private String username;
 
 }
