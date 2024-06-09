@@ -5,8 +5,8 @@ import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import com.fithub.services.chat.dao.model.MessageEntity;
 import com.fithub.services.chat.api.model.message.MessageResponse;
+import com.fithub.services.chat.dao.model.MessageEntity;
 
 @Mapper(componentModel = "spring")
 public interface MessageMapper {

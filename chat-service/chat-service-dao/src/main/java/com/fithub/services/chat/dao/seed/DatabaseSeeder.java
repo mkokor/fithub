@@ -41,7 +41,7 @@ public class DatabaseSeeder implements ApplicationRunner {
 
             ChatroomEntity chatroomJohnEntity = new ChatroomEntity();
             chatroomJohnEntity.setAdmin(coachJohnEntity);
-            chatroomJohnEntity.setRoomName("John Room");
+            chatroomJohnEntity.setRoomName("John's Room");
             chatroomRepository.save(chatroomJohnEntity);
 
             UserEntity coachMaryUserEntity = new UserEntity();
@@ -57,7 +57,7 @@ public class DatabaseSeeder implements ApplicationRunner {
 
             ChatroomEntity chatroomMaryEntity = new ChatroomEntity();
             chatroomMaryEntity.setAdmin(coachMaryEntity);
-            chatroomMaryEntity.setRoomName("Mary Room");
+            chatroomMaryEntity.setRoomName("Mary's Room");
             chatroomRepository.save(chatroomMaryEntity);
 
             UserEntity coachJamesUserEntity = new UserEntity();
@@ -73,7 +73,7 @@ public class DatabaseSeeder implements ApplicationRunner {
 
             ChatroomEntity chatroomJamesEntity = new ChatroomEntity();
             chatroomJamesEntity.setAdmin(coachJamesEntity);
-            chatroomJamesEntity.setRoomName("James Room");
+            chatroomJamesEntity.setRoomName("Martin's Room");
             chatroomRepository.save(chatroomJamesEntity);
         }
     }

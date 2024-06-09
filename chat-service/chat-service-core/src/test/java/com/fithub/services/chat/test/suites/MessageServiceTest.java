@@ -1,8 +1,6 @@
 package com.fithub.services.chat.test.suites;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
-
 import static org.testng.Assert.assertThrows;
 
 import java.time.LocalDateTime;
@@ -15,9 +13,13 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.fithub.services.chat.api.model.message.MessageSendRequest;
 import com.fithub.services.chat.api.MessageService;
+import com.fithub.services.chat.api.model.message.MessageResponse;
+import com.fithub.services.chat.api.model.message.MessageSendRequest;
 import com.fithub.services.chat.core.impl.MessageServiceImpl;
+import com.fithub.services.chat.dao.model.ChatroomEntity;
+import com.fithub.services.chat.dao.model.CoachEntity;
+import com.fithub.services.chat.dao.model.UserEntity;
 import com.fithub.services.chat.dao.repository.ChatroomRepository;
 import com.fithub.services.chat.dao.repository.MessageRepository;
 import com.fithub.services.chat.dao.repository.UserRepository;
@@ -27,24 +29,19 @@ import com.fithub.services.chat.test.configuration.BasicTestConfiguration;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
 
-import com.fithub.services.chat.api.model.message.MessageResponse;
-import com.fithub.services.chat.dao.model.ChatroomEntity;
-import com.fithub.services.chat.dao.model.CoachEntity;
-import com.fithub.services.chat.dao.model.UserEntity;
-
 public class MessageServiceTest extends BasicTestConfiguration {
 
     @Autowired
     private MessageMapper messageMapper;
-    
+
     private ChatroomRepository chatroomRepository;
 
     private MessageRepository messageRepository;
-    
+
     private UserRepository userRepository;
 
     private MessageService messageService;
-    
+
     private Validator validator;
 
     @BeforeMethod
@@ -52,32 +49,28 @@ public class MessageServiceTest extends BasicTestConfiguration {
         chatroomRepository = Mockito.mock(ChatroomRepository.class);
         messageRepository = Mockito.mock(MessageRepository.class);
         userRepository = Mockito.mock(UserRepository.class);
-        
+
         LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
         localValidatorFactoryBean.afterPropertiesSet();
         validator = localValidatorFactoryBean;
 
-        messageService = new MessageServiceImpl(chatroomRepository, messageRepository, userRepository, messageMapper, validator);
+        messageService = new MessageServiceImpl(chatroomRepository, messageRepository, messageMapper, validator);
     }
-    
+
     @Test
     public void testSendMessage_NoUserIdProvided_ThrowsMethodArgumentNotValidException() {
         try {
             MessageSendRequest messageSendRequest = new MessageSendRequest();
-            messageSendRequest.setUserId("");
             messageSendRequest.setContent("this is my first message");
-            messageSendRequest.setCreated(LocalDateTime.now());
-            
-            Long chatroomId = 1L;
 
             assertThrows(ConstraintViolationException.class, () -> {
-                messageService.sendMessage(messageSendRequest, chatroomId);
+                messageService.sendMessage(messageSendRequest);
             });
         } catch (Exception exception) {
             Assert.fail();
         }
     }
-    
+
     @Test
     public void testSendMessage_ValidDataProvided_ReturnsSentMessage() {
         try {
@@ -88,18 +81,16 @@ public class MessageServiceTest extends BasicTestConfiguration {
             CoachEntity coachEntity = new CoachEntity();
             coachEntity.setId(1L);
             coachEntity.setUser(coachUser);
-            
+
             ChatroomEntity chatroomEntity = new ChatroomEntity();
             chatroomEntity.setId(1L);
             chatroomEntity.setAdmin(coachEntity);
             chatroomEntity.setRoomName("test-chatroom");
-            
+
             LocalDateTime time = LocalDateTime.now();
 
             MessageSendRequest messageSendRequest = new MessageSendRequest();
-            messageSendRequest.setUserId("coach-id");
             messageSendRequest.setContent("this is my first message");
-            messageSendRequest.setCreated(time);
 
             MessageResponse expectedResponse = new MessageResponse();
             expectedResponse.setUsername("maryann");
@@ -110,7 +101,7 @@ public class MessageServiceTest extends BasicTestConfiguration {
             Mockito.when(chatroomRepository.findById(chatroomEntity.getId())).thenReturn(Optional.of(chatroomEntity));
             Mockito.when(userRepository.findById(coachUser.getUuid())).thenReturn(Optional.of(coachUser));
 
-            MessageResponse actualResponse = messageService.sendMessage(messageSendRequest, chatroomEntity.getId());
+            MessageResponse actualResponse = messageService.sendMessage(messageSendRequest);
 
             assertThat(actualResponse).usingRecursiveComparison().ignoringFields("id").isEqualTo(expectedResponse);
         } catch (Exception exception) {
