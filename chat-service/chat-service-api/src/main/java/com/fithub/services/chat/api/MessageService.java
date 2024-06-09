@@ -11,6 +11,8 @@ public interface MessageService {
 
     MessageResponse sendMessage(MessageSendRequest messageSendRequest) throws Exception;
 
+    MessageResponse sendMessageUnauthenticated(MessageSendRequest messageSendRequest) throws Exception;
+
     List<MessageResponse> getMessages(Pageable pageable);
 
 }

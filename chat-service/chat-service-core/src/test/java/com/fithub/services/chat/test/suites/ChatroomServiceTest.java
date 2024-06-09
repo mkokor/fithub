@@ -26,7 +26,7 @@ public class ChatroomServiceTest extends BasicTestConfiguration {
     public void beforeMethod() {
         chatroomRepository = Mockito.mock(ChatroomRepository.class);
 
-        chatroomService = new ChatroomServiceImpl(chatroomRepository, chatroomMapper, userMapper);
+        chatroomService = new ChatroomServiceImpl(chatroomRepository, chatroomMapper, userMapper, null);
     }
 
 }

@@ -54,7 +54,7 @@ public class MessageServiceTest extends BasicTestConfiguration {
         localValidatorFactoryBean.afterPropertiesSet();
         validator = localValidatorFactoryBean;
 
-        messageService = new MessageServiceImpl(chatroomRepository, messageRepository, messageMapper, validator);
+        messageService = new MessageServiceImpl(chatroomRepository, messageRepository, userRepository, messageMapper, validator);
     }
 
     @Test

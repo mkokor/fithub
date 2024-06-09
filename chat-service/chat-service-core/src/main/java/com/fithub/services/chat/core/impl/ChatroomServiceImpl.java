@@ -19,6 +19,7 @@ import com.fithub.services.chat.dao.model.ClientEntity;
 import com.fithub.services.chat.dao.model.CoachEntity;
 import com.fithub.services.chat.dao.model.UserEntity;
 import com.fithub.services.chat.dao.repository.ChatroomRepository;
+import com.fithub.services.chat.dao.repository.UserRepository;
 import com.fithub.services.chat.mapper.ChatroomMapper;
 import com.fithub.services.chat.mapper.UserMapper;
 
@@ -31,6 +32,7 @@ public class ChatroomServiceImpl implements ChatroomService {
     private final ChatroomRepository chatroomRepository;
     private final ChatroomMapper chatroomMapper;
     private final UserMapper userMapper;
+    private final UserRepository userRepository;
 
     private List<UserResponse> getParticipants(Long chatroomId) throws ApiException {
         Optional<ChatroomEntity> chatroomEntity = chatroomRepository.findById(chatroomId);
@@ -84,6 +86,26 @@ public class ChatroomServiceImpl implements ChatroomService {
         chatroomDataResponse.setParticipants(participants);
 
         return chatroomDataResponse;
+    }
+
+    @Override
+    public ChatroomResponse getChatroomDataByParticipiantUsername(final String username) throws ApiException {
+        final Optional<UserEntity> user = userRepository.findByUsername(username);
+        if (user.isEmpty()) {
+            throw new NotFoundException("The user with the provided username could not be found.");
+        }
+
+        final UserEntity userEntity = user.get();
+
+        ChatroomEntity chatroomEntity;
+        final ClientEntity clientEntity = userEntity.getClient();
+        if (Objects.isNull(clientEntity)) {
+            chatroomEntity = userEntity.getCoach().getChatroom();
+        } else {
+            chatroomEntity = clientEntity.getCoach().getChatroom();
+        }
+
+        return chatroomMapper.entityToDto(chatroomEntity);
     }
 
 }

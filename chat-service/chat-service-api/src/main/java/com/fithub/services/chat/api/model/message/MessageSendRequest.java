@@ -16,4 +16,8 @@ public class MessageSendRequest implements Serializable {
     @NotBlank(message = "The content of the message must not be blank.")
     private String content;
 
+    @Schema(description = "The username of the sender")
+    @NotBlank(message = "The username of the sender must not be blank.")
+    private String username;
+
 }
