@@ -13,7 +13,7 @@ export const getChatroomData = async () => {
     return await response.json();
   } catch (error) {
     console.error('Error fetching chatroom data:', error);
-    return { "chatroomDetails": "", "messages": [], "participants": [] };
+    return { "chatroomDetails": "", "participants": [] };
   }
 };
 

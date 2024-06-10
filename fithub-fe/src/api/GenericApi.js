@@ -1,8 +1,6 @@
 import { userAccessRefresh } from "./UserApi";
-import { useAuth } from "../context/AuthContext";
 
 export const sendRequest = async (request) => {
-  const { logout } = useAuth();
   try {
     const user = JSON.parse(localStorage.getItem('user'));
     let accessToken = user?.accessToken;
