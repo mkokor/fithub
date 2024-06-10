@@ -3,6 +3,8 @@ import "../../css/Chatroom.css";
 import LoadingSpinner from "../LoadingSpinner";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { getChatroomData, getChatroomMessages, sendNewMessage } from "../../api/ChatApi";
+import {over} from 'stompjs';
+import SockJS from 'sockjs-client';
 
 const UserProfileImage = ({ user }) => {
   function getColor(username) {
@@ -46,25 +48,64 @@ const UserProfileImage = ({ user }) => {
 };
 
 const Chatroom = () => {
+  const [userData, setUserData] = useState({
+    username: '',
+    receivername: '',
+    connected: false,
+    message: ''
+  });
   const [chatroomData, setChatroomData] = useState({ participants: [] });
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [newMessage, setNewMessage] = useState("");
+  const [stompClient, setStompClient] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await getChatroomData();
         setChatroomData(data);
+
+        const token = JSON.parse(localStorage.getItem("user")).accessToken;
+        let socket = new SockJS('http://localhost:8002/ws');
+        const client = over(socket); 
+        setStompClient(client); 
+        client.connect({ 'Authorization': token }, onConnected, onError);
+        console.log("Connecting...");
       } catch (error) {
         console.error("Error fetching chatroom data:", error);
       } finally {
         setIsLoading(false);
       }
     };
-
+  
     fetchData();
   }, []);
+
+  const onConnected = () => {
+    setUserData({...userData,"connected": true});
+    stompClient.subscribe('/chatroom/1', onMessageReceived);
+    userJoin();
+}
+
+const userJoin=()=>{
+  var chatMessage = {
+    senderUsername: userData.username,
+    type:"JOIN"
+  };
+  stompClient.send("/chat/message", {}, JSON.stringify(chatMessage));
+}
+
+const onMessageReceived = (payload)=>{
+var payloadData = JSON.parse(payload.body);
+switch(payloadData.type){
+    case "JOIN":
+        console.log(`${payloadData.senderUsername} joined`)
+        break;
+    case "MESSAGE":
+        break;
+}
+}
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -80,18 +121,23 @@ const Chatroom = () => {
   }, []);
 
   const sendMessage = async () => {
-    if (newMessage !== "") {
-      const messageTime = new Date(Date.now());
-      const messageData = {
-        userId: "29262910-09fb-40e8-9db7-c05372ad6ae6",
-        content: newMessage,
-        created: messageTime,
-      };
-      setNewMessage("");
-      await sendNewMessage(messageData);
-      setMessages((prevMessages) => [...prevMessages, messageData]);
+    if (newMessage != "") {
+      if (stompClient) {
+        const username = JSON.parse(localStorage.getItem("user")).username;
+        var chatMessage = {
+          senderUsername: username,
+          content: newMessage,
+          type:"MESSAGE"
+        };
+        stompClient.send("/chat/message", {}, JSON.stringify(chatMessage));
+        setUserData({...userData, "message": ""});
+      }
     }
   };
+
+  const onError = (err) => {
+    console.log(err);
+  }
 
   const extractTime = (created) => {
     const dateTime = new Date(created);

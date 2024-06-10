@@ -33,27 +33,3 @@ export const getChatroomMessages = async () => {
     return { "messages": [] };
   }
 };
-
-export const sendNewMessage = async (messageData) => {
-  try {
-    const request = {
-      url: '/chat-service/message/sendMessage',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(messageData)
-    };
-    const response = await sendRequest(request);
-    return await response.json();
-  } catch (error) {
-    console.error('Error sending message:', error);
-    return { 
-      "id": "",
-      "chatroomId": "",
-      "username": "",
-      "content": "",
-      "created": ""
-    };
-  }
-};
