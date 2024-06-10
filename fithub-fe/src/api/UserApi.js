@@ -19,6 +19,7 @@ export const userLogIn = async (loginData) => {
     return {
       "accessToken": "",
       "role": "",
+      "username": ""
     };
   }
 };
@@ -50,15 +51,19 @@ export const userRegister = async (registerData) => {
 
 export const userAccessRefresh = async () => {
   try {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const accessToken = user?.accessToken;
     const response = await fetch('/auth-service/user/access-refresh', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
       }
     });
 
     if (response.status === 200) {
       const responseData = await response.json();
+      localStorage.setItem('user', JSON.stringify(responseData));
       return responseData;
     } else {
       throw new Error('Access refresh failed');
@@ -67,7 +72,8 @@ export const userAccessRefresh = async () => {
     console.error('Access refresh error:', error);
     return {
       "acessToken": "",
-      "role": ""
+      "role": "",
+      "username": ""
     };
   }
 };
