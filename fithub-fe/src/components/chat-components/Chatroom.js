@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../../css/Chatroom.css";
 import LoadingSpinner from "../LoadingSpinner";
 import ScrollToBottom from "react-scroll-to-bottom";
@@ -9,6 +9,7 @@ import SockJS from 'sockjs-client';
 const UserProfileImage = ({ user }) => {
   function getColor(username) {
     function hashCode(str) {
+      if (!str) return 0;
       let hash = 0;
       for (let i = 0; i < str.length; i++) {
         hash = str.charCodeAt(i) + ((hash << 5) - hash);
@@ -55,7 +56,7 @@ const Chatroom = () => {
   const [chatroomData, setChatroomData] = useState(null);
   const [newMessage, setNewMessage] = useState("");
   const [userData, setUserData] = useState({
-    username: '',
+    username: JSON.parse(localStorage.getItem("user")).username,
     connected: false,
     message: ''
   });
@@ -79,65 +80,76 @@ const Chatroom = () => {
       }
     };
 
-    if (chatroomData === null)
+    if (chatroomData === null) {
       fetchData();
-    else 
+    } else {
       connect(chatroomData.chatroomDetails.id);
+    }
   }, [chatroomData]);
 
   const connect = (chatroomId) => {
     let socket = new SockJS('http://localhost:8002/ws');
     stompClient = over(socket);
     stompClient.connect({}, () => onConnected(chatroomId), onError);
-  }
+  };
 
   const onConnected = (chatroomId) => {
-      setUserData({...userData,"connected": true});
-      stompClient.subscribe(`/chatroom/${chatroomId}`, onMessageReceived);
-      userJoin();
-  }
+    setUserData(prevState => ({ ...prevState, connected: true }));
+    stompClient.subscribe(`/chatroom/${chatroomId}`, onMessageReceived);
+    userJoin();
+  };
 
-  const userJoin=()=>{
-    var chatMessage = {
-      senderUsername: JSON.parse(localStorage.getItem("user")).username,
-      type:"JOIN"
+  const userJoin = () => {
+    const chatMessage = {
+      senderUsername: userData.username,
+      type: "JOIN"
     };
     stompClient.send("/chat/message", {}, JSON.stringify(chatMessage));
-  }
+  };
 
-  const onMessageReceived = (payload)=>{
-  var payloadData = JSON.parse(payload.body);
-  switch(payloadData.type){
+  const onMessageReceived = (payload) => {
+    const payloadData = JSON.parse(payload.body);
+    switch(payloadData.type) {
       case "JOIN":
-          console.log(chatroomData);
-          break;
+        console.log("User joined:", payloadData.senderUsername);
+        console.log('fdgteg', messages)
+        break;
       case "MESSAGE":
-          messages.push(payloadData);
-          setMessages([...messages, payloadData]);
-          break;
+        const newMessage = {
+          content: payloadData.content,
+          created: payloadData.created,
+          username: payloadData.senderUsername
+        }
+        console.log(payloadData)
+        setMessages(prevMessages => [...prevMessages, newMessage]);
+        console.log('gewre' , messages)
+        break;
+      default:
+        break;
     }   
-  }
+  };
 
-  const onError = (err) => {}
+  const onError = (err) => {
+    console.error("WebSocket error:", err);
+  };
 
-  const sendMessage=()=>{
-      if (stompClient !== null) {
-        var chatMessage = {
-          senderUsername: JSON.parse(localStorage.getItem("user")).username,
-          content: newMessage,
-          type:"MESSAGE"
-        };
-        stompClient.send("/chat/message", {}, JSON.stringify(chatMessage));
-        setUserData({...userData,"message": ""});
-      }
-  }
+  const sendMessage = () => {
+    if (stompClient && newMessage.trim() !== "") {
+      const chatMessage = {
+        senderUsername: userData.username,
+        content: newMessage,
+        type: "MESSAGE"
+      };
+      stompClient.send("/chat/message", {}, JSON.stringify(chatMessage));
+      setNewMessage("");
+    }
+  };
 
   const extractTime = (created) => {
     const dateTime = new Date(created);
     const hours = dateTime.getHours();
     const minutes = dateTime.getMinutes();
-    const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-    return formattedTime;
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
   };
 
   return (
@@ -162,8 +174,8 @@ const Chatroom = () => {
             <div id="chat-body">
               <ScrollToBottom className="message-container">
                 {messages.map((messageData, index) => (
-                  <div className="message" key={index}>
-                    <UserProfileImage user={messageData.username} />
+                  <div className={messageData.username === userData.username ? "message-you" : "message"} key={index}>
+                    {messageData.username !== userData.username && <UserProfileImage user={messageData.username} />}
                     <div className="message-div">
                       <div className="message-author-info">
                         <p className="message-author">{messageData.username}</p>
@@ -177,6 +189,7 @@ const Chatroom = () => {
                         </div>
                       </div>
                     </div>
+                    {messageData.username === userData.username && <UserProfileImage user={messageData.username} />}
                   </div>
                 ))}
               </ScrollToBottom>

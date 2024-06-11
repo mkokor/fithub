@@ -10,7 +10,7 @@ export const getMealPlan = async () => {
       }
     };
     const response = await sendRequest(request);
-    console.log("Fetched melpla")
+    console.log("Fetched melplan: ", response.json())
     return await response.json();
   } catch (error) {
     console.error('Error fetching mealplan:', error);
