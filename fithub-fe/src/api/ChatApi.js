@@ -3,7 +3,7 @@ import { sendRequest } from './GenericApi.js';
 export const getChatroomData = async () => {
   try {
     const request = {
-      url: '/chat-service/chatroom/data',
+      url: `/chat-service/chatroom/data`,
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
