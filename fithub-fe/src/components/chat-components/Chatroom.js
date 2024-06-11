@@ -52,7 +52,7 @@ var stompClient = null;
 const Chatroom = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [messages, setMessages] = useState([]); 
-  const [chatroomData, setChatroomData] = useState({});
+  const [chatroomData, setChatroomData] = useState(null);
   const [newMessage, setNewMessage] = useState("");
   const [userData, setUserData] = useState({
     username: '',
@@ -61,23 +61,14 @@ const Chatroom = () => {
   });
 
   useEffect(() => {
-    console.log(userData);
-  }, [userData]);
-
-  useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("Fetching chatroom data...");
         const data = await getChatroomData();
         setChatroomData(data);
-        console.log("Chatroom data fetched:", data);
+        
         try {
-          console.log("Fetching messages...");
           const messagesData = await getChatroomMessages();
           setMessages(messagesData);
-          console.log("Chatroom messages fetched:", messagesData);
-          const id = chatroomData.chatroomDetails.id;
-          connect(id);
         } catch(error) {
           console.error("Error fetching messages:", error);
         }
@@ -87,22 +78,22 @@ const Chatroom = () => {
         setIsLoading(false);
       }
     };
-    fetchData();
-  }, []);
 
-  const connect = () => {
-    // SockJS connection
+    if (chatroomData === null)
+      fetchData();
+    else 
+      connect(chatroomData.chatroomDetails.id);
+  }, [chatroomData]);
+
+  const connect = (chatroomId) => {
     let socket = new SockJS('http://localhost:8002/ws');
     stompClient = over(socket);
-
-    // Configure headers
-    stompClient.connect({  }, onConnected, onError);
-    console.log("Connecting...");
+    stompClient.connect({}, () => onConnected(chatroomId), onError);
   }
 
-  const onConnected = (id) => {
+  const onConnected = (chatroomId) => {
       setUserData({...userData,"connected": true});
-      stompClient.subscribe(`/chatroom/3`, onMessageReceived);
+      stompClient.subscribe(`/chatroom/${chatroomId}`, onMessageReceived);
       userJoin();
   }
 
@@ -118,21 +109,18 @@ const Chatroom = () => {
   var payloadData = JSON.parse(payload.body);
   switch(payloadData.type){
       case "JOIN":
-          console.log(`${payloadData.senderUsername} joined`)
+          console.log(chatroomData);
           break;
       case "MESSAGE":
           messages.push(payloadData);
-          setMessages([...messages]);
+          setMessages([...messages, payloadData]);
           break;
     }   
   }
 
-  const onError = (err) => {
-    console.log(err);
-  }
+  const onError = (err) => {}
 
   const sendMessage=()=>{
-    console.log(stompClient);
       if (stompClient !== null) {
         var chatMessage = {
           senderUsername: JSON.parse(localStorage.getItem("user")).username,
@@ -154,7 +142,7 @@ const Chatroom = () => {
 
   return (
     <div className="App">
-      {isLoading ? (
+      {isLoading || chatroomData === null ? (
         <LoadingSpinner />
       ) : (
         <div className="page-div" id="chat">
