@@ -4,6 +4,8 @@ import "../../css/Clients.css";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
 import ConfirmDeleteModal from "../modals/ConfirmDeleteModal"; 
+import ClientsMealPlanModal from "../modals/ClientsMealPlanModal"; 
+import ClientsMembershipModal from "../modals/ClientsMembershipModal"; 
 import SuccessModal from "../modals/SuccessModal"; 
 
 const Clients = () => {
@@ -170,6 +172,18 @@ const Clients = () => {
         <SuccessModal
           message="Client successfully deleted."
           onClose={closeSuccessModal}
+        />
+      )}
+      {showMealPlanModal && (
+        <ClientsMealPlanModal
+          client={clientForMealPlan}
+          onClose={closeMealPlanModal}
+        />
+      )}
+      {showMembershipModal && (
+        <ClientsMembershipModal
+          client={clientForMembership}
+          onClose={closeMembershipModal}
         />
       )}
     </div>
