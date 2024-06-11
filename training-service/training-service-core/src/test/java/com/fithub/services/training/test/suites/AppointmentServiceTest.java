@@ -1,16 +1,24 @@
 package com.fithub.services.training.test.suites;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.fithub.services.training.api.AppointmentService;
+import com.fithub.services.training.api.exception.UnauthorizedException;
+import com.fithub.services.training.api.model.reservation.ReservationResponse;
 import com.fithub.services.training.core.client.MembershipServiceClient;
 import com.fithub.services.training.core.context.UserContext;
 import com.fithub.services.training.core.impl.AppointmentServiceImpl;
 import com.fithub.services.training.dao.model.AppointmentEntity;
+import com.fithub.services.training.dao.model.ClientEntity;
 import com.fithub.services.training.dao.model.CoachEntity;
+import com.fithub.services.training.dao.model.ReservationEntity;
 import com.fithub.services.training.dao.model.UserEntity;
 import com.fithub.services.training.dao.repository.AppointmentRepository;
 import com.fithub.services.training.dao.repository.ReservationRepository;
@@ -67,12 +75,72 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
     }
 
     @Test
-    public void testGetReservations_ValidAppointmentIdIsProvided_ReturnReservations() throws Exception {
-        authenticateCoach();
+    public void testGetReservations_ValidAppointmentIdIsProvided_ReturnReservations() {
+        try {
+            authenticateCoach();
 
-        AppointmentEntity appointmentEntity = new AppointmentEntity();
-        appointmentEntity.se
-        appointmentService.getReservations(1L);
+            UserEntity coachUser = constructCoachUser();
+
+            UserEntity clientUser = new UserEntity();
+            clientUser.setUuid("michael-jordan-client");
+            clientUser.setFirstName("Michael");
+            clientUser.setLastName("Jordan");
+
+            ClientEntity clientEntity = new ClientEntity();
+            clientEntity.setUser(clientUser);
+            clientEntity.setId(1L);
+
+            ReservationEntity reservationEntity = new ReservationEntity();
+            reservationEntity.setClient(clientEntity);
+            reservationEntity.setId(1L);
+
+            AppointmentEntity appointmentEntity = new AppointmentEntity();
+            appointmentEntity.setId(1L);
+            appointmentEntity.setCoach(coachUser.getCoach());
+            appointmentEntity.setReservations(List.of(reservationEntity));
+
+            reservationEntity.setAppointment(appointmentEntity);
+
+            ReservationResponse reservationResponse = new ReservationResponse();
+            reservationResponse.setAppointmentId(appointmentEntity.getId());
+            reservationResponse.setClientId(clientEntity.getId());
+            reservationResponse.setId(reservationEntity.getId());
+
+            Mockito.when(appointmentRepository.findById(appointmentEntity.getId())).thenReturn(Optional.of(appointmentEntity));
+
+            List<ReservationResponse> reservations = appointmentService.getReservations(1L);
+
+            Assert.assertEquals(reservations, reservations);
+        } catch (Exception excweption) {
+            Assert.fail();
+        }
+    }
+
+    @Test
+    public void testGetReservations_AppointmentOfAnotherCoachIsRequested_ThrowsUnauthorizedException() {
+        try {
+            authenticateCoach();
+
+            UserEntity coachUser = new UserEntity();
+            coachUser.setUuid("mary-ann");
+            coachUser.setFirstName("Mary");
+            coachUser.setLastName("Ann");
+
+            CoachEntity coachEntity = new CoachEntity();
+            coachEntity.setId(2L);
+            coachEntity.setUser(coachUser);
+            coachUser.setCoach(coachEntity);
+
+            AppointmentEntity appointmentEntity = new AppointmentEntity();
+            appointmentEntity.setId(1L);
+            appointmentEntity.setCoach(coachUser.getCoach());
+
+            Mockito.when(appointmentRepository.findById(appointmentEntity.getId())).thenReturn(Optional.of(appointmentEntity));
+
+            Assert.assertThrows(UnauthorizedException.class, () -> appointmentService.getReservations(appointmentEntity.getId()));
+        } catch (Exception excweption) {
+            Assert.fail();
+        }
     }
 
 }
