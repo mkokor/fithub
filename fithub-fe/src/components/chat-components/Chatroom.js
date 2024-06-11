@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import "../../css/Chatroom.css";
 import LoadingSpinner from "../LoadingSpinner";
 import ScrollToBottom from "react-scroll-to-bottom";
-import { getChatroomData, getChatroomMessages, sendNewMessage } from "../../api/ChatApi";
+import { getChatroomData, getChatroomMessages } from "../../api/ChatApi";
 import { over } from 'stompjs';
 import SockJS from 'sockjs-client';
-import StompClientContext from './StompClientContext';
 
 const UserProfileImage = ({ user }) => {
   function getColor(username) {
@@ -48,15 +47,15 @@ const UserProfileImage = ({ user }) => {
   );
 };
 
+var stompClient = null;
+
 const Chatroom = () => {
-  const stompClient = useContext(StompClientContext);
   const [isLoading, setIsLoading] = useState(true);
   const [messages, setMessages] = useState([]); 
   const [chatroomData, setChatroomData] = useState({});
   const [newMessage, setNewMessage] = useState("");
   const [userData, setUserData] = useState({
     username: '',
-    receivername: '',
     connected: false,
     message: ''
   });
@@ -72,81 +71,78 @@ const Chatroom = () => {
         const data = await getChatroomData();
         setChatroomData(data);
         console.log("Chatroom data fetched:", data);
+        try {
+          console.log("Fetching messages...");
+          const messagesData = await getChatroomMessages();
+          setMessages(messagesData);
+          console.log("Chatroom messages fetched:", messagesData);
+          const id = chatroomData.chatroomDetails.id;
+          connect(id);
+        } catch(error) {
+          console.error("Error fetching messages:", error);
+        }
       } catch (error) {
         console.error("Error fetching chatroom data:", error);
       } finally {
         setIsLoading(false);
       }
     };
-
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        console.log("Fetching chatroom messages...");
-        const data = await getChatroomMessages();
-        setMessages(data);
-        console.log("Chatroom messages fetched:", data);
+  const connect = () => {
+    // SockJS connection
+    let socket = new SockJS('http://localhost:8002/ws');
+    stompClient = over(socket);
 
-      } catch (error) {
-        console.error("Error fetching chatroom messages:", error);
-      }
-    };
+    // Configure headers
+    stompClient.connect({  }, onConnected, onError);
+    console.log("Connecting...");
+  }
 
-    fetchData();
-  }, []);
-
-  const onConnected = () => {
-    console.log("Connected to STOMP");
-    setUserData({ ...userData, connected: true });
-    var id = chatroomData.chatroomDetails?.id;
-    if (id) {
-      stompClient.subscribe(`/chatroom/${id}`, onMessageReceived);
+  const onConnected = (id) => {
+      setUserData({...userData,"connected": true});
+      stompClient.subscribe(`/chatroom/3`, onMessageReceived);
       userJoin();
-    }
-  };
+  }
 
-  const userJoin = () => {
+  const userJoin=()=>{
     var chatMessage = {
-      senderUsername: userData.username,
-      type: "JOIN"
+      senderUsername: JSON.parse(localStorage.getItem("user")).username,
+      type:"JOIN"
     };
     stompClient.send("/chat/message", {}, JSON.stringify(chatMessage));
-  };
+  }
 
-  const onMessageReceived = (payload) => {
-    var payloadData = JSON.parse(payload.body);
-    console.log("Message received:", payloadData);
-    switch (payloadData.type) {
+  const onMessageReceived = (payload)=>{
+  var payloadData = JSON.parse(payload.body);
+  switch(payloadData.type){
       case "JOIN":
-        console.log(`${payloadData.senderUsername} joined`);
-        break;
+          console.log(`${payloadData.senderUsername} joined`)
+          break;
       case "MESSAGE":
-        setMessages((prevMessages) => [...prevMessages, payloadData]);
-        break;
-    }
-  };
+          messages.push(payloadData);
+          setMessages([...messages]);
+          break;
+    }   
+  }
 
   const onError = (err) => {
-    console.log("Error connecting to STOMP:", err);
-  };
+    console.log(err);
+  }
 
-  const sendMessage = () => {
-    if (stompClient) {
-      var chatMessage = {
-        senderUsername: JSON.parse(localStorage.getItem("user")).username,
-        content: newMessage,
-        type: "MESSAGE"
-      };
-      stompClient.send("/chat/message", {}, JSON.stringify(chatMessage));
-      console.log("senttt")
-      setNewMessage(""); 
-    } else {
-      console.log("no client")
-    }
-  };
+  const sendMessage=()=>{
+    console.log(stompClient);
+      if (stompClient !== null) {
+        var chatMessage = {
+          senderUsername: JSON.parse(localStorage.getItem("user")).username,
+          content: newMessage,
+          type:"MESSAGE"
+        };
+        stompClient.send("/chat/message", {}, JSON.stringify(chatMessage));
+        setUserData({...userData,"message": ""});
+      }
+  }
 
   const extractTime = (created) => {
     const dateTime = new Date(created);

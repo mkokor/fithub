@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LoginForm from './components/login-components/LoginForm';
-import NavbarClient from './components/client-components/NavbarClient';
-import NavbarCoach from './components/coach-components/NavbarCoach';
-import Home from './components/Home';
-import Nutrition from './components/client-components/Nutrition';
-import Training from './components/client-components/Training';
-import Chatroom from './components/chat-components/Chatroom';
-import Schedule from './components/coach-components/Schedule';
-import Clients from './components/coach-components/Clients';
-import HamburgerMenu from './components/HamburgerMenu';
-import NotFound from './components/NotFound';
+import "./App.css";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import LoginForm from "./components/login-components/LoginForm";
+import NavbarClient from "./components/client-components/NavbarClient";
+import NavbarCoach from "./components/coach-components/NavbarCoach";
+import Home from "./components/Home";
+import Nutrition from "./components/client-components/Nutrition";
+import Training from "./components/client-components/Training";
+import Chatroom from "./components/chat-components/Chatroom";
+import Schedule from "./components/coach-components/Schedule";
+import Clients from "./components/coach-components/Clients";
+import HamburgerMenu from "./components/HamburgerMenu";
+import NotFound from "./components/NotFound";
+import { useState, useEffect } from "react";
 import { useAuth } from './context/AuthContext';
 import { useRole } from './context/RoleContext';
-import NavbarProvider from './components/chat-components/NavbarProvider'; 
 
 function App() {
   const { isAuthenticated, login } = useAuth();
@@ -21,14 +21,7 @@ function App() {
   const [navbarIsVisible, setNavbarIsVisible] = useState(true);
 
   useEffect(() => {
-    const navigationRequired = [
-      '/',
-      '/nutrition',
-      '/training',
-      '/chatroom',
-      '/coach-nutrition',
-      '/membership'
-    ].includes(window.location.pathname);
+    const navigationRequired = ["/", "/nutrition", "/training", "/chatroom", "/coach-nutrition", "/membership"].includes(window.location.pathname);
     setNavbarIsVisible(navigationRequired);
   }, []);
 
@@ -45,31 +38,28 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
-        {}
-        <NavbarProvider>
-          {navbarIsVisible && (role === 'CLIENT' ? <NavbarClient /> : <NavbarCoach />)}
-          {navbarIsVisible && <HamburgerMenu role={role} />}
-          <Routes>
-            {role === 'CLIENT' ? (
-              <>
-                <Route path="/" element={<Home />} />
-                <Route path="/nutrition" element={<Nutrition />} />
-                <Route path="/training" element={<Training />} />
-                <Route path="/chatroom" element={<Chatroom />} />
-                <Route path="/*" element={<NotFound />} />
-              </>
-            ) : (
-              <>
-                <Route path="/" element={<Schedule />} />
-                <Route path="/clients" element={<Clients />} />
-                <Route path="/chatroom" element={<Chatroom />} />
-                <Route path="/*" element={<NotFound />} />
-              </>
-            )}
-          </Routes>
-        </NavbarProvider>
-      </Router>
+      <BrowserRouter>
+        {navbarIsVisible && (role === 'CLIENT' ? <NavbarClient /> : <NavbarCoach />)}
+        {navbarIsVisible && <HamburgerMenu role={role} />}
+        <Routes>
+          {role === 'CLIENT' ? (
+            <>
+              <Route path="/" element={<Home />} />
+              <Route path="/nutrition" element={<Nutrition />} />
+              <Route path="/training" element={<Training />} />
+              <Route path="/chatroom" element={<Chatroom />} />
+              <Route path="/*" element={<NotFound />} />
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<Schedule />} />
+              <Route path="/clients" element={<Clients />} />
+              <Route path="/chatroom" element={<Chatroom />} />
+              <Route path="/*" element={<NotFound />} />
+            </>
+          )}
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

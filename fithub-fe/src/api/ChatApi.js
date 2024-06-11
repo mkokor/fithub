@@ -33,3 +33,28 @@ export const getChatroomMessages = async () => {
     return { "messages": [] };
   }
 };
+
+export const sendNewMessage = async () => {
+  try {
+    var token = JSON.parse(localStorage.getItem("user")).accessToken;
+    const request = {
+      url: '/chat-service/message',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    };
+    const response = await sendRequest(request);
+    return await response.json();
+  } catch (error) {
+    console.error('Error sending message:', error);
+    return {
+      "id": null,
+      "chatroomId": null,
+      "username": "",
+      "content": "",
+      "created": ""
+    };
+  }
+};
