@@ -1,16 +1,20 @@
+import { sendRequest } from "./GenericApi";
+
 export const getMealPlan = async () => {
   try {
-    const response = await fetch('/mealplan-service/mealplan');
-    
-    if (!response.ok) {
-      throw new Error('Failed to fetch mealplan data');
-    }
-
-    const data = await response.json();
-    return data;
+    const request = {
+      url: '/mealplan-service/mealplan',
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json'
+      }
+    };
+    const response = await sendRequest(request);
+    console.log("Fetched melpla")
+    return await response.json();
   } catch (error) {
-    console.error('Error fetching mealplan data:', error);
-    return [] ;
+    console.error('Error fetching mealplan:', error);
+    return [];
   }
 };
 
