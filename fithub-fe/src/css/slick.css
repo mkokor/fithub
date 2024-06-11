@@ -113,6 +113,10 @@
 
     border: 1px solid transparent;
 }
-.slick-arrow.slick-hidden {
+.slick-arrow .slick-hidden {
     display: none;
+}
+
+.slick-arrow {
+  opacity: 0%;
 }

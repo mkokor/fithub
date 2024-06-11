@@ -6,7 +6,7 @@ const Options = () => {
   return (
     <div className="workout-styles-container">
       <div className="image-wrapper">
-        <img src="/images/weight-training.jpg" alt={`WEIGHT TRAINING`} className="workout-image" />
+        <img src="/images/training.jpg" alt={`WEIGHT TRAINING`} className="workout-image" />
         <p className='workout-style-p'>TRAINING</p>
       </div>
       <div className="image-wrapper">

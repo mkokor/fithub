@@ -18,3 +18,17 @@ export const getMealPlan = async () => {
   }
 };
 
+export const getHomeNews = async () => {
+  try {
+    const response = await fetch(`/training-service/image/path`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch news data');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching home news: ', error);
+    return [];
+  }
+}
+

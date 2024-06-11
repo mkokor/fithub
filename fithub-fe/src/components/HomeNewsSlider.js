@@ -23,7 +23,7 @@ export default class SimpleSlider extends Component {
         <Slider {...settings}>
           {
             news.map((slide, index) => (
-              <img className="banner" src={slide.image} alt={`slide-${index}`} key={index}></img>
+              <img className="banner" src={'http://localhost:8080/training-service' + `${slide}`} alt={`slide-${index}`} key={index}></img>
             ))
           }
         </Slider>
