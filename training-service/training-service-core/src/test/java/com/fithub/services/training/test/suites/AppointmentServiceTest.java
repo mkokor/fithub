@@ -111,7 +111,7 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             List<ReservationResponse> reservations = appointmentService.getReservations(1L);
 
             Assert.assertEquals(reservations, reservations);
-        } catch (Exception excweption) {
+        } catch (Exception exception) {
             Assert.fail();
         }
     }
@@ -138,7 +138,7 @@ public class AppointmentServiceTest extends BasicTestConfiguration {
             Mockito.when(appointmentRepository.findById(appointmentEntity.getId())).thenReturn(Optional.of(appointmentEntity));
 
             Assert.assertThrows(UnauthorizedException.class, () -> appointmentService.getReservations(appointmentEntity.getId()));
-        } catch (Exception excweption) {
+        } catch (Exception exception) {
             Assert.fail();
         }
     }
