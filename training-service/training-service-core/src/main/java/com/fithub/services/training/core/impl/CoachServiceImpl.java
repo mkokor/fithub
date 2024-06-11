@@ -1,5 +1,6 @@
 package com.fithub.services.training.core.impl;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -11,15 +12,19 @@ import com.fithub.services.training.api.exception.ApiException;
 import com.fithub.services.training.api.exception.BadRequestException;
 import com.fithub.services.training.api.exception.NotFoundException;
 import com.fithub.services.training.api.model.GenericResponse;
+import com.fithub.services.training.api.model.client.ClientResponse;
 import com.fithub.services.training.api.model.coach.ClientCapacityUpdateRequest;
 import com.fithub.services.training.api.rabbitmq.CoachCapacityUpdateMessage;
 import com.fithub.services.training.api.rabbitmq.EventType;
 import com.fithub.services.training.core.context.UserContext;
 import com.fithub.services.training.core.utils.RabbitMQHelper;
+import com.fithub.services.training.dao.model.ClientEntity;
 import com.fithub.services.training.dao.model.CoachEntity;
 import com.fithub.services.training.dao.model.UserEntity;
+import com.fithub.services.training.dao.repository.ClientRepository;
 import com.fithub.services.training.dao.repository.CoachRepository;
 import com.fithub.services.training.dao.repository.UserRepository;
+import com.fithub.services.training.mapper.ClientMapper;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -32,7 +37,9 @@ public class CoachServiceImpl implements CoachService {
 
     private final RabbitMQHelper rabbitMQHelper;
     private final CoachRepository coachRepository;
+    private final ClientRepository clientRepository;
     private final UserRepository userRepository;
+    private final ClientMapper clientMapper;
     private final Validator validator;
 
     @Override
@@ -80,6 +87,16 @@ public class CoachServiceImpl implements CoachService {
         GenericResponse response = new GenericResponse();
         response.setMessage("The client capacity update request is pending. Email notification will be sent once it is complete.");
         return response;
+    }
+
+    @Override
+    public List<ClientResponse> getClients() {
+        final UserEntity authenticatedUser = UserContext.getCurrentContext().getUser();
+        final CoachEntity authenticatedCoach = authenticatedUser.getCoach();
+
+        List<ClientEntity> clientEntities = clientRepository.findByCoachId(authenticatedCoach.getId());
+
+        return clientMapper.entitiesToDtos(clientEntities);
     }
 
 }

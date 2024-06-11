@@ -18,8 +18,8 @@ import com.fithub.services.training.configuration.RibbonConfig;
 @EntityScan(basePackages = { "com.fithub.services.training.dao.model" })
 @EnableFeignClients("com.fithub.services.training.core.client")
 @PropertySource("classpath:spotify-api.properties")
-@RibbonClients({ @RibbonClient(name = "fithub-auth-service", configuration = RibbonConfig.class),
-        @RibbonClient(name = "fithub-membership-service", configuration = RibbonConfig.class) })
+@RibbonClients({ @RibbonClient(name = "auth-service", configuration = RibbonConfig.class),
+        @RibbonClient(name = "membership-service", configuration = RibbonConfig.class) })
 public class TrainingServiceLauncher {
 
     public static void main(String[] args) {
