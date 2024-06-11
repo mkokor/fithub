@@ -34,7 +34,6 @@ public class MembershipServiceTest extends BasicTestConfiguration {
 
     @Test
     public void testPaymentRecord_ValidIdIsProvided_ReturnTrue() {
-
         try {
             PaymentRecordEntity paymentRecordEntity = new PaymentRecordEntity();
             paymentRecordEntity.setId(1L);
