@@ -1,0 +1,93 @@
+#clients-coach-page-div {
+    padding-top: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    text-align: center;
+    padding: 8px;
+    border-bottom: 1px solid #dddddd;
+}
+
+button {
+    background-color: rgba(147, 184, 169, 0.773);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-bottom: none;
+    height: 40px;
+    line-height: 20px;
+    transition: color 0.3s;
+    border-radius: 100px;
+}
+
+button:hover {
+    color: rgb(62, 91, 62);
+}
+
+button:last-child {
+    margin-right: 0;
+}
+
+button a {
+    color: white;
+    text-decoration: none;
+}
+
+button a:hover {
+    text-decoration: underline;
+}
+
+#clients-coach-page-title {
+    text-align: center;
+    margin-top: 100px;
+}
+
+button.download-button {
+    background-color: transparent;
+    border: none;
+    color: black;
+    cursor: pointer;
+    float: right;
+}
+
+button.download-button:hover {
+    color: rgba(147, 184, 169, 0.773);
+    text-decoration: underline;
+}
+
+button.delete-button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+img.delete-icon {
+    opacity: 0.4;
+    display: block;
+    margin-left: -10px;
+}
+
+img.delete-icon:hover {
+    opacity: 1;
+}
+
+.membership-button {
+    float: right;
+}
+
+.mealplan-button {
+    float: right;
+}
