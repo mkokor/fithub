@@ -1,5 +1,6 @@
 package com.fithub.services.chat.controller;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -46,6 +47,7 @@ public class ChatController {
     @MessageMapping("/message")
     public Message sendMessage(@Payload final Message message) throws Exception {
         storeMessage(message);
+        message.setCreated(LocalDateTime.now());
 
         final String destination = constructDestinationUri(message.getSenderUsername());
         simpMessagingTemplate.convertAndSend(destination, message);
