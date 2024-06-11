@@ -30,7 +30,7 @@ public class MealPlanController {
     }
 
     @Operation(summary = "Get meal plan for client")
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<MealPlanResponse> getMealPlanClient() {
         return new ResponseEntity<>(mealPlanService.getMealPlanClient(), HttpStatus.OK);
     }
