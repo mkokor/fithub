@@ -55,7 +55,7 @@ export const getMyStats = async () => {
 export const getScoreBoard = async () => {
   try {
     const request = {
-      url: '/training-service/client/score-board',
+      url: '/training-service/progression-stats/rang-list',
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'

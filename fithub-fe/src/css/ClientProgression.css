@@ -6,7 +6,7 @@
   height: 100vh;
 }
 
-#client-prog-content {
+#prog-content {
   display: grid;
   grid-template-columns: 2fr 3fr; 
   grid-gap: 10px; 
@@ -39,13 +39,13 @@
   opacity: 100%;
 }
 
-#my-stats-div {
+#client-stats-div {
   height: 100%;
 }
 
 
 @media screen and (max-width: 930px) {
-  #client-prog-content {
+  #prog-content {
     display: flex;
     flex-direction: column;
   }
@@ -55,16 +55,16 @@
 }
 
 @media screen and (min-width: 930px) {
-  #my-stats-div {
+  #client-stats-div {
     border-right: 1px solid #b5b5b5; 
   }
   #score-half-div {
-    margin-left: 100px;
+    margin-left: 80px;
   }
 }
 
 @media screen and (max-width: 930px) {
-  #my-stats-div {
+  #client-stats-div {
     padding-bottom: 30px;
     border-bottom: 1px solid #b5b5b5; 
   }
