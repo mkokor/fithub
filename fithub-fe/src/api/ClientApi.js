@@ -32,3 +32,39 @@ export const getHomeNews = async () => {
   }
 }
 
+export const getMyStats = async () => {
+  try {
+    const request = {
+      url: '/training-service/progression-stats/latest',
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    const response = await sendRequest(request);
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching client stats:', error);
+    return { 
+      
+     };
+  }
+};
+
+
+export const getScoreBoard = async () => {
+  try {
+    const request = {
+      url: '/training-service/client/score-board',
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    const response = await sendRequest(request);
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching score board data:', error);
+    return [];
+  }
+};

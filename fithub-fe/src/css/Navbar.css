@@ -56,7 +56,7 @@
   right: 20px;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1209px) {
   #menu-icon-img {
     display: block;
     position: absolute;

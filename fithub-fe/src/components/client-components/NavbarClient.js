@@ -21,6 +21,7 @@ const NavbarClient = () => {
       <NavLink to="/" className="menu-item-link" id="home-link">Home</NavLink>
       <NavLink to="/nutrition" className="menu-item-link" id="nutrition-link">Nutrition</NavLink>
       <NavLink to="/training" className="menu-item-link" id="training-link">Training</NavLink>
+      <NavLink to="/progression" className="menu-item-link" id="progression-link">Progression</NavLink>
       <NavLink to="/chatroom" className="menu-item-link" id="chatroom-link">Chatroom</NavLink>
       <LogoutButton tag="navbar"/>
       <img id="menu-icon-img" src="/images/hamburger-menu-icon.png" alt="MENU" onClick={ () => { handleHamburgerMenu() }}></img>
