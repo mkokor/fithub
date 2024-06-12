@@ -40,7 +40,7 @@
 }
 
 
-.lockedTermins {
+.unavailableTerm {
     color: red;
     cursor: not-allowed; 
   }

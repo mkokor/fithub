@@ -1,22 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../css/ConfirmReservationModal.css";
 
 const ConfirmReservationModal = ({ closeModal, selectedTermin }) => {
-  return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <span className="close" onClick={closeModal}>&times;</span>
-        <h2>Reservation Confirmed</h2>
-        <p className="confirmation">Your reservation for the following slot has been successfully recorded:</p>
-        <p><strong>Day:</strong> {selectedTermin.day}</p>
-        <p><strong>Time:</strong> {selectedTermin.startTime} - {selectedTermin.endTime}</p>
-        <p><strong>Capacity:</strong> {selectedTermin.capacity}</p>
-        <div className="button-container">
-          <button onClick={closeModal}>Close</button>
+  const [isReserved, setIsReserved] = useState(false);
+
+  const handleConfirmReservation = () => {
+    setIsReserved(true);
+    closeModal();
+  };
+
+  if (selectedTermin.capacity === 10) {
+    return (
+      <div className="modal-overlay">
+        <div className="modal-content">
+          <span className="close" onClick={closeModal}>&times;</span>
+          <h2>Full Appointment</h2>
+          <p className="full">The appointment slot is full! Please reserve another one!</p>
+          <div className="button-container">
+            <button onClick={closeModal}>Close</button>
+          </div>
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  } else if (!isReserved) {
+    return (
+      <div className="modal-overlay">
+        <div className="modal-content">
+          <span className="close" onClick={closeModal}>&times;</span>
+          <h2>{`${selectedTermin.day}, ${selectedTermin.startTime} - ${selectedTermin.endTime}`}</h2>
+          <p className="confirmation">Your reservation has been recorded!</p>
+          <div className="button-container">
+            <button onClick={handleConfirmReservation}>Close</button>
+          </div>
+        </div>
+      </div>
+    );
+  } else {
+    return null; // Termin je rezervisan i zaleđen, pa se modal ne prikazuje
+  }
+};
 
 export default ConfirmReservationModal;
