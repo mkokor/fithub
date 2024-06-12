@@ -53,10 +53,13 @@ Projekat je moguće pokrenuti na dva načina, preko Docker-a ili manuelno. S obz
 Prvo pokrenite backened projekat prema sljedećim uputama:
 1. Importujte backend projekat u razvojno okruženje
 2. Na portu 3306 obezbijedite prazne baze naziva: fithub_auth, fithub_chat, fithub_membership, fithub_mealplan, fithub_training
-3. Za svaki od podprojekata uradite niz akcija Maven clean -> Update Maven project -> Maven install -> pokrenite izvršni fajl kao Java aplikaciju (izvršni fajl nalazi se u src folderu u folderu NAZIV_MIKROSERVISE-service
+3. U auth-service pod src/main/resources dodajte email.properties fajl, a u training-service pod src/main/resources dodajte spotify-api.properties fajl
 
-      Podprojekte pokrenite sljedećim redoslijedom fithub-config-server -> eureka-service-registry -> system-events-service -> auth-service -> mealplan-service -> chat-service -> training-service -> membership-service ->api-gateway
-4. Backend je sada pokrenut
+   Razlog za ovo jeste da bi se omogućilo slanje kodova na email korisnika, te komuniciranje sa spotify API-em koji se koristi za glazbene prijedloge, a iz koda je moguće zaključiti koja polja je potrebno dodati
+5. Za svaki od podprojekata uradite niz akcija Maven clean -> Update Maven project -> Maven install -> pokrenite izvršni fajl kao Java aplikaciju (izvršni fajl nalazi se u src folderu u folderu NAZIV_MIKROSERVISE-service
+
+   Podprojekte pokrenite sljedećim redoslijedom fithub-config-server -> eureka-service-registry -> system-events-service -> auth-service -> mealplan-service -> chat-service -> training-service -> membership-service -> api-gateway
+6. Backend je sada pokrenut
 
 Za pokretanje frontend projekta potrebno je izvršiti sljedeće korake
 1. Pozicionirajte se u frontend folder (fithub-fe)
