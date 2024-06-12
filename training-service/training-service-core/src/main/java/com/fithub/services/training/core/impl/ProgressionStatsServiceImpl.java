@@ -1,12 +1,18 @@
 package com.fithub.services.training.core.impl;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import org.springframework.data.domain.Pageable;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.fithub.services.training.api.ProgressionStatsService;
@@ -15,6 +21,7 @@ import com.fithub.services.training.api.exception.BadRequestException;
 import com.fithub.services.training.api.exception.NotFoundException;
 import com.fithub.services.training.api.exception.UnauthorizedException;
 import com.fithub.services.training.api.model.progressionstat.ProgressionStatsCreateRequest;
+import com.fithub.services.training.api.model.progressionstat.ProgressionStatsPageable;
 import com.fithub.services.training.api.model.progressionstat.ProgressionStatsResponse;
 import com.fithub.services.training.core.context.UserContext;
 import com.fithub.services.training.dao.model.ClientEntity;
@@ -25,6 +32,7 @@ import com.fithub.services.training.dao.repository.ProgressionStatsRepository;
 import com.fithub.services.training.dao.repository.UserRepository;
 import com.fithub.services.training.mapper.ProgressionStatsMapper;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
@@ -92,7 +100,17 @@ public class ProgressionStatsServiceImpl implements ProgressionStatsService {
     }
 
     @Override
-    public List<ProgressionStatsResponse> getRangList(Pageable pageable) throws ApiException {
+    public List<ProgressionStatsResponse> getRangList(ProgressionStatsPageable progressionStatsPageable) throws ApiException {
+        if (!("createdAt".equals(progressionStatsPageable.getSortFilter()) || "benchPr".equals(progressionStatsPageable.getSortFilter())
+                || "treadmillPr".equals(progressionStatsPageable.getSortFilter())
+                || "squatPr".equals(progressionStatsPageable.getSortFilter())
+                || "deadliftPm".equals(progressionStatsPageable.getSortFilter()))) {
+            throw new BadRequestException("The sort filter is invalid.");
+        }
+
+        PageRequest pageable = PageRequest.of(progressionStatsPageable.getPageNumber(), progressionStatsPageable.getPageSize(),
+                Sort.by(Sort.Order.desc("createdAt"), Sort.Order.desc(progressionStatsPageable.getSortFilter())));
+
         List<ProgressionStatsEntity> progressionStatsEntities = progressionStatsRepository.findByDistinctClientIds(pageable);
         return progressionStatsMapper.entitiesToDtos(progressionStatsEntities);
     }
@@ -108,6 +126,53 @@ public class ProgressionStatsServiceImpl implements ProgressionStatsService {
         }
 
         return progressionStatsMapper.entityToDto(progressionStatsEntity.get(0));
+    }
+
+    @Override
+    public void generateExcelFromProgressionStats(HttpServletResponse response) throws IOException {
+        final ClientEntity client = getAuthenticatedUser().getClient();
+        final List<ProgressionStatsEntity> progressionStatsList = progressionStatsRepository.findByClientUuid(client.getUser().getUuid());
+
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("Progression Stats");
+
+        XSSFRow headerRow = sheet.createRow(0);
+        headerRow.createCell(0).setCellValue("ID");
+        headerRow.createCell(1).setCellValue("Created At");
+        headerRow.createCell(2).setCellValue("Created By");
+        headerRow.createCell(3).setCellValue("Weight");
+        headerRow.createCell(4).setCellValue("Height");
+        headerRow.createCell(5).setCellValue("Deadlift PR");
+        headerRow.createCell(6).setCellValue("Squat PR");
+        headerRow.createCell(7).setCellValue("Bench PR");
+        headerRow.createCell(8).setCellValue("Treadmill PR");
+
+        int rowNum = 1;
+        for (ProgressionStatsEntity stats : progressionStatsList) {
+            XSSFRow row = sheet.createRow(rowNum++);
+            row.createCell(0).setCellValue(stats.getId());
+            row.createCell(1).setCellValue(stats.getCreatedAt().format(dateFormatter));
+            row.createCell(2)
+                    .setCellValue(stats.getCreatedBy().getUser().getFirstName() + " " + stats.getCreatedBy().getUser().getLastName());
+            row.createCell(3).setCellValue(stats.getWeight());
+            row.createCell(4).setCellValue(stats.getHeight());
+            row.createCell(5).setCellValue(stats.getDeadliftPr());
+            row.createCell(6).setCellValue(stats.getSquatPr());
+            row.createCell(7).setCellValue(stats.getBenchPr());
+            row.createCell(8).setCellValue(stats.getTreadmillPr());
+        }
+
+        for (int i = 0; i < 10; i++) {
+            sheet.autoSizeColumn(i);
+        }
+
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setHeader("Content-Disposition", "attachment; filename=progression-stats.xlsx");
+
+        workbook.write(response.getOutputStream());
+        workbook.close();
     }
 
 }

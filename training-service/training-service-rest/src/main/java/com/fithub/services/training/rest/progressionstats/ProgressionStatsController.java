@@ -1,9 +1,8 @@
 package com.fithub.services.training.rest.progressionstats;
 
+import java.io.IOException;
 import java.util.List;
 
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fithub.services.training.api.ProgressionStatsService;
 import com.fithub.services.training.api.exception.ApiException;
 import com.fithub.services.training.api.model.progressionstat.ProgressionStatsCreateRequest;
+import com.fithub.services.training.api.model.progressionstat.ProgressionStatsPageable;
 import com.fithub.services.training.api.model.progressionstat.ProgressionStatsResponse;
-import com.fithub.services.training.api.model.validation.ProgressionStatsSort;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -59,11 +59,19 @@ public class ProgressionStatsController {
     public ResponseEntity<List<ProgressionStatsResponse>> getRangList(
             @RequestParam(name = "page_number", required = false, defaultValue = "0") final Integer pageNumber,
             @RequestParam(name = "page_size", required = false, defaultValue = "5") final Integer pageSize,
-            @RequestParam(name = "sort_by", required = false, defaultValue = "createdAt") @ProgressionStatsSort final String sortBy)
-            throws ApiException {
-        PageRequest pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Order.desc("createdAt"), Sort.Order.desc(sortBy)));
+            @RequestParam(name = "sort_by", required = false, defaultValue = "createdAt") final String sortBy) throws ApiException {
+        ProgressionStatsPageable pageable = new ProgressionStatsPageable();
+        pageable.setPageNumber(pageNumber);
+        pageable.setPageSize(pageSize);
+        pageable.setSortFilter(sortBy);
 
         return new ResponseEntity<>(progressionStatsService.getRangList(pageable), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Get progression stats report")
+    @GetMapping("/report")
+    public void downloadProgressionStatsExcel(HttpServletResponse response) throws IOException {
+        progressionStatsService.generateExcelFromProgressionStats(response);
     }
 
 }
