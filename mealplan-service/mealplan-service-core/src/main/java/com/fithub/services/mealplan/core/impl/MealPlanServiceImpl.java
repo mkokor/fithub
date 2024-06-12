@@ -41,7 +41,7 @@ public class MealPlanServiceImpl implements MealPlanService {
     private final DailyMealPlanMapper dailyMealPlanMapper;
 
     @Override
-    public void createMealPlan(ClientEntity clientEntity) {
+    public MealPlanResponse createMealPlan(ClientEntity clientEntity) {
         MealPlanEntity mealPlanEntity = new MealPlanEntity();
         mealPlanEntity.setClient(clientEntity);
         mealPlanEntity.setLastModified(LocalDateTime.now());
@@ -61,6 +61,8 @@ public class MealPlanServiceImpl implements MealPlanService {
 
             dailyMealPlanRepository.save(dailyMealPlanEntity);
         }
+
+        return createMealPlanResponse(mealPlanEntity);
     }
 
     private MealPlanResponse createMealPlanResponse(final MealPlanEntity mealPlanEntity) {

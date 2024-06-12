@@ -6,7 +6,7 @@ import com.fithub.services.mealplan.dao.model.ClientEntity;
 
 public interface MealPlanService {
 
-    void createMealPlan(final ClientEntity clientEntity);
+    MealPlanResponse createMealPlan(final ClientEntity clientEntity);
 
     MealPlanResponse getMealPlanByClientUuid(final String clientUuid) throws ApiException;
 
