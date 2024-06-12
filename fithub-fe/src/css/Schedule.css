@@ -30,9 +30,12 @@
     font-weight: bold;
   }
   .termin {
-    color: rgb(116, 141, 131);
+    cursor: pointer;
+    color: rgb(0, 0, 0);
   }
-  
+  .termin:hover{
+    color: rgb(159, 159, 159);
+  }
 
 
 

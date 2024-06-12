@@ -16,25 +16,25 @@ import { useAuth } from './context/AuthContext';
 import { useRole } from './context/RoleContext';
 
 function App() {
-  const { isAuthenticated, login } = useAuth();
-  const { role, updateRole } = useRole();
+  //const { isAuthenticated, login } = useAuth();
+  //const { role, updateRole } = useRole();
   const [navbarIsVisible, setNavbarIsVisible] = useState(true);
-
+  const role = 'ADMIN';
   useEffect(() => {
     const navigationRequired = ["/", "/nutrition", "/training", "/chatroom", "/coach-nutrition", "/membership"].includes(window.location.pathname);
     setNavbarIsVisible(navigationRequired);
   }, []);
 
   const handleLogin = (loginData) => {
-    login(loginData);
+    /*login(loginData);
     if (loginData.role) {
       updateRole(loginData.role);
-    }
+    }*/
   };
 
-  if (!isAuthenticated) {
+  /*if (!isAuthenticated) {
     return <LoginForm onLogin={handleLogin} />;
-  }
+  }*/
 
   return (
     <div className="App">

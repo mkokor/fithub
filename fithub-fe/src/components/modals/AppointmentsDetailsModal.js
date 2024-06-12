@@ -2,6 +2,11 @@ import React from "react";
 import "../../css/AppointmentsDetailsModal.css";
 
 const AppointmentsDetailsModal = ({ closeModal, selectedTermin }) => {
+  // Provjera da li je selectedTermin definiran prije pristupa svojstvima
+  if (!selectedTermin) {
+    return null; // Ako selectedTermin nije definiran, prikažemo prazan modal
+  }
+
   return (
     <div className="modal-overlay">
       <div className="modal-content">
