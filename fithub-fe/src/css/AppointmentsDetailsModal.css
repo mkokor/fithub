@@ -1,20 +1,23 @@
-.modal {
-    display: none;
+.modal-overlay {
     position: fixed;
-    z-index: 1;
-    left: 0;
     top: 0;
-    width: 40%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    max-width: none;
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    height: 230px;
+    overflow-y: auto;
     width: 400px;
 }
 
@@ -67,4 +70,11 @@ button a {
 button a:hover {
     text-decoration: underline;
 }
+
+/* AppointmentsDetailsModal.css */
+.full-termin {
+    color: rgb(182, 21, 21);
+    font-weight: bold;
+  }
+  
 
