@@ -4,7 +4,7 @@ import LoadingSpinner from "../LoadingSpinner";
 
 import { useState, useEffect } from "react";
 import ClientPersonalStats from "./ClientPersonalStats";
-import { getMyStats, getScoreBoard } from "../../api/ClientApi";
+import { getMyStats, getReport, getScoreBoard } from "../../api/ClientApi";
 import ScoreBoard from "../ScoreBoard";
 
 
@@ -43,7 +43,7 @@ const ClientProgression = () => {
   }, []); 
 
   const generateReport = () => {
-
+    getReport();
   }
 
 

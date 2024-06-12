@@ -66,3 +66,28 @@ export const getScoreBoard = async () => {
     return [];
   }
 };
+
+export const getReport = async () => {
+  var token = JSON.parse(localStorage.getItem("user")).accessToken;
+  fetch('/training-service/progression-stats/report', {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  .then(response => {
+    return response.blob(); 
+  })
+  .then(blob => {
+    const url = window.URL.createObjectURL(new Blob([blob]));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'stats_history_fithub.xlsx'); 
+    document.body.appendChild(link);
+    link.click();
+    link.parentNode.removeChild(link); 
+  })
+  .catch(error => {
+    console.error('Greška pri preuzimanju fajla:', error);
+  });
+};
