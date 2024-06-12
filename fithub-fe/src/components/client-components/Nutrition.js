@@ -16,7 +16,8 @@ const Nutrition = () => {
     const fetchData = async () => {
       try {
         if (user) {
-          const data = await getMealPlan(); 
+          const data = await getMealPlan();
+          console.log(data);
           setMealPlan(data);
         }
         setIsLoading(false);
@@ -27,7 +28,7 @@ const Nutrition = () => {
     };
 
     fetchData();
-  }, [user]);
+  }, []);
 
   function downloadMealplan() {
     const doc = new jsPDF();
@@ -40,11 +41,11 @@ const Nutrition = () => {
 
     const columns = ["", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
     const rows = [
-      ["Breakfast", ...mealplan.map(dayPlan => dayPlan.breakfast)],
-      ["AM Snack", ...mealplan.map(dayPlan => dayPlan.amSnack)],
-      ["Lunch", ...mealplan.map(dayPlan => dayPlan.lunch)],
-      ["Dinner", ...mealplan.map(dayPlan => dayPlan.dinner)],
-      ["PM Snack", ...mealplan.map(dayPlan => dayPlan.pmSnack)]
+      ["Breakfast", ...mealplan.dailyMealPlans.map(dayPlan => dayPlan.breakfast)],
+      ["AM Snack", ...mealplan.dailyMealPlans.map(dayPlan => dayPlan.amSnack)],
+      ["Lunch", ...mealplan.dailyMealPlans.map(dayPlan => dayPlan.lunch)],
+      ["Dinner", ...mealplan.dailyMealPlans.map(dayPlan => dayPlan.dinner)],
+      ["PM Snack", ...mealplan.dailyMealPlans.map(dayPlan => dayPlan.pmSnack)]
     ];
 
     doc.autoTable({
@@ -63,23 +64,21 @@ const Nutrition = () => {
     document.body.removeChild(link);
   }
 
-  const renderEvents = (
+  return (
+    <div className="App">
+      {isLoading || mealplan === null ? <LoadingSpinner /> : (
     <div id="nutrition-page-div" className="page-div">
       <div className="nutrition-banner"> 
-        <p className="page-title">Your weekly meal plan</p>
-        <img src="/images/meal-48.png" alt=""></img>
+        <p className="mp-title">Your weekly meal plan</p>
+        <img src="/images/icons/food.png" alt=""></img>
       </div>
       <hr className="content-divider"></hr>
       <div id="mealplan-bg">
-        <MealPlan mealplan={mealplan}/>
+        <MealPlan mealplan={mealplan.dailyMealPlans}/>
         <img src="/images/download.png" alt="Download as PDF" id="download-link" onClick={() => downloadMealplan()}></img>
       </div>
     </div>
-  );
-
-  return (
-    <div className="App">
-      {isLoading ? <LoadingSpinner /> : renderEvents}
+  )}
     </div>
   );
 }

@@ -101,10 +101,10 @@ const CoachProgression = () => {
               {clientStatsHistory.map((stats, index) => (
                 <tr key={index}>
                   <td className='stats-value'>{stats.bmi.toFixed(2)}</td>
-                  <td className='stats-value'>{stats.benchPr}</td>
-                  <td className='stats-value'>{stats.squatPr}</td>
-                  <td className='stats-value'>{stats.deadliftPr}</td>
-                  <td className='stats-value'>{stats.treadmillPr}</td>
+                  <td className='stats-value'>{stats.benchPr.toFixed(2)}</td>
+                  <td className='stats-value'>{stats.squatPr.toFixed(2)}</td>
+                  <td className='stats-value'>{stats.deadliftPr.toFixed(2)}</td>
+                  <td className='stats-value'>{stats.treadmillPr.toFixed(2)}</td>
                 </tr>
               ))}
             </tbody>

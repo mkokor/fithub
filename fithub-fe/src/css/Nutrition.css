@@ -15,8 +15,13 @@
 
 .day-cell {
   text-align: center;
-  color: whitesmoke;
-  background-color: #69eba6;
+  background-color: rgb(241, 248, 245);
+}
+
+.mp-title {
+  font-size: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .day-cell, .meal-title {
@@ -29,7 +34,7 @@
 .meal-title {
   text-align: left;
   color: rgb(53, 53, 53);
-  background-color: rgba(239, 244, 238, 0.996);
+  background-color: rgba(239, 244, 238, 0.9);
 }
 
 #mealplan-table-div {
@@ -40,12 +45,11 @@
 #mealplan-bg {
   height: 75vh;
   overflow-y: hidden; 
-  background-image: url('../../public/images/nutrition-bg.png');
 }
 
 #mealplan-table, #mealplan-table th, #mealplan-table td {
   border: 0px;
-  border-radius: 10px;
+  border-radius: 2px;
 }
 
 #meal-cell {
@@ -85,7 +89,7 @@
   flex-direction: row;
   justify-content: center;
   place-items: center;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 3px 6px, rgba(50, 50, 50, 0.2) 0px 2px 4px;
+  box-shadow: rgba(97, 97, 97, 0.07) 0px 3px 3px, rgba(135, 135, 135, 0.2) 0px 1px 2px;
 }
 
 .nutrition-banner img {

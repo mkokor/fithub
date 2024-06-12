@@ -43,6 +43,21 @@
   height: 100%;
 }
 
+.title-cell {
+  text-align: center;
+}
+
+.my-stats-value {
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#my-stats-table {
+  padding-right: 0px;
+}
 
 @media screen and (max-width: 930px) {
   #prog-content {

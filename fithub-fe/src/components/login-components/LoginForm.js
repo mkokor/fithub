@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../../css/LoginForm.css';
 import '../../App.css';
 import '../../css/CoachDetailsModal.css';
-import { userRegister, userLogIn, getAvailableCoaches, getCoachDetails } from "../../api/UserApi";
+import { userRegister, userLogIn, getAvailableCoaches, getCoachDetails, resetPassword } from "../../api/UserApi";
 import InputField from './InputField';
 import ConfirmationModal from '../modals/ConfirmationModal';
 import CoachDetailsModal from '../modals/CoachDetailsModal';
@@ -238,8 +238,10 @@ const LoginForm = () => {
       {isResetPasswordModalOpen && (
         <ResetPasswordModal
           onClose={handleResetPasswordModalClose}
-          onSubmit={() => setIsResetPasswordModalOpen(false)}
-          resetPassword={() => console.log('Reset Password function')}
+          onSubmit={ () => setIsResetPasswordModalOpen(false)}
+          resetPassword={async (resetData) => 
+            await resetPassword(resetData)
+          }
         />
       )}
       {isStatusModalOpen && (

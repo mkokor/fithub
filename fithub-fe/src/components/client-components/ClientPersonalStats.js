@@ -7,23 +7,23 @@ const ClientPersonalStats = ({ stats }) => {
       <tbody>
         <tr className='my-stats-row'>
           <td className='my-stats-cat'>BMI</td>
-          <td className='my-stats-value'>{stats ? stats.bmi : 'Not available'}</td>
+          <td className='my-stats-value'>{stats ? stats.bmi.toFixed(2) : 'Not available'}</td>
         </tr>
         <tr className='my-stats-row'>
           <td className='my-stats-cat'>Bench PR</td>
-          <td className='my-stats-value'>{stats ? stats.benchPr : 'Not available'}</td>
+          <td className='my-stats-value'>{stats ? stats.benchPr.toFixed(2) : 'Not available'}</td>
         </tr>
         <tr className='my-stats-row'>
           <td className='my-stats-cat'>Squat PR</td>
-          <td className='my-stats-value'>{stats ? stats.squatPr : 'Not available'}</td>
+          <td className='my-stats-value'>{stats ? stats.squatPr.toFixed(2) : 'Not available'}</td>
         </tr>
         <tr className='my-stats-row'>
           <td className='my-stats-cat'>Deadlift PR</td>
-          <td className='my-stats-value'>{stats ? stats.deadliftPr : 'Not available'}</td>
+          <td className='my-stats-value'>{stats ? stats.deadliftPr.toFixed(2) : 'Not available'}</td>
         </tr>
         <tr className='my-stats-row'>
           <td className='my-stats-cat'>Treadmill PR</td>
-          <td className='my-stats-value'>{stats ? stats.treadmillPr : 'Not available'}</td>
+          <td className='my-stats-value'>{stats ? stats.treadmillPr.toFixed(2) : 'Not available'}</td>
         </tr>
       </tbody>
     </table>

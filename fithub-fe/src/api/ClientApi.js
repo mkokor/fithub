@@ -10,7 +10,6 @@ export const getMealPlan = async () => {
       }
     };
     const response = await sendRequest(request);
-    console.log("Fetched melplan: ", response.json())
     return await response.json();
   } catch (error) {
     console.error('Error fetching mealplan:', error);
@@ -50,7 +49,6 @@ export const getMyStats = async () => {
      };
   }
 };
-
 
 export const getScoreBoard = async () => {
   try {
