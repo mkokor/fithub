@@ -31,4 +31,10 @@ public class SwaggerConfiguration {
         return GroupedOpenApi.builder().group("image-api").packagesToScan("com.fithub.services.training.rest.image").build();
     }
 
+    @Bean
+    public GroupedOpenApi progressionStatsApi() {
+        return GroupedOpenApi.builder().group("progression-stats-api").packagesToScan("com.fithub.services.training.rest.progressionstats")
+                .build();
+    }
+
 }
