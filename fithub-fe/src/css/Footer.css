@@ -35,6 +35,8 @@
 
 #footer-info p {
   color: rgb(255, 255, 255);
+  cursor: pointer;
+  transition: 0.3s ease;
 }
 
 #footer-title {
@@ -61,6 +63,8 @@
 .footer-social-link {
   height: 35px;
   margin: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
 }
 
 #copyright {

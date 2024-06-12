@@ -8,8 +8,8 @@ import ConfirmationModal from '../modals/ConfirmationModal';
 import CoachDetailsModal from '../modals/CoachDetailsModal';
 import InputEmailModal from '../modals/InputEmailModal';
 import ResetPasswordModal from '../modals/ResetPasswordModal';
-import StatusMessageModal from '../modals/StatusMessageModal'; 
-import CoachDropdown from './CoachDropdown'; 
+import StatusMessageModal from '../modals/StatusMessageModal';
+import CoachDropdown from './CoachDropdown';
 import { useAuth } from '../../context/AuthContext';
 import { useRole } from '../../context/RoleContext';
 
@@ -26,7 +26,7 @@ const LoginForm = () => {
 
   const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false); 
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [isCoachDetailsModalOpen, setIsCoachDetailsModalOpen] = useState(false);
   const [coaches, setCoaches] = useState([]);
   const [coachDetails, setCoachDetails] = useState({
@@ -37,7 +37,7 @@ const LoginForm = () => {
     "imagePath": ""
   });
   const [isInputEmailModalOpen, setIsInputEmailModalOpen] = useState(false);
-  const [isResetPasswordModalOpen, setIsResetPasswordModalOpen] = useState(false); 
+  const [isResetPasswordModalOpen, setIsResetPasswordModalOpen] = useState(false);
   const [isStatusModalOpen, setIsStatusModalOpen] = useState(false);
   const { login } = useAuth();
   const { updateRole } = useRole();
@@ -78,7 +78,7 @@ const LoginForm = () => {
     const { username, password, firstName, lastName, email, coachId } = formData;
 
     if (!username || !password || (isRegistering && (!firstName || !lastName || !email || !coachId))) {
-      setIsStatusModalOpen(true); 
+      setIsStatusModalOpen(true);
       return;
     }
 
@@ -95,7 +95,7 @@ const LoginForm = () => {
       if (loginResponse.accessToken) {
         login(loginResponse);
         if (loginResponse.role) {
-          updateRole(loginResponse.role); 
+          updateRole(loginResponse.role);
         }
       } else {
         throw new Error('Invalid credentials');
@@ -112,7 +112,7 @@ const LoginForm = () => {
       const registerResponse = await userRegister(formData);
       if (registerResponse.message && registerResponse.message.startsWith("ERROR")) {
         setHasError(true);
-        setErrorMessage(registerResponse.message.substring(5)); 
+        setErrorMessage(registerResponse.message.substring(5));
         setIsStatusModalOpen(true);
       } else {
         console.log("Registration successful");
@@ -129,7 +129,7 @@ const LoginForm = () => {
   const handleModalConfirm = (confirmationCode) => {
     console.log('Confirmed with code:', confirmationCode);
     setIsConfirmationModalOpen(false);
-    setIsRegistering(false); 
+    setIsRegistering(false);
   };
 
   const handleConfirmationModalClose = () => {
@@ -143,13 +143,13 @@ const LoginForm = () => {
   };
 
   const handleForgotPasswordClick = () => {
-    setIsInputEmailModalOpen(true); 
+    setIsInputEmailModalOpen(true);
   };
 
   const handleInputEmailModalClose = () => {
-    setIsInputEmailModalOpen(false); 
+    setIsInputEmailModalOpen(false);
   };
-  
+
   const handleInputEmailSubmit = (email) => {
     console.log("Reset password request for email:", email);
     setIsInputEmailModalOpen(false);
@@ -226,12 +226,13 @@ const LoginForm = () => {
         onClose={handleConfirmationModalClose}
         onConfirm={handleModalConfirm}
         email={email}
+        setIsRegistering={setIsRegistering} // Pass the setter function
       />
       {isInputEmailModalOpen && (
-        <InputEmailModal 
-          onSubmit={handleInputEmailSubmit} 
+        <InputEmailModal
+          onSubmit={handleInputEmailSubmit}
           onClose={handleInputEmailModalClose}
-          onSuccess={handleInputEmailSuccess} 
+          onSuccess={handleInputEmailSuccess}
         />
       )}
       {isResetPasswordModalOpen && (

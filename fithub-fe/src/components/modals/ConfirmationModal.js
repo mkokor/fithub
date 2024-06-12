@@ -4,7 +4,7 @@ import '../../App.css';
 import { confirmCode, resendConfirmationCode } from '../../api/UserApi';
 import StatusMessageModal from './StatusMessageModal';
 
-const ConfirmationModal = ({ isOpen, onClose, email, onConfirm }) => {
+const ConfirmationModal = ({ isOpen, onClose, email, onConfirm, setIsRegistering }) => {
   const [code, setCode] = useState(Array(6).fill(''));
   const [errorMessage, setErrorMessage] = useState('');
   const [resendMessage, setResendMessage] = useState('');
@@ -36,6 +36,7 @@ const ConfirmationModal = ({ isOpen, onClose, email, onConfirm }) => {
       if (response.message) {
         setShowStatusModal(true);
         setErrorMessage('');
+        setIsRegistering(false);
         onClose();
       } else {
         setShowStatusModal(true);
