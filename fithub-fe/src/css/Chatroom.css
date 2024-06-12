@@ -7,7 +7,7 @@
 
 #participants-div {
   border-right: 1px solid rgb(226, 226, 226);
-  background-color: rgba(147, 184, 169, 0.17);
+  background-color: rgb(241, 248, 245);
 }
 
 #divider {
@@ -30,9 +30,17 @@
   padding-left: 10px;
 }
 
-#chat-footer {
-  display: grid;
-  grid-template-columns: 9fr 1fr;
+.user-profile-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  margin-top: 13px;
+  overflow: hidden; 
 }
 
 #message-section {
@@ -43,7 +51,8 @@
   padding-right: 10px;
   padding-bottom: 20px;
   padding-top: 0px;
-  height: 640px;
+  height: 85vh;
+  width: 100%;
 }
 
 #chat-body {
@@ -66,7 +75,11 @@
 }
 
 #chat-footer {
-  height: 40px; 
+  height: 10vh; 
+  display: flex;
+  padding-left: 10px;
+  padding-right: 30px;
+  flex-direction: row;
 }
 
 #chat-body .message-container::-webkit-scrollbar {
@@ -187,4 +200,60 @@
 
 #send-message-button:hover {
   opacity: 100%;
+}
+
+.participants-overlay {
+  position: fixed;
+  top: 100px;
+  width: 100%;
+  height: 50px;
+  box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1); 
+  background-color: rgb(241, 248, 245);
+  z-index: 100;
+}
+
+.show-p-button {
+  position: fixed;
+  z-index: 1000;
+  top: 80px;
+  box-shadow: rgba(96, 96, 96, 0.08) 0px 3px 6px, rgba(123, 123, 123, 0.2) 0px 2px 4px;
+  background-color: white;
+  width: 100%;
+  height: 50px;
+}
+
+.participants-container {
+  position: absolute;
+  padding-top: 50px; 
+  right: 0;
+  width: 300px; 
+  z-index: 50;
+  height: 85%;
+  box-shadow: rgba(33, 33, 33, 0.12) 0px 3px 6px, rgba(50, 50, 50, 0.2) 0px 2px 4px;
+  overflow-y: auto;
+  display: none;
+  background-color: rgb(241, 248, 245);
+}
+
+.show {
+  display: block;
+}
+
+.show-participants-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 3px;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+  #message-section {
+    width: 100%;
+  }
+  #chat {
+    display: block;
+  }
 }

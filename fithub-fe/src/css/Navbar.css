@@ -4,7 +4,7 @@
   align-items: center;
   border-bottom-width: 5px;
   border-color: rgb(99, 99, 99);
-  z-index: 1000;
+  z-index: 8000;
   position: fixed;
   background-color: white;
   height: 80px;
