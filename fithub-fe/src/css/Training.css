@@ -39,3 +39,9 @@
     cursor: pointer;
 }
 
+
+.lockedTermins {
+    color: red;
+    cursor: not-allowed; 
+  }
+  

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../css/Training.css";
 import LoadingSpinner from "../LoadingSpinner";
-import AppointmentsDetailsModal from "../modals/AppointmentsDetailsModal";
+import ConfirmReservationModal from "../modals/ConfirmReservationModal";
 import { getAvailableAppointments } from "../../api/ClientApi"; 
 
 const getTermin = (day, time, availableTermins) => {
@@ -17,6 +17,7 @@ const Training = () => {
   const [selectedTermin, setSelectedTermin] = useState(null);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [lockedTermins, setLockedTermins] = useState([]);
 
   useEffect(() => {
     const fetchAppointments = async () => {
@@ -38,9 +39,10 @@ const Training = () => {
     const termin = availableTermins.find(
       res => res.day === day && res.startTime === time && res.capacity > 1
     );
-    if (termin) {
+    if (termin && !lockedTermins.includes(termin.id)) {
       setSelectedTermin(termin);
       setShowConfirmation(true);
+      setLockedTermins(prevLockedTermins => [...prevLockedTermins, termin.id]);
     }
   };
 
@@ -75,11 +77,11 @@ const Training = () => {
             return (
               <tr key={timeString}>
                 <td className="times">{timeString}</td>
-                <td className="availableTerm" onClick={() => handleTerminClick("Monday", timeString)}>{getTermin("Monday", timeString, availableTermins)}</td>
-                <td className="availableTerm" onClick={() => handleTerminClick("Tuesday", timeString)}>{getTermin("Tuesday", timeString, availableTermins)}</td>
-                <td className="availableTerm" onClick={() => handleTerminClick("Wednesday", timeString)}>{getTermin("Wednesday", timeString, availableTermins)}</td>
-                <td className="availableTerm" onClick={() => handleTerminClick("Thursday", timeString)}>{getTermin("Thursday", timeString, availableTermins)}</td>
-                <td className="availableTerm" onClick={() => handleTerminClick("Friday", timeString)}>{getTermin("Friday", timeString, availableTermins)}</td>
+                <td className={`availableTerm${lockedTermins.includes(`${timeString}-Monday`) ? ' locked' : ''}`} onClick={() => handleTerminClick("Monday", timeString)}>{getTermin("Monday", timeString, availableTermins)}</td>
+                <td className={`availableTerm${lockedTermins.includes(`${timeString}-Tuesday`) ? ' locked' : ''}`} onClick={() => handleTerminClick("Tuesday", timeString)}>{getTermin("Tuesday", timeString, availableTermins)}</td>
+                <td className={`availableTerm${lockedTermins.includes(`${timeString}-Wednesday`) ? ' locked' : ''}`} onClick={() => handleTerminClick("Wednesday", timeString)}>{getTermin("Wednesday", timeString, availableTermins)}</td>
+                <td className={`availableTerm${lockedTermins.includes(`${timeString}-Thursday`) ? ' locked' : ''}`} onClick={() => handleTerminClick("Thursday", timeString)}>{getTermin("Thursday", timeString, availableTermins)}</td>
+                <td className={`availableTerm${lockedTermins.includes(`${timeString}-Friday`) ? ' locked' : ''}`} onClick={() => handleTerminClick("Friday", timeString)}>{getTermin("Friday", timeString, availableTermins)}</td>
               </tr>
             );
           })}
@@ -93,7 +95,7 @@ const Training = () => {
     <div className="App">
       {isLoading ? <LoadingSpinner /> : renderEvents}
       {showConfirmation && selectedTermin && (
-        <AppointmentsDetailsModal closeModal={closeModal} selectedTermin={selectedTermin} />
+        <ConfirmReservationModal closeModal={closeModal} selectedTermin={selectedTermin} />
       )}
     </div>
   );
