@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../css/Training.css";
 import LoadingSpinner from "../LoadingSpinner";
-import ConfirmReservationModal from "../modals/ConfirmReservationModal";
+import AppointmentsDetailsModal from "../modals/AppointmentsDetailsModal";
 import { getAvailableAppointments } from "../../api/ClientApi"; 
 
 const getTermin = (day, time, availableTermins) => {
@@ -93,7 +93,7 @@ const Training = () => {
     <div className="App">
       {isLoading ? <LoadingSpinner /> : renderEvents}
       {showConfirmation && selectedTermin && (
-        <ConfirmReservationModal closeModal={closeModal} selectedTermin={selectedTermin} />
+        <AppointmentsDetailsModal closeModal={closeModal} selectedTermin={selectedTermin} />
       )}
     </div>
   );
