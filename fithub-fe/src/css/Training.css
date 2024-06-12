@@ -1,0 +1,41 @@
+.training-table {
+    width: 60%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.training-table th,
+.training-table td {
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    width: 12%;
+}
+
+.training-table th {
+    color: black;
+}
+
+#training-page-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.training-page-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.times {
+    font-weight: bold;
+}
+
+#training-page-title {
+    margin-top: 100px;
+}
+.availableTerm:hover {
+    color: rgb(159, 159, 159);
+    cursor: pointer;
+}
+

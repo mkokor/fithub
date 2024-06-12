@@ -1,3 +1,4 @@
+
 import { sendRequest } from "./GenericApi";
 
 export const getMealPlan = async () => {
@@ -18,3 +19,20 @@ export const getMealPlan = async () => {
   }
 };
 
+
+export const getAvailableAppointments = async () => {
+  try {
+    const request = {
+      url: `training-service/appointment/available`,
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json'
+      }
+    };
+    const response = await sendRequest(request);
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching appointments:', error);
+    return [];
+  }
+};
