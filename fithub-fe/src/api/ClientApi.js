@@ -10,7 +10,7 @@ export const getMealPlan = async () => {
       }
     };
     const response = await sendRequest(request);
-    console.log("Fetched melpla")
+    console.log("Fetched melplan: ", response.json())
     return await response.json();
   } catch (error) {
     console.error('Error fetching mealplan:', error);
@@ -18,3 +18,53 @@ export const getMealPlan = async () => {
   }
 };
 
+export const getHomeNews = async () => {
+  try {
+    const response = await fetch(`/training-service/image/path`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch news data');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching home news: ', error);
+    return [];
+  }
+}
+
+export const getMyStats = async () => {
+  try {
+    const request = {
+      url: '/training-service/progression-stats/latest',
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    const response = await sendRequest(request);
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching client stats:', error);
+    return { 
+      
+     };
+  }
+};
+
+
+export const getScoreBoard = async () => {
+  try {
+    const request = {
+      url: '/training-service/client/score-board',
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    const response = await sendRequest(request);
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching score board data:', error);
+    return [];
+  }
+};

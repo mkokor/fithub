@@ -10,6 +10,8 @@ import Chatroom from "./components/chat-components/Chatroom";
 import Schedule from "./components/coach-components/Schedule";
 import Clients from "./components/coach-components/Clients";
 import HamburgerMenu from "./components/HamburgerMenu";
+import ClientProgression from "./components/client-components/ClientProgression";
+import CoachProgression from "./components/coach-components/CoachProgression";
 import NotFound from "./components/NotFound";
 import { useState, useEffect } from "react";
 import { useAuth } from './context/AuthContext';
@@ -21,7 +23,7 @@ function App() {
   const [navbarIsVisible, setNavbarIsVisible] = useState(true);
 
   useEffect(() => {
-    const navigationRequired = ["/", "/nutrition", "/training", "/chatroom", "/coach-nutrition", "/membership"].includes(window.location.pathname);
+    const navigationRequired = ["/", "/nutrition", "/training", "/progression", "/chatroom", "/coach-nutrition", "/membership"].includes(window.location.pathname);
     setNavbarIsVisible(navigationRequired);
   }, []);
 
@@ -47,6 +49,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/nutrition" element={<Nutrition />} />
               <Route path="/training" element={<Training />} />
+              <Route path="/progression" element={<ClientProgression />} />
               <Route path="/chatroom" element={<Chatroom />} />
               <Route path="/*" element={<NotFound />} />
             </>
@@ -54,6 +57,7 @@ function App() {
             <>
               <Route path="/" element={<Schedule />} />
               <Route path="/clients" element={<Clients />} />
+              <Route path="/progression" element={<CoachProgression />} />
               <Route path="/chatroom" element={<Chatroom />} />
               <Route path="/*" element={<NotFound />} />
             </>

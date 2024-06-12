@@ -1,0 +1,74 @@
+#progression-page-div {
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 80px;
+  justify-content: center;
+  height: 100vh;
+}
+
+#client-prog-content {
+  display: grid;
+  grid-template-columns: 2fr 3fr; 
+  grid-gap: 10px; 
+  height: 90%;
+  padding-bottom: 100px;
+}
+
+.client-progression-tp {
+  text-align: left;
+  margin-top: 70px;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+#stats-b-div {
+  width: 100%;
+  margin-top: 20px;
+}
+
+#stats-b-div img {
+  position: relative;
+  height: 30px;
+  width: 30px;
+  opacity: 60%;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+#stats-b-div img:hover {
+  opacity: 100%;
+}
+
+#my-stats-div {
+  height: 100%;
+}
+
+
+@media screen and (max-width: 930px) {
+  #client-prog-content {
+    display: flex;
+    flex-direction: column;
+  }
+  #my-stats-div {
+    margin-top: 30px;
+  }
+}
+
+@media screen and (min-width: 930px) {
+  #my-stats-div {
+    border-right: 1px solid #b5b5b5; 
+  }
+  #score-half-div {
+    margin-left: 100px;
+  }
+}
+
+@media screen and (max-width: 930px) {
+  #my-stats-div {
+    padding-bottom: 30px;
+    border-bottom: 1px solid #b5b5b5; 
+  }
+  #score-half-div p {
+    margin-top: 30px;
+  }
+}

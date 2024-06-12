@@ -248,6 +248,7 @@ public class UserServiceImpl implements UserService {
         UserSignInResponse userSignInResponse = new UserSignInResponse();
         userSignInResponse.setAccessToken(tokenHelper.generateAccessToken(userEntity.get()));
         userSignInResponse.setRole(getRole(userEntity.get()).getValue());
+        userSignInResponse.setUsername(tokenOwnerUsername);
         return userSignInResponse;
     }
 
