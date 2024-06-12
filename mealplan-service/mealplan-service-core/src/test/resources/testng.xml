@@ -1,22 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="MealPlanServiceTestSuite">
-	<!--
-    <test thread-count="5" name="ClientService">
-        <classes>
-            <class name="com.fithub.services.mealplan.test.suites.ClientServiceTest"/>
-        </classes>
-    </test>
-    <test thread-count="5" name="CoachService">
-        <classes>
-            <class name="com.fithub.services.mealplan.test.suites.CoachServiceTest"/>
-        </classes>
-    </test>
-    
-        <test thread-count="5" name="MealPlanService">
+    <test thread-count="5" name="MealPlanService">
         <classes>
             <class name="com.fithub.services.mealplan.test.suites.MealPlanServiceTest"/>
         </classes>
-    </test>-->
+    </test>
 </suite>
-
