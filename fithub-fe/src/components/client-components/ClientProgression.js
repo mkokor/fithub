@@ -25,7 +25,7 @@ const ClientProgression = () => {
       }
     };
     fetchData();
-  }, [stats]); 
+  }, []); 
 
   
   useEffect(() => {
@@ -40,7 +40,7 @@ const ClientProgression = () => {
       }
     };
     fetchData();
-  }, [scoreBoardStats]); 
+  }, []); 
 
   const generateReport = () => {
 
@@ -49,8 +49,8 @@ const ClientProgression = () => {
 
   const renderEvents = (
     <div id="progression-page-div" className="page-div">
-      <div id="client-prog-content">
-        <div id="my-stats-div">
+      <div id="prog-content">
+        <div id="client-stats-div">
           <p className="client-progression-tp">Your latest stats:</p>
           <div>
             <ClientPersonalStats stats={stats}/>

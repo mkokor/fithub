@@ -184,7 +184,7 @@ export const getPasswordResetCode = async (email) => {
 
 export const resetPassword = async (resetData) => {
   try {
-    const response = await fetch(`/auth-service/user/${resetData.email}/password-reset`, {
+    const response = await fetch(`/auth-service/user/${resetData.userEmail}/password-reset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

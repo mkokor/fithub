@@ -10,7 +10,6 @@ export const getMealPlan = async () => {
       }
     };
     const response = await sendRequest(request);
-    console.log("Fetched melplan: ", response.json())
     return await response.json();
   } catch (error) {
     console.error('Error fetching mealplan:', error);
@@ -51,11 +50,10 @@ export const getMyStats = async () => {
   }
 };
 
-
 export const getScoreBoard = async () => {
   try {
     const request = {
-      url: '/training-service/client/score-board',
+      url: '/training-service/progression-stats/rang-list',
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
