@@ -26,7 +26,7 @@ const CoachProgression = () => {
         if (clientsData.length > 0) {
           setClients(clientsData);
           setClient(clientsData[0]);
-          setUuid(client.uuid);
+          setUuid(clientsData[0].uuid);
           const statsData = await getStatsForClient(clientsData[0].uuid);
           setClientStatsHistory(statsData);
         }

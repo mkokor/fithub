@@ -10,7 +10,7 @@ import ScoreBoard from "../ScoreBoard";
 
 const ClientProgression = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [stats, setStats] = useState({});
+  const [stats, setStats] = useState(null);
   const [scoreBoardStats, setScoreBoardStats] = useState([]);
 
   useEffect(() => {
@@ -46,8 +46,9 @@ const ClientProgression = () => {
     getReport();
   }
 
-
-  const renderEvents = (
+  return (
+    <div className="App">
+    {isLoading || stats === null ? <LoadingSpinner /> : (
     <div id="progression-page-div" className="page-div">
       <div id="prog-content">
         <div id="client-stats-div">
@@ -67,11 +68,7 @@ const ClientProgression = () => {
         </div>
       </div>
     </div>
-  );
-
-  return (
-    <div className="App">
-    {isLoading ? <LoadingSpinner /> : renderEvents}
+  )}
     </div>
   );
 }
