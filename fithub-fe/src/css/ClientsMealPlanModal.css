@@ -1,0 +1,82 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    max-width: none;
+}
+
+.modal-content-mealplan {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    height: 70%;
+    max-height: 90%;
+    overflow-y: auto;
+    width: 80%;
+}
+
+.modal-content-mealplan table {
+    width: calc(100% - 30px);
+    margin: 0 auto;
+    padding: 0 15px;
+    border-collapse: collapse; /* Dodano kako bi se obrubi prikazali samo kao tanke linije */
+}
+
+.day {
+    font-weight: bold;
+    color: rgb(116, 141, 131);
+}
+
+.modal-content-mealplan table td {
+    padding-right: 20px;
+    width: 110px;
+    padding-left: 20px;
+    text-align: left;
+    position: relative;
+    border-left: 1px solid #ddd; /* Dodano kako bi se stvorile tanke uspravne linije između ćelija */
+}
+
+.modal-content-mealplan table th {
+    padding-right: 10px;
+    width: 150px;
+    padding-left: 10px;
+    text-align: left;
+    position: relative;
+    border-left: 1px solid #ddd; /* Dodano kako bi se stvorile tanke uspravne linije između ćelija */
+}
+
+.modal-content-mealplan table th {
+    text-align: center;
+    color: rgb(116, 141, 131);
+}
+
+.modal-content-mealplan table td:first-child, .modal-content-mealplan table th:first-child {
+    border-left: none; /* Uklanja lijevi obrub za prvu ćeliju u svakom redu */
+}
+
+.modal-content-mealplan table td img {
+    opacity: 0.4; 
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    margin-right: 8px;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.modal-content-mealplan table td img:hover {
+    opacity: 1; 
+}
+
+.modal-content-mealplan button {
+    margin-top: 20px;
+}

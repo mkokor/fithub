@@ -12,6 +12,8 @@ const MealPlan = ({ mealplan }) => {
             <td className="day-cell">Wednesday</td>
             <td className="day-cell">Thursday</td>
             <td className="day-cell">Friday</td>
+            <td className="day-cell">Saturday</td>
+            <td className="day-cell">Sunday</td>
           </tr>
         </thead>
         <tbody>

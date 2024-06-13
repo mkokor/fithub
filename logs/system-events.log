@@ -1,0 +1,47 @@
+15:25:29.329 [] [] [] [] Fetching config from server at : http://localhost:8888
+15:25:30.434 [] [] [] [] Located environment: name=system-events-service, profiles=[default], label=null, version=953d3a9a0f41a66eaf42167c8354ad864a58d121, state=null
+15:25:30.434 [] [] [] [] Located property source: [BootstrapPropertySource {name='bootstrapProperties-configClient'}]
+15:25:30.439 [] [] [] [] The following 1 profile is active: "development"
+15:25:30.468 [] [] [] [] Fetching config from server at : http://localhost:8888
+15:25:30.468 [] [] [] [] Located environment: name=system-events-service, profiles=[default], label=null, version=953d3a9a0f41a66eaf42167c8354ad864a58d121, state=null
+15:25:30.468 [] [] [] [] Fetching config from server at : http://localhost:8888
+15:25:30.468 [] [] [] [] Located environment: name=system-events-service, profiles=[development], label=null, version=953d3a9a0f41a66eaf42167c8354ad864a58d121, state=null
+15:25:31.597 [] [] [] [] BeanFactory id=436474b4-29d0-38f2-8c93-1c00f250a35f
+15:25:31.667 [] [] [] [] Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+15:25:31.675 [] [] [] [] Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+15:25:31.861 [] [] [] [] Eureka HTTP Client uses RestTemplate.
+15:25:32.155 [] [] [] [] Detected grpc-netty-shaded: Creating ShadedNettyGrpcServerFactory
+15:25:32.848 [] [] [] [] Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+15:25:32.951 [] [] [] [] Setting initial instance status as: STARTING
+15:25:33.115 [] [] [] [] Initializing Eureka in region us-east-1
+15:25:33.115 [] [] [] [] Resolving eureka endpoints via configuration
+15:25:33.177 [] [] [] [] Disable delta property : false
+15:25:33.177 [] [] [] [] Single vip registry refresh property : null
+15:25:33.185 [] [] [] [] Force full registry fetch : false
+15:25:33.185 [] [] [] [] Application is null : false
+15:25:33.187 [] [] [] [] Registered Applications size is zero : true
+15:25:33.187 [] [] [] [] Application version is -1: true
+15:25:33.187 [] [] [] [] Getting all instance registry info from the eureka server
+15:25:33.898 [] [] [] [] The response status is 200
+15:25:33.898 [] [] [] [] Starting heartbeat executor: renew interval is: 30
+15:25:33.915 [] [] [] [] InstanceInfoReplicator onDemand update allowed rate per min is 4
+15:25:33.931 [] [] [] [] Discovery Client initialized at timestamp 1718198733931 with initial instances count: 0
+15:25:33.935 [] [] [] [] Registering application SYSTEM-EVENTS-SERVICE with eureka with status UP
+15:25:33.935 [] [] [] [] Saw local status change event StatusChangeEvent [timestamp=1718198733935, current=UP, previous=STARTING]
+15:25:33.943 [] [] [] [] DiscoveryClient_SYSTEM-EVENTS-SERVICE/LAPTOP-0MN5E036.local:system-events-service: registering service...
+15:25:33.945 [] [] [] [] Ignoring onDemand update due to rate limiter
+15:25:34.143 [] [] [] [] Registered gRPC service: com.fithub.services.systemevents.ActionLoggerService, bean: actionLoggerService, class: com.fithub.services.systemevents.services.ActionLoggerService
+15:25:34.143 [] [] [] [] Registered gRPC service: grpc.health.v1.Health, bean: grpcHealthService, class: io.grpc.protobuf.services.HealthServiceImpl
+15:25:34.143 [] [] [] [] Registered gRPC service: grpc.reflection.v1alpha.ServerReflection, bean: protoReflectionService, class: io.grpc.protobuf.services.ProtoReflectionService
+15:25:34.227 [] [] [] [] DiscoveryClient_SYSTEM-EVENTS-SERVICE/LAPTOP-0MN5E036.local:system-events-service - registration status: 204
+15:25:34.397 [] [] [] [] gRPC Server started, listening on address: *, port: 9090
+15:25:34.430 [] [] [] [] Started SystemEventsServiceLauncher in 17.476 seconds (process running for 18.141)
+15:26:03.914 [] [] [] [] Disable delta property : false
+15:26:03.916 [] [] [] [] Single vip registry refresh property : null
+15:26:03.916 [] [] [] [] Force full registry fetch : false
+15:26:03.917 [] [] [] [] Application is null : false
+15:26:03.918 [] [] [] [] Registered Applications size is zero : true
+15:26:03.918 [] [] [] [] Application version is -1: false
+15:26:03.919 [] [] [] [] Getting all instance registry info from the eureka server
+15:26:03.934 [] [] [] [] The response status is 200
+15:30:33.204 [] [] [] [] Resolving eureka endpoints via configuration
