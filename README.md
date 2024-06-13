@@ -19,6 +19,7 @@ FitHub je full-stack aplikacija razvijena od strane studenata Elektrotehničkog 
 
 Aplikacija je razvijena u sklopu predmeta Napredne web tehnologije s idejom olakšanja poslovanja teretane. 
 Za razvoj aplikacije korišteni su Spring Boot za backend i React za frontend.
+ERD dijagrame i dokumentaciju možete pronaći na sljedećem linku: https://drive.google.com/drive/folders/1HoTkdSVJawVhkEzNIR4ty4ayQTX8BcO-
 
 
 # 💡 Napomena
