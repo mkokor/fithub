@@ -1,0 +1,103 @@
+#clients-coach-page-div {
+    padding-top: 20px; /* Dodaj padding na vrhu tabele */
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: center; /* Centriraj podatke u ćelijama */
+    padding: 8px;
+    border-bottom: 1px solid #dddddd; /* Dodaj donji border za sve ćelije */
+}
+
+/* Stilizacija dugmadi */
+button {
+    background-color: rgba(147, 184, 169, 0.773); /* Postavi pozadinu dugmeta na zelenu */
+    border: none;
+    color: white;
+    padding: 10px 20px; /* Dodaj padding dugmetu */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px; /* Dodaj marginu dugmetu */
+    cursor: pointer;
+    border-bottom: none; /* Ukloni donji border za dugmad */
+    height: 40px; /* Postavi visinu dugmeta */
+    line-height: 20px; /* Postavi liniju dugmeta */
+    transition: color 0.3s; /* Dodaj tranziciju za promjenu boje teksta */
+    border-radius: 100px;
+}
+
+/* Stilizacija dugmadi kada se prelazi preko njih */
+button:hover {
+    color: rgb(62, 91, 62); /* Promijeni boju teksta na crvenu kada se prelazi preko dugmeta */
+}
+
+/* Ukloni desni margin od zadnjeg dugmeta */
+button:last-child {
+    margin-right: 0;
+}
+
+/* Stilizacija linkova unutar dugmadi */
+button a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Stilizacija linkova kada su u hover stanju */
+button a:hover {
+    text-decoration: underline;
+}
+
+#clients-coach-page-title {
+    margin-top: 100px; /* Dodaj margin na vrhu naslova */
+}
+
+/* Stilizacija dugmeta za preuzimanje */
+button.download-button {
+    background-color: transparent; /* Postavi transparentnu pozadinu */
+    border: none;
+    color: black; /* Postavi boju teksta na crnu */
+    cursor: pointer;
+    float: right; /* Pomeri dugme skroz desno */
+}
+
+/* Stilizacija dugmeta za preuzimanje kada se prelazi preko njega */
+button.download-button:hover {
+    color: rgba(147, 184, 169, 0.773); /* Promijeni boju teksta na plavu kada se prelazi preko dugmeta */
+    text-decoration: underline;
+}
+
+/* Stilizacija dugmeta za brisanje */
+button.delete-button {
+    background-color: transparent; /* Transparentna pozadina */
+    border: none; /* Bez bordera */
+    padding: 0; /* Bez paddinga */
+    cursor: pointer; /* Promena kursora */
+}
+
+/* Stilizacija slike ikone za brisanje */
+img.delete-icon {
+    opacity: 0.4; 
+    display: block;
+    margin-left: -10px; /* Pomeri ikonu ulijevo */
+}
+img.delete-icon:hover{
+    opacity: 1;
+}
+
+/* Align "Membership" button to the right */
+.membership-button {
+    float: right;
+}
+
+/* Add left margin to "Meal Plan" button */
+.mealplan-button {
+    float: right;
+}
+
+
