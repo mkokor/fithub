@@ -3,72 +3,61 @@
 </p>
 <h1 align='center'>Fithub</h1>
 
-# 🧑‍💻 Demo aplikacije
+# 🏋️‍♂️ What is FitHub
 
-Demo videa možete pogledati na sljedećem linku: https://drive.google.com/drive/folders/1VH3lrnldw_NaWt_wrzH-lZRlUkdpj-oe
-
-# 🏋️‍♂️ Šta je FitHub
-
-FitHub je full-stack aplikacija razvijena od strane studenata Elektrotehničkog fakulteta u Sarajevu:
+FitHub is a full-stack application developed by students of the Faculty of Electrical Engineering in Sarajevo:
 
 - https://github.com/mkokor
 - https://github.com/nkokor
-- https://github.com/nhelac1
-- https://github.com/mbesirevic1
 
+The application was developed as part of the Advanced Web Technologies course with the idea of facilitating gym management.
+Spring Boot was used for the backend and React for the frontend.
 
-Aplikacija je razvijena u sklopu predmeta Napredne web tehnologije s idejom olakšanja poslovanja teretane. 
-Za razvoj aplikacije korišteni su Spring Boot za backend i React za frontend.
-ERD dijagrame i dokumentaciju možete pronaći na sljedećem linku: https://drive.google.com/drive/folders/1HoTkdSVJawVhkEzNIR4ty4ayQTX8BcO-
+# 🦾 Features
+In addition to the basic user registration functionality, FitHub includes:
 
+- Online trainer selection
+- Viewing and accessing the latest news and offers provided by the gym
+- Viewing personalized weekly meal plans and downloading them as PDF documents (for clients)
+- Updating weekly meal plans (for trainers)
+- Viewing group training schedules and registering for available sessions (for clients)
+- Submitting music suggestions for sessions (for clients)
+- Viewing the most successful clients
+- Accessing personal results and downloading progress history as an Excel document (for clients)
+- Updating client results (for trainers)
+- Updating membership payment records (for trainers)
+- A real-time chat platform where users can communicate with their trainer and other clients
 
-# 💡 Napomena
+# 🔧 Installation
+1. Download the project or clone the repository using the following commands:
 
-Frontend i backend projekti inicijalno su se nalazili na različitim repozitorijima. Razvoj frontenda prije prebacivanja u centralni repozitorij možete vidjeti prateći sljedeći link: https://github.com/nkokor/fithub
-
-
-# 🦾 Funkcionalnosti
-FitHub osim osnovne funkcionalnosti registracije korisnika uključuje i
-
-- online izbor trenera
-- pregled i uvid u najnovije vijesti i ponude koje teretana nudi svojim korisnicima
-- pregled personaliziranog sedmičnog plana ishrana i preuzimanje istog u obliku pdf dokumenta (za klijenta)
-- ažuriranje sedmičnog plana ishrane (za trenera)
-- uvid u termine grupnih treninga i prijava na slobodne termine (za klijenta)
-- upućivanje glazbenih prijedloga za termine (za klijenta)
-- pregled najuspješnijih klijenata
-- uvid u vlastite rezultate i preuzimanje historije napretka u obliku excel dokumenta (za klijenta)
-- ažuriranje rezultata klijenata (za trenera)
-- ažuriranje uplata o mjesečnim članarinama (za trenera)
-- chat platformu u realnom vremenu u kojem korisnici mogu komunicirati sa svojim trenerom i njegovim ostalim klijentima
-
-
-# 🔧 Instalacija
-1. Download-ajte projekat ili klonirajte repozitorij uz pomoć sljedećih komandi:
 ```
 gh repo clone mkokor/fithub
 ```
 
-Projekat je moguće pokrenuti na dva načina, preko Docker-a ili manuelno. S obzirom da je CPU opterećenje u slučaju pokretanja uz Docker izuzetno visoko (preko 250%), preporuka je da se aplikacija ne pokreće na taj način, nego ručno, što će biti opisano u nastavku.
 
-Prvo pokrenite backened projekat prema sljedećim uputama:
-1. Importujte backend projekat u razvojno okruženje
-2. Na portu 3306 obezbijedite prazne baze naziva: fithub_auth, fithub_chat, fithub_membership, fithub_mealplan, fithub_training
-3. U auth-service pod src/main/resources dodajte email.properties fajl, a u training-service pod src/main/resources dodajte spotify-api.properties fajl
+The project can be started in two ways, via Docker or manually. Since CPU load when running via Docker is extremely high (over 250%), it is recommended not to start the application this way, but rather manually, which will be described below.
 
-   Razlog za ovo jeste da bi se omogućilo slanje kodova na email korisnika, te komuniciranje sa spotify API-em koji se koristi za glazbene prijedloge, a iz koda je moguće zaključiti koja polja je potrebno dodati
-5. Za svaki od podprojekata uradite niz akcija Maven clean -> Update Maven project -> Maven install -> pokrenite izvršni fajl kao Java aplikaciju (izvršni fajl nalazi se u src folderu u folderu NAZIV_MIKROSERVISE-service
+First, start the backend project according to the following instructions:
+1. Import the backend project into your development environment.
+2. Ensure empty databases with the following names on port 3306: fithub_auth, fithub_chat, fithub_membership, fithub_mealplan, fithub_training.
+3. In the auth-service under src/main/resources, add an email.properties file, and in the training-service under src/main/resources, add a spotify-api.properties file.
 
-   Podprojekte pokrenite sljedećim redoslijedom fithub-config-server -> eureka-service-registry -> system-events-service -> auth-service -> mealplan-service -> chat-service -> training-service -> membership-service -> api-gateway
-6. Backend je sada pokrenut
+   This is necessary to enable sending codes to users' emails and communication with the Spotify API, which is used for music suggestions. From the code, you can infer which fields need to be added.
+5. For each subproject, perform a series of actions: Maven clean -> Update Maven project -> Maven install -> run the executable file as a Java application (the executable file is located in the src folder within the folder MICROSERVICE_TITLE-service).
 
-Za pokretanje frontend projekta potrebno je izvršiti sljedeće korake
-1. Pozicionirajte se u frontend folder (fithub-fe)
-2. Preuzmite potrebne dependency-je uz pomoć sljedeće komande:
+   Start the subprojects in the following order: fithub-config-server -> eureka-service-registry -> system-events-service -> auth-service -> mealplan-service -> chat-service -> training-service -> membership-service -> api-gateway.
+6. The backend is now running.
+
+To start the frontend project, follow these steps:
+1. Navigate to the frontend folder (fithub-fe).
+2. Download the necessary dependencies using the following command:
+
 ```
 npm install
 ```
-3. Pokrenite aplikaciju sljedećom komandom
+3. Start the application with the following command:
+
 ```
 npm start
 ```
